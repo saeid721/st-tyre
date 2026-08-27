@@ -547,6 +547,35 @@ body.pos-mode .main-wrapper {
 }
 
 /* ============ KPI CARDS ============ */
+.kpi-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .kpi-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .kpi-row {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 12px;
+  }
+}
+
+.kpi-col {
+  min-width: 0;
+}
+
+.kpi-col>a {
+  display: block;
+  height: 100%;
+}
+
 .kpi-card {
   background: var(--card);
   border: 1px solid var(--border);
