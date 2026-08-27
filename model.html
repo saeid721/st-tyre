@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STP AutoFlow — Model Components</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/model.css" />
+</head>
+
+<body>
+
+    <!-- ============ MOBILE / POS OFFCANVAS SIDEBAR ============ -->
+    <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="mobileSidebar"
+        aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <div class="brand d-flex align-items-center gap-2">
+                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
+                <div class="brand-text">
+                    <div class="brand-name">STP</div>
+                    <div class="brand-sub">AutoFlow</div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0" id="mobileSidebarBody"></div>
+    </div>
+
+    <!-- ============ DESKTOP SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <div class="brand d-flex align-items-center gap-2">
+                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
+                <div class="brand-text">
+                    <div class="brand-name">STP</div>
+                    <div class="brand-sub">AutoFlow</div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebarNav" aria-label="Sidebar menu"></nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-user d-flex align-items-center gap-2">
+                <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar avatar-sm object-fit-cover">
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">Asraf Mridha</div>
+                    <div class="sidebar-user-role">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN WRAPPER ============ -->
+    <div class="main-wrapper" id="mainWrapper">
+
+        <!-- ============ TOP NAVBAR ============ -->
+        <header class="topbar" id="topbar">
+            <div class="topbar-left d-flex align-items-center gap-2">
+                <button class="btn-icon mobile-menu-btn d-none" id="mobileMenuBtn" aria-label="Open menu"
+                    aria-controls="mobileSidebar">
+                    <i class="bi bi-list"></i>
+                </button>
+                <button class="btn-icon topbar-toggle-btn" id="topbarSidebarToggle" aria-label="Toggle sidebar"
+                    aria-expanded="true">
+                    <i class="bi bi-layout-sidebar-inset"></i>
+                </button>
+                <div class="breadcrumb-compact d-none d-md-flex align-items-center gap-2 text-secondary small">
+                    <i class="bi bi-house-door"></i>
+                    <span>/</span>
+                    <span class="fw-semibold text-dark">Dashboard</span>
+                </div>
+            </div>
+
+            <div class="topbar-right d-flex align-items-center gap-2">
+                <a href="#" class="btn btn-pos" id="posBtn">
+                    <i class="bi bi-grid-3x3-gap-fill"></i>
+                    <span>POS</span>
+                </a>
+
+                <!-- Add New Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-add-new dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-plus-lg"></i>
+                        <span class="d-none d-sm-inline">Add New</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm add-new-menu">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span class="add-icon bg-primary bg-opacity-10 text-primary"><i
+                                        class="bi bi-box-seam"></i></span>
+                                <span><strong>Add Product</strong><small class="d-block text-muted">Create new inventory
+                                        item</small></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span class="add-icon bg-success bg-opacity-10 text-success"><i
+                                        class="bi bi-person-plus"></i></span>
+                                <span><strong>Add Client</strong><small class="d-block text-muted">Register new
+                                        customer</small></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span class="add-icon bg-info bg-opacity-10 text-info"><i
+                                        class="bi bi-truck"></i></span>
+                                <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new
+                                        supplier</small></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span class="add-icon bg-warning bg-opacity-10 text-warning"><i
+                                        class="bi bi-receipt"></i></span>
+                                <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new
+                                        invoice</small></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <span class="add-icon bg-danger bg-opacity-10 text-danger"><i
+                                        class="bi bi-cash-stack"></i></span>
+                                <span><strong>Add Expense</strong><small class="d-block text-muted">Record new
+                                        expense</small></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="btn-icon" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <button class="btn-icon position-relative" aria-label="Notifications" title="Notifications">
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <div class="dropdown user-dropdown">
+                    <button class="btn-user d-flex align-items-center gap-2" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar object-fit-cover">
+                        <div class="user-info d-none d-md-block">
+                            <div class="user-name">Asraf Mridha</div>
+                        </div>
+                        <i class="bi bi-chevron-down small d-none d-md-block"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Account Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history me-2"></i>Activity Log</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============ MAIN CONTENT ============ -->
+        <main class="main-content" id="mainContent">
+
+            <!-- Page Header -->
+            <div class="dashboard-header">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="header-icon bg-primary bg-opacity-10 text-primary">
+                        <i class="bi bi-ui-checks-grid"></i>
+                    </div>
+                    <h1 class="dashboard-title">Model Components</h1>
+                </div>
+                <button type="button" class="btn btn-primary" id="openModalBtn">
+                    <i class="bi bi-ui-checks-grid me-1"></i> Open Form Components
+                </button>
+            </div>
+
+            <!-- Component Cards Grid -->
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="kpi-card kpi-blue" style="cursor: pointer;" id="cardBasicInputs">
+                        <div class="kpi-bg-icon"><i class="bi bi-ui-checks-grid"></i></div>
+                        <div class="kpi-header">
+                            <span class="kpi-label">Form Components</span>
+                            <div class="kpi-icon-box"><i class="bi bi-ui-checks-grid"></i></div>
+                        </div>
+                        <div class="kpi-value" style="font-size: 18px;">12 Types</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>All Inputs</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="kpi-card kpi-green" style="cursor: pointer;" id="cardValidation">
+                        <div class="kpi-bg-icon"><i class="bi bi-check-circle-fill"></i></div>
+                        <div class="kpi-header">
+                            <span class="kpi-label">Validation</span>
+                            <div class="kpi-icon-box"><i class="bi bi-check-circle-fill"></i></div>
+                        </div>
+                        <div class="kpi-value" style="font-size: 18px;">6 States</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>Available</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="kpi-card kpi-purple" style="cursor: pointer;" id="cardUpload">
+                        <div class="kpi-bg-icon"><i class="bi bi-file-earmark-plus-fill"></i></div>
+                        <div class="kpi-header">
+                            <span class="kpi-label">Upload</span>
+                            <div class="kpi-icon-box"><i class="bi bi-file-earmark-plus-fill"></i></div>
+                        </div>
+                        <div class="kpi-value" style="font-size: 18px;">5 Methods</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>Drag & Drop</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="kpi-card kpi-orange" style="cursor: pointer;" id="cardDateTime">
+                        <div class="kpi-bg-icon"><i class="bi bi-calendar-event"></i></div>
+                        <div class="kpi-header">
+                            <span class="kpi-label">Date & Time</span>
+                            <div class="kpi-icon-box"><i class="bi bi-calendar-event"></i></div>
+                        </div>
+                        <div class="kpi-value" style="font-size: 18px;">7 Picker</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>Available</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Trigger Card -->
+            <div class="card card-panel">
+                <div class="card-panel-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="panel-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-ui-checks-grid"></i>
+                        </div>
+                        <h2 class="panel-title">Form Components Library</h2>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="openModalBtn2">
+                        <i class="bi bi-arrows-expand me-1"></i> Open Modal
+                    </button>
+                </div>
+                <div class="card-panel-body">
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-input-cursor-text fs-1 text-primary"></i>
+                                <h6 class="mt-2 mb-0">Basic Inputs</h6>
+                                <small class="text-muted">Text, Email, Password</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-calendar3 fs-1 text-success"></i>
+                                <h6 class="mt-2 mb-0">Date & Time</h6>
+                                <small class="text-muted">Date, Time, Range</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-list-ul fs-1 text-purple"></i>
+                                <h6 class="mt-2 mb-0">Selection</h6>
+                                <small class="text-muted">Select, Radio, Checkbox</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-upload fs-1 text-warning"></i>
+                                <h6 class="mt-2 mb-0">File Upload</h6>
+                                <small class="text-muted">Single, Multiple, Drag</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-sliders2 fs-1 text-danger"></i>
+                                <h6 class="mt-2 mb-0">Specialized</h6>
+                                <small class="text-muted">OTP, Color, Range</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-geo-alt fs-1 text-info"></i>
+                                <h6 class="mt-2 mb-0">Address</h6>
+                                <small class="text-muted">Country, City, Map</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-check2-square fs-1 text-teal"></i>
+                                <h6 class="mt-2 mb-0">Validation</h6>
+                                <small class="text-muted">Success, Error, Warning</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" onclick="openModal()">
+                            <div class="border rounded-3 p-3 text-center bg-light-subtle">
+                                <i class="bi bi-grid-3x3-gap-fill fs-1 text-primary"></i>
+                                <h6 class="mt-2 mb-0">Layouts</h6>
+                                <small class="text-muted">2-3 Column, Inline</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
+                        class="text-decoration-none fw-semibold">STITBD</a></div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- MODAL: Form Components Library -->
+    <div class="modal fade" id="componentsModal" tabindex="-1" aria-labelledby="componentsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+            <div class="modal-content border-0 shadow-lg">
+
+                <!-- Modal Header -->
+                <div class="modal-header border-bottom bg-white sticky-top z-3">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1" id="componentsModalLabel">
+                            <i class="bi bi-ui-checks-grid text-primary me-2"></i>Form Components
+                        </h5>
+                        <small class="text-muted">Complete collection of reusable form controls</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body bg-light-subtle p-4">
+                    <form id="componentForm" novalidate>
+                        <div class="row g-4">
+
+                            <!-- 01 — Basic Input Types -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">01</span>
+                                        <span class="fw-semibold">Basic Input Types</span>
+                                        <div class="text-muted small mt-1">Common text-based form controls</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="fullName" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="fullName"
+                                                    placeholder="John Doe">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="username" class="form-label">Username</label>
+                                                <input type="text" class="form-control" id="username"
+                                                    placeholder="johndoe99">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="name@example.com">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="password" class="form-label">Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="password"
+                                                        placeholder="Enter password">
+                                                    <button class="btn btn-outline-secondary border-start-0"
+                                                        type="button" id="togglePassword"
+                                                        aria-label="Toggle password visibility">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="phone" class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone"
+                                                    placeholder="+880 1XXXXXXXXX">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="website" class="form-label">Website URL</label>
+                                                <input type="url" class="form-control" id="website"
+                                                    placeholder="https://example.com">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="search" class="form-label">Search</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text bg-white border-end-0"><i
+                                                            class="bi bi-search text-muted"></i></span>
+                                                    <input type="search" class="form-control border-start-0 ps-0"
+                                                        id="search" placeholder="Search anything...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 02 — Date & Time -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">02</span>
+                                        <span class="fw-semibold">Date & Time</span>
+                                        <div class="text-muted small mt-1">Temporal input controls</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="dob" class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control" id="dob">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="appointment" class="form-label">Appointment Date &
+                                                    Time</label>
+                                                <input type="datetime-local" class="form-control" id="appointment">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="billingMonth" class="form-label">Billing Month</label>
+                                                <input type="month" class="form-control" id="billingMonth">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="deliveryWeek" class="form-label">Delivery Week</label>
+                                                <input type="week" class="form-control" id="deliveryWeek">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="pickupTime" class="form-label">Pickup Time</label>
+                                                <input type="time" class="form-control" id="pickupTime">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Date Range</label>
+                                                <div class="input-group">
+                                                    <input type="date" class="form-control" aria-label="Start Date">
+                                                    <span class="input-group-text"><i
+                                                            class="bi bi-arrow-right"></i></span>
+                                                    <input type="date" class="form-control" aria-label="End Date">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Time Range</label>
+                                                <div class="input-group">
+                                                    <input type="time" class="form-control" aria-label="Start Time">
+                                                    <span class="input-group-text"><i
+                                                            class="bi bi-arrow-right"></i></span>
+                                                    <input type="time" class="form-control" aria-label="End Time">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 03 — Selection Controls -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">03</span>
+                                        <span class="fw-semibold">Selection Controls</span>
+                                        <div class="text-muted small mt-1">Dropdowns, checkboxes, radios, and switches
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-4">
+                                            <div class="col-md-6 col-lg-4">
+                                                <label for="country" class="form-label">Country</label>
+                                                <select class="form-select" id="country">
+                                                    <option selected disabled>Choose a country...</option>
+                                                    <option>Bangladesh</option>
+                                                    <option>United States</option>
+                                                    <option>United Kingdom</option>
+                                                    <option>Canada</option>
+                                                    <option>Australia</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label for="services" class="form-label">Services (Multi-Select)</label>
+                                                <select class="form-select" id="services" multiple size="4">
+                                                    <option>International Courier</option>
+                                                    <option>Air Freight</option>
+                                                    <option>Sea Freight</option>
+                                                    <option>Road Freight</option>
+                                                    <option>Warehousing</option>
+                                                    <option>Packaging</option>
+                                                </select>
+                                                <div class="form-text">Hold Ctrl/Cmd to select multiple.</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label for="customerCombobox" class="form-label">Customer
+                                                    (Combobox)</label>
+                                                <input class="form-control" list="customerOptions" id="customerCombobox"
+                                                    placeholder="Type to search...">
+                                                <datalist id="customerOptions">
+                                                    <option value="Acme Corporation">
+                                                    <option value="Global Tech Ltd">
+                                                    <option value="Nexus Logistics">
+                                                </datalist>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label for="cityAutocomplete" class="form-label">City
+                                                    (Autocomplete)</label>
+                                                <input class="form-control" list="cityOptions" id="cityAutocomplete"
+                                                    placeholder="Start typing a city...">
+                                                <datalist id="cityOptions">
+                                                    <option value="Dhaka">
+                                                    <option value="Chittagong">
+                                                    <option value="Sylhet">
+                                                    <option value="Rajshahi">
+                                                </datalist>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label d-block">Account Type</label>
+                                                <div class="d-flex gap-3 mt-1">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="accountType"
+                                                            id="accPersonal" checked>
+                                                        <label class="form-check-label"
+                                                            for="accPersonal">Personal</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="accountType"
+                                                            id="accBusiness">
+                                                        <label class="form-check-label"
+                                                            for="accBusiness">Business</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="accountType"
+                                                            id="accEnterprise">
+                                                        <label class="form-check-label"
+                                                            for="accEnterprise">Enterprise</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label d-block">Notifications</label>
+                                                <div class="d-flex flex-column gap-2 mt-1">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="notifEmail"
+                                                            checked>
+                                                        <label class="form-check-label" for="notifEmail">Email</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="notifSms">
+                                                        <label class="form-check-label" for="notifSms">SMS</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="notifPush"
+                                                            checked>
+                                                        <label class="form-check-label" for="notifPush">Push
+                                                            Notification</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label d-block">Account Status</label>
+                                                <div class="form-check form-switch mt-2">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                        id="accountStatus" checked>
+                                                    <label class="form-check-label fw-medium"
+                                                        for="accountStatus">Active</label>
+                                                </div>
+                                                <div class="form-check form-switch mt-2">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                        id="accountStatusInactive">
+                                                    <label class="form-check-label text-muted"
+                                                        for="accountStatusInactive">Inactive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 04 — Text & Content -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">04</span>
+                                        <span class="fw-semibold">Text & Content</span>
+                                        <div class="text-muted small mt-1">Textareas and rich text editing</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="description" rows="4"
+                                                    placeholder="Write a detailed description..." maxlength="500"
+                                                    oninput="updateCharCount(this)"></textarea>
+                                                <div class="form-text text-end"><span id="charCount">0</span> / 500
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="fullAddress" class="form-label">Full Address</label>
+                                                <textarea class="form-control" id="fullAddress" rows="4"
+                                                    placeholder="Enter your complete mailing address..."></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Rich Text Editor</label>
+                                                <div class="border rounded-3 overflow-hidden bg-white">
+                                                    <div class="bg-light border-bottom p-2 d-flex gap-1 flex-wrap">
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Bold"><i class="bi bi-type-bold"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Italic"><i class="bi bi-type-italic"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Underline"><i
+                                                                class="bi bi-type-underline"></i></button>
+                                                        <div class="vr mx-1"></div>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Heading"><i class="bi bi-type-h1"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Bullet List"><i class="bi bi-list-ul"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Numbered List"><i class="bi bi-list-ol"></i></button>
+                                                        <div class="vr mx-1"></div>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Link"><i class="bi bi-link-45deg"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Align Left"><i class="bi bi-text-left"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-light border"
+                                                            title="Align Center"><i
+                                                                class="bi bi-text-center"></i></button>
+                                                        <div class="vr mx-1"></div>
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-light border text-danger"
+                                                            title="Clear Formatting"><i
+                                                                class="bi bi-eraser"></i></button>
+                                                    </div>
+                                                    <div class="p-3" contenteditable="true"
+                                                        style="min-height: 120px; outline: none;"
+                                                        aria-label="Rich text editor content">
+                                                        <p>Start typing your <b>formatted</b> content here...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 05 — File & Media Upload -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">05</span>
+                                        <span class="fw-semibold">File & Media Upload</span>
+                                        <div class="text-muted small mt-1">Document, image, and drag-and-drop uploads
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label for="docUpload" class="form-label">Document Upload</label>
+                                                <input class="form-control" type="file" id="docUpload"
+                                                    accept=".pdf,.doc,.docx,.xls,.xlsx">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="imgUpload" class="form-label">Profile Image</label>
+                                                <input class="form-control" type="file" id="imgUpload" accept="image/*">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="multiUpload" class="form-label">Multiple Files</label>
+                                                <input class="form-control" type="file" id="multiUpload" multiple>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Drag & Drop Zone</label>
+                                                <div class="dropzone border border-2 border-dashed rounded-3 p-5 text-center bg-light-subtle"
+                                                    id="dropZone">
+                                                    <i class="bi bi-cloud-arrow-up display-4 text-primary mb-3"></i>
+                                                    <h6 class="fw-semibold mb-1">Drag & drop files here</h6>
+                                                    <p class="text-muted mb-3 small">or click to browse files from your
+                                                        computer</p>
+                                                    <button type="button" class="btn btn-primary btn-sm px-4">Browse
+                                                        Files</button>
+                                                    <input type="file" class="d-none" id="dropZoneInput" multiple>
+                                                    <div class="mt-3 text-muted small">Supported: PDF, DOC, DOCX, XLS,
+                                                        XLSX, JPG, PNG (Max 10MB)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 06 — Specialized Inputs -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">06</span>
+                                        <span class="fw-semibold">Specialized Inputs</span>
+                                        <div class="text-muted small mt-1">OTP, currency, percentage, and range controls
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-4">
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">OTP Verification</label>
+                                                <div class="d-flex gap-2" id="otpContainer">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 1">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 2">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 3">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 4">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 5">
+                                                    <input type="text" class="form-control text-center otp-input"
+                                                        maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                        aria-label="OTP digit 6">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Phone + Country Code</label>
+                                                <div class="input-group">
+                                                    <select class="form-select" style="max-width: 110px;"
+                                                        aria-label="Country code">
+                                                        <option value="+880">+880 ▼</option>
+                                                        <option value="+1">+1 ▼</option>
+                                                        <option value="+44">+44 ▼</option>
+                                                    </select>
+                                                    <input type="tel" class="form-control" placeholder="1XXXXXXXXX"
+                                                        aria-label="Phone number">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Currency</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">৳</span>
+                                                    <input type="text" class="form-control" placeholder="0.00"
+                                                        aria-label="Currency amount">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Percentage</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" placeholder="15"
+                                                        aria-label="Percentage value">
+                                                    <span class="input-group-text">%</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Color Picker</label>
+                                                <div class="input-group">
+                                                    <input type="color" class="form-control form-control-color"
+                                                        id="colorPicker" value="#4f46e5" title="Choose your color">
+                                                    <input type="text" class="form-control" value="#4F46E5"
+                                                        id="colorHex" aria-label="Color hex value">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label for="priceRange"
+                                                    class="form-label d-flex justify-content-between">
+                                                    <span>Price Range</span>
+                                                    <span class="text-primary fw-semibold" id="rangeValue">৳2,750</span>
+                                                </label>
+                                                <input type="range" class="form-range" min="500" max="5000" step="50"
+                                                    id="priceRange" value="2750">
+                                                <div class="d-flex justify-content-between text-muted"
+                                                    style="font-size: 0.75rem;">
+                                                    <span>৳500</span>
+                                                    <span>৳5,000</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 07 — Validation States -->
+                            <div class="col-12">
+                                <div class="card component-card h-100">
+                                    <div class="card-header bg-transparent border-bottom">
+                                        <span class="badge bg-primary-subtle text-primary me-2">07</span>
+                                        <span class="fw-semibold">Validation States</span>
+                                        <div class="text-muted small mt-1">Visual feedback for form validation</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Default</label>
+                                                <input type="text" class="form-control" placeholder="Normal input">
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Focus</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Click to see focus ring">
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Success</label>
+                                                <input type="email" class="form-control is-valid"
+                                                    value="user@example.com" aria-invalid="false">
+                                                <div class="valid-feedback">Email address is available.</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Error</label>
+                                                <input type="email" class="form-control is-invalid"
+                                                    value="invalid-email" aria-invalid="true"
+                                                    aria-describedby="emailError">
+                                                <div class="invalid-feedback" id="emailError">Please enter a valid email
+                                                    address.</div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Warning</label>
+                                                <input type="text" class="form-control is-warning" value="almost_full">
+                                                <div class="form-text text-warning">This field is almost at capacity.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Disabled</label>
+                                                <input type="text" class="form-control" placeholder="Disabled input"
+                                                    disabled>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <label class="form-label">Readonly</label>
+                                                <input type="text" class="form-control" value="Read-only value"
+                                                    readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer border-top bg-white sticky-bottom z-3 py-3">
+                    <div class="d-none d-md-block text-muted small align-self-center me-auto">
+                        <i class="bi bi-check-circle-fill text-success me-1"></i> 7 Components • Responsive
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 w-100 w-md-auto justify-content-end">
+                        <button type="button" class="btn btn-light border" data-bs-dismiss="modal">
+                            <i class="bi bi-x-lg me-1"></i> Cancel
+                        </button>
+                        <button type="reset" form="componentForm" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                        </button>
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class="bi bi-eye me-1"></i> Preview
+                        </button>
+                        <button type="submit" form="componentForm" class="btn btn-primary px-4">
+                            <i class="bi bi-check-lg me-1"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- Custom Interactions -->
+    <script>
+        // Function to open modal using Bootstrap 5 API
+        function openModal() {
+            const modalElement = document.getElementById('componentsModal');
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+
+        // Open modal from button - using onclick directly in HTML
+        document.getElementById('openModalBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+        });
+
+        document.getElementById('openModalBtn2').addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Open modal from KPI cards
+        document.querySelectorAll('.kpi-card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                openModal();
+            });
+        });
+
+        // 1. Password Toggle Visibility
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('bi-eye');
+                this.querySelector('i').classList.toggle('bi-eye-slash');
+            });
+        }
+
+        // 2. Character Count for Textarea
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            const max = textarea.getAttribute('maxlength');
+            const counterEl = document.getElementById('charCount');
+            if (counterEl) {
+                counterEl.textContent = count;
+                if (count >= max) {
+                    counterEl.parentElement.classList.add('text-danger');
+                    counterEl.parentElement.classList.remove('text-muted');
+                } else {
+                    counterEl.parentElement.classList.remove('text-danger');
+                    counterEl.parentElement.classList.add('text-muted');
+                }
+            }
+        }
+
+        // 3. OTP Auto-focus Logic
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+            input.addEventListener('keypress', (e) => {
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // 4. Range Slider Value Update
+        const priceRange = document.getElementById('priceRange');
+        const rangeValue = document.getElementById('rangeValue');
+        if (priceRange && rangeValue) {
+            priceRange.addEventListener('input', function () {
+                const val = parseInt(this.value).toLocaleString();
+                rangeValue.textContent = `৳${val}`;
+            });
+        }
+
+        // 5. Color Picker Sync
+        const colorPicker = document.getElementById('colorPicker');
+        const colorHex = document.getElementById('colorHex');
+        if (colorPicker && colorHex) {
+            colorPicker.addEventListener('input', function () {
+                colorHex.value = this.value.toUpperCase();
+            });
+            colorHex.addEventListener('input', function () {
+                if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+                    colorPicker.value = this.value;
+                }
+            });
+        }
+
+        // 6. Drag & Drop Simulation
+        const dropZone = document.getElementById('dropZone');
+        const dropZoneInput = document.getElementById('dropZoneInput');
+        if (dropZone && dropZoneInput) {
+            dropZone.addEventListener('click', () => dropZoneInput.click());
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('bg-primary-subtle', 'border-primary');
+            });
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('bg-primary-subtle', 'border-primary');
+            });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('bg-primary-subtle', 'border-primary');
+                alert('Files dropped! (Simulation)');
+            });
+        }
+    </script>
+</body>
+
+</html>

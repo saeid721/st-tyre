@@ -1,0 +1,151 @@
+/* from.css - Form Page Specific Styles */
+
+/* =========================================
+   1. Form Components
+   ========================================= */
+.component-card {
+    border: 1px solid var(--bs-border-color, #e2e8f0);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.component-card:hover {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+.component-card .card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--bs-border-color, #e2e8f0);
+}
+
+.component-card .card-body {
+    padding: 1.5rem;
+}
+
+/* =========================================
+   2. Form Controls
+   ========================================= */
+.form-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #334155;
+    margin-bottom: 0.375rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.5rem;
+    border-color: #cbd5e1;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--bs-primary, #4f46e5);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Custom Warning State */
+.form-control.is-warning {
+    border-color: #f59e0b;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23f59e0b'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23f59e0b' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-warning:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+/* Form Switch */
+.form-switch .form-check-input {
+    width: 2.5em;
+    height: 1.25em;
+    margin-top: 0.125em;
+}
+
+.form-switch .form-check-input:checked {
+    background-color: var(--bs-primary, #4f46e5);
+    border-color: var(--bs-primary, #4f46e5);
+}
+
+/* =========================================
+   3. Specialized Components
+   ========================================= */
+/* OTP Inputs */
+.otp-input {
+    width: 100%;
+    aspect-ratio: 1;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 0;
+}
+
+.otp-input:focus {
+    z-index: 1;
+}
+
+/* Dropzone */
+.dropzone {
+    border-style: dashed !important;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropzone:hover {
+    background-color: #f1f5f9 !important;
+    border-color: var(--bs-primary, #4f46e5) !important;
+}
+
+/* Range Slider */
+.form-range::-webkit-slider-thumb {
+    background: var(--bs-primary, #4f46e5);
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: #e2e8f0;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(79, 70, 229, 0.25);
+}
+
+/* Color Picker */
+.form-control-color {
+    width: 3rem;
+    padding: 0.375rem;
+}
+
+/* =========================================
+   4. Utilities
+   ========================================= */
+.min-width-0 {
+    min-width: 0;
+}
+
+.space-y-2>*+* {
+    margin-top: 0.5rem;
+}
+
+/* =========================================
+   5. Responsive
+   ========================================= */
+@media (max-width: 575.98px) {
+    .component-card .card-body {
+        padding: 1rem;
+    }
+
+    .otp-input {
+        font-size: 1rem;
+    }
+}

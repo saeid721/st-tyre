@@ -1,0 +1,158 @@
+/* table.css - Table Page Specific Styles */
+
+/* =========================================
+   1. Table Styling
+   ========================================= */
+.yezra-table {
+    overflow-x: auto;
+}
+
+.yezra-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.yezra-table th {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.yezra-table td {
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.yezra-table tr {
+    transition: background-color 0.15s ease;
+}
+
+.yezra-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Bulk Toolbar Animation */
+.bulk-toolbar {
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Skeleton Loading State */
+.skeleton-row td {
+    padding: 1rem 0.75rem;
+}
+
+.skeleton-bar {
+    height: 12px;
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-bar.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.skeleton-bar.short {
+    width: 60px;
+}
+
+.skeleton-bar.medium {
+    width: 120px;
+}
+
+.skeleton-bar.long {
+    width: 180px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* =========================================
+   2. Responsive Mobile Table Card View
+   ========================================= */
+@media (max-width: 767.98px) {
+
+    .yezra-table table,
+    .yezra-table thead,
+    .yezra-table tbody,
+    .yezra-table th,
+    .yezra-table td,
+    .yezra-table tr {
+        display: block;
+    }
+
+    .yezra-table thead {
+        display: none;
+    }
+
+    .yezra-table tr {
+        border: 1px solid var(--bs-border-color, #e2e8f0);
+        border-radius: 0.75rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .yezra-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.625rem 0;
+        border-bottom: 1px solid #f1f5f9;
+        white-space: normal;
+    }
+
+    .yezra-table td:last-child {
+        border-bottom: none;
+        justify-content: flex-end;
+    }
+
+    .yezra-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #64748b;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+        margin-right: 1rem;
+    }
+
+    /* Hide less important columns on mobile */
+    .yezra-table td.mobile-hide {
+        display: none !important;
+    }
+
+    /* Adjust bulk toolbar for mobile */
+    .bulk-toolbar {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 0.75rem;
+    }
+
+    .bulk-toolbar>div {
+        justify-content: center;
+    }
+}
