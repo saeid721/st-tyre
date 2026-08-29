@@ -456,3 +456,148 @@ document.querySelectorAll('#sidebarNav .nav-item-link[data-title]').forEach((lin
     sidebarTooltip.classList.remove('show');
   });
 });
+
+
+/* ---------- NEW: Revenue & Profit Analytics Chart ---------- */
+const revenueProfitCtx = document.getElementById('revenueProfitChart');
+if (revenueProfitCtx) {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  new Chart(revenueProfitCtx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [
+        {
+          label: 'Revenue',
+          data: [4200, 4500, 4100, 4800, 5100, 4900, 5300, 5600, 5400, 5800, 6100, 6400],
+          backgroundColor: 'rgba(79, 70, 229, 0.8)',
+          borderRadius: 4,
+          barPercentage: 0.6,
+          order: 2
+        },
+        {
+          label: 'Gross Profit',
+          data: [1100, 1200, 1050, 1300, 1400, 1350, 1450, 1500, 1480, 1600, 1700, 1800],
+          backgroundColor: 'rgba(16, 185, 129, 0.8)',
+          borderRadius: 4,
+          barPercentage: 0.6,
+          order: 3
+        },
+        {
+          label: 'Net Profit',
+          type: 'line',
+          data: [750, 820, 710, 890, 950, 920, 1000, 1050, 1020, 1100, 1180, 1250],
+          borderColor: '#f59e0b',
+          backgroundColor: 'transparent',
+          borderWidth: 2.5,
+          tension: 0.4,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          order: 1
+        }
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', align: 'end', labels: { usePointStyle: true, pointStyleWidth: 10, padding: 16 } },
+        tooltip: {
+          backgroundColor: '#0f172a',
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ৳${ctx.parsed.y.toLocaleString()}` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: {
+          beginAtZero: true,
+          ticks: { font: { size: 11 }, callback: v => '৳' + (v / 1000) + 'k' },
+          grid: { color: '#f1f3f6' }
+        }
+      },
+      animation: { duration: 1000 }
+    }
+  });
+}
+
+/* ---------- NEW: Sales by Channel Donut Chart ---------- */
+const salesChannelData = [
+  { name: 'Retail POS', value: 35, color: '#10b981', amount: '৳18.2L' },
+  { name: 'Dealer', value: 40, color: '#3b82f6', amount: '৳20.8L' },
+  { name: 'Ecommerce', value: 15, color: '#8b5cf6', amount: '৳7.8L' },
+  { name: 'B2B', value: 8, color: '#f59e0b', amount: '৳4.1L' },
+  { name: 'Other', value: 2, color: '#94a3b8', amount: '৳1.0L' }
+];
+const salesChannelCtx = document.getElementById('salesChannelChart');
+if (salesChannelCtx) {
+  new Chart(salesChannelCtx, {
+    type: 'doughnut',
+    data: {
+      labels: salesChannelData.map(d => d.name),
+      datasets: [{
+        data: salesChannelData.map(d => d.value),
+        backgroundColor: salesChannelData.map(d => d.color),
+        borderWidth: 2,
+        borderColor: '#ffffff',
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (${salesChannelData[ctx.dataIndex].amount})`
+          }
+        }
+      },
+      animation: { animateRotate: true, duration: 900 }
+    }
+  });
+  const channelLegendEl = document.getElementById('salesChannelLegend');
+  if (channelLegendEl) {
+    channelLegendEl.innerHTML = salesChannelData.map(d => `
+            <div class="legend-item">
+                <span class="legend-dot" style="background:${d.color}"></span>
+                <span class="legend-name">${d.name}</span>
+                <span class="legend-value">${d.value}%</span>
+            </div>
+        `).join('');
+  }
+}
+
+/* ---------- NEW: Expense Breakdown Chart ---------- */
+const expenseBreakdownCtx = document.getElementById('expenseBreakdownChart');
+if (expenseBreakdownCtx) {
+  new Chart(expenseBreakdownCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Import Duty', 'Salary', 'Warehouse', 'Transport', 'Marketing', 'Other'],
+      datasets: [{
+        data: [45, 25, 12, 8, 6, 4],
+        backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#94a3b8'],
+        borderWidth: 2,
+        borderColor: '#ffffff',
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: { position: 'right', labels: { usePointStyle: true, pointStyleWidth: 10, padding: 12, font: { size: 11 } } },
+        tooltip: {
+          callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` }
+        }
+      },
+      animation: { animateRotate: true, duration: 900 }
+    }
+  });
+}

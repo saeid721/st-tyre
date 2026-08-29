@@ -2043,3 +2043,72 @@ body.pos-mode .mobile-menu-btn {
 .more-menu-item.text-danger i {
   color: var(--danger);
 }
+
+
+
+/* =========================================================
+   NEW ENTERPRISE DASHBOARD COMPONENTS
+   ========================================================= */
+
+/* Pipeline Steps */
+.pipeline-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 0 8px;
+}
+
+.pipeline-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+/* Aging Progress Bars Customization */
+.progress-bar.bg-muted {
+  background-color: var(--text-soft) !important;
+}
+
+/* Insight Cards Hover Effect */
+.card-panel.border-start {
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+}
+
+.card-panel.border-start:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* System Health Status Indicators */
+.system-status-operational {
+  color: var(--success);
+}
+
+.system-status-warning {
+  color: var(--warning);
+}
+
+.system-status-offline {
+  color: var(--danger);
+}
+
+/* Compact Table Enhancements for New Sections */
+.table-compact .badge {
+  font-size: 10.5px;
+  padding: 4px 8px;
+  font-weight: 600;
+}
+
+
+/* Reduced Motion Support for New Animations */
+@media (prefers-reduced-motion: reduce) {
+  .card-panel.border-start {
+    transition: none !important;
+  }
+}
