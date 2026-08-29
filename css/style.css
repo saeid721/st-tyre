@@ -2,17 +2,17 @@
    STP AutoFlow — Premium Tyre Dashboard
    ========================================================= */
 :root {
-  --primary: #4f46e5;
-  --primary-dark: #4338ca;
-  --primary-light: #e0e7ff;
-  --success: #10b981;
-  --success-light: #d1fae5;
-  --danger: #ef4444;
-  --danger-light: #fee2e2;
+  --primary: #0072bc;
+  --primary-dark: #005a94;
+  --primary-light: #e0f0fa;
+  --success: #00a651;
+  --success-light: #e0f7ea;
+  --danger: #ed1c24;
+  --danger-light: #fde2e3;
   --warning: #f59e0b;
   --warning-light: #fef3c7;
-  --info: #06b6d4;
-  --info-light: #cffafe;
+  --info: #00aeef;
+  --info-light: #e0f7fd;
   --bg: #f4f6fb;
   --card: #ffffff;
   --border: #e5e7eb;
@@ -20,10 +20,10 @@
   --text: #0f172a;
   --text-muted: #64748b;
   --text-soft: #94a3b8;
-  --kpi-blue: #3b82f6;
-  --kpi-blue-bg: #eff6ff;
-  --kpi-teal: #14b8a6;
-  --kpi-teal-bg: #f0fdfa;
+  --kpi-blue: #0072bc;
+  --kpi-blue-bg: #e0f0fa;
+  --kpi-teal: #00aeef;
+  --kpi-teal-bg: #e0f7fd;
   --kpi-purple: #8b5cf6;
   --kpi-purple-bg: #f5f3ff;
   --kpi-red: #ef4444;
@@ -91,6 +91,8 @@ a:hover {
 
 .sidebar.collapsed {
   width: var(--sidebar-collapsed);
+  overflow-x: visible;
+  overflow-y: hidden;
 }
 
 .sidebar.pos-hidden {
@@ -200,6 +202,10 @@ a:hover {
   padding: 8px 8px;
 }
 
+.sidebar.collapsed .sidebar-nav {
+  overflow-x: visible;
+}
+
 .sidebar-nav::-webkit-scrollbar {
   width: 4px;
 }
@@ -288,6 +294,40 @@ a:hover {
 
 .sidebar.collapsed .nav-arrow {
   opacity: 0;
+}
+
+/* Collapsed Sidebar — Menu Name Tooltip (JS positioned, fixed) */
+.sidebar-tooltip {
+  position: fixed;
+  transform: translateY(-50%);
+  background: var(--kpi-navy);
+  color: #fff;
+  padding: 7px 12px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+  z-index: 3000;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
+}
+
+.sidebar-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--kpi-navy);
 }
 
 .nav-item-link.active {
@@ -450,9 +490,9 @@ body.pos-mode .main-wrapper {
 }
 
 .btn-add-new {
-  background: var(--success);
+  background: var(--success) !important;
   color: #fff !important;
-  border: none;
+  border: 1px solid var(--success) !important;
   border-radius: 10px;
   padding: 8px 14px;
   font-weight: 600;
@@ -464,10 +504,20 @@ body.pos-mode .main-wrapper {
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
 }
 
-.btn-add-new:hover {
-  background: #059669;
-  transform: translateY(-1px);
+.btn-add-new:hover,
+.btn-add-new:focus,
+.btn-add-new:active,
+.btn-add-new.show {
+  background: #059669 !important;
+  border-color: #059669 !important;
   color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+
+.btn-add-new i,
+.btn-add-new span {
+  color: inherit;
 }
 
 .notification-dot {

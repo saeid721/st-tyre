@@ -93,6 +93,7 @@
         a.className = 'nav-item-link' + (item.active ? ' active' : '');
         a.href = item.href || '#';
         a.setAttribute('role', 'menuitem');
+        a.setAttribute('data-title', item.label);
         a.innerHTML = `
           <span class="nav-icon"><i class="bi ${item.icon}"></i></span>
           <span class="nav-label">${item.label}</span>
@@ -428,5 +429,30 @@ document.querySelectorAll('.js-logout-btn').forEach((btn) => {
     if (confirmLogout) {
       window.location.href = 'login.html';
     }
+  });
+});
+
+
+/* ---------- Collapsed Sidebar Tooltip ---------- */
+const sidebarTooltip = document.createElement('div');
+sidebarTooltip.className = 'sidebar-tooltip';
+document.body.appendChild(sidebarTooltip);
+
+function isSidebarCollapsedView() {
+  return window.innerWidth >= 992 &&
+    (document.getElementById('sidebar').classList.contains('collapsed') || window.innerWidth < 1200);
+}
+
+document.querySelectorAll('#sidebarNav .nav-item-link[data-title]').forEach((link) => {
+  link.addEventListener('mouseenter', () => {
+    if (!isSidebarCollapsedView()) return;
+    const rect = link.getBoundingClientRect();
+    sidebarTooltip.textContent = link.getAttribute('data-title');
+    sidebarTooltip.style.top = `${rect.top + rect.height / 2}px`;
+    sidebarTooltip.style.left = `${rect.right + 14}px`;
+    sidebarTooltip.classList.add('show');
+  });
+  link.addEventListener('mouseleave', () => {
+    sidebarTooltip.classList.remove('show');
   });
 });
