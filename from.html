@@ -23,10 +23,9 @@
         aria-labelledby="mobileSidebarLabel">
         <div class="offcanvas-header border-bottom">
             <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
-                <div class="brand-text">
-                    <div class="brand-name">STP</div>
-                    <div class="brand-sub">AutoFlow</div>
+                <div class="brand-logo">
+                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
+                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
                 </div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -38,16 +37,13 @@
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
         <div class="sidebar-header">
             <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
-                <div class="brand-text">
-                    <div class="brand-name">STP</div>
-                    <div class="brand-sub">AutoFlow</div>
+                <div class="brand-logo">
+                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
+                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
                 </div>
             </div>
         </div>
-
         <nav class="sidebar-nav" id="sidebarNav" aria-label="Sidebar menu"></nav>
-
         <div class="sidebar-footer">
             <div class="sidebar-user d-flex align-items-center gap-2">
                 <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar avatar-sm object-fit-cover">
@@ -97,23 +93,23 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-primary bg-opacity-10 text-primary"><i
                                         class="bi bi-box-seam"></i></span>
-                                <span><strong>Add Product</strong><small class="d-block text-muted">Create new inventory
-                                        item</small></span>
+                                <span><strong>Add Tyre Stock</strong><small class="d-block text-muted">Create new
+                                        inventory item</small></span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-success bg-opacity-10 text-success"><i
                                         class="bi bi-person-plus"></i></span>
-                                <span><strong>Add Client</strong><small class="d-block text-muted">Register new
-                                        customer</small></span>
+                                <span><strong>Add Dealer</strong><small class="d-block text-muted">Register new local
+                                        dealer</small></span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-info bg-opacity-10 text-info"><i
                                         class="bi bi-truck"></i></span>
-                                <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new
+                                <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new import
                                         supplier</small></span>
                             </a>
                         </li>
@@ -121,7 +117,7 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-warning bg-opacity-10 text-warning"><i
                                         class="bi bi-receipt"></i></span>
-                                <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new
+                                <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new dealer
                                         invoice</small></span>
                             </a>
                         </li>
@@ -129,8 +125,8 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-danger bg-opacity-10 text-danger"><i
                                         class="bi bi-cash-stack"></i></span>
-                                <span><strong>Add Expense</strong><small class="d-block text-muted">Record new
-                                        expense</small></span>
+                                <span><strong>Add Expense</strong><small class="d-block text-muted">Record import duty,
+                                        freight, etc.</small></span>
                             </a>
                         </li>
                     </ul>
@@ -169,577 +165,434 @@
 
         <!-- ============ MAIN CONTENT ============ -->
         <main class="main-content" id="mainContent">
-            <!-- Page Header - Same as dashboard -->
-            <div class="dashboard-header">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="header-icon bg-primary bg-opacity-10 text-primary">
-                        <i class="bi bi-ui-checks-grid"></i>
+
+            <!-- ============ TOP NAVBAR ============ -->
+            <header class="topbar" id="topbar">
+                <div class="topbar-left d-flex align-items-center gap-2">
+                    <button class="btn-icon mobile-menu-btn d-none" id="mobileMenuBtn" aria-label="Open menu"
+                        aria-controls="mobileSidebar">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <button class="btn-icon topbar-toggle-btn" id="topbarSidebarToggle" aria-label="Toggle sidebar"
+                        aria-expanded="true">
+                        <i class="bi bi-layout-sidebar-inset"></i>
+                    </button>
+                    <div class="breadcrumb-compact d-none d-md-flex align-items-center gap-2 text-secondary small">
+                        <i class="bi bi-house-door"></i>
+                        <span>/</span>
+                        <span class="fw-semibold text-dark">Dashboard</span>
                     </div>
-                    <h1 class="dashboard-title">Form Components</h1>
                 </div>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-outline-secondary" type="button"><i class="bi bi-eye me-1"></i>
-                        Preview</button>
-                    <button class="btn btn-primary" type="button"
-                        onclick="document.querySelectorAll('form').forEach(f => f.reset())"><i
-                            class="bi bi-arrow-counterclockwise me-1"></i> Reset</button>
+
+                <div class="topbar-right d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-pos" id="posBtn">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <span>POS</span>
+                    </a>
+
+                    <!-- Add New Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-add-new dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-plus-lg"></i>
+                            <span class="d-none d-sm-inline">Add New</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm add-new-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-primary bg-opacity-10 text-primary"><i
+                                            class="bi bi-box-seam"></i></span>
+                                    <span><strong>Add Product</strong><small class="d-block text-muted">Create new
+                                            inventory
+                                            item</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-success bg-opacity-10 text-success"><i
+                                            class="bi bi-person-plus"></i></span>
+                                    <span><strong>Add Client</strong><small class="d-block text-muted">Register new
+                                            customer</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-info bg-opacity-10 text-info"><i
+                                            class="bi bi-truck"></i></span>
+                                    <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new
+                                            supplier</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-warning bg-opacity-10 text-warning"><i
+                                            class="bi bi-receipt"></i></span>
+                                    <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new
+                                            invoice</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-danger bg-opacity-10 text-danger"><i
+                                            class="bi bi-cash-stack"></i></span>
+                                    <span><strong>Add Expense</strong><small class="d-block text-muted">Record new
+                                            expense</small></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn-icon" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </button>
+                    <button class="btn-icon position-relative" aria-label="Notifications" title="Notifications">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="dropdown user-dropdown">
+                        <button class="btn-user d-flex align-items-center gap-2" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar object-fit-cover">
+                            <div class="user-info d-none d-md-block">
+                                <div class="user-name">Asraf Mridha</div>
+                            </div>
+                            <i class="bi bi-chevron-down small d-none d-md-block"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Account Settings</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history me-2"></i>Activity
+                                    Log</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="#"><i
+                                        class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </header>
 
-            <form id="mainForm" novalidate>
-                <div class="row g-4">
-
-                    <!-- 01 — Basic Input Types -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">01</span>
-                                    <h5 class="mb-0 fw-semibold">Basic Input Types</h5>
-                                </div>
-                                <small class="text-muted">Common text-based form controls</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="fullName" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName"
-                                            placeholder="Enter your full name">
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="password" class="form-label">Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="password"
-                                                placeholder="Enter password">
-                                            <button class="btn btn-outline-secondary border-start-0" type="button"
-                                                id="togglePassword" aria-label="Toggle password visibility">
-                                                <i class="bi bi-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email"
-                                            placeholder="name@example.com">
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="quantity" class="form-label">Quantity</label>
-                                        <input type="number" class="form-control" id="quantity"
-                                            placeholder="Enter quantity" min="0">
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="+880 1XXXXXXXXX">
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="website" class="form-label">Website</label>
-                                        <input type="url" class="form-control" id="website"
-                                            placeholder="https://example.com">
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <label for="search" class="form-label">Search</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-white border-end-0"><i
-                                                    class="bi bi-search text-muted"></i></span>
-                                            <input type="search" class="form-control border-start-0 ps-0" id="search"
-                                                placeholder="Search anything...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- ============ MAIN CONTENT ============ -->
+            <main class="main-content" id="mainContent">
+                <!-- Page Header - Same as dashboard -->
+                <div class="dashboard-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="header-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-ui-checks-grid"></i>
                         </div>
+                        <h1 class="dashboard-title">Form Components</h1>
                     </div>
-
-                    <!-- 02 — Date & Time -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">02</span>
-                                    <h5 class="mb-0 fw-semibold">Date & Time</h5>
-                                </div>
-                                <small class="text-muted">Temporal input controls</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="dob" class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" id="dob">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="appointment" class="form-label">Appointment Date & Time</label>
-                                        <input type="datetime-local" class="form-control" id="appointment">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="billingMonth" class="form-label">Billing Month</label>
-                                        <input type="month" class="form-control" id="billingMonth">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="deliveryWeek" class="form-label">Delivery Week</label>
-                                        <input type="week" class="form-control" id="deliveryWeek">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="pickupTime" class="form-label">Pickup Time</label>
-                                        <input type="time" class="form-control" id="pickupTime">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Date Range</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" aria-label="Start Date">
-                                            <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
-                                            <input type="date" class="form-control" aria-label="End Date">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Time Range</label>
-                                        <div class="input-group">
-                                            <input type="time" class="form-control" aria-label="Start Time">
-                                            <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
-                                            <input type="time" class="form-control" aria-label="End Time">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-eye me-1"></i>
+                            Preview</button>
+                        <button class="btn btn-primary" type="button"
+                            onclick="document.querySelectorAll('form').forEach(f => f.reset())"><i
+                                class="bi bi-arrow-counterclockwise me-1"></i> Reset</button>
                     </div>
+                </div>
 
-                    <!-- 03 — Selection Controls -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">03</span>
-                                    <h5 class="mb-0 fw-semibold">Selection Controls</h5>
-                                </div>
-                                <small class="text-muted">Dropdowns, checkboxes, radios, and switches</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="country" class="form-label">Country</label>
-                                        <select class="form-select" id="country">
-                                            <option selected disabled>Choose a country...</option>
-                                            <option>Bangladesh</option>
-                                            <option>United States</option>
-                                            <option>United Kingdom</option>
-                                            <option>Canada</option>
-                                            <option>Australia</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="services" class="form-label">Select Services</label>
-                                        <select class="form-select" id="services" multiple size="4">
-                                            <option>International Courier</option>
-                                            <option>Air Freight</option>
-                                            <option>Sea Freight</option>
-                                            <option>Road Freight</option>
-                                            <option>Warehousing</option>
-                                            <option>Packaging</option>
-                                        </select>
-                                        <div class="form-text">Hold Ctrl/Cmd to select multiple.</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="customerCombobox" class="form-label">Select Customer
-                                            (Combobox)</label>
-                                        <input class="form-control" list="customerOptions" id="customerCombobox"
-                                            placeholder="Type to search...">
-                                        <datalist id="customerOptions">
-                                            <option value="Acme Corporation">
-                                            <option value="Global Tech Ltd">
-                                            <option value="Nexus Logistics">
-                                            <option value="Stark Industries">
-                                        </datalist>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="cityAutocomplete" class="form-label">Search City
-                                            (Autocomplete)</label>
-                                        <input class="form-control" list="cityOptions" id="cityAutocomplete"
-                                            placeholder="Start typing a city...">
-                                        <datalist id="cityOptions">
-                                            <option value="Dhaka">
-                                            <option value="Chittagong">
-                                            <option value="Sylhet">
-                                            <option value="Rajshahi">
-                                            <option value="Khulna">
-                                        </datalist>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label d-block">Account Type</label>
-                                        <div class="d-flex gap-3 mt-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="accountType"
-                                                    id="accPersonal" checked>
-                                                <label class="form-check-label" for="accPersonal">Personal</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="accountType"
-                                                    id="accBusiness">
-                                                <label class="form-check-label" for="accBusiness">Business</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="accountType"
-                                                    id="accEnterprise">
-                                                <label class="form-check-label" for="accEnterprise">Enterprise</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label d-block">Notification Preferences</label>
-                                        <div class="d-flex flex-column gap-2 mt-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifEmail" checked>
-                                                <label class="form-check-label" for="notifEmail">Email</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifSms">
-                                                <label class="form-check-label" for="notifSms">SMS</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifWhatsapp">
-                                                <label class="form-check-label" for="notifWhatsapp">WhatsApp</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifPush" checked>
-                                                <label class="form-check-label" for="notifPush">Push
-                                                    Notification</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label d-block">Account Status</label>
-                                        <div class="form-check form-switch mt-2">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="accountStatus" checked>
-                                            <label class="form-check-label fw-medium" for="accountStatus">Active</label>
-                                        </div>
-                                        <div class="form-check form-switch mt-2">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="accountStatusInactive">
-                                            <label class="form-check-label text-muted"
-                                                for="accountStatusInactive">Inactive</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <form id="mainForm" novalidate>
+                    <div class="row g-4">
 
-                    <!-- 04 — Text & Content -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">04</span>
-                                    <h5 class="mb-0 fw-semibold">Text & Content</h5>
+                        <!-- 01 — Basic Input Types -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">01</span>
+                                        <h5 class="mb-0 fw-semibold">Basic Input Types</h5>
+                                    </div>
+                                    <small class="text-muted">Common text-based form controls</small>
                                 </div>
-                                <small class="text-muted">Textareas and rich text editing</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" rows="4"
-                                            placeholder="Write a detailed description..." maxlength="500"
-                                            oninput="updateCharCount(this)"></textarea>
-                                        <div class="form-text text-end"><span id="charCount">0</span> / 500</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="fullAddress" class="form-label">Full Address</label>
-                                        <textarea class="form-control" id="fullAddress" rows="4"
-                                            placeholder="Enter your complete mailing address..."></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Rich Text Editor</label>
-                                        <div class="border rounded-3 overflow-hidden">
-                                            <div class="bg-light border-bottom p-2 d-flex gap-1 flex-wrap">
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Bold"><i class="bi bi-type-bold"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Italic"><i class="bi bi-type-italic"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Underline"><i class="bi bi-type-underline"></i></button>
-                                                <div class="vr mx-1"></div>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Heading"><i class="bi bi-type-h1"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Bullet List"><i class="bi bi-list-ul"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Numbered List"><i class="bi bi-list-ol"></i></button>
-                                                <div class="vr mx-1"></div>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Link"><i class="bi bi-link-45deg"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Align Left"><i class="bi bi-text-left"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Align Center"><i class="bi bi-text-center"></i></button>
-                                                <div class="vr mx-1"></div>
-                                                <button type="button" class="btn btn-sm btn-light border text-danger"
-                                                    title="Clear Formatting"><i class="bi bi-eraser"></i></button>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="fullName" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="fullName"
+                                                placeholder="Enter your full name">
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="password" class="form-label">Password</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="password"
+                                                    placeholder="Enter password">
+                                                <button class="btn btn-outline-secondary border-start-0" type="button"
+                                                    id="togglePassword" aria-label="Toggle password visibility">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
                                             </div>
-                                            <div class="p-3 bg-white" contenteditable="true"
-                                                style="min-height: 120px; outline: none;"
-                                                aria-label="Rich text editor content">
-                                                <p>Start typing your <b>formatted</b> content here...</p>
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="name@example.com">
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="quantity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="quantity"
+                                                placeholder="Enter quantity" min="0">
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone"
+                                                placeholder="+880 1XXXXXXXXX">
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="website" class="form-label">Website</label>
+                                            <input type="url" class="form-control" id="website"
+                                                placeholder="https://example.com">
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <label for="search" class="form-label">Search</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-white border-end-0"><i
+                                                        class="bi bi-search text-muted"></i></span>
+                                                <input type="search" class="form-control border-start-0 ps-0"
+                                                    id="search" placeholder="Search anything...">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 05 — File & Media Upload -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">05</span>
-                                    <h5 class="mb-0 fw-semibold">File & Media Upload</h5>
+                        <!-- 02 — Date & Time -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">02</span>
+                                        <h5 class="mb-0 fw-semibold">Date & Time</h5>
+                                    </div>
+                                    <small class="text-muted">Temporal input controls</small>
                                 </div>
-                                <small class="text-muted">Document, image, and drag-and-drop uploads</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="docUpload" class="form-label">Upload Document</label>
-                                        <input class="form-control" type="file" id="docUpload"
-                                            accept=".pdf,.doc,.docx,.xls,.xlsx">
-                                        <div class="form-text">Allowed: PDF, DOC, DOCX, XLS, XLSX</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="imgUpload" class="form-label">Profile Image</label>
-                                        <input class="form-control" type="file" id="imgUpload" accept="image/*">
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="multiUpload" class="form-label">Upload Attachments</label>
-                                        <input class="form-control" type="file" id="multiUpload" multiple>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <!-- Spacer for grid alignment -->
-                                    </div>
-
-                                    <!-- Drag & Drop Zone -->
-                                    <div class="col-12">
-                                        <label class="form-label">Drag & Drop Upload</label>
-                                        <div class="dropzone border border-2 border-dashed rounded-3 p-5 text-center bg-light-subtle"
-                                            id="dropZone">
-                                            <i class="bi bi-cloud-arrow-up display-4 text-primary mb-3"></i>
-                                            <h6 class="fw-semibold mb-1">Drag & drop files here</h6>
-                                            <p class="text-muted mb-3" style="font-size: 0.875rem;">or click to
-                                                browse files from your computer</p>
-                                            <button type="button" class="btn btn-primary btn-sm px-4">Browse
-                                                Files</button>
-                                            <input type="file" class="d-none" id="dropZoneInput" multiple>
-                                            <div class="mt-3 text-muted" style="font-size: 0.75rem;">Supported: JPG,
-                                                PNG, PDF up to 10MB</div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="dob" class="form-label">Date of Birth</label>
+                                            <input type="date" class="form-control" id="dob">
                                         </div>
-
-                                        <!-- Example Uploaded Files -->
-                                        <div class="mt-3 space-y-2">
-                                            <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
-                                                <div class="bg-primary-subtle text-primary rounded p-2 me-3">
-                                                    <i class="bi bi-file-earmark-pdf fs-5"></i>
-                                                </div>
-                                                <div class="flex-grow-1 min-width-0">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span
-                                                            class="fw-medium text-truncate">project_requirements.pdf</span>
-                                                        <span class="text-muted" style="font-size: 0.75rem;">2.4
-                                                            MB</span>
-                                                    </div>
-                                                    <div class="progress" style="height: 4px;">
-                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                            style="width: 100%"></div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-link text-danger p-2 ms-2"
-                                                    aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="appointment" class="form-label">Appointment Date & Time</label>
+                                            <input type="datetime-local" class="form-control" id="appointment">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="billingMonth" class="form-label">Billing Month</label>
+                                            <input type="month" class="form-control" id="billingMonth">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="deliveryWeek" class="form-label">Delivery Week</label>
+                                            <input type="week" class="form-control" id="deliveryWeek">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="pickupTime" class="form-label">Pickup Time</label>
+                                            <input type="time" class="form-control" id="pickupTime">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Date Range</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" aria-label="Start Date">
+                                                <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
+                                                <input type="date" class="form-control" aria-label="End Date">
                                             </div>
-                                            <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
-                                                <div class="bg-warning-subtle text-warning rounded p-2 me-3">
-                                                    <i class="bi bi-file-earmark-image fs-5"></i>
-                                                </div>
-                                                <div class="flex-grow-1 min-width-0">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span class="fw-medium text-truncate">logo_design_v2.png</span>
-                                                        <span class="text-muted" style="font-size: 0.75rem;">1.1
-                                                            MB</span>
-                                                    </div>
-                                                    <div class="progress" style="height: 4px;">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            role="progressbar" style="width: 65%"></div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-link text-danger p-2 ms-2"
-                                                    aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Time Range</label>
+                                            <div class="input-group">
+                                                <input type="time" class="form-control" aria-label="Start Time">
+                                                <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
+                                                <input type="time" class="form-control" aria-label="End Time">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 06 — Specialized Inputs -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">06</span>
-                                    <h5 class="mb-0 fw-semibold">Specialized Inputs</h5>
-                                </div>
-                                <small class="text-muted">OTP, currency, percentage, and range controls</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">OTP Verification</label>
-                                        <div class="d-flex gap-2" id="otpContainer">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 1">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 2">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 3">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 4">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 5">
-                                            <input type="text" class="form-control text-center otp-input" maxlength="1"
-                                                inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 6">
-                                        </div>
+                        <!-- 03 — Selection Controls -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">03</span>
+                                        <h5 class="mb-0 fw-semibold">Selection Controls</h5>
                                     </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Phone + Country Code</label>
-                                        <div class="input-group">
-                                            <select class="form-select" style="max-width: 110px;"
-                                                aria-label="Country code">
-                                                <option value="+880">+880 ▼</option>
-                                                <option value="+1">+1 ▼</option>
-                                                <option value="+44">+44 ▼</option>
+                                    <small class="text-muted">Dropdowns, checkboxes, radios, and switches</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="country" class="form-label">Country</label>
+                                            <select class="form-select" id="country">
+                                                <option selected disabled>Choose a country...</option>
+                                                <option>Bangladesh</option>
+                                                <option>United States</option>
+                                                <option>United Kingdom</option>
+                                                <option>Canada</option>
+                                                <option>Australia</option>
                                             </select>
-                                            <input type="tel" class="form-control" placeholder="1XXXXXXXXX"
-                                                aria-label="Phone number">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Currency Input</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input type="text" class="form-control" placeholder="0.00"
-                                                aria-label="Currency amount">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="services" class="form-label">Select Services</label>
+                                            <select class="form-select" id="services" multiple size="4">
+                                                <option>International Courier</option>
+                                                <option>Air Freight</option>
+                                                <option>Sea Freight</option>
+                                                <option>Road Freight</option>
+                                                <option>Warehousing</option>
+                                                <option>Packaging</option>
+                                            </select>
+                                            <div class="form-text">Hold Ctrl/Cmd to select multiple.</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Percentage Input</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" placeholder="15"
-                                                aria-label="Percentage value">
-                                            <span class="input-group-text">%</span>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="customerCombobox" class="form-label">Select Customer
+                                                (Combobox)</label>
+                                            <input class="form-control" list="customerOptions" id="customerCombobox"
+                                                placeholder="Type to search...">
+                                            <datalist id="customerOptions">
+                                                <option value="Acme Corporation">
+                                                <option value="Global Tech Ltd">
+                                                <option value="Nexus Logistics">
+                                                <option value="Stark Industries">
+                                            </datalist>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Color Picker</label>
-                                        <div class="input-group">
-                                            <input type="color" class="form-control form-control-color" id="colorPicker"
-                                                value="#4f46e5" title="Choose your color">
-                                            <input type="text" class="form-control" value="#4F46E5" id="colorHex"
-                                                aria-label="Color hex value">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="cityAutocomplete" class="form-label">Search City
+                                                (Autocomplete)</label>
+                                            <input class="form-control" list="cityOptions" id="cityAutocomplete"
+                                                placeholder="Start typing a city...">
+                                            <datalist id="cityOptions">
+                                                <option value="Dhaka">
+                                                <option value="Chittagong">
+                                                <option value="Sylhet">
+                                                <option value="Rajshahi">
+                                                <option value="Khulna">
+                                            </datalist>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label for="priceRange" class="form-label d-flex justify-content-between">
-                                            <span>Price Range</span>
-                                            <span class="text-primary fw-semibold" id="rangeValue">৳2,750</span>
-                                        </label>
-                                        <input type="range" class="form-range" min="500" max="5000" step="50"
-                                            id="priceRange" value="2750">
-                                        <div class="d-flex justify-content-between text-muted"
-                                            style="font-size: 0.75rem;">
-                                            <span>৳500</span>
-                                            <span>৳5,000</span>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label d-block">Account Type</label>
+                                            <div class="d-flex gap-3 mt-1">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="accountType"
+                                                        id="accPersonal" checked>
+                                                    <label class="form-check-label" for="accPersonal">Personal</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="accountType"
+                                                        id="accBusiness">
+                                                    <label class="form-check-label" for="accBusiness">Business</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="accountType"
+                                                        id="accEnterprise">
+                                                    <label class="form-check-label"
+                                                        for="accEnterprise">Enterprise</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label d-block">Notification Preferences</label>
+                                            <div class="d-flex flex-column gap-2 mt-1">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="notifEmail"
+                                                        checked>
+                                                    <label class="form-check-label" for="notifEmail">Email</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="notifSms">
+                                                    <label class="form-check-label" for="notifSms">SMS</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="notifWhatsapp">
+                                                    <label class="form-check-label" for="notifWhatsapp">WhatsApp</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="notifPush"
+                                                        checked>
+                                                    <label class="form-check-label" for="notifPush">Push
+                                                        Notification</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label d-block">Account Status</label>
+                                            <div class="form-check form-switch mt-2">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="accountStatus" checked>
+                                                <label class="form-check-label fw-medium"
+                                                    for="accountStatus">Active</label>
+                                            </div>
+                                            <div class="form-check form-switch mt-2">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="accountStatusInactive">
+                                                <label class="form-check-label text-muted"
+                                                    for="accountStatusInactive">Inactive</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 07 — Address & Location -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">07</span>
-                                    <h5 class="mb-0 fw-semibold">Address & Location</h5>
+                        <!-- 04 — Text & Content -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">04</span>
+                                        <h5 class="mb-0 fw-semibold">Text & Content</h5>
+                                    </div>
+                                    <small class="text-muted">Textareas and rich text editing</small>
                                 </div>
-                                <small class="text-muted">Geographic and mailing address components</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="addrCountry" class="form-label">Country</label>
-                                        <select class="form-select" id="addrCountry">
-                                            <option>Bangladesh</option>
-                                            <option>United States</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="addrState" class="form-label">State / Division</label>
-                                        <select class="form-select" id="addrState">
-                                            <option>Dhaka</option>
-                                            <option>Chittagong</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="addrCity" class="form-label">City</label>
-                                        <select class="form-select" id="addrCity">
-                                            <option>Dhaka</option>
-                                            <option>Gazipur</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="addrArea" class="form-label">Area</label>
-                                        <select class="form-select" id="addrArea">
-                                            <option>Gulshan</option>
-                                            <option>Banani</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="postalCode" class="form-label">Postal Code</label>
-                                        <input type="text" class="form-control" id="postalCode" placeholder="1212">
-                                    </div>
-                                    <div class="col-md-12 col-lg-9">
-                                        <label for="addrFull" class="form-label">Full Address</label>
-                                        <textarea class="form-control" id="addrFull" rows="1"
-                                            placeholder="House, Road, Block..."></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Map Location Picker</label>
-                                        <div class="border rounded-3 overflow-hidden position-relative"
-                                            style="height: 300px; background-color: #e9ecef;">
-                                            <!-- Mock Map Background -->
-                                            <div class="w-100 h-100 d-flex align-items-center justify-content-center position-relative"
-                                                style="background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%); background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;">
-                                                <i class="bi bi-geo-alt-fill text-danger display-1 position-absolute"
-                                                    style="transform: translateY(-50%); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));"></i>
-
-                                                <!-- Map Controls Overlay -->
-                                                <div class="position-absolute top-0 start-0 w-100 p-3">
-                                                    <div class="input-group shadow-sm">
-                                                        <span class="input-group-text bg-white border-end-0"><i
-                                                                class="bi bi-search"></i></span>
-                                                        <input type="text" class="form-control border-start-0"
-                                                            placeholder="Search location...">
-                                                        <button class="btn btn-primary" type="button"><i
-                                                                class="bi bi-crosshair me-1"></i> Current</button>
-                                                    </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="description" class="form-label">Description</label>
+                                            <textarea class="form-control" id="description" rows="4"
+                                                placeholder="Write a detailed description..." maxlength="500"
+                                                oninput="updateCharCount(this)"></textarea>
+                                            <div class="form-text text-end"><span id="charCount">0</span> / 500</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fullAddress" class="form-label">Full Address</label>
+                                            <textarea class="form-control" id="fullAddress" rows="4"
+                                                placeholder="Enter your complete mailing address..."></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Rich Text Editor</label>
+                                            <div class="border rounded-3 overflow-hidden">
+                                                <div class="bg-light border-bottom p-2 d-flex gap-1 flex-wrap">
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Bold"><i class="bi bi-type-bold"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Italic"><i class="bi bi-type-italic"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Underline"><i class="bi bi-type-underline"></i></button>
+                                                    <div class="vr mx-1"></div>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Heading"><i class="bi bi-type-h1"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Bullet List"><i class="bi bi-list-ul"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Numbered List"><i class="bi bi-list-ol"></i></button>
+                                                    <div class="vr mx-1"></div>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Link"><i class="bi bi-link-45deg"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Align Left"><i class="bi bi-text-left"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-light border"
+                                                        title="Align Center"><i class="bi bi-text-center"></i></button>
+                                                    <div class="vr mx-1"></div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-light border text-danger"
+                                                        title="Clear Formatting"><i class="bi bi-eraser"></i></button>
                                                 </div>
-
-                                                <div
-                                                    class="position-absolute bottom-0 start-0 w-100 bg-white bg-opacity-75 p-2 border-top d-flex gap-3">
-                                                    <div class="small"><strong>Lat:</strong> 23.8103</div>
-                                                    <div class="small"><strong>Lng:</strong> 90.4125</div>
+                                                <div class="p-3 bg-white" contenteditable="true"
+                                                    style="min-height: 120px; outline: none;"
+                                                    aria-label="Rich text editor content">
+                                                    <p>Start typing your <b>formatted</b> content here...</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -747,230 +600,502 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 08 — System Fields -->
-                    <div class="col-12">
-                        <div class="card component-card border-info-subtle bg-info-subtle">
-                            <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <i class="bi bi-info-circle-fill text-info fs-4 me-3 mt-1"></i>
-                                    <div>
-                                        <h6 class="fw-semibold mb-1">System Fields (Hidden Inputs)</h6>
-                                        <p class="text-muted mb-2" style="font-size: 0.875rem;">Used for Record ID,
-                                            User ID, CSRF tokens, or internal references. Not visible to the user
-                                            but submitted with the form.</p>
-                                        <code
-                                            class="bg-white px-2 py-1 rounded border">&lt;input type="hidden" name="record_id" value="12345"&gt;</code>
-                                        <input type="hidden" name="record_id" value="12345">
+                        <!-- 05 — File & Media Upload -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">05</span>
+                                        <h5 class="mb-0 fw-semibold">File & Media Upload</h5>
                                     </div>
+                                    <small class="text-muted">Document, image, and drag-and-drop uploads</small>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 10 — Validation States -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">10</span>
-                                    <h5 class="mb-0 fw-semibold">Validation States</h5>
-                                </div>
-                                <small class="text-muted">Visual feedback for form validation</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Default</label>
-                                        <input type="text" class="form-control" placeholder="Normal input">
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Focus</label>
-                                        <input type="text" class="form-control" placeholder="Click to see focus ring"
-                                            autofocus>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Success</label>
-                                        <input type="email" class="form-control is-valid" value="user@example.com">
-                                        <div class="valid-feedback">Email address is available.</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Error</label>
-                                        <input type="email" class="form-control is-invalid" value="invalid-email">
-                                        <div class="invalid-feedback">Please enter a valid email address.</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Warning</label>
-                                        <input type="text" class="form-control is-warning" value="almost_full">
-                                        <div class="form-text text-warning">This field is almost at capacity.</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Disabled</label>
-                                        <input type="text" class="form-control" placeholder="Disabled input" disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Read Only</label>
-                                        <input type="text" class="form-control" value="Read-only value" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 11 — Form Layout Patterns -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">11</span>
-                                    <h5 class="mb-0 fw-semibold">Form Layout Patterns</h5>
-                                </div>
-                                <small class="text-muted">Responsive grid layouts for different scenarios</small>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="fw-semibold mb-3">Two Column Form</h6>
-                                <div class="row g-3 mb-4">
-                                    <div class="col-md-6"><input type="text" class="form-control"
-                                            placeholder="First Name"></div>
-                                    <div class="col-md-6"><input type="text" class="form-control"
-                                            placeholder="Last Name"></div>
-                                    <div class="col-md-6"><input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="col-md-6"><input type="tel" class="form-control" placeholder="Phone">
-                                    </div>
-                                </div>
-
-                                <h6 class="fw-semibold mb-3">Three Column Form</h6>
-                                <div class="row g-3 mb-4">
-                                    <div class="col-md-4"><select class="form-select">
-                                            <option>Country</option>
-                                        </select></div>
-                                    <div class="col-md-4"><select class="form-select">
-                                            <option>State</option>
-                                        </select></div>
-                                    <div class="col-md-4"><select class="form-select">
-                                            <option>City</option>
-                                        </select></div>
-                                </div>
-
-                                <h6 class="fw-semibold mb-3">Inline Form</h6>
-                                <form
-                                    class="row row-cols-md-auto g-3 align-items-center border rounded-3 p-3 bg-light-subtle">
-                                    <div class="col-12">
-                                        <label class="visually-hidden" for="inlineSearch">Search</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                            <input type="text" class="form-control" id="inlineSearch"
-                                                placeholder="Search...">
+                                <div class="card-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="docUpload" class="form-label">Upload Document</label>
+                                            <input class="form-control" type="file" id="docUpload"
+                                                accept=".pdf,.doc,.docx,.xls,.xlsx">
+                                            <div class="form-text">Allowed: PDF, DOC, DOCX, XLS, XLSX</div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="visually-hidden" for="inlineStatus">Status</label>
-                                        <select class="form-select" id="inlineStatus">
-                                            <option selected>Status</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Apply Filter</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="imgUpload" class="form-label">Profile Image</label>
+                                            <input class="form-control" type="file" id="imgUpload" accept="image/*">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="multiUpload" class="form-label">Upload Attachments</label>
+                                            <input class="form-control" type="file" id="multiUpload" multiple>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <!-- Spacer for grid alignment -->
+                                        </div>
 
-                    <!-- 12 — Input Groups -->
-                    <div class="col-12">
-                        <div class="card component-card">
-                            <div class="card-header bg-transparent border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-subtle text-primary me-2">12</span>
-                                    <h5 class="mb-0 fw-semibold">Input Groups</h5>
-                                </div>
-                                <small class="text-muted">Extending form controls by adding text, buttons, or button
-                                    groups</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Search Group</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search products...">
-                                            <button class="btn btn-primary" type="button">Search</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Currency Group</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input type="text" class="form-control" placeholder="1,000.00">
-                                            <span class="input-group-text">.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">URL Group</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">https://</span>
-                                            <input type="text" class="form-control" placeholder="example.com">
+                                        <!-- Drag & Drop Zone -->
+                                        <div class="col-12">
+                                            <label class="form-label">Drag & Drop Upload</label>
+                                            <div class="dropzone border border-2 border-dashed rounded-3 p-5 text-center bg-light-subtle"
+                                                id="dropZone">
+                                                <i class="bi bi-cloud-arrow-up display-4 text-primary mb-3"></i>
+                                                <h6 class="fw-semibold mb-1">Drag & drop files here</h6>
+                                                <p class="text-muted mb-3" style="font-size: 0.875rem;">or click to
+                                                    browse files from your computer</p>
+                                                <button type="button" class="btn btn-primary btn-sm px-4">Browse
+                                                    Files</button>
+                                                <input type="file" class="d-none" id="dropZoneInput" multiple>
+                                                <div class="mt-3 text-muted" style="font-size: 0.75rem;">Supported: JPG,
+                                                    PNG, PDF up to 10MB</div>
+                                            </div>
+
+                                            <!-- Example Uploaded Files -->
+                                            <div class="mt-3 space-y-2">
+                                                <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
+                                                    <div class="bg-primary-subtle text-primary rounded p-2 me-3">
+                                                        <i class="bi bi-file-earmark-pdf fs-5"></i>
+                                                    </div>
+                                                    <div class="flex-grow-1 min-width-0">
+                                                        <div class="d-flex justify-content-between mb-1">
+                                                            <span
+                                                                class="fw-medium text-truncate">project_requirements.pdf</span>
+                                                            <span class="text-muted" style="font-size: 0.75rem;">2.4
+                                                                MB</span>
+                                                        </div>
+                                                        <div class="progress" style="height: 4px;">
+                                                            <div class="progress-bar bg-success" role="progressbar"
+                                                                style="width: 100%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-link text-danger p-2 ms-2"
+                                                        aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
+                                                </div>
+                                                <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
+                                                    <div class="bg-warning-subtle text-warning rounded p-2 me-3">
+                                                        <i class="bi bi-file-earmark-image fs-5"></i>
+                                                    </div>
+                                                    <div class="flex-grow-1 min-width-0">
+                                                        <div class="d-flex justify-content-between mb-1">
+                                                            <span
+                                                                class="fw-medium text-truncate">logo_design_v2.png</span>
+                                                            <span class="text-muted" style="font-size: 0.75rem;">1.1
+                                                                MB</span>
+                                                        </div>
+                                                        <div class="progress" style="height: 4px;">
+                                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                                role="progressbar" style="width: 65%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-link text-danger p-2 ms-2"
+                                                        aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 09 — Form Actions (Placed at bottom for logical flow) -->
-                    <div class="col-12">
-                        <div class="card component-card border-primary-subtle">
-                            <div class="card-header bg-primary-subtle border-bottom border-primary-subtle">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary text-white me-2">09</span>
-                                    <h5 class="mb-0 fw-semibold text-primary">Form Actions</h5>
+                        <!-- 06 — Specialized Inputs -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">06</span>
+                                        <h5 class="mb-0 fw-semibold">Specialized Inputs</h5>
+                                    </div>
+                                    <small class="text-muted">OTP, currency, percentage, and range controls</small>
                                 </div>
-                                <small class="text-primary-emphasis">Submit, cancel, and stateful action
-                                    buttons</small>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex flex-wrap gap-2">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-lg me-1"></i> Save Changes
-                                    </button>
-                                    <button type="button" class="btn btn-secondary">
-                                        <i class="bi bi-x-lg me-1"></i> Cancel
-                                    </button>
-                                    <button type="button" class="btn btn-outline-primary">
-                                        <i class="bi bi-eye me-1"></i> Preview
-                                    </button>
-                                    <button type="reset" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Form
-                                    </button>
-                                    <button type="button" class="btn btn-outline-danger">
-                                        <i class="bi bi-trash me-1"></i> Delete
-                                    </button>
-                                    <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
-                                        <span role="status">Saving...</span>
-                                    </button>
-                                    <button type="button" class="btn btn-primary" disabled>
-                                        <i class="bi bi-lock me-1"></i> Disabled
-                                    </button>
+                                <div class="card-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">OTP Verification</label>
+                                            <div class="d-flex gap-2" id="otpContainer">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 1">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 2">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 3">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 4">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 5">
+                                                <input type="text" class="form-control text-center otp-input"
+                                                    maxlength="1" inputmode="numeric" pattern="[0-9]*"
+                                                    aria-label="OTP digit 6">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Phone + Country Code</label>
+                                            <div class="input-group">
+                                                <select class="form-select" style="max-width: 110px;"
+                                                    aria-label="Country code">
+                                                    <option value="+880">+880 ▼</option>
+                                                    <option value="+1">+1 ▼</option>
+                                                    <option value="+44">+44 ▼</option>
+                                                </select>
+                                                <input type="tel" class="form-control" placeholder="1XXXXXXXXX"
+                                                    aria-label="Phone number">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Currency Input</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control" placeholder="0.00"
+                                                    aria-label="Currency amount">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Percentage Input</label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" placeholder="15"
+                                                    aria-label="Percentage value">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Color Picker</label>
+                                            <div class="input-group">
+                                                <input type="color" class="form-control form-control-color"
+                                                    id="colorPicker" value="#4f46e5" title="Choose your color">
+                                                <input type="text" class="form-control" value="#4F46E5" id="colorHex"
+                                                    aria-label="Color hex value">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label for="priceRange" class="form-label d-flex justify-content-between">
+                                                <span>Price Range</span>
+                                                <span class="text-primary fw-semibold" id="rangeValue">৳2,750</span>
+                                            </label>
+                                            <input type="range" class="form-range" min="500" max="5000" step="50"
+                                                id="priceRange" value="2750">
+                                            <div class="d-flex justify-content-between text-muted"
+                                                style="font-size: 0.75rem;">
+                                                <span>৳500</span>
+                                                <span>৳5,000</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- 07 — Address & Location -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">07</span>
+                                        <h5 class="mb-0 fw-semibold">Address & Location</h5>
+                                    </div>
+                                    <small class="text-muted">Geographic and mailing address components</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="addrCountry" class="form-label">Country</label>
+                                            <select class="form-select" id="addrCountry">
+                                                <option>Bangladesh</option>
+                                                <option>United States</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="addrState" class="form-label">State / Division</label>
+                                            <select class="form-select" id="addrState">
+                                                <option>Dhaka</option>
+                                                <option>Chittagong</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="addrCity" class="form-label">City</label>
+                                            <select class="form-select" id="addrCity">
+                                                <option>Dhaka</option>
+                                                <option>Gazipur</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="addrArea" class="form-label">Area</label>
+                                            <select class="form-select" id="addrArea">
+                                                <option>Gulshan</option>
+                                                <option>Banani</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <label for="postalCode" class="form-label">Postal Code</label>
+                                            <input type="text" class="form-control" id="postalCode" placeholder="1212">
+                                        </div>
+                                        <div class="col-md-12 col-lg-9">
+                                            <label for="addrFull" class="form-label">Full Address</label>
+                                            <textarea class="form-control" id="addrFull" rows="1"
+                                                placeholder="House, Road, Block..."></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Map Location Picker</label>
+                                            <div class="border rounded-3 overflow-hidden position-relative"
+                                                style="height: 300px; background-color: #e9ecef;">
+                                                <!-- Mock Map Background -->
+                                                <div class="w-100 h-100 d-flex align-items-center justify-content-center position-relative"
+                                                    style="background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%); background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;">
+                                                    <i class="bi bi-geo-alt-fill text-danger display-1 position-absolute"
+                                                        style="transform: translateY(-50%); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));"></i>
+
+                                                    <!-- Map Controls Overlay -->
+                                                    <div class="position-absolute top-0 start-0 w-100 p-3">
+                                                        <div class="input-group shadow-sm">
+                                                            <span class="input-group-text bg-white border-end-0"><i
+                                                                    class="bi bi-search"></i></span>
+                                                            <input type="text" class="form-control border-start-0"
+                                                                placeholder="Search location...">
+                                                            <button class="btn btn-primary" type="button"><i
+                                                                    class="bi bi-crosshair me-1"></i> Current</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="position-absolute bottom-0 start-0 w-100 bg-white bg-opacity-75 p-2 border-top d-flex gap-3">
+                                                        <div class="small"><strong>Lat:</strong> 23.8103</div>
+                                                        <div class="small"><strong>Lng:</strong> 90.4125</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 08 — System Fields -->
+                        <div class="col-12">
+                            <div class="card component-card border-info-subtle bg-info-subtle">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-info-circle-fill text-info fs-4 me-3 mt-1"></i>
+                                        <div>
+                                            <h6 class="fw-semibold mb-1">System Fields (Hidden Inputs)</h6>
+                                            <p class="text-muted mb-2" style="font-size: 0.875rem;">Used for Record ID,
+                                                User ID, CSRF tokens, or internal references. Not visible to the user
+                                                but submitted with the form.</p>
+                                            <code
+                                                class="bg-white px-2 py-1 rounded border">&lt;input type="hidden" name="record_id" value="12345"&gt;</code>
+                                            <input type="hidden" name="record_id" value="12345">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10 — Validation States -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">10</span>
+                                        <h5 class="mb-0 fw-semibold">Validation States</h5>
+                                    </div>
+                                    <small class="text-muted">Visual feedback for form validation</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Default</label>
+                                            <input type="text" class="form-control" placeholder="Normal input">
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Focus</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Click to see focus ring" autofocus>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Success</label>
+                                            <input type="email" class="form-control is-valid" value="user@example.com">
+                                            <div class="valid-feedback">Email address is available.</div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Error</label>
+                                            <input type="email" class="form-control is-invalid" value="invalid-email">
+                                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Warning</label>
+                                            <input type="text" class="form-control is-warning" value="almost_full">
+                                            <div class="form-text text-warning">This field is almost at capacity.</div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Disabled</label>
+                                            <input type="text" class="form-control" placeholder="Disabled input"
+                                                disabled>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Read Only</label>
+                                            <input type="text" class="form-control" value="Read-only value" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 11 — Form Layout Patterns -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">11</span>
+                                        <h5 class="mb-0 fw-semibold">Form Layout Patterns</h5>
+                                    </div>
+                                    <small class="text-muted">Responsive grid layouts for different scenarios</small>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="fw-semibold mb-3">Two Column Form</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                placeholder="First Name"></div>
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                placeholder="Last Name"></div>
+                                        <div class="col-md-6"><input type="email" class="form-control"
+                                                placeholder="Email">
+                                        </div>
+                                        <div class="col-md-6"><input type="tel" class="form-control"
+                                                placeholder="Phone">
+                                        </div>
+                                    </div>
+
+                                    <h6 class="fw-semibold mb-3">Three Column Form</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-4"><select class="form-select">
+                                                <option>Country</option>
+                                            </select></div>
+                                        <div class="col-md-4"><select class="form-select">
+                                                <option>State</option>
+                                            </select></div>
+                                        <div class="col-md-4"><select class="form-select">
+                                                <option>City</option>
+                                            </select></div>
+                                    </div>
+
+                                    <h6 class="fw-semibold mb-3">Inline Form</h6>
+                                    <form
+                                        class="row row-cols-md-auto g-3 align-items-center border rounded-3 p-3 bg-light-subtle">
+                                        <div class="col-12">
+                                            <label class="visually-hidden" for="inlineSearch">Search</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                                <input type="text" class="form-control" id="inlineSearch"
+                                                    placeholder="Search...">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="visually-hidden" for="inlineStatus">Status</label>
+                                            <select class="form-select" id="inlineStatus">
+                                                <option selected>Status</option>
+                                                <option value="1">Active</option>
+                                                <option value="2">Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Apply Filter</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12 — Input Groups -->
+                        <div class="col-12">
+                            <div class="card component-card">
+                                <div class="card-header bg-transparent border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary-subtle text-primary me-2">12</span>
+                                        <h5 class="mb-0 fw-semibold">Input Groups</h5>
+                                    </div>
+                                    <small class="text-muted">Extending form controls by adding text, buttons, or button
+                                        groups</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Search Group</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Search products...">
+                                                <button class="btn btn-primary" type="button">Search</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">Currency Group</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control" placeholder="1,000.00">
+                                                <span class="input-group-text">.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <label class="form-label">URL Group</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">https://</span>
+                                                <input type="text" class="form-control" placeholder="example.com">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 09 — Form Actions (Placed at bottom for logical flow) -->
+                        <div class="col-12">
+                            <div class="card component-card border-primary-subtle">
+                                <div class="card-header bg-primary-subtle border-bottom border-primary-subtle">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary text-white me-2">09</span>
+                                        <h5 class="mb-0 fw-semibold text-primary">Form Actions</h5>
+                                    </div>
+                                    <small class="text-primary-emphasis">Submit, cancel, and stateful action
+                                        buttons</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-lg me-1"></i> Save Changes
+                                        </button>
+                                        <button type="button" class="btn btn-secondary">
+                                            <i class="bi bi-x-lg me-1"></i> Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-outline-primary">
+                                            <i class="bi bi-eye me-1"></i> Preview
+                                        </button>
+                                        <button type="reset" class="btn btn-outline-secondary">
+                                            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Form
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger">
+                                            <i class="bi bi-trash me-1"></i> Delete
+                                        </button>
+                                        <button class="btn btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm me-1"
+                                                aria-hidden="true"></span>
+                                            <span role="status">Saving...</span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" disabled>
+                                            <i class="bi bi-lock me-1"></i> Disabled
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                </form>
 
-                </div>
-            </form>
+                <!-- Footer -->
+                <footer class="dashboard-footer">
+                    <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
+                            class="text-decoration-none fw-semibold">STITBD</a></div>
+                </footer>
 
-            <!-- Footer -->
-            <footer class="dashboard-footer">
-                <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
-                        class="text-decoration-none fw-semibold">STITBD</a></div>
-            </footer>
-
-        </main>
+            </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>

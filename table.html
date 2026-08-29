@@ -23,10 +23,9 @@
         aria-labelledby="mobileSidebarLabel">
         <div class="offcanvas-header border-bottom">
             <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
-                <div class="brand-text">
-                    <div class="brand-name">STP</div>
-                    <div class="brand-sub">AutoFlow</div>
+                <div class="brand-logo">
+                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
+                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
                 </div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -38,16 +37,13 @@
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
         <div class="sidebar-header">
             <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo"><i class="bi bi-box-seam-fill"></i></div>
-                <div class="brand-text">
-                    <div class="brand-name">STP</div>
-                    <div class="brand-sub">AutoFlow</div>
+                <div class="brand-logo">
+                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
+                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
                 </div>
             </div>
         </div>
-
         <nav class="sidebar-nav" id="sidebarNav" aria-label="Sidebar menu"></nav>
-
         <div class="sidebar-footer">
             <div class="sidebar-user d-flex align-items-center gap-2">
                 <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar avatar-sm object-fit-cover">
@@ -97,23 +93,23 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-primary bg-opacity-10 text-primary"><i
                                         class="bi bi-box-seam"></i></span>
-                                <span><strong>Add Product</strong><small class="d-block text-muted">Create new inventory
-                                        item</small></span>
+                                <span><strong>Add Tyre Stock</strong><small class="d-block text-muted">Create new
+                                        inventory item</small></span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-success bg-opacity-10 text-success"><i
                                         class="bi bi-person-plus"></i></span>
-                                <span><strong>Add Client</strong><small class="d-block text-muted">Register new
-                                        customer</small></span>
+                                <span><strong>Add Dealer</strong><small class="d-block text-muted">Register new local
+                                        dealer</small></span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-info bg-opacity-10 text-info"><i
                                         class="bi bi-truck"></i></span>
-                                <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new
+                                <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new import
                                         supplier</small></span>
                             </a>
                         </li>
@@ -121,7 +117,7 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-warning bg-opacity-10 text-warning"><i
                                         class="bi bi-receipt"></i></span>
-                                <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new
+                                <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new dealer
                                         invoice</small></span>
                             </a>
                         </li>
@@ -129,8 +125,8 @@
                             <a class="dropdown-item" href="#">
                                 <span class="add-icon bg-danger bg-opacity-10 text-danger"><i
                                         class="bi bi-cash-stack"></i></span>
-                                <span><strong>Add Expense</strong><small class="d-block text-muted">Record new
-                                        expense</small></span>
+                                <span><strong>Add Expense</strong><small class="d-block text-muted">Record import duty,
+                                        freight, etc.</small></span>
                             </a>
                         </li>
                     </ul>
@@ -170,308 +166,425 @@
         <!-- ============ MAIN CONTENT ============ -->
         <main class="main-content" id="mainContent">
 
-            <!-- Page Header -->
-            <div class="dashboard-header">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="header-icon bg-primary bg-opacity-10 text-primary">
-                        <i class="bi bi-people-fill"></i>
+            <!-- ============ TOP NAVBAR ============ -->
+            <header class="topbar" id="topbar">
+                <div class="topbar-left d-flex align-items-center gap-2">
+                    <button class="btn-icon mobile-menu-btn d-none" id="mobileMenuBtn" aria-label="Open menu"
+                        aria-controls="mobileSidebar">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <button class="btn-icon topbar-toggle-btn" id="topbarSidebarToggle" aria-label="Toggle sidebar"
+                        aria-expanded="true">
+                        <i class="bi bi-layout-sidebar-inset"></i>
+                    </button>
+                    <div class="breadcrumb-compact d-none d-md-flex align-items-center gap-2 text-secondary small">
+                        <i class="bi bi-house-door"></i>
+                        <span>/</span>
+                        <span class="fw-semibold text-dark">Dashboard</span>
                     </div>
-                    <h1 class="dashboard-title">Customers</h1>
                 </div>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
-                    <i class="bi bi-plus-lg me-1"></i> Add Customer
-                </button>
-            </div>
 
-            <!-- Summary Statistics -->
-            <div class="row g-3 mb-4">
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="kpi-card kpi-blue">
-                        <div class="kpi-bg-icon"><i class="bi bi-people-fill"></i></div>
-                        <div class="kpi-header">
-                            <span class="kpi-label">Total Customers</span>
-                            <div class="kpi-icon-box"><i class="bi bi-people-fill"></i></div>
-                        </div>
-                        <div class="kpi-value">8,549</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>12.5%</div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="kpi-card kpi-green">
-                        <div class="kpi-bg-icon"><i class="bi bi-check-circle-fill"></i></div>
-                        <div class="kpi-header">
-                            <span class="kpi-label">Active</span>
-                            <div class="kpi-icon-box"><i class="bi bi-check-circle-fill"></i></div>
-                        </div>
-                        <div class="kpi-value">7,842</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>8.3%</div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="kpi-card kpi-red">
-                        <div class="kpi-bg-icon"><i class="bi bi-pause-circle-fill"></i></div>
-                        <div class="kpi-header">
-                            <span class="kpi-label">Inactive</span>
-                            <div class="kpi-icon-box"><i class="bi bi-pause-circle-fill"></i></div>
-                        </div>
-                        <div class="kpi-value">707</div>
-                        <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>2.1%</div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="kpi-card kpi-purple">
-                        <div class="kpi-bg-icon"><i class="bi bi-person-plus-fill"></i></div>
-                        <div class="kpi-header">
-                            <span class="kpi-label">New This Month</span>
-                            <div class="kpi-icon-box"><i class="bi bi-person-plus-fill"></i></div>
-                        </div>
-                        <div class="kpi-value">486</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>15.7%</div>
-                    </div>
-                </div>
-            </div>
+                <div class="topbar-right d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-pos" id="posBtn">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        <span>POS</span>
+                    </a>
 
-            <!-- Data Table -->
-            <div class="card card-panel">
-                <div class="card-panel-header">
+                    <!-- Add New Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-add-new dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-plus-lg"></i>
+                            <span class="d-none d-sm-inline">Add New</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm add-new-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-primary bg-opacity-10 text-primary"><i
+                                            class="bi bi-box-seam"></i></span>
+                                    <span><strong>Add Product</strong><small class="d-block text-muted">Create new
+                                            inventory
+                                            item</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-success bg-opacity-10 text-success"><i
+                                            class="bi bi-person-plus"></i></span>
+                                    <span><strong>Add Client</strong><small class="d-block text-muted">Register new
+                                            customer</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-info bg-opacity-10 text-info"><i
+                                            class="bi bi-truck"></i></span>
+                                    <span><strong>Add Supplier</strong><small class="d-block text-muted">Add new
+                                            supplier</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-warning bg-opacity-10 text-warning"><i
+                                            class="bi bi-receipt"></i></span>
+                                    <span><strong>Add Invoice</strong><small class="d-block text-muted">Create new
+                                            invoice</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span class="add-icon bg-danger bg-opacity-10 text-danger"><i
+                                            class="bi bi-cash-stack"></i></span>
+                                    <span><strong>Add Expense</strong><small class="d-block text-muted">Record new
+                                            expense</small></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn-icon" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </button>
+                    <button class="btn-icon position-relative" aria-label="Notifications" title="Notifications">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="dropdown user-dropdown">
+                        <button class="btn-user d-flex align-items-center gap-2" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar object-fit-cover">
+                            <div class="user-info d-none d-md-block">
+                                <div class="user-name">Asraf Mridha</div>
+                            </div>
+                            <i class="bi bi-chevron-down small d-none d-md-block"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Account Settings</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history me-2"></i>Activity
+                                    Log</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="#"><i
+                                        class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============ MAIN CONTENT ============ -->
+            <main class="main-content" id="mainContent">
+
+                <!-- Page Header -->
+                <div class="dashboard-header">
                     <div class="d-flex align-items-center gap-2">
-                        <div class="panel-icon bg-primary bg-opacity-10 text-primary">
-                            <i class="bi bi-table"></i>
+                        <div class="header-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-people-fill"></i>
                         </div>
-                        <h2 class="panel-title">Customer List</h2>
+                        <h1 class="dashboard-title">Customers</h1>
                     </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-download me-1"></i> Export
-                        </button>
-                        <button class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-funnel me-1"></i> Filter
-                        </button>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#addCustomerModal">
-                            <i class="bi bi-plus-lg me-1"></i> Add
-                        </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                        <i class="bi bi-plus-lg me-1"></i> Add Customer
+                    </button>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-blue">
+                            <div class="kpi-bg-icon"><i class="bi bi-people-fill"></i></div>
+                            <div class="kpi-header">
+                                <span class="kpi-label">Total Customers</span>
+                                <div class="kpi-icon-box"><i class="bi bi-people-fill"></i></div>
+                            </div>
+                            <div class="kpi-value">8,549</div>
+                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>12.5%</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-green">
+                            <div class="kpi-bg-icon"><i class="bi bi-check-circle-fill"></i></div>
+                            <div class="kpi-header">
+                                <span class="kpi-label">Active</span>
+                                <div class="kpi-icon-box"><i class="bi bi-check-circle-fill"></i></div>
+                            </div>
+                            <div class="kpi-value">7,842</div>
+                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>8.3%</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-red">
+                            <div class="kpi-bg-icon"><i class="bi bi-pause-circle-fill"></i></div>
+                            <div class="kpi-header">
+                                <span class="kpi-label">Inactive</span>
+                                <div class="kpi-icon-box"><i class="bi bi-pause-circle-fill"></i></div>
+                            </div>
+                            <div class="kpi-value">707</div>
+                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>2.1%</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="kpi-card kpi-purple">
+                            <div class="kpi-bg-icon"><i class="bi bi-person-plus-fill"></i></div>
+                            <div class="kpi-header">
+                                <span class="kpi-label">New This Month</span>
+                                <div class="kpi-icon-box"><i class="bi bi-person-plus-fill"></i></div>
+                            </div>
+                            <div class="kpi-value">486</div>
+                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>15.7%</div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-panel-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-compact mb-0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Customer</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Country</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th class="text-end">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="row-num">1</span></td>
-                                    <td><span class="fw-semibold">John Doe</span></td>
-                                    <td>john.doe@email.com</td>
-                                    <td>+1 234-567-8901</td>
-                                    <td>USA</td>
-                                    <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">2</span></td>
-                                    <td><span class="fw-semibold">Jane Smith</span></td>
-                                    <td>jane.smith@email.com</td>
-                                    <td>+1 234-567-8902</td>
-                                    <td>UK</td>
-                                    <td><span class="badge bg-success bg-opacity-10 text-success">Business</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">3</span></td>
-                                    <td><span class="fw-semibold">Robert Johnson</span></td>
-                                    <td>robert.j@email.com</td>
-                                    <td>+1 234-567-8903</td>
-                                    <td>Canada</td>
-                                    <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span></td>
-                                    <td><span class="badge-status pending">Pending</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">4</span></td>
-                                    <td><span class="fw-semibold">Sarah Williams</span></td>
-                                    <td>sarah.w@email.com</td>
-                                    <td>+44 20-1234-5678</td>
-                                    <td>UK</td>
-                                    <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">5</span></td>
-                                    <td><span class="fw-semibold">Michael Brown</span></td>
-                                    <td>michael.b@email.com</td>
-                                    <td>+61 2-1234-5678</td>
-                                    <td>Australia</td>
-                                    <td><span class="badge bg-success bg-opacity-10 text-success">Business</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">6</span></td>
-                                    <td><span class="fw-semibold">Emily Davis</span></td>
-                                    <td>emily.d@email.com</td>
-                                    <td>+1 234-567-8904</td>
-                                    <td>USA</td>
-                                    <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
-                                    <td><span class="badge-status pending">Pending</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">7</span></td>
-                                    <td><span class="fw-semibold">David Wilson</span></td>
-                                    <td>david.w@email.com</td>
-                                    <td>+1 234-567-8905</td>
-                                    <td>Canada</td>
-                                    <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">8</span></td>
-                                    <td><span class="fw-semibold">Lisa Martinez</span></td>
-                                    <td>lisa.m@email.com</td>
-                                    <td>+44 20-9876-5432</td>
-                                    <td>UK</td>
-                                    <td><span class="badge bg-success bg-opacity-10 text-success">Business</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">9</span></td>
-                                    <td><span class="fw-semibold">James Taylor</span></td>
-                                    <td>james.t@email.com</td>
-                                    <td>+61 2-9876-5432</td>
-                                    <td>Australia</td>
-                                    <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
-                                    <td><span class="badge-status pending">Pending</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span class="row-num">10</span></td>
-                                    <td><span class="fw-semibold">Amanda Anderson</span></td>
-                                    <td>amanda.a@email.com</td>
-                                    <td>+1 234-567-8906</td>
-                                    <td>USA</td>
-                                    <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span></td>
-                                    <td><span class="badge-status active">Active</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary" title="View"><i
-                                                class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning" title="Edit"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                <!-- Data Table -->
+                <div class="card card-panel">
+                    <div class="card-panel-header">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="panel-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-table"></i>
+                            </div>
+                            <h2 class="panel-title">Customer List</h2>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-download me-1"></i> Export
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-funnel me-1"></i> Filter
+                            </button>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#addCustomerModal">
+                                <i class="bi bi-plus-lg me-1"></i> Add
+                            </button>
+                        </div>
                     </div>
-                    <!-- Table Footer with Pagination -->
-                    <div
-                        class="d-flex flex-column flex-sm-row justify-content-between align-items-center p-3 border-top">
-                        <div class="text-muted small">Showing 1 to 10 of 8,549 entries</div>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination pagination-sm mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div class="card-panel-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-compact mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Customer</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Country</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="row-num">1</span></td>
+                                        <td><span class="fw-semibold">John Doe</span></td>
+                                        <td>john.doe@email.com</td>
+                                        <td>+1 234-567-8901</td>
+                                        <td>USA</td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">2</span></td>
+                                        <td><span class="fw-semibold">Jane Smith</span></td>
+                                        <td>jane.smith@email.com</td>
+                                        <td>+1 234-567-8902</td>
+                                        <td>UK</td>
+                                        <td><span class="badge bg-success bg-opacity-10 text-success">Business</span>
+                                        </td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">3</span></td>
+                                        <td><span class="fw-semibold">Robert Johnson</span></td>
+                                        <td>robert.j@email.com</td>
+                                        <td>+1 234-567-8903</td>
+                                        <td>Canada</td>
+                                        <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span>
+                                        </td>
+                                        <td><span class="badge-status pending">Pending</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">4</span></td>
+                                        <td><span class="fw-semibold">Sarah Williams</span></td>
+                                        <td>sarah.w@email.com</td>
+                                        <td>+44 20-1234-5678</td>
+                                        <td>UK</td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">5</span></td>
+                                        <td><span class="fw-semibold">Michael Brown</span></td>
+                                        <td>michael.b@email.com</td>
+                                        <td>+61 2-1234-5678</td>
+                                        <td>Australia</td>
+                                        <td><span class="badge bg-success bg-opacity-10 text-success">Business</span>
+                                        </td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">6</span></td>
+                                        <td><span class="fw-semibold">Emily Davis</span></td>
+                                        <td>emily.d@email.com</td>
+                                        <td>+1 234-567-8904</td>
+                                        <td>USA</td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
+                                        <td><span class="badge-status pending">Pending</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">7</span></td>
+                                        <td><span class="fw-semibold">David Wilson</span></td>
+                                        <td>david.w@email.com</td>
+                                        <td>+1 234-567-8905</td>
+                                        <td>Canada</td>
+                                        <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span>
+                                        </td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">8</span></td>
+                                        <td><span class="fw-semibold">Lisa Martinez</span></td>
+                                        <td>lisa.m@email.com</td>
+                                        <td>+44 20-9876-5432</td>
+                                        <td>UK</td>
+                                        <td><span class="badge bg-success bg-opacity-10 text-success">Business</span>
+                                        </td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">9</span></td>
+                                        <td><span class="fw-semibold">James Taylor</span></td>
+                                        <td>james.t@email.com</td>
+                                        <td>+61 2-9876-5432</td>
+                                        <td>Australia</td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info">Individual</span></td>
+                                        <td><span class="badge-status pending">Pending</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="row-num">10</span></td>
+                                        <td><span class="fw-semibold">Amanda Anderson</span></td>
+                                        <td>amanda.a@email.com</td>
+                                        <td>+1 234-567-8906</td>
+                                        <td>USA</td>
+                                        <td><span class="badge bg-purple bg-opacity-10 text-purple">Enterprise</span>
+                                        </td>
+                                        <td><span class="badge-status active">Active</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-primary" title="View"><i
+                                                    class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                                    class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Table Footer with Pagination -->
+                        <div
+                            class="d-flex flex-column flex-sm-row justify-content-between align-items-center p-3 border-top">
+                            <div class="text-muted small">Showing 1 to 10 of 8,549 entries</div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Footer -->
-            <footer class="dashboard-footer">
-                <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
-                        class="text-decoration-none fw-semibold">STITBD</a></div>
-            </footer>
+                <!-- Footer -->
+                <footer class="dashboard-footer">
+                    <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
+                            class="text-decoration-none fw-semibold">STITBD</a></div>
+                </footer>
 
-        </main>
+            </main>
     </div>
 
     <!-- Add Customer Modal -->
