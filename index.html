@@ -77,14 +77,18 @@
                 </div>
             </div>
 
+            <div class="topbar-center-logo d-flex d-lg-none">
+                <img src="images/logo.png" alt="STP Logo">
+            </div>
+
             <div class="topbar-right d-flex align-items-center gap-2">
-                <a href="#" class="btn btn-pos" id="posBtn">
+                <a href="#" class="btn btn-pos d-none d-lg-flex" id="posBtn">
                     <i class="bi bi-grid-3x3-gap-fill"></i>
                     <span>POS</span>
                 </a>
 
                 <!-- Add New Dropdown (ENHANCED) -->
-                <div class="dropdown">
+                <div class="dropdown d-none d-lg-block">
                     <button class="btn btn-add-new dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-plus-lg"></i>
                         <span class="d-none d-sm-inline">Add New</span>
@@ -1589,6 +1593,29 @@
             </footer>
 
         </main>
+
+        <!-- ============ MOBILE BOTTOM NAVIGATION ============ -->
+        <nav class="bottom-nav d-lg-none" id="bottomNav" aria-label="Mobile bottom navigation">
+            <a href="index.html" class="bottom-nav-item active">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="invoices-list.html" class="bottom-nav-item">
+                <i class="bi bi-receipt"></i>
+                <span>Invoice</span>
+            </a>
+            <a href="#" class="bottom-nav-fab" aria-label="Create Invoice">
+                <i class="bi bi-plus-lg"></i>
+            </a>
+            <a href="warehouse-stock.html" class="bottom-nav-item">
+                <i class="bi bi-box-seam"></i>
+                <span>Stock</span>
+            </a>
+            <button type="button" class="bottom-nav-item bottom-nav-more" id="bottomNavMoreBtn">
+                <i class="bi bi-grid-3x3-gap-fill"></i>
+                <span>More</span>
+            </button>
+        </nav>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>

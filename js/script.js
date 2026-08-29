@@ -398,3 +398,24 @@
   }
 
 })();
+
+
+
+/* ---------- Bottom Nav Active State ---------- */
+const bottomNavItems = document.querySelectorAll('.bottom-nav-item[href]');
+bottomNavItems.forEach((item) => {
+  item.addEventListener('click', () => {
+    bottomNavItems.forEach((el) => el.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+/* ---------- Bottom Nav "More" — reuse mobile sidebar ---------- */
+const bottomNavMoreBtn = document.getElementById('bottomNavMoreBtn');
+if (bottomNavMoreBtn) {
+  bottomNavMoreBtn.addEventListener('click', () => {
+    if (typeof openMobileSidebar === 'function') {
+      openMobileSidebar();
+    }
+  });
+}
