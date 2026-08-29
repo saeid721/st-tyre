@@ -366,19 +366,20 @@
 
   /* ---------- Top Clients (Tyre Dealers Specific) ---------- */
   const clients = [
-    { name: 'Rahim Tyre House', amount: 1463000, sales: 230, avatar: 'R', color: '#10b981' },
-    { name: 'Karim Auto Parts', amount: 685000, sales: 120, avatar: 'K', color: '#3b82f6' },
-    { name: 'Dhaka Tyre Center', amount: 652000, sales: 115, avatar: 'D', color: '#8b5cf6' },
-    { name: 'Chittagong Rubber House', amount: 401000, sales: 85, avatar: 'C', color: '#f59e0b' },
-    { name: 'Sylhet Wheel Care', amount: 320000, sales: 70, avatar: 'S', color: '#ef4444' },
+    { name: 'Rahim Tyre House', amount: 1463000, sales: 230, img: 'images/dealers/01.jpg' },
+    { name: 'Karim Auto Parts', amount: 685000, sales: 120, img: 'images/dealers/02.jpg' },
+    { name: 'Dhaka Tyre Center', amount: 652000, sales: 115, img: 'images/dealers/03.jpg' },
+    { name: 'Chittagong Rubber House', amount: 401000, sales: 85, img: 'images/dealers/04.jpg' },
+    { name: 'Sylhet Wheel Care', amount: 320000, sales: 70, img: 'images/dealers/05.jpg' },
   ];
+
   const maxAmount = Math.max(...clients.map(c => c.amount));
   const clientListEl = document.getElementById('clientList');
   if (clientListEl) {
     clientListEl.innerHTML = clients.map((c, i) => `
       <div class="client-item">
         <div class="client-rank ${i === 0 ? 'top' : ''}">${i + 1}</div>
-        <div class="client-avatar" style="background:${c.color}20; color:${c.color}">${c.avatar}</div>
+        <img src="${c.img}" alt="${c.name}" class="client-avatar object-fit-cover">
         <div class="client-info">
           <div class="client-name">${c.name}</div>
           <div class="client-progress">
