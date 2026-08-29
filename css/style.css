@@ -1849,10 +1849,6 @@ body.pos-mode .mobile-menu-btn {
 }
 
 @media (max-width: 991.98px) {
-  .topbar {
-    position: relative;
-  }
-
   .topbar-center-logo {
     display: flex;
     align-items: center;
@@ -1891,4 +1887,60 @@ body.pos-mode .mobile-menu-btn {
   .topbar-center-logo {
     height: 40px;
   }
+}
+
+
+/* ============ MOBILE "MORE" BOTTOM SHEET ============ */
+.more-menu-offcanvas {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  max-height: 70vh;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.more-menu-offcanvas .offcanvas-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 4px;
+  margin: 10px auto 0;
+}
+
+.more-menu-offcanvas .offcanvas-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.more-menu-offcanvas .offcanvas-body {
+  padding: 10px 12px 20px;
+}
+
+.more-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background var(--t-fast);
+}
+
+.more-menu-item i {
+  width: 22px;
+  font-size: 17px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.more-menu-item:hover,
+.more-menu-item:active {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.more-menu-item.text-danger i {
+  color: var(--danger);
 }
