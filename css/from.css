@@ -39,13 +39,14 @@
     border-color: #cbd5e1;
     padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
-    transition: all 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.1s ease;
 }
 
 .form-control:focus,
 .form-select:focus {
     border-color: var(--bs-primary, #4f46e5);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    transform: translateY(-1px);
 }
 
 .form-control::placeholder {
@@ -89,22 +90,47 @@
     font-size: 1.25rem;
     font-weight: 600;
     padding: 0;
+    text-align: center;
+    caret-color: var(--bs-primary, #4f46e5);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
 .otp-input:focus {
     z-index: 1;
+    transform: translateY(-2px);
 }
 
-/* Dropzone */
+.otp-input.otp-filled {
+    border-color: var(--bs-primary, #4f46e5);
+    background-color: #eef2ff;
+}
+
 .dropzone {
     border-style: dashed !important;
     transition: all 0.2s ease;
     cursor: pointer;
+    background-color: #f8fafc;
 }
 
-.dropzone:hover {
-    background-color: #f1f5f9 !important;
+.dropzone:hover,
+.dropzone.drag-over {
+    background-color: #eef2ff !important;
     border-color: var(--bs-primary, #4f46e5) !important;
+    transform: translateY(-2px);
+}
+
+.uploaded-file-item {
+    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.uploaded-file-item:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.uploaded-file-item .text-truncate {
+    max-width: 100%;
+    word-break: break-word;
 }
 
 /* Range Slider */
@@ -146,6 +172,87 @@
     }
 
     .otp-input {
-        font-size: 1rem;
+        font-size: 1.125rem;
+        min-height: 48px;
     }
+}
+
+
+
+/* =========================================
+   6. Required / Optional Field Indicator
+   ========================================= */
+.form-label.is-required::after {
+    content: "*";
+    color: #ef4444;
+    margin-left: 3px;
+    font-weight: 700;
+}
+
+.form-label .optional-tag {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-left: 6px;
+}
+
+/* =========================================
+   7. Validation Feedback Motion
+   ========================================= */
+.form-control.is-invalid,
+.form-control.is-valid,
+.form-control.is-warning {
+    animation: fieldFeedbackIn 0.2s ease both;
+}
+
+@keyframes fieldFeedbackIn {
+    from {
+        transform: translateY(-2px);
+        opacity: 0.6;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.invalid-feedback,
+.valid-feedback,
+.form-text {
+    animation: fieldFeedbackIn 0.18s ease both;
+}
+
+/* =========================================
+   10. Component Card Entrance (subtle, matches KPI cards)
+   ========================================= */
+.component-card {
+    animation: fadeInUp 0.35s ease both;
+}
+
+/* =========================================
+   11. Reduced Motion
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    .component-card,
+    .form-control.is-invalid,
+    .form-control.is-valid,
+    .form-control.is-warning,
+    .invalid-feedback,
+    .valid-feedback,
+    .form-text,
+    .otp-input,
+    .uploaded-file-item {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* =========================================
+   12. Loading Button State
+   ========================================= */
+.btn.is-loading {
+    pointer-events: none;
+    opacity: 0.85;
 }

@@ -187,25 +187,26 @@
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-6 col-xl-4">
-                                        <label for="fullName" class="form-label">Full Name</label>
+                                        <label for="fullName" class="form-label is-required">Full Name</label>
                                         <input type="text" class="form-control" id="fullName"
-                                            placeholder="Enter your full name">
+                                            placeholder="Enter your full name" required aria-required="true">
                                     </div>
                                     <div class="col-md-6 col-xl-4">
-                                        <label for="password" class="form-label">Password</label>
+                                        <label for="password" class="form-label is-required">Password</label>
                                         <div class="input-group">
                                             <input type="password" class="form-control" id="password"
-                                                placeholder="Enter password">
+                                                placeholder="Enter password" required aria-required="true"
+                                                aria-describedby="togglePassword">
                                             <button class="btn btn-outline-secondary border-start-0" type="button"
-                                                id="togglePassword" aria-label="Toggle password visibility">
+                                                id="togglePassword" aria-label="Show password" aria-pressed="false">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-xl-4">
-                                        <label for="email" class="form-label">Email Address</label>
+                                        <label for="email" class="form-label is-required">Email Address</label>
                                         <input type="email" class="form-control" id="email"
-                                            placeholder="name@example.com">
+                                            placeholder="name@example.com" required aria-required="true">
                                     </div>
                                     <div class="col-md-6 col-xl-4">
                                         <label for="quantity" class="form-label">Quantity</label>
@@ -268,19 +269,23 @@
                                         <input type="time" class="form-control" id="pickupTime">
                                     </div>
                                     <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Date Range</label>
+                                        <label class="form-label" for="dateRangeStart">Date Range</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control" aria-label="Start Date">
+                                            <input type="date" class="form-control" id="dateRangeStart"
+                                                aria-label="Start Date">
                                             <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
-                                            <input type="date" class="form-control" aria-label="End Date">
+                                            <input type="date" class="form-control" id="dateRangeEnd"
+                                                aria-label="End Date">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Time Range</label>
+                                        <label class="form-label" for="timeRangeStart">Time Range</label>
                                         <div class="input-group">
-                                            <input type="time" class="form-control" aria-label="Start Time">
+                                            <input type="time" class="form-control" id="timeRangeStart"
+                                                aria-label="Start Time">
                                             <span class="input-group-text"><i class="bi bi-arrow-right"></i></span>
-                                            <input type="time" class="form-control" aria-label="End Time">
+                                            <input type="time" class="form-control" id="timeRangeEnd"
+                                                aria-label="End Time">
                                         </div>
                                     </div>
                                 </div>
@@ -425,7 +430,7 @@
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control" id="description" rows="4"
                                             placeholder="Write a detailed description..." maxlength="500"
-                                            oninput="updateCharCount(this)"></textarea>
+                                            data-char-counter="charCount"></textarea>
                                         <div class="form-text text-end"><span id="charCount">0</span> / 500</div>
                                     </div>
                                     <div class="col-md-6">
@@ -434,36 +439,45 @@
                                             placeholder="Enter your complete mailing address..."></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Rich Text Editor</label>
+                                        <label class="form-label" for="richTextEditor">Rich Text Editor</label>
                                         <div class="border rounded-3 overflow-hidden">
-                                            <div class="bg-light border-bottom p-2 d-flex gap-1 flex-wrap">
+                                            <div class="bg-light border-bottom p-2 d-flex gap-1 flex-wrap"
+                                                role="toolbar" aria-label="Text formatting">
+                                                <button type="button" class="btn btn-sm btn-light border" title="Bold"
+                                                    aria-label="Bold"><i class="bi bi-type-bold"></i></button>
+                                                <button type="button" class="btn btn-sm btn-light border" title="Italic"
+                                                    aria-label="Italic"><i class="bi bi-type-italic"></i></button>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Bold"><i class="bi bi-type-bold"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Italic"><i class="bi bi-type-italic"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Underline"><i class="bi bi-type-underline"></i></button>
+                                                    title="Underline" aria-label="Underline"><i
+                                                        class="bi bi-type-underline"></i></button>
                                                 <div class="vr mx-1"></div>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Heading"><i class="bi bi-type-h1"></i></button>
+                                                    title="Heading" aria-label="Heading"><i
+                                                        class="bi bi-type-h1"></i></button>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Bullet List"><i class="bi bi-list-ul"></i></button>
+                                                    title="Bullet List" aria-label="Bullet List"><i
+                                                        class="bi bi-list-ul"></i></button>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Numbered List"><i class="bi bi-list-ol"></i></button>
+                                                    title="Numbered List" aria-label="Numbered List"><i
+                                                        class="bi bi-list-ol"></i></button>
                                                 <div class="vr mx-1"></div>
+                                                <button type="button" class="btn btn-sm btn-light border" title="Link"
+                                                    aria-label="Insert Link"><i class="bi bi-link-45deg"></i></button>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Link"><i class="bi bi-link-45deg"></i></button>
+                                                    title="Align Left" aria-label="Align Left"><i
+                                                        class="bi bi-text-left"></i></button>
                                                 <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Align Left"><i class="bi bi-text-left"></i></button>
-                                                <button type="button" class="btn btn-sm btn-light border"
-                                                    title="Align Center"><i class="bi bi-text-center"></i></button>
+                                                    title="Align Center" aria-label="Align Center"><i
+                                                        class="bi bi-text-center"></i></button>
                                                 <div class="vr mx-1"></div>
                                                 <button type="button" class="btn btn-sm btn-light border text-danger"
-                                                    title="Clear Formatting"><i class="bi bi-eraser"></i></button>
+                                                    title="Clear Formatting" aria-label="Clear Formatting"><i
+                                                        class="bi bi-eraser"></i></button>
                                             </div>
-                                            <div class="p-3 bg-white" contenteditable="true"
-                                                style="min-height: 120px; outline: none;"
-                                                aria-label="Rich text editor content">
+                                            <div id="richTextEditor" class="p-3 bg-white" contenteditable="true"
+                                                role="textbox" aria-multiline="true"
+                                                aria-label="Rich text editor content"
+                                                style="min-height: 120px; outline: none;">
                                                 <p>Start typing your <b>formatted</b> content here...</p>
                                             </div>
                                         </div>
@@ -507,55 +521,66 @@
                                     <div class="col-12">
                                         <label class="form-label">Drag & Drop Upload</label>
                                         <div class="dropzone border border-2 border-dashed rounded-3 p-5 text-center bg-light-subtle"
-                                            id="dropZone">
+                                            id="dropZone" role="button" tabindex="0"
+                                            aria-label="Drag and drop files, or press Enter to browse">
                                             <i class="bi bi-cloud-arrow-up display-4 text-primary mb-3"></i>
                                             <h6 class="fw-semibold mb-1">Drag & drop files here</h6>
-                                            <p class="text-muted mb-3" style="font-size: 0.875rem;">or click to
-                                                browse files from your computer</p>
-                                            <button type="button" class="btn btn-primary btn-sm px-4">Browse
-                                                Files</button>
+                                            <p class="text-muted mb-3" style="font-size: 0.875rem;">or click to browse
+                                                files from your computer</p>
+                                            <button type="button" class="btn btn-primary btn-sm px-4"
+                                                id="dropZoneBrowseBtn">Browse Files</button>
                                             <input type="file" class="d-none" id="dropZoneInput" multiple>
                                             <div class="mt-3 text-muted" style="font-size: 0.75rem;">Supported: JPG,
                                                 PNG, PDF up to 10MB</div>
                                         </div>
 
-                                        <!-- Example Uploaded Files -->
-                                        <div class="mt-3 space-y-2">
-                                            <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
-                                                <div class="bg-primary-subtle text-primary rounded p-2 me-3">
+                                        <!-- Dynamic Uploaded Files List -->
+                                        <div class="mt-3 space-y-2" id="uploadedFilesList">
+                                            <div
+                                                class="d-flex align-items-center p-2 border rounded-2 bg-white uploaded-file-item mb-2">
+                                                <div class="bg-primary-subtle text-primary rounded p-2 me-3 d-flex align-items-center justify-content-center"
+                                                    style="width: 40px; height: 40px;">
                                                     <i class="bi bi-file-earmark-pdf fs-5"></i>
                                                 </div>
                                                 <div class="flex-grow-1 min-width-0">
                                                     <div class="d-flex justify-content-between mb-1">
-                                                        <span
-                                                            class="fw-medium text-truncate">project_requirements.pdf</span>
+                                                        <span class="fw-medium text-truncate"
+                                                            title="project_requirements.pdf">project_requirements.pdf</span>
                                                         <span class="text-muted" style="font-size: 0.75rem;">2.4
                                                             MB</span>
                                                     </div>
                                                     <div class="progress" style="height: 4px;">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            style="width: 100%"></div>
+                                                            style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                                                            aria-valuemax="100" aria-label="Upload complete"></div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-link text-danger p-2 ms-2"
+                                                <button type="button"
+                                                    class="btn btn-link text-danger p-2 ms-2 remove-file-btn"
                                                     aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
                                             </div>
-                                            <div class="d-flex align-items-center p-2 border rounded-2 bg-white">
-                                                <div class="bg-warning-subtle text-warning rounded p-2 me-3">
+                                            <div
+                                                class="d-flex align-items-center p-2 border rounded-2 bg-white uploaded-file-item mb-2">
+                                                <div class="bg-warning-subtle text-warning rounded p-2 me-3 d-flex align-items-center justify-content-center"
+                                                    style="width: 40px; height: 40px;">
                                                     <i class="bi bi-file-earmark-image fs-5"></i>
                                                 </div>
                                                 <div class="flex-grow-1 min-width-0">
                                                     <div class="d-flex justify-content-between mb-1">
-                                                        <span class="fw-medium text-truncate">logo_design_v2.png</span>
+                                                        <span class="fw-medium text-truncate"
+                                                            title="logo_design_v2.png">logo_design_v2.png</span>
                                                         <span class="text-muted" style="font-size: 0.75rem;">1.1
                                                             MB</span>
                                                     </div>
                                                     <div class="progress" style="height: 4px;">
                                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            role="progressbar" style="width: 65%"></div>
+                                                            role="progressbar" style="width: 65%" aria-valuenow="65"
+                                                            aria-valuemin="0" aria-valuemax="100"
+                                                            aria-label="Uploading logo_design_v2.png"></div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-link text-danger p-2 ms-2"
+                                                <button type="button"
+                                                    class="btn btn-link text-danger p-2 ms-2 remove-file-btn"
                                                     aria-label="Remove file"><i class="bi bi-x-lg"></i></button>
                                             </div>
                                         </div>
@@ -579,7 +604,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6 col-lg-4">
                                         <label class="form-label">OTP Verification</label>
-                                        <div class="d-flex gap-2" id="otpContainer">
+                                        <div class="d-flex gap-2" id="otpContainer" data-otp-group>
                                             <input type="text" class="form-control text-center otp-input" maxlength="1"
                                                 inputmode="numeric" pattern="[0-9]*" aria-label="OTP digit 1">
                                             <input type="text" class="form-control text-center otp-input" maxlength="1"
@@ -715,9 +740,12 @@
                                                         <span class="input-group-text bg-white border-end-0"><i
                                                                 class="bi bi-search"></i></span>
                                                         <input type="text" class="form-control border-start-0"
-                                                            placeholder="Search location...">
-                                                        <button class="btn btn-primary" type="button"><i
-                                                                class="bi bi-crosshair me-1"></i> Current</button>
+                                                            id="mapSearchInput" placeholder="Search location..."
+                                                            aria-label="Search location">
+                                                        <button class="btn btn-primary" type="button"
+                                                            aria-label="Use current location"><i
+                                                                class="bi bi-crosshair me-1"></i> <span
+                                                                class="d-none d-sm-inline">Current</span></button>
                                                     </div>
                                                 </div>
 
@@ -739,6 +767,7 @@
                         <div class="card component-card border-info-subtle bg-info-subtle">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
+                                    <span class="badge bg-info-subtle text-info me-2 align-self-start">08</span>
                                     <i class="bi bi-info-circle-fill text-info fs-4 me-3 mt-1"></i>
                                     <div>
                                         <h6 class="fw-semibold mb-1">System Fields (Hidden Inputs)</h6>
@@ -786,9 +815,11 @@
                                         <div class="invalid-feedback">Please enter a valid email address.</div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">
-                                        <label class="form-label">Warning</label>
-                                        <input type="text" class="form-control is-warning" value="almost_full">
-                                        <div class="form-text text-warning">This field is almost at capacity.</div>
+                                        <label class="form-label" for="warningInput">Warning</label>
+                                        <input type="text" class="form-control is-warning" id="warningInput"
+                                            value="almost_full" aria-describedby="warningHelp">
+                                        <div id="warningHelp" class="form-text text-warning">This field is almost at
+                                            capacity.</div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">
                                         <label class="form-label">Disabled</label>
@@ -961,6 +992,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/from.js"></script>
 </body>
 
 </html>
