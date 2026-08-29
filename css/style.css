@@ -1713,30 +1713,6 @@ body.pos-mode .main-wrapper {
   }
 }
 
-.kpi-card {
-  animation: fadeInUp 0.4s ease both;
-}
-
-.kpi-card:nth-child(1) {
-  animation-delay: 0.02s;
-}
-
-.kpi-card:nth-child(2) {
-  animation-delay: 0.06s;
-}
-
-.kpi-card:nth-child(3) {
-  animation-delay: 0.10s;
-}
-
-.kpi-card:nth-child(4) {
-  animation-delay: 0.14s;
-}
-
-.card-panel {
-  animation: fadeInUp 0.5s ease both;
-}
-
 /* ============ FOCUS ============ */
 .btn-icon:focus-visible,
 .btn-pos:focus-visible,
@@ -2323,5 +2299,131 @@ body.pos-mode .mobile-menu-btn {
 
   .status-tile-name {
     font-size: 10.5px;
+  }
+}
+
+/* =========================================================
+   animations.css — reveal / count-up / micro-interactions
+   Purely additive: opacity + transform only. No layout impact.
+   ========================================================= */
+:root {
+  --reveal-duration: 600ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-distance: 15px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.row-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 420ms var(--reveal-ease), transform 420ms var(--reveal-ease);
+}
+
+.row-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bars animate width only when this class is present */
+.progress-bar.progress-animate {
+  transition: width 900ms var(--reveal-ease);
+}
+
+/* Button press feedback — additive, doesn't touch existing colors/shadows */
+.btn,
+.btn-filter,
+.btn-icon,
+.btn-add-new,
+.btn-pos,
+button {
+  transition: transform 150ms var(--reveal-ease), box-shadow 150ms var(--reveal-ease);
+}
+
+.btn:active,
+.btn-filter:active,
+.btn-icon:active,
+.btn-add-new:active,
+.btn-pos:active,
+button:active {
+  transform: scale(0.98);
+}
+
+/* Icon micro-nudges on parent hover (parents already have hover states) */
+.kpi-icon-box,
+.panel-icon,
+.add-icon,
+.stat-tile-icon {
+  transition: transform 200ms var(--reveal-ease);
+}
+
+.card-panel:hover .panel-icon,
+.kpi-card:hover .kpi-icon-box {
+  transform: scale(1.06);
+}
+
+.nav-item-link .nav-icon {
+  transition: transform 180ms var(--reveal-ease);
+}
+
+.nav-item-link:hover .nav-icon {
+  transform: translateX(2px);
+}
+
+/* One-shot subtle highlight for critical alert rows (no looping/flashing) */
+@keyframes alertPulseOnce {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.22);
+  }
+
+  100% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+}
+
+.alert-pulse-once {
+  animation: alertPulseOnce 900ms ease-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .row-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .progress-bar.progress-animate {
+    transition: none !important;
+  }
+
+  .btn,
+  .btn-filter,
+  .btn-icon,
+  .btn-add-new,
+  .btn-pos,
+  button,
+  .kpi-icon-box,
+  .panel-icon,
+  .add-icon,
+  .stat-tile-icon,
+  .nav-item-link .nav-icon {
+    transition: none !important;
+  }
+
+  .alert-pulse-once {
+    animation: none !important;
   }
 }

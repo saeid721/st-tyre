@@ -602,3 +602,129 @@ if (expenseBreakdownCtx) {
     }
   });
 }
+
+
+
+(function () {
+  'use strict';
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Count-up (keeps ৳, %, "Days", "Items", commas exact) ---------- */
+  function parseToken(text) {
+    const m = text.match(/^([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/);
+    if (!m) return null;
+    const [, prefix, numStr, suffix] = m;
+    const value = parseFloat(numStr.replace(/,/g, ''));
+    if (isNaN(value)) return null;
+    const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+    return { prefix, suffix, value, decimals };
+  }
+
+  function formatIndian(num, decimals) {
+    const fixed = num.toFixed(decimals);
+    const [intPart, decPart] = fixed.split('.');
+    const digits = intPart.replace('-', '');
+    const lastThree = digits.slice(-3);
+    const other = digits.slice(0, -3);
+    let grouped = other ? other.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree : lastThree;
+    if (intPart.startsWith('-')) grouped = '-' + grouped;
+    return decPart !== undefined ? grouped + '.' + decPart : grouped;
+  }
+
+  function animateCountUp(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = 'true';
+    const original = el.textContent.trim();
+    if (prefersReducedMotion) return;
+    const parsed = parseToken(original);
+    if (!parsed) return;
+    const { prefix, suffix, value, decimals } = parsed;
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = prefix + formatIndian(value * eased, decimals) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = original;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function animateProgressBar(bar) {
+    if (prefersReducedMotion || bar.dataset.animated) return;
+    bar.dataset.animated = 'true';
+    const target = bar.style.width;
+    if (!target) return;
+    bar.classList.add('progress-animate');
+    bar.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = target; }));
+  }
+
+  function revealTableRows(panel) {
+    panel.querySelectorAll('.table-compact tbody tr').forEach((row, i) => {
+      if (row.dataset.revealed) return;
+      row.dataset.revealed = 'true';
+      row.classList.add('row-reveal');
+      setTimeout(() => row.classList.add('active'), i * 40);
+    });
+  }
+
+  function initReveal() {
+    const targets = document.querySelectorAll('.card-panel, .kpi-card');
+    if (!targets.length) return;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(el => {
+        el.classList.add('reveal', 'active');
+        el.querySelectorAll('.kpi-value').forEach(animateCountUp);
+        el.querySelectorAll('.progress-bar').forEach(animateProgressBar);
+        revealTableRows(el);
+      });
+      return;
+    }
+
+    // Stagger delay based on position within its row
+    document.querySelectorAll('.kpi-row, .row').forEach(group => {
+      let i = 0;
+      Array.from(group.children).forEach(child => {
+        const target = child.querySelector('.kpi-card') || child.querySelector(':scope > .card-panel');
+        if (target && !target.dataset.staggerDelay) {
+          target.dataset.staggerDelay = Math.min(i * 60, 240);
+          i++;
+        }
+      });
+    });
+
+    targets.forEach(el => el.classList.add('reveal'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const delay = parseInt(el.dataset.staggerDelay || '0', 10);
+        setTimeout(() => {
+          el.classList.add('active');
+          el.querySelectorAll('.kpi-value').forEach(animateCountUp);
+          if (el.classList.contains('kpi-value')) animateCountUp(el);
+          el.querySelectorAll('.progress-bar').forEach(animateProgressBar);
+          revealTableRows(el);
+        }, delay);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(el => observer.observe(el));
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initReveal();
+
+    if (!prefersReducedMotion) {
+      document.querySelectorAll('.dealer-alert-item, .kpi-red .kpi-icon-box').forEach((el, i) => {
+        setTimeout(() => el.classList.add('alert-pulse-once'), 500 + i * 80);
+      });
+    }
+  });
+})();
