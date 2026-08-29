@@ -32,6 +32,33 @@
     background-color: #f8fafc;
 }
 
+/* =========================================
+   1a. Compact Table — Horizontal Scroll Fix
+   (Applies to .table-compact used on Customers page;
+   prevents text wrapping so table scrolls instead of stacking)
+   ========================================= */
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive .table-compact th,
+.table-responsive .table-compact td {
+    white-space: nowrap;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 /* Bulk Toolbar Animation */
 .bulk-toolbar {
     animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -94,6 +121,29 @@
    2. Responsive Mobile Table Card View
    ========================================= */
 @media (max-width: 767.98px) {
+
+    .table-responsive .table-compact th,
+    .table-responsive .table-compact td {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .table-responsive .table-compact .row-num {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    .table-responsive .table-compact .badge-status,
+    .table-responsive .table-compact .badge {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .table-responsive .table-compact td.text-end .btn-sm {
+        padding: 3px 7px;
+        font-size: 11px;
+    }
 
     .yezra-table table,
     .yezra-table thead,
