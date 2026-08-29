@@ -2112,3 +2112,178 @@ body.pos-mode .mobile-menu-btn {
     transition: none !important;
   }
 }
+
+
+/* ============ STAT TILES (Inventory Health / Workforce) ============ */
+.stat-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.stat-tile-grid-2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 576px) {
+  .stat-tile-grid:not(.stat-tile-grid-2col) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-tile {
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  transition: all var(--t-fast);
+}
+
+.stat-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border);
+}
+
+.stat-tile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  margin: 0 auto 6px;
+}
+
+.stat-tile-value {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.stat-tile-label {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.stat-tile-warning {
+  background: var(--warning-light);
+  border-color: transparent;
+}
+
+.stat-tile-danger {
+  background: var(--danger-light);
+  border-color: transparent;
+}
+
+.stat-tile-info {
+  background: var(--info-light);
+  border-color: transparent;
+}
+
+.stat-tile-success {
+  background: var(--success-light);
+  border-color: transparent;
+}
+
+.stat-tile-muted {
+  background: #f1f5f9;
+  border-color: transparent;
+}
+
+.stat-tile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--danger-light);
+  border-radius: var(--radius);
+}
+
+/* ============ STATUS TILES (System Health) ============ */
+.status-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px 8px;
+  transition: all var(--t-fast);
+}
+
+.status-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-tile-icon {
+  font-size: 18px;
+}
+
+.status-tile-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.status-tile-state {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.status-tile.status-tile-warning {
+  background: var(--warning-light);
+  border-color: transparent;
+}
+
+/* ============ MOBILE ADJUSTMENTS ============ */
+@media (max-width: 767.98px) {
+  .stat-tile-grid {
+    gap: 6px;
+  }
+
+  .stat-tile {
+    padding: 8px;
+  }
+
+  .stat-tile-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .stat-tile-value {
+    font-size: 14px;
+  }
+
+  .stat-tile-label {
+    font-size: 9.5px;
+  }
+
+  .stat-tile-footer {
+    padding: 8px 10px;
+    margin-top: 8px;
+  }
+
+  .status-tile {
+    padding: 8px 6px;
+  }
+
+  .status-tile-icon {
+    font-size: 15px;
+  }
+
+  .status-tile-name {
+    font-size: 10.5px;
+  }
+}
