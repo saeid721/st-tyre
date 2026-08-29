@@ -311,10 +311,35 @@ a:hover {
 }
 
 .sidebar-user {
+  width: 100%;
   padding: 8px;
+  border: none;
   border-radius: 10px;
   background: var(--bg);
   overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--t-fast);
+}
+
+.sidebar-user:hover,
+.sidebar-user[aria-expanded="true"] {
+  background: var(--primary-light);
+}
+
+.sidebar-user-caret {
+  color: var(--text-soft);
+  flex-shrink: 0;
+  transition: opacity var(--t-fast);
+}
+
+.sidebar.collapsed .sidebar-user-caret {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar-user-dropdown {
+  width: 100%;
 }
 
 .sidebar-user-info {
@@ -1294,6 +1319,17 @@ body.pos-mode .main-wrapper {
   padding: 0;
 }
 
+.sidebar-offcanvas .offcanvas-footer {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.sidebar-offcanvas .offcanvas-footer .text-muted {
+  font-size: 11.5px;
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1199.98px) {
   .sidebar {
@@ -1686,16 +1722,20 @@ body.pos-mode .main-wrapper {
 }
 
 /* Avatar Image Styling */
-.avatar.object-fit-cover {
+.avatar.object-fit-cover,
+.avatar-sm.object-fit-cover {
+  display: block;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
-  border-radius: 50px;
+  object-position: center top;
+  border-radius: 50%;
   border: 1px solid #ddd;
 }
 
 .avatar-sm.object-fit-cover {
   width: 32px;
   height: 32px;
-  font-size: 12px;
 }
 
 /* ============ BUTTON VISIBILITY CONTROL ============ */
@@ -1775,6 +1815,10 @@ body.pos-mode .mobile-menu-btn {
   }
 
   body.pos-mode .bottom-nav {
+    display: none;
+  }
+
+  .dashboard-footer {
     display: none;
   }
 }
@@ -1894,8 +1938,13 @@ body.pos-mode .mobile-menu-btn {
 .more-menu-offcanvas {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  max-height: 70vh;
+  height: auto !important;
+  max-height: 85vh;
   padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.more-menu-offcanvas .offcanvas-body {
+  overflow-y: visible;
 }
 
 .more-menu-offcanvas .offcanvas-handle {

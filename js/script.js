@@ -419,3 +419,14 @@ if (bottomNavMoreBtn) {
     }
   });
 }
+
+/* ---------- Logout Handler ---------- */
+document.querySelectorAll('.js-logout-btn').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const confirmLogout = window.confirm('আপনি কি সত্যিই লগআউট করতে চান?');
+    if (confirmLogout) {
+      window.location.href = 'login.html';
+    }
+  });
+});
