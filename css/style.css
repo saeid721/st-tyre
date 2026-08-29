@@ -985,6 +985,29 @@ body.pos-mode .main-wrapper {
   border-bottom: none;
 }
 
+/* ============ TABLE — Mobile Scroll Fix (no wrap/stack) ============ */
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive .table-compact th,
+.table-responsive .table-compact td {
+  white-space: nowrap;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .row-num {
   width: 24px;
   height: 24px;
@@ -1170,6 +1193,52 @@ body.pos-mode .main-wrapper {
   color: var(--text-muted);
 }
 
+/* ============ DEALER ALERT LIST (Top Outstanding Dealers) ============ */
+.dealer-alert-list {
+  gap: 10px;
+}
+
+.dealer-alert-item {
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  transition: all var(--t-fast);
+}
+
+.dealer-alert-item:hover {
+  border-color: #fecaca;
+  background: #fff5f5;
+  transform: translateX(2px);
+}
+
+.dealer-alert-item .client-name {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.dealer-alert-item .badge-status.pending {
+  font-size: 10.5px;
+  padding: 3px 9px;
+}
+
+.dealer-alert-item .client-amount {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.dealer-alert-item .btn-outline-danger {
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all var(--t-fast);
+}
+
+.dealer-alert-item .btn-outline-danger:hover {
+  background: var(--danger);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
 /* ============ ADD NEW DROPDOWN ============ */
 .add-new-menu {
   padding: 8px;
@@ -1285,7 +1354,8 @@ body.pos-mode .main-wrapper {
     display: flex !important;
   }
 
-  .topbar-sidebar-toggle {
+  .topbar-sidebar-toggle,
+  #topbarSidebarToggle {
     display: none !important;
   }
 }
@@ -1314,16 +1384,219 @@ body.pos-mode .main-wrapper {
   }
 
   .kpi-trend {
-    padding: 1px 5px;
+    display: none !important;
+  }
+
+  .card-panel-body {
+    padding: 14px;
+  }
+
+  .card-panel-body .gap-3 {
+    gap: 10px !important;
+  }
+
+  .card-panel-body .gap-2 {
+    gap: 6px !important;
+  }
+
+  .card-panel-body hr.my-2 {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .card-panel-body .mb-4 {
+    margin-bottom: 12px !important;
+  }
+
+  .card-panel-body .mb-3 {
+    margin-bottom: 8px !important;
+  }
+
+  .card-panel-body .mb-1 {
+    margin-bottom: 4px !important;
+  }
+
+  .card-panel-body .display-6 {
+    font-size: 1.5rem;
+  }
+
+  .card-panel-body .progress {
+    height: 8px !important;
+  }
+
+  .card-panel-body .pb-3 {
+    padding-bottom: 8px !important;
+  }
+
+  .card-panel-body .my-1 {
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .card-panel-body [style*="width:32px"],
+  .card-panel-body [style*="width: 32px"] {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 12px;
+  }
+
+  .client-list {
+    gap: 10px;
+  }
+
+  .client-item {
+    gap: 8px;
+  }
+
+  .client-rank {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .client-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .client-name {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .client-progress {
+    height: 4px;
+  }
+
+  .client-amount {
+    font-size: 12px;
+  }
+
+  .client-sales {
+    font-size: 10px;
+  }
+
+  .dealer-alert-list {
+    gap: 6px;
+  }
+
+  .dealer-alert-item {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .dealer-alert-item .client-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .dealer-alert-item .client-name {
+    font-size: 11.5px;
+    margin-bottom: 3px;
+  }
+
+  .dealer-alert-item .badge-status.pending {
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+
+  .dealer-alert-item .client-amount {
+    font-size: 12.5px;
+  }
+
+  .dealer-alert-item .btn-outline-danger {
+    font-size: 10px;
+    padding: 2px 7px !important;
+  }
+
+  .table-responsive .table-compact .avatar-sm {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .table-responsive .table-compact .d-flex.align-items-center.gap-2 {
+    gap: 6px !important;
+  }
+
+  .table-responsive .table-compact .progress {
+    height: 4px !important;
+  }
+
+  .table-responsive .table-compact .small {
+    font-size: 10.5px;
+  }
+
+  /* Compact tables on mobile — scroll instead of wrap/stack */
+  .table-responsive .table-compact th,
+  .table-responsive .table-compact td {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .table-responsive .table-compact .row-num {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .table-responsive .table-compact .badge-status,
+  .table-responsive .table-compact .badge-alert,
+  .table-responsive .table-compact .code-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  /* Recent Activities tab header — reduce spacing so labels don't wrap awkwardly */
+  .nav-tabs-custom {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs-custom::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-tabs-custom .nav-link {
+    padding: 8px 10px;
+    font-size: 11.5px;
+    gap: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .donut-layout {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
   }
 
   .donut-chart-wrap {
-    width: 160px;
-    height: 160px;
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+  }
+
+  .donut-legend {
+    gap: 6px;
+  }
+
+  .donut-legend .legend-item {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .donut-legend .legend-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .donut-legend .legend-value {
+    font-size: 10.5px;
   }
 
   .chart-wrap {
