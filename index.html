@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ST Tyre Dashboard</title>
-
+    <title>ST TYRE ERP - Dashboard</title>
     <link rel="icon" href="images/favicon.png" type="image/png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
@@ -18,2434 +16,600 @@
 </head>
 
 <body>
-
-    <!-- ============ MOBILE / POS OFFCANVAS SIDEBAR ============ -->
-    <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="mobileSidebar"
-        aria-labelledby="mobileSidebarLabel">
-        <div class="offcanvas-header border-bottom">
-            <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo">
-                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
-                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
-                </div>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body p-0" id="mobileSidebarBody"></div>
-        <div class="offcanvas-footer">
-            <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
-                    class="text-decoration-none fw-semibold">STITBD</a></div>
-        </div>
-    </div>
-
-    <!-- ============ DESKTOP SIDEBAR ============ -->
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="brand d-flex align-items-center gap-2">
-                <div class="brand-logo">
-                    <img src="images/logo.png" alt="STP Logo" class="brand-logo-full" />
-                    <img src="images/favicon.png" alt="STP" class="brand-logo-mini" />
-                </div>
+            <div class="brand-logo">
+                <img src="images/logo.png" alt="ST TYRE" onerror="this.style.display='none'">
             </div>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+                <i class="bi bi-chevron-left"></i>
+            </button>
         </div>
-        <nav class="sidebar-nav" id="sidebarNav" aria-label="Sidebar menu"></nav>
+
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+
         <div class="sidebar-footer">
-            <div class="dropdown dropup sidebar-user-dropdown">
-                <button type="button" class="sidebar-user d-flex align-items-center gap-2" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar avatar-sm object-fit-cover">
-                    <div class="sidebar-user-info">
-                        <div class="sidebar-user-name">Asraf Mridha</div>
-                        <div class="sidebar-user-role">Administrator</div>
-                    </div>
-                    <i class="bi bi-chevron-expand small sidebar-user-caret"></i>
-                </button>
-                <ul class="dropdown-menu shadow-sm" style="width: 100%;">
-                    <li><a class="dropdown-item text-danger js-logout-btn" href="#"><i
-                                class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                </ul>
+            <div class="sidebar-company">
+                <div>
+                    <div class="company-name">ST TYRE Ltd.</div>
+                    <div class="company-location">Head Office</div>
+                </div>
+                <i class="bi bi-chevron-expand"></i>
+            </div>
+            <div class="sidebar-user">
+                <img src="images/Asraf-Mridha.jpg" alt="User"
+                    onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">MD. Shaokat Hossain</div>
+                    <div class="sidebar-user-role">Managing Director</div>
+                    <div class="online-status"><i class="bi bi-circle-fill"></i> Online</div>
+                </div>
             </div>
         </div>
     </aside>
 
-    <!-- ============ MAIN WRAPPER ============ -->
-    <div class="main-wrapper" id="mainWrapper">
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-        <!-- ============ TOP NAVBAR ============ -->
-        <header class="topbar" id="topbar">
-            <div class="topbar-left d-flex align-items-center gap-2">
-                <button class="btn-icon mobile-menu-btn d-none" id="mobileMenuBtn" aria-label="Open menu"
-                    aria-controls="mobileSidebar">
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                     <i class="bi bi-list"></i>
                 </button>
-                <button class="btn-icon topbar-toggle-btn" id="topbarSidebarToggle" aria-label="Toggle sidebar"
-                    aria-expanded="true">
-                    <i class="bi bi-layout-sidebar-inset"></i>
-                </button>
-                <div class="breadcrumb-compact d-none d-md-flex align-items-center gap-2 text-secondary small">
-                    <i class="bi bi-house-door"></i>
-                    <span>/</span>
-                    <span class="fw-semibold text-dark">Dashboard</span>
+                <div class="breadcrumb">
+                    <span>Home</span>
+                    <span class="separator">></span>
+                    <span class="current">Dashboard</span>
                 </div>
             </div>
 
-            <div class="topbar-center-logo d-flex d-lg-none">
-                <img src="images/logo.png" alt="STP Logo">
-            </div>
-
-            <div class="topbar-right d-flex align-items-center gap-2">
-                <a href="#" class="btn btn-pos d-none d-lg-flex" id="posBtn">
-                    <i class="bi bi-grid-3x3-gap-fill"></i>
-                    <span>POS</span>
-                </a>
-
-                <!-- Add New Dropdown (ENHANCED) -->
-                <div class="dropdown d-none d-lg-block">
-                    <button class="btn btn-add-new dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-plus-lg"></i>
-                        <span class="d-none d-sm-inline">Add New</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm add-new-menu">
-                        <li><a class="dropdown-item" href="#"><span
-                                    class="add-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-receipt"></i></span><span><strong>New Sale</strong><small
-                                        class="d-block text-muted">Create a new sales invoice</small></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span class="add-icon bg-info bg-opacity-10 text-info"><i
-                                        class="bi bi-cart-plus"></i></span><span><strong>New Purchase</strong><small
-                                        class="d-block text-muted">Add new purchase order</small></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span
-                                    class="add-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-cash-coin"></i></span><span><strong>Receive Payment</strong><small
-                                        class="d-block text-muted">Record incoming payment</small></span></a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+            <div class="topbar-center">
+                <div class="dropdown">
+                    <div class="date-range dropdown-toggle" id="dateRangeBtn" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-calendar"></i>
+                        <span id="dateRangeText">01 May 2026 - 31 May 2026</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-menu date-range-menu p-3" aria-labelledby="dateRangeBtn">
+                        <div class="mb-2">
+                            <label class="form-label small mb-1">From</label>
+                            <input type="date" class="form-control form-control-sm" id="dateFrom" value="2026-05-01">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small mb-1">To</label>
+                            <input type="date" class="form-control form-control-sm" id="dateTo" value="2026-05-31">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm w-100" id="applyDateRange">Apply</button>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="branch-select dropdown-toggle" id="branchBtn" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span id="branchText">All Branch</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="branchBtn">
+                        <li><a class="dropdown-item branch-option" href="#" data-branch="All Branch">All Branch</a></li>
+                        <li><a class="dropdown-item branch-option" href="#" data-branch="Head Office">Head Office</a>
                         </li>
-                        <li><a class="dropdown-item" href="#"><span
-                                    class="add-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-box-seam"></i></span><span><strong>Add Tyre Stock</strong><small
-                                        class="d-block text-muted">Create new inventory item</small></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span
-                                    class="add-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-person-plus"></i></span><span><strong>Add Dealer</strong><small
-                                        class="d-block text-muted">Register new local dealer</small></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span class="add-icon bg-info bg-opacity-10 text-info"><i
-                                        class="bi bi-truck"></i></span><span><strong>Add Supplier</strong><small
-                                        class="d-block text-muted">Add new import supplier</small></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span
-                                    class="add-icon bg-warning bg-opacity-10 text-warning"><i
-                                        class="bi bi-sliders"></i></span><span><strong>Stock Adjustment</strong><small
-                                        class="d-block text-muted">Adjust inventory counts</small></span></a></li>
+                        <li><a class="dropdown-item branch-option" href="#" data-branch="Chattogram Branch">Chattogram
+                                Branch</a></li>
+                        <li><a class="dropdown-item branch-option" href="#" data-branch="Sylhet Branch">Sylhet
+                                Branch</a></li>
                     </ul>
                 </div>
+            </div>
 
-                <button class="btn-icon" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen">
+            <div class="topbar-right">
+                <button class="icon-btn" aria-label="Search">
+                    <i class="bi bi-search"></i>
+                </button>
+                <button class="icon-btn" id="fullscreenBtn" aria-label="Toggle Fullscreen">
                     <i class="bi bi-arrows-fullscreen"></i>
                 </button>
-                <button class="btn-icon position-relative" aria-label="Notifications" title="Notifications">
+                <button class="icon-btn" aria-label="Notifications">
                     <i class="bi bi-bell"></i>
-                    <span class="notification-dot"></span>
+                    <span class="notification-badge">12</span>
                 </button>
-                <div class="dropdown user-dropdown d-none d-lg-block">
-                    <button class="btn-user d-flex align-items-center gap-2" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar object-fit-cover">
-                        <div class="user-info d-none d-md-block">
-                            <div class="user-name">Asraf Mridha</div>
-                        </div>
-                        <i class="bi bi-chevron-down small d-none d-md-block"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Account Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-clock-history me-2"></i>Activity Log</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-                        <li><a class="dropdown-item text-danger js-logout-btn" href="#"><i
-                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                    </ul>
+                <div class="user-profile dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="images/Asraf-Mridha.jpg" alt="User"
+                        onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
+                    <div class="user-info">
+                        <div class="user-name">MD. Shaokat Hossain</div>
+                        <div class="user-role">Managing Director</div>
+                    </div>
+                    <i class="bi bi-chevron-down"></i>
                 </div>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item text-danger" href="#"><i
+                                class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                </ul>
             </div>
         </header>
 
-        <!-- ============ MAIN CONTENT ============ -->
-        <main class="main-content" id="mainContent">
-
-            <!-- Dashboard Header (ENHANCED WITH FILTERS) -->
-            <div class="dashboard-header">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="header-icon bg-primary bg-opacity-10 text-primary">
-                        <i class="bi bi-calendar-event"></i>
-                    </div>
-                    <h1 class="dashboard-title">Today Summary</h1>
-                </div>
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <div class="dropdown d-none d-lg-block">
-                        <button class="btn btn-filter dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-building"></i> <span>All Branches</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                            <li><a class="dropdown-item active" href="#">All Branches</a></li>
-                            <li><a class="dropdown-item" href="#">Dhaka</a></li>
-                            <li><a class="dropdown-item" href="#">Chittagong</a></li>
-                            <li><a class="dropdown-item" href="#">Sylhet</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown d-none d-xl-block">
-                        <button class="btn btn-filter dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-box-seam"></i> <span>All Warehouses</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                            <li><a class="dropdown-item active" href="#">All Warehouses</a></li>
-                            <li><a class="dropdown-item" href="#">Central Warehouse</a></li>
-                            <li><a class="dropdown-item" href="#">Dhaka Warehouse</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-filter dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-calendar3"></i>
-                            <span id="dateFilterLabel">Today</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                            <li><a class="dropdown-item active" href="#" data-filter="today">Today</a></li>
-                            <li><a class="dropdown-item" href="#" data-filter="yesterday">Yesterday</a></li>
-                            <li><a class="dropdown-item" href="#" data-filter="week">This Week</a></li>
-                            <li><a class="dropdown-item" href="#" data-filter="month">This Month</a></li>
-                            <li><a class="dropdown-item" href="#" data-filter="quarter">This Quarter</a></li>
-                            <li><a class="dropdown-item" href="#" data-filter="year">This Year</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#" data-filter="custom">Custom Range</a></li>
-                        </ul>
+        <main class="main-content">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon blue"><i class="bi bi-cart"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">TOTAL SALES (BDT)</div>
+                        <div class="kpi-value">125,845,750</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+12.45% vs Last Month</span></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- EXISTING KPI Row 1 -->
-            <div class="kpi-row mb-3">
-
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-emerald">
-                            <div class="kpi-bg-icon"><i class="bi bi-cash-coin"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Revenue</span>
-                                <div class="kpi-icon-box"><i class="bi bi-cash-coin"></i></div>
-                            </div>
-                            <div class="kpi-value">৳1,24,50,000</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>15.2%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-blue">
-                            <div class="kpi-bg-icon"><i class="bi bi-graph-up"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Gross Profit</span>
-                                <div class="kpi-icon-box"><i class="bi bi-graph-up"></i></div>
-                            </div>
-                            <div class="kpi-value">৳18,45,000</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>14.8%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-purple">
-                            <div class="kpi-bg-icon"><i class="bi bi-wallet"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Net Profit</span>
-                                <div class="kpi-icon-box"><i class="bi bi-wallet"></i></div>
-                            </div>
-                            <div class="kpi-value">৳12,80,500</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>11.4%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-teal">
-                            <div class="kpi-bg-icon"><i class="bi bi-arrow-left-right"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Operating Cash Flow</span>
-                                <div class="kpi-icon-box"><i class="bi bi-arrow-left-right"></i></div>
-                            </div>
-                            <div class="kpi-value">৳6,25,000</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-left-right"></i>7.2%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="purchases.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-blue">
-                            <div class="kpi-bg-icon"><i class="bi bi-cart-fill"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Import Purchase</span>
-                                <div class="kpi-icon-box"><i class="bi bi-cart-fill"></i></div>
-                            </div>
-                            <div class="kpi-value">৳24,58,000.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>12.5%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="returns-list.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-teal">
-                            <div class="kpi-bg-icon"><i class="bi bi-arrow-return-left"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Purchase Return</span>
-                                <div class="kpi-icon-box"><i class="bi bi-arrow-return-left"></i></div>
-                            </div>
-                            <div class="kpi-value">৳84,500.00</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>3.2%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="invoices-list.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-purple">
-                            <div class="kpi-bg-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Dealer Sales</span>
-                                <div class="kpi-icon-box"><i class="bi bi-graph-up-arrow"></i></div>
-                            </div>
-                            <div class="kpi-value">38,72,500.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>18.7%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="invoice-returns.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-red">
-                            <div class="kpi-bg-icon"><i class="bi bi-graph-down-arrow"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Sales Return</span>
-                                <div class="kpi-icon-box"><i class="bi bi-graph-down-arrow"></i></div>
-                            </div>
-                            <div class="kpi-value">৳1,23,000.00</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>5.1%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="invoice-payment.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-green">
-                            <div class="kpi-bg-icon"><i class="bi bi-wallet2"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Dealer Payment</span>
-                                <div class="kpi-icon-box"><i class="bi bi-wallet2"></i></div>
-                            </div>
-                            <div class="kpi-value">৳31,25,000.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>9.4%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="purchase-payment.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-violet">
-                            <div class="kpi-bg-icon"><i class="bi bi-send-fill"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Supplier Payment</span>
-                                <div class="kpi-icon-box"><i class="bi bi-send-fill"></i></div>
-                            </div>
-                            <div class="kpi-value">৳19,87,000.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>6.8%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="expenses.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-orange">
-                            <div class="kpi-bg-icon"><i class="bi bi-cash-stack"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Import & Ops Expense</span>
-                                <div class="kpi-icon-box"><i class="bi bi-cash-stack"></i></div>
-                            </div>
-                            <div class="kpi-value">৳4,56,000.00</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>2.3%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="balance-transfers.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-navy">
-                            <div class="kpi-bg-icon"><i class="bi bi-arrow-left-right"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Balance Transfers</span>
-                                <div class="kpi-icon-box"><i class="bi bi-arrow-left-right"></i></div>
-                            </div>
-                            <div class="kpi-value">৳7,50,000.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>4.2%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="dealer-ledger.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-cyan">
-                            <div class="kpi-bg-icon"><i class="bi bi-hourglass-split"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Receivable</span>
-                                <div class="kpi-icon-box"><i class="bi bi-hourglass-split"></i></div>
-                            </div>
-                            <div class="kpi-value">৳18,42,000.00</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>Dealer dues</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="supplier-ledger.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-pink">
-                            <div class="kpi-bg-icon"><i class="bi bi-exclamation-octagon"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Payable</span>
-                                <div class="kpi-icon-box"><i class="bi bi-exclamation-octagon"></i></div>
-                            </div>
-                            <div class="kpi-value">৳9,75,000.00</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>Supplier dues</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="cash-book.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-emerald">
-                            <div class="kpi-bg-icon"><i class="bi bi-safe"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Cash & Bank Balance</span>
-                                <div class="kpi-icon-box"><i class="bi bi-safe"></i></div>
-                            </div>
-                            <div class="kpi-value">৳42,80,500.00</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>7.1%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="warehouse-stock.html" class="text-decoration-none">
-                        <div class="kpi-card kpi-amber">
-                            <div class="kpi-bg-icon"><i class="bi bi-box-seam"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Low Stock Items</span>
-                                <div class="kpi-icon-box"><i class="bi bi-box-seam"></i></div>
-                            </div>
-                            <div class="kpi-value">5 Items</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>2 out of stock</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-teal">
-                            <div class="kpi-bg-icon"><i class="bi bi-pie-chart"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Gross Margin</span>
-                                <div class="kpi-icon-box"><i class="bi bi-pie-chart"></i></div>
-                            </div>
-                            <div class="kpi-value">18.6%</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>2.1%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-red">
-                            <div class="kpi-bg-icon"><i class="bi bi-cash-stack"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Cost</span>
-                                <div class="kpi-icon-box"><i class="bi bi-cash-stack"></i></div>
-                            </div>
-                            <div class="kpi-value">৳98,20,000</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>3.5%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-navy">
-                            <div class="kpi-bg-icon"><i class="bi bi-box-seam"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Stock Value</span>
-                                <div class="kpi-icon-box"><i class="bi bi-box-seam"></i></div>
-                            </div>
-                            <div class="kpi-value">৳48,50,000</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>8.4%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-cyan">
-                            <div class="kpi-bg-icon"><i class="bi bi-boxes"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Total Stock Qty</span>
-                                <div class="kpi-icon-box"><i class="bi bi-boxes"></i></div>
-                            </div>
-                            <div class="kpi-value">12,450</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>Units</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-amber">
-                            <div class="kpi-bg-icon"><i class="bi bi-exclamation-triangle"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Low Stock Items</span>
-                                <div class="kpi-icon-box"><i class="bi bi-exclamation-triangle"></i></div>
-                            </div>
-                            <div class="kpi-value">38 Items</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>Reorder</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-pink">
-                            <div class="kpi-bg-icon"><i class="bi bi-x-octagon"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Out of Stock</span>
-                                <div class="kpi-icon-box"><i class="bi bi-x-octagon"></i></div>
-                            </div>
-                            <div class="kpi-value">12 Items</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>Critical</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-violet">
-                            <div class="kpi-bg-icon"><i class="bi bi-archive"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Dead Stock</span>
-                                <div class="kpi-icon-box"><i class="bi bi-archive"></i></div>
-                            </div>
-                            <div class="kpi-value">৳6,80,000</div>
-                            <div class="kpi-trend down"><i class="bi bi-arrow-down-right"></i>14%</div>
-                        </div>
-                    </a></div>
-                <div class="kpi-col"><a href="#" class="text-decoration-none">
-                        <div class="kpi-card kpi-green">
-                            <div class="kpi-bg-icon"><i class="bi bi-clock-history"></i></div>
-                            <div class="kpi-header"><span class="kpi-label">Avg Stock Days</span>
-                                <div class="kpi-icon-box"><i class="bi bi-clock-history"></i></div>
-                            </div>
-                            <div class="kpi-value">42 Days</div>
-                            <div class="kpi-trend up"><i class="bi bi-arrow-up-right"></i>Optimal</div>
-                        </div>
-                    </a></div>
-            </div>
-
-            <!-- NEW: Cash Flow Overview + Bank/Cash Account Summary -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-8">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i class="bi bi-cash-flow"></i>
-                                </div>
-                                <h2 class="panel-title">Cash Flow Overview (2026)</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap"><canvas id="cashFlowChart"></canvas></div>
+                <div class="kpi-card">
+                    <div class="kpi-icon green"><i class="bi bi-bag"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">TOTAL PURCHASE (BDT)</div>
+                        <div class="kpi-value">98,260,500</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+8.21% vs Last Month</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon purple"><i class="bi bi-box"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">TOTAL INVENTORY VALUE</div>
+                        <div class="kpi-value">215,478,300</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+6.32% vs Last Month</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon orange"><i class="bi bi-people"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">TOTAL RECEIVABLE (BDT)</div>
+                        <div class="kpi-value">32,745,600</div>
+                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-4.32% vs Last Month</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i class="bi bi-bank"></i>
-                                </div>
-                                <h2 class="panel-title">Cash & Bank Accounts</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="avatar avatar-sm bg-primary bg-opacity-10 text-primary"><i
-                                                class="bi bi-cash"></i></div><span class="fw-semibold">Main Cash</span>
-                                    </div>
-                                    <span class="fw-bold">৳8,50,000</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="avatar avatar-sm bg-info bg-opacity-10 text-info"><i
-                                                class="bi bi-bank"></i></div><span class="fw-semibold">DBBL
-                                            Account</span>
-                                    </div>
-                                    <span class="fw-bold">৳18,40,000</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="avatar avatar-sm bg-warning bg-opacity-10 text-warning"><i
-                                                class="bi bi-bank"></i></div><span class="fw-semibold">BRAC Bank</span>
-                                    </div>
-                                    <span class="fw-bold">৳11,20,000</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="avatar avatar-sm bg-success bg-opacity-10 text-success"><i
-                                                class="bi bi-phone"></i></div><span class="fw-semibold">Mobile
-                                            Banking</span>
-                                    </div>
-                                    <span class="fw-bold">৳2,80,000</span>
-                                </div>
-                                <hr class="my-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="fw-bold text-dark">Total Balance</span>
-                                    <span class="fw-bold text-success fs-5">৳40,90,000</span>
-                                </div>
-                            </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon red"><i class="bi bi-credit-card"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">TOTAL PAYABLE (BDT)</div>
+                        <div class="kpi-value">18,654,200</div>
+                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-6.15% vs Last Month</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- NEW: Business Performance + Sales Target -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-8">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-bar-chart-line-fill"></i></div>
-                                <h2 class="panel-title">Business Performance (2026)</h2>
+            <div class="dashboard-grid">
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Sales Overview</h3>
+                        <select class="form-select form-select-sm period-select" id="salesPeriod" data-target="sales"
+                            style="width: auto;">
+                            <option value="thisMonth">This Month</option>
+                            <option value="lastMonth">Last Month</option>
+                            <option value="last3Months">Last 3 Months</option>
+                            <option value="thisYear">This Year</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div class="overview-stats">
+                            <div class="overview-stat">
+                                <div class="overview-stat-label" id="salesCurrentLabel">This Month (BDT)</div>
+                                <div class="overview-stat-value" id="salesCurrentValue">125,845,750</div>
+                            </div>
+                            <div class="overview-stat">
+                                <div class="overview-stat-label" id="salesPrevLabel">Last Month (BDT)</div>
+                                <div class="overview-stat-value" id="salesPrevValue">111,903,200</div>
                             </div>
                         </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap"><canvas id="businessPerformanceChart"></canvas></div>
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-bullseye"></i></div>
-                                <h2 class="panel-title">Sales Target</h2>
-                            </div>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-filter dropdown-toggle"
-                                    data-bs-toggle="dropdown">Monthly</button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                                    <li><a class="dropdown-item active" href="#">Monthly</a></li>
-                                    <li><a class="dropdown-item" href="#">Quarterly</a></li>
-                                    <li><a class="dropdown-item" href="#">Yearly</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="text-center mb-4">
-                                <div class="text-muted small mb-1">Achievement</div>
-                                <div class="display-6 fw-bold text-success">85%</div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span>Target: ৳50,00,000</span>
-                                    <span class="fw-semibold">৳42,50,000</span>
-                                </div>
-                                <div class="progress" style="height: 10px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 85%"
-                                        aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted">
-                                <span>Remaining: ৳7,50,000</span>
-                                <span>15 Days Left</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- EXISTING Row 3: Top Selling + Recent Activities -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-pie-chart-fill"></i></div>
-                                <h2 class="panel-title">Top Selling Tyres (2026)</h2>
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Purchase Overview</h3>
+                        <select class="form-select form-select-sm period-select" id="purchasePeriod"
+                            data-target="purchase" style="width: auto;">
+                            <option value="thisMonth">This Month</option>
+                            <option value="lastMonth">Last Month</option>
+                            <option value="last3Months">Last 3 Months</option>
+                            <option value="thisYear">This Year</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div class="overview-stats">
+                            <div class="overview-stat">
+                                <div class="overview-stat-label" id="purchaseCurrentLabel">This Month (BDT)</div>
+                                <div class="overview-stat-value" id="purchaseCurrentValue">98,260,500</div>
+                            </div>
+                            <div class="overview-stat">
+                                <div class="overview-stat-label" id="purchasePrevLabel">Last Month (BDT)</div>
+                                <div class="overview-stat-value" id="purchasePrevValue">90,820,400</div>
                             </div>
                         </div>
-                        <div class="card-panel-body">
-                            <div class="donut-layout">
-                                <div class="donut-chart-wrap">
-                                    <canvas id="topSellingChart"></canvas>
-                                </div>
-                                <div class="donut-legend" id="topSellingLegend"></div>
-                            </div>
+                        <div class="chart-container">
+                            <canvas id="purchaseChart"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-8">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-activity"></i></div>
-                                <h2 class="panel-title">Recent Activities</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <ul class="nav nav-tabs-custom px-3 pt-3" role="tablist">
-                                <li class="nav-item" role="presentation"><button class="nav-link active"
-                                        data-bs-toggle="tab" data-bs-target="#tabInvoices" type="button" role="tab"><i
-                                            class="bi bi-receipt"></i> Invoices</button></li>
-                                <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
-                                        data-bs-target="#tabPurchases" type="button" role="tab"><i
-                                            class="bi bi-cart"></i> Purchases</button></li>
-                                <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
-                                        data-bs-target="#tabExpenses" type="button" role="tab"><i
-                                            class="bi bi-wallet2"></i> Expenses</button></li>
-                                <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
-                                        data-bs-target="#tabTransactions" type="button" role="tab"><i
-                                            class="bi bi-arrow-left-right"></i> Transactions</button></li>
-                            </ul>
-                            <div class="tab-content">
-                                <!-- Invoices Tab -->
-                                <div class="tab-pane fade show active" id="tabInvoices" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-compact mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Invoice No</th>
-                                                    <th>Date</th>
-                                                    <th>Dealer / Client</th>
-                                                    <th class="text-end">Subtotal</th>
-                                                    <th class="text-end">Net Total</th>
-                                                    <th class="text-end">Total Due</th>
-                                                    <th class="text-end">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="row-num">1</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-file-earmark-text me-1"></i>INV-070</a>
-                                                    </td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>25 Aug, 2026</td>
-                                                    <td><i class="bi bi-person me-1 text-muted"></i>Rahim Tyre House
-                                                    </td>
-                                                    <td class="text-end">৳1,15,000.00</td>
-                                                    <td class="text-end fw-semibold">৳1,26,500.00</td>
-                                                    <td class="text-end text-danger">৳1,26,500.00</td>
-                                                    <td class="text-end"><span class="badge-status active">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">2</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-file-earmark-text me-1"></i>INV-069</a>
-                                                    </td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>22 Aug, 2026</td>
-                                                    <td><i class="bi bi-person me-1 text-muted"></i>Karim Auto Parts
-                                                    </td>
-                                                    <td class="text-end">৳57,000.00</td>
-                                                    <td class="text-end fw-semibold">৳54,600.00</td>
-                                                    <td class="text-end text-danger">৳0.00</td>
-                                                    <td class="text-end"><span class="badge-status active">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">3</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-file-earmark-text me-1"></i>INV-068</a>
-                                                    </td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>22 Aug, 2026</td>
-                                                    <td><i class="bi bi-person me-1 text-muted"></i>Walk-in Dealer</td>
-                                                    <td class="text-end">57,000.00</td>
-                                                    <td class="text-end fw-semibold">৳62,500.00</td>
-                                                    <td class="text-end text-danger">৳0.00</td>
-                                                    <td class="text-end"><span class="badge-status active">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">4</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-file-earmark-text me-1"></i>INV-067</a>
-                                                    </td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>22 Aug, 2026</td>
-                                                    <td><i class="bi bi-person me-1 text-muted"></i>Dhaka Tyre Center
-                                                    </td>
-                                                    <td class="text-end">57,000.00</td>
-                                                    <td class="text-end fw-semibold">৳59,000.00</td>
-                                                    <td class="text-end text-danger">৳0.00</td>
-                                                    <td class="text-end"><span class="badge-status active">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">5</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-file-earmark-text me-1"></i>INV-066</a>
-                                                    </td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>22 Aug, 2026</td>
-                                                    <td><i class="bi bi-person me-1 text-muted"></i>Chittagong Rubber
-                                                        House</td>
-                                                    <td class="text-end">৳57,000.00</td>
-                                                    <td class="text-end fw-semibold">57,000.00</td>
-                                                    <td class="text-end text-danger">৳0.00</td>
-                                                    <td class="text-end"><span class="badge-status active">Active</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Purchases Tab -->
-                                <div class="tab-pane fade" id="tabPurchases" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-compact mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Purchase No</th>
-                                                    <th>Date</th>
-                                                    <th>Supplier</th>
-                                                    <th class="text-end">Items (Pcs)</th>
-                                                    <th class="text-end">Total</th>
-                                                    <th class="text-end">Paid</th>
-                                                    <th class="text-end">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="row-num">1</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-box-seam me-1"></i>PUR-045</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>20 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Michelin Asia Pacific
-                                                    </td>
-                                                    <td class="text-end">500</td>
-                                                    <td class="text-end fw-semibold">৳12,50,000</td>
-                                                    <td class="text-end text-success">৳12,50,000</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Completed</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">2</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-box-seam me-1"></i>PUR-044</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>18 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Bridgestone
-                                                        Corporation</td>
-                                                    <td class="text-end">300</td>
-                                                    <td class="text-end fw-semibold">৳21,00,000</td>
-                                                    <td class="text-end text-success">৳15,00,000</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status pending">Partial</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">3</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-box-seam me-1"></i>PUR-043</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>15 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Continental Tyres
-                                                    </td>
-                                                    <td class="text-end">400</td>
-                                                    <td class="text-end fw-semibold">৳9,50,000</td>
-                                                    <td class="text-end text-success">৳9,50,000</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Completed</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">4</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-box-seam me-1"></i>PUR-042</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>10 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Yokohama Rubber</td>
-                                                    <td class="text-end">600</td>
-                                                    <td class="text-end fw-semibold">৳7,50,000</td>
-                                                    <td class="text-end text-success">৳0</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status pending">Pending</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">5</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-box-seam me-1"></i>PUR-041</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>05 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Dunlop Bangladesh
-                                                    </td>
-                                                    <td class="text-end">250</td>
-                                                    <td class="text-end fw-semibold">৳6,00,000</td>
-                                                    <td class="text-end text-success">৳6,00,000</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Completed</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Expenses Tab -->
-                                <div class="tab-pane fade" id="tabExpenses" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-compact mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Expense ID</th>
-                                                    <th>Date</th>
-                                                    <th>Category</th>
-                                                    <th class="text-end">Amount</th>
-                                                    <th class="text-end">Method</th>
-                                                    <th class="text-end">Approved</th>
-                                                    <th class="text-end">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="row-num">1</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-receipt me-1"></i>EXP-120</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>26 Aug, 2026</td>
-                                                    <td><i class="bi bi-lightning me-1 text-muted"></i>Import Duty & Tax
-                                                    </td>
-                                                    <td class="text-end">৳8,50,000</td>
-                                                    <td class="text-end">Bank</td>
-                                                    <td class="text-end text-success">Yes</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Approved</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">2</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-receipt me-1"></i>EXP-119</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>24 Aug, 2026</td>
-                                                    <td><i class="bi bi-wifi me-1 text-muted"></i>Warehouse Rent</td>
-                                                    <td class="text-end">৳3,20,000</td>
-                                                    <td class="text-end">Bank</td>
-                                                    <td class="text-end text-success">Yes</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Approved</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">3</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-receipt me-1"></i>EXP-118</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>22 Aug, 2026</td>
-                                                    <td><i class="bi bi-truck me-1 text-muted"></i>Port & Freight
-                                                        Charges</td>
-                                                    <td class="text-end">৳5,40,000</td>
-                                                    <td class="text-end">Bank</td>
-                                                    <td class="text-end text-success">Yes</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Approved</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">4</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-receipt me-1"></i>EXP-117</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>20 Aug, 2026</td>
-                                                    <td><i class="bi bi-megaphone me-1 text-muted"></i>Dealer Promotion
-                                                    </td>
-                                                    <td class="text-end">৳1,50,000</td>
-                                                    <td class="text-end">Cash</td>
-                                                    <td class="text-end text-warning">Pending</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status pending">Pending</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">5</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-receipt me-1"></i>EXP-116</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>18 Aug, 2026</td>
-                                                    <td><i class="bi bi-tools me-1 text-muted"></i>Forklift Maintenance
-                                                    </td>
-                                                    <td class="text-end">12,500</td>
-                                                    <td class="text-end">Cash</td>
-                                                    <td class="text-end text-success">Yes</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Approved</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Transactions Tab -->
-                                <div class="tab-pane fade" id="tabTransactions" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-compact mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>TXN ID</th>
-                                                    <th>Date</th>
-                                                    <th>Type</th>
-                                                    <th class="text-end">Amount</th>
-                                                    <th class="text-end">From</th>
-                                                    <th class="text-end">To</th>
-                                                    <th class="text-end">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="row-num">1</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-arrow-left-right me-1"></i>TXN-890</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>27 Aug, 2026</td>
-                                                    <td><i class="bi bi-bank me-1 text-muted"></i>LC Payment</td>
-                                                    <td class="text-end">৳50,00,000</td>
-                                                    <td class="text-end">DBBL</td>
-                                                    <td class="text-end">Supplier Account</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Success</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">2</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-arrow-left-right me-1"></i>TXN-889</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>25 Aug, 2026</td>
-                                                    <td><i class="bi bi-cash me-1 text-muted"></i>Cash Deposit</td>
-                                                    <td class="text-end">৳2,50,000</td>
-                                                    <td class="text-end">Main Cash</td>
-                                                    <td class="text-end">DBBL</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Success</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">3</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-arrow-left-right me-1"></i>TXN-888</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>23 Aug, 2026</td>
-                                                    <td><i class="bi bi-bank me-1 text-muted"></i>Bank Transfer</td>
-                                                    <td class="text-end">10,00,000</td>
-                                                    <td class="text-end">BRAC Bank</td>
-                                                    <td class="text-end">DBBL</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Success</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">4</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-arrow-left-right me-1"></i>TXN-887</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>20 Aug, 2026</td>
-                                                    <td><i class="bi bi-phone me-1 text-muted"></i>Dealer Advance</td>
-                                                    <td class="text-end">৳1,50,000</td>
-                                                    <td class="text-end">bKash</td>
-                                                    <td class="text-end">Main Cash</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status pending">Processing</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="row-num">5</span></td>
-                                                    <td><a href="#" class="invoice-link"><i
-                                                                class="bi bi-arrow-left-right me-1"></i>TXN-886</a></td>
-                                                    <td><i class="bi bi-calendar3 me-1 text-muted"></i>18 Aug, 2026</td>
-                                                    <td><i class="bi bi-bank me-1 text-muted"></i>Bank Transfer</td>
-                                                    <td class="text-end">৳7,50,000</td>
-                                                    <td class="text-end">City Bank</td>
-                                                    <td class="text-end">DBBL</td>
-                                                    <td class="text-end"><span
-                                                            class="badge-status active">Success</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- NEW: Action Required + Upcoming Activities -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-danger bg-opacity-10 text-danger"><i
-                                        class="bi bi-exclamation-circle-fill"></i></div>
-                                <h2 class="panel-title">Action Required</h2>
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Top Selling Products</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="product-list">
+                            <div class="product-item">
+                                <div class="product-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="product-info">
+                                    <div class="product-name">GOODRIDE 205/55R16</div>
+                                    <div class="product-bar">
+                                        <div class="product-bar-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="product-qty">2,850 Pcs</div>
                             </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-3">
-                                <div
-                                    class="d-flex align-items-center justify-content-between p-2 rounded bg-danger bg-opacity-10 border border-danger border-opacity-25">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <i class="bi bi-exclamation-triangle-fill text-danger fs-5"></i>
-                                        <div>
-                                            <div class="fw-semibold text-dark">8 Overdue Invoices</div>
-                                            <div class="small text-muted">৳4,20,000 payment overdue</div>
-                                        </div>
+                            <div class="product-item">
+                                <div class="product-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="product-info">
+                                    <div class="product-name">LINGLONG 195/65R15</div>
+                                    <div class="product-bar">
+                                        <div class="product-bar-fill" style="width: 75%"></div>
                                     </div>
-                                    <button class="btn btn-sm btn-outline-danger">View</button>
                                 </div>
-                                <div
-                                    class="d-flex align-items-center justify-content-between p-2 rounded bg-warning bg-opacity-10 border border-warning border-opacity-25">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <i class="bi bi-box-seam text-warning fs-5"></i>
-                                        <div>
-                                            <div class="fw-semibold text-dark">12 Tyres Out of Stock</div>
-                                            <div class="small text-muted">Reorder required immediately</div>
-                                        </div>
+                                <div class="product-qty">2,320 Pcs</div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="product-info">
+                                    <div class="product-name">MAXXIS 185/65R14</div>
+                                    <div class="product-bar">
+                                        <div class="product-bar-fill" style="width: 65%"></div>
                                     </div>
-                                    <button class="btn btn-sm btn-outline-warning">View</button>
                                 </div>
-                                <div
-                                    class="d-flex align-items-center justify-content-between p-2 rounded bg-warning bg-opacity-10 border border-warning border-opacity-25">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <i class="bi bi-file-earmark-text text-warning fs-5"></i>
-                                        <div>
-                                            <div class="fw-semibold text-dark">6 Purchase Orders Pending</div>
-                                            <div class="small text-muted">Supplier confirmation required</div>
-                                        </div>
+                                <div class="product-qty">1,980 Pcs</div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="product-info">
+                                    <div class="product-name">CEAT 215/60R16</div>
+                                    <div class="product-bar">
+                                        <div class="product-bar-fill" style="width: 55%"></div>
                                     </div>
-                                    <button class="btn btn-sm btn-outline-warning">View</button>
                                 </div>
-                                <div
-                                    class="d-flex align-items-center justify-content-between p-2 rounded bg-danger bg-opacity-10 border border-danger border-opacity-25">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <i class="bi bi-cash-coin text-danger fs-5"></i>
-                                        <div>
-                                            <div class="fw-semibold text-dark">3 Supplier Payments Due Today</div>
-                                            <div class="small text-muted">৳2,40,000 payable</div>
-                                        </div>
+                                <div class="product-qty">1,650 Pcs</div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="product-info">
+                                    <div class="product-name">APOLLO 7.50R16 LT</div>
+                                    <div class="product-bar">
+                                        <div class="product-bar-fill" style="width: 48%"></div>
                                     </div>
-                                    <button class="btn btn-sm btn-outline-danger">View</button>
                                 </div>
+                                <div class="product-qty">1,420 Pcs</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-calendar-check-fill"></i></div>
-                                <h2 class="panel-title">Upcoming Activities</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-3">
-                                <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width:32px;height:32px"><i class="bi bi-cash"></i></div>
-                                        <div class="border-start border-2 border-primary h-100 my-1"></div>
-                                    </div>
-                                    <div class="pb-3">
-                                        <div class="fw-semibold">Supplier payment due today</div>
-                                        <div class="small text-muted">৳2,40,000 to Michelin Asia Pacific</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width:32px;height:32px"><i class="bi bi-truck"></i></div>
-                                        <div class="border-start border-2 border-success h-100 my-1"></div>
-                                    </div>
-                                    <div class="pb-3">
-                                        <div class="fw-semibold">Purchase order expected tomorrow</div>
-                                        <div class="small text-muted">PO-1024 from Bridgestone Corp</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width:32px;height:32px"><i class="bi bi-person-check"></i></div>
-                                        <div class="border-start border-2 border-info h-100 my-1"></div>
-                                    </div>
-                                    <div class="pb-3">
-                                        <div class="fw-semibold">Dealer payment expected</div>
-                                        <div class="small text-muted">Rahim Tyre House - ৳1,26,500</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width:32px;height:32px"><i class="bi bi-piggy-bank"></i></div>
-                                    </div>
-                                    <div>
-                                        <div class="fw-semibold">Loan installment due</div>
-                                        <div class="small text-muted">৳85,000 on 30 Aug, 2026</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- EXISTING Row 5: Stock Alert + Sales vs Purchases -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-warning bg-opacity-10 text-warning"><i
-                                        class="bi bi-exclamation-triangle-fill"></i></div>
-                                <h2 class="panel-title">Tyre Stock Alert</h2>
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Inventory Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="inventory-grid">
+                            <div class="donut-chart">
+                                <canvas id="inventoryChart"></canvas>
+                                <div class="donut-center">
+                                    <div class="donut-center-label">Total Qty</div>
+                                    <div class="donut-center-value">48,256</div>
+                                    <div class="donut-center-sub">Pcs</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Code</th>
-                                            <th>Tyre Model / Size</th>
-                                            <th class="text-end">Quantity</th>
-                                            <th class="text-end">Alert Qty</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><span class="row-num">1</span></td>
-                                            <td><code class="code-tag">MIC-20555</code></td>
-                                            <td><a href="#" class="product-link">Michelin 205/55R16</a></td>
-                                            <td class="text-end"><span class="badge-alert"><i
-                                                        class="bi bi-exclamation-triangle-fill"></i> 3 pcs</span></td>
-                                            <td class="text-end">50 pcs</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="row-num">2</span></td>
-                                            <td><code class="code-tag">BRI-21560</code></td>
-                                            <td><a href="#" class="product-link">Bridgestone 215/60R16</a></td>
-                                            <td class="text-end"><span class="badge-alert critical"><i
-                                                        class="bi bi-exclamation-triangle-fill"></i> 0 pcs</span></td>
-                                            <td class="text-end">50 pcs</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="row-num">3</span></td>
-                                            <td><code class="code-tag">CON-19565</code></td>
-                                            <td><a href="#" class="product-link">Continental 195/65R15</a></td>
-                                            <td class="text-end"><span class="badge-alert critical"><i
-                                                        class="bi bi-exclamation-triangle-fill"></i> 0 pcs</span></td>
-                                            <td class="text-end">50 pcs</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="row-num">4</span></td>
-                                            <td><code class="code-tag">YOK-18570</code></td>
-                                            <td><a href="#" class="product-link">Yokohama 185/70R14</a></td>
-                                            <td class="text-end"><span class="badge-alert"><i
-                                                        class="bi bi-exclamation-triangle-fill"></i> 12 pcs</span></td>
-                                            <td class="text-end">40 pcs</td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="row-num">5</span></td>
-                                            <td><code class="code-tag">DUN-19560</code></td>
-                                            <td><a href="#" class="product-link">Dunlop 195/60R15</a></td>
-                                            <td class="text-end"><span class="badge-alert"><i
-                                                        class="bi bi-exclamation-triangle-fill"></i> 8 pcs</span></td>
-                                            <td class="text-end">30 pcs</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="inventory-stats">
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #10b981"></div>
+                                    <div class="stat-label">Available Stock</div>
+                                    <div class="stat-value">34,256 Pcs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #3b82f6"></div>
+                                    <div class="stat-label">Reserved Stock</div>
+                                    <div class="stat-value">5,120 Pcs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #f59e0b"></div>
+                                    <div class="stat-label">In-Transit Stock</div>
+                                    <div class="stat-value">3,450 Pcs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #ef4444"></div>
+                                    <div class="stat-label">Damage Stock</div>
+                                    <div class="stat-value">1,250 Pcs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #8b5cf6"></div>
+                                    <div class="stat-label">Warranty Stock</div>
+                                    <div class="stat-value">2,180 Pcs</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i
-                                        class="bi bi-bar-chart-fill"></i></div>
-                                <h2 class="panel-title">Sales vs Purchases (2026)</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap"><canvas id="salesPurchasesChart"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- NEW: Purchase Order Pipeline + Sales by Brand -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i
-                                        class="bi bi-diagram-3-fill"></i></div>
-                                <h2 class="panel-title">Purchase Order Pipeline</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex justify-content-between mb-4 text-center">
-                                <div>
-                                    <div class="fw-bold fs-5 text-muted">12</div>
-                                    <div class="small text-muted">Draft</div>
-                                </div>
-                                <div>
-                                    <div class="fw-bold fs-5 text-warning">18</div>
-                                    <div class="small text-muted">Pending</div>
-                                </div>
-                                <div>
-                                    <div class="fw-bold fs-5 text-info">25</div>
-                                    <div class="small text-muted">Approved</div>
-                                </div>
-                                <div>
-                                    <div class="fw-bold fs-5 text-success">86</div>
-                                    <div class="small text-muted">Received</div>
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Stock Aging (DOT Wise)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="inventory-grid">
+                            <div class="donut-chart">
+                                <canvas id="agingChart"></canvas>
+                                <div class="donut-center">
+                                    <div class="donut-center-label">Total Qty</div>
+                                    <div class="donut-center-value">48,256</div>
+                                    <div class="donut-center-sub">Pcs</div>
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>PO Number</th>
-                                            <th>Supplier</th>
-                                            <th class="text-end">Amount</th>
-                                            <th class="text-end">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="#" class="invoice-link">PO-1024</a></td>
-                                            <td>ABC Tyres</td>
-                                            <td class="text-end fw-semibold">৳8,50,000</td>
-                                            <td class="text-end"><span class="badge-status pending">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#" class="invoice-link">PO-1025</a></td>
-                                            <td>XYZ Rubber</td>
-                                            <td class="text-end fw-semibold">৳5,20,000</td>
-                                            <td class="text-end"><span class="badge-status active">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#" class="invoice-link">PO-1026</a></td>
-                                            <td>Global Tyres</td>
-                                            <td class="text-end fw-semibold">৳7,80,000</td>
-                                            <td class="text-end"><span class="badge-status active"
-                                                    style="background:#cffafe;color:#0e7490">In Transit</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="inventory-stats">
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #10b981"></div>
+                                    <div class="stat-label">0 - 90 Days</div>
+                                    <div class="stat-value">18,450 Pcs (38%)</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #3b82f6"></div>
+                                    <div class="stat-label">91 - 180 Days</div>
+                                    <div class="stat-value">12,750 Pcs (26%)</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #f59e0b"></div>
+                                    <div class="stat-label">181 - 365 Days</div>
+                                    <div class="stat-value">8,420 Pcs (17%)</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #ef4444"></div>
+                                    <div class="stat-label">1 - 2 Years</div>
+                                    <div class="stat-value">5,230 Pcs (11%)</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-dot" style="background: #8b5cf6"></div>
+                                    <div class="stat-label">2+ Years</div>
+                                    <div class="stat-value">3,406 Pcs (8%)</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i
-                                        class="bi bi-funnel-fill"></i></div>
-                                <h2 class="panel-title">Sales Pipeline</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex justify-content-between mb-4 text-center flex-wrap gap-2">
-                                <div class="flex-fill">
-                                    <div class="fw-bold fs-5 text-muted">24</div>
-                                    <div class="small text-muted">Quotation<br><span
-                                            class="fw-semibold text-dark">৳12.5L</span></div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="fw-bold fs-5 text-primary">18</div>
-                                    <div class="small text-muted">Sales Order<br><span
-                                            class="fw-semibold text-dark">৳9.2L</span></div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="fw-bold fs-5 text-warning">12</div>
-                                    <div class="small text-muted">Invoiced<br><span
-                                            class="fw-semibold text-dark">৳6.8L</span></div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="fw-bold fs-5 text-success">35</div>
-                                    <div class="small text-muted">Delivered<br><span
-                                            class="fw-semibold text-dark">৳18.4L</span></div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="fw-bold fs-5 text-emerald" style="color:#059669">28</div>
-                                    <div class="small text-muted">Paid<br><span
-                                            class="fw-semibold text-dark">৳15.1L</span></div>
-                                </div>
-                            </div>
-                            <div class="progress" style="height: 8px;">
-                                <div class="progress-bar bg-muted" style="width: 20%"></div>
-                                <div class="progress-bar bg-primary" style="width: 15%"></div>
-                                <div class="progress-bar bg-warning" style="width: 10%"></div>
-                                <div class="progress-bar bg-success" style="width: 30%"></div>
-                                <div class="progress-bar" style="width: 25%; background-color: #059669;"></div>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted mt-1">
-                                <span>Overall Conversion: 68%</span>
-                                <span>Avg Cycle: 14 Days</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-opacity-10"
-                                    style="background: var(--kpi-purple-bg); color: var(--kpi-purple);"><i
-                                        class="bi bi-pie-chart-fill"></i></div>
-                                <h2 class="panel-title">Sales by Tyre Brand</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="donut-layout">
-                                <div class="donut-chart-wrap"><canvas id="salesByBrandChart"></canvas></div>
-                                <div class="donut-legend" id="salesByBrandLegend"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- EXISTING Row 4: Payment Analytics + Top Clients -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-8">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-danger bg-opacity-10 text-danger"><i
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Low Stock Alerts</h3>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert-list">
+                            <div class="alert-item">
+                                <div class="alert-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="alert-info">
+                                    <div class="alert-name">GOODRIDE 175/70R13</div>
+                                    <div class="alert-detail">Reorder Level: 200 Pcs</div>
+                                </div>
+                                <div class="alert-stock">
+                                    <div class="alert-current">45 Pcs</div>
+                                    <div class="alert-label">Current Stock</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="alert-info">
+                                    <div class="alert-name">LINGLONG 205/55R16</div>
+                                    <div class="alert-detail">Reorder Level: 150 Pcs</div>
+                                </div>
+                                <div class="alert-stock">
+                                    <div class="alert-current">60 Pcs</div>
+                                    <div class="alert-label">Current Stock</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="alert-info">
+                                    <div class="alert-name">CEAT 215/60R16</div>
+                                    <div class="alert-detail">Reorder Level: 100 Pcs</div>
+                                </div>
+                                <div class="alert-stock">
+                                    <div class="alert-current">25 Pcs</div>
+                                    <div class="alert-label">Current Stock</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="alert-info">
+                                    <div class="alert-name">APOLLO 185/65R14</div>
+                                    <div class="alert-detail">Reorder Level: 120 Pcs</div>
+                                </div>
+                                <div class="alert-stock">
+                                    <div class="alert-current">35 Pcs</div>
+                                    <div class="alert-label">Current Stock</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-img-placeholder"><i class="bi bi-disc-fill"></i></div>
+                                <div class="alert-info">
+                                    <div class="alert-name">MAXXIS 7.50R16 LT</div>
+                                    <div class="alert-detail">Reorder Level: 80 Pcs</div>
+                                </div>
+                                <div class="alert-stock">
+                                    <div class="alert-current">20 Pcs</div>
+                                    <div class="alert-label">Current Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card col-span-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activities</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon green"><i class="bi bi-cart"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Purchase Order Created</div>
+                                    <div class="activity-desc">PO# PO-2605-0058 has been created to Rubber World Ltd.
+                                    </div>
+                                    <div class="activity-meta">Today, 11:30 AM by Al Amin</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon purple"><i class="bi bi-arrow-left-right"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Stock Transfer</div>
+                                    <div class="activity-desc">Transfer# TR-2605-0021 from Head Office to Chattogram
+                                        Branch.</div>
+                                    <div class="activity-meta">Yesterday, 04:20 PM by Karim Uddin</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon blue"><i class="bi bi-truck"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Goods Received</div>
+                                    <div class="activity-desc">GRN# GRN-2605-0123 received from China Tyre Co. Ltd.
+                                    </div>
+                                    <div class="activity-meta">Today, 10:15 AM by Rasel Ahmed</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon red"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Damage Entry</div>
+                                    <div class="activity-desc">Damage entry# DMG-2605-0012 for 25 Pcs tyres.</div>
+                                    <div class="activity-meta">Yesterday, 03:05 PM by Sohel Rana</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon orange"><i class="bi bi-file-text"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Sales Invoice</div>
+                                    <div class="activity-desc">Invoice# SI-2605-0456 has been created for Rahman Motors.
+                                    </div>
+                                    <div class="activity-meta">Today, 09:40 AM by Jannatul</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon blue"><i class="bi bi-sliders"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Stock Adjustment</div>
+                                    <div class="activity-desc">Adjustment# ADJ-2605-0015 has been completed.</div>
+                                    <div class="activity-meta">Yesterday, 02:30 PM by Al Amin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card col-span-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Quick Links</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-links">
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #dbeafe; color: #3b82f6;"><i
+                                        class="bi bi-cart-plus"></i></div>
+                                <div class="quick-link-label">New Purchase</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #d1fae5; color: #10b981;"><i
+                                        class="bi bi-bag"></i></div>
+                                <div class="quick-link-label">New Sales</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #e9d5ff; color: #8b5cf6;"><i
+                                        class="bi bi-box"></i></div>
+                                <div class="quick-link-label">Stock In</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #ffedd5; color: #f97316;"><i
+                                        class="bi bi-box-arrow-up"></i></div>
+                                <div class="quick-link-label">Stock Out</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #dbeafe; color: #3b82f6;"><i
                                         class="bi bi-arrow-left-right"></i></div>
-                                <h2 class="panel-title">Payment Sent vs Payment Received (2026)</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap"><canvas id="paymentChart"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-people-fill"></i></div>
-                                <h2 class="panel-title">Top 5 Dealers (2026)</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="client-list" id="clientList"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Top Outstanding Dealers + Sales Team Performance -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-danger bg-opacity-10 text-danger"><i
-                                        class="bi bi-person-exclamation"></i></div>
-                                <h2 class="panel-title">Top Outstanding Dealers</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="client-list dealer-alert-list">
-                                <div class="client-item dealer-alert-item">
-                                    <img src="images/dealers/01.jpg" alt="Rahim Tyre House"
-                                        class="client-avatar object-fit-cover">
-                                    <div class="client-info">
-                                        <div class="client-name">Rahim Tyre House</div>
-                                        <div class="d-flex align-items-center gap-2 mt-1"><span
-                                                class="badge-status pending">45 Days Overdue</span></div>
-                                    </div>
-                                    <div class="client-stats text-end">
-                                        <div class="client-amount text-danger">৳4,80,000</div>
-                                        <button class="btn btn-sm btn-outline-danger mt-1"
-                                            style="font-size:11px; padding: 2px 8px;">View</button>
-                                    </div>
-                                </div>
-                                <div class="client-item dealer-alert-item">
-                                    <img src="images/dealers/02.jpg" alt="Karim Auto Parts"
-                                        class="client-avatar object-fit-cover">
-                                    <div class="client-info">
-                                        <div class="client-name">Karim Auto Parts</div>
-                                        <div class="d-flex align-items-center gap-2 mt-1"><span
-                                                class="badge-status pending">32 Days Overdue</span></div>
-                                    </div>
-                                    <div class="client-stats text-end">
-                                        <div class="client-amount text-danger">৳3,20,000</div>
-                                        <button class="btn btn-sm btn-outline-danger mt-1"
-                                            style="font-size:11px; padding: 2px 8px;">View</button>
-                                    </div>
-                                </div>
-                                <div class="client-item dealer-alert-item">
-                                    <img src="images/dealers/03.jpg" alt="Dhaka Tyre Center"
-                                        class="client-avatar object-fit-cover">
-                                    <div class="client-info">
-                                        <div class="client-name">Dhaka Tyre Center</div>
-                                        <div class="d-flex align-items-center gap-2 mt-1"><span
-                                                class="badge-status pending">21 Days Overdue</span></div>
-                                    </div>
-                                    <div class="client-stats text-end">
-                                        <div class="client-amount text-danger">৳2,85,000</div>
-                                        <button class="btn btn-sm btn-outline-danger mt-1"
-                                            style="font-size:11px; padding: 2px 8px;">View</button>
-                                    </div>
-                                </div>
-                                <div class="client-item dealer-alert-item">
-                                    <img src="images/dealers/04.jpg" alt="Chittagong Rubber House"
-                                        class="client-avatar object-fit-cover">
-                                    <div class="client-info">
-                                        <div class="client-name">Chittagong Rubber House</div>
-                                        <div class="d-flex align-items-center gap-2 mt-1"><span
-                                                class="badge-status pending">18 Days Overdue</span></div>
-                                    </div>
-                                    <div class="client-stats text-end">
-                                        <div class="client-amount text-danger">৳2,10,000</div>
-                                        <button class="btn btn-sm btn-outline-danger mt-1"
-                                            style="font-size:11px; padding: 2px 8px;">View</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-people-fill"></i></div>
-                                <h2 class="panel-title">Sales Team Performance</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Sales Person</th>
-                                            <th class="text-end">Sales</th>
-                                            <th class="text-end">Target</th>
-                                            <th>Achievement</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="sales-person">
-                                                    <img src="images/sales-team/01.jpg" alt="Rahim"
-                                                        class="sales-person-avatar object-fit-cover">
-                                                    <span class="fw-semibold text-success">Rahim</span>
-                                                </div>
-                                            </td>
-                                            <td class="text-end fw-semibold">৳12,50,000</td>
-                                            <td class="text-end text-muted">৳15,00,000</td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="progress flex-grow-1" style="height: 6px;">
-                                                        <div class="progress-bar bg-success" style="width: 83%"></div>
-                                                    </div>
-                                                    <span class="small fw-semibold">83%</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="sales-person">
-                                                    <img src="images/sales-team/02.jpg" alt="Karim"
-                                                        class="sales-person-avatar object-fit-cover">
-                                                    <span class="fw-semibold text-primary">Karim</span>
-                                                </div>
-                                            </td>
-                                            <td class="text-end fw-semibold">৳10,20,000</td>
-                                            <td class="text-end text-muted">৳10,00,000</td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="progress flex-grow-1" style="height: 6px;">
-                                                        <div class="progress-bar bg-success" style="width: 100%"></div>
-                                                    </div>
-                                                    <span class="small fw-semibold text-success">102%</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="sales-person">
-                                                    <img src="images/sales-team/03.jpg" alt="Hasan"
-                                                        class="sales-person-avatar object-fit-cover">
-                                                    <span class="fw-semibold text-warning">Hasan</span>
-                                                </div>
-                                            </td>
-                                            <td class="text-end fw-semibold">৳8,40,000</td>
-                                            <td class="text-end text-muted">৳12,00,000</td>
-                                            <td>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <div class="progress flex-grow-1" style="height: 6px;">
-                                                        <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                                    </div>
-                                                    <span class="small fw-semibold text-warning">70%</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div class="quick-link-label">Stock Transfer</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #d1fae5; color: #10b981;"><i
+                                        class="bi bi-clipboard"></i></div>
+                                <div class="quick-link-label">GRN</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #ffedd5; color: #f97316;"><i
+                                        class="bi bi-file-text"></i></div>
+                                <div class="quick-link-label">Invoice</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #e9d5ff; color: #8b5cf6;"><i
+                                        class="bi bi-credit-card"></i></div>
+                                <div class="quick-link-label">Payment</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #dbeafe; color: #3b82f6;"><i
+                                        class="bi bi-receipt"></i></div>
+                                <div class="quick-link-label">Receipt</div>
+                            </a>
+                            <a href="#" class="quick-link">
+                                <div class="quick-link-icon" style="background: #f3e8ff; color: #a855f7;"><i
+                                        class="bi bi-file-earmark-bar-graph"></i></div>
+                                <div class="quick-link-label">Reports</div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- NEW: Return Analysis + Multi-Branch Performance -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-warning bg-opacity-10 text-warning"><i
-                                        class="bi bi-arrow-return-left"></i></div>
-                                <h2 class="panel-title">Return Analysis</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex justify-content-around mb-3 text-center">
-                                <div>
-                                    <div class="text-muted small">Sales Returns</div>
-                                    <div class="fw-bold fs-5 text-danger">৳1,23,000</div>
-                                </div>
-                                <div>
-                                    <div class="text-muted small">Purchase Returns</div>
-                                    <div class="fw-bold fs-5 text-warning">৳84,500</div>
-                                </div>
-                                <div>
-                                    <div class="text-muted small">Return Rate</div>
-                                    <div class="fw-bold fs-5 text-info">2.4%</div>
-                                </div>
-                            </div>
-                            <div class="chart-wrap" style="height: 200px;"><canvas id="returnAnalysisChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-opacity-10"
-                                    style="background: var(--kpi-navy-bg); color: var(--kpi-navy);"><i
-                                        class="bi bi-building"></i></div>
-                                <h2 class="panel-title">Branch Performance</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Branch</th>
-                                            <th class="text-end">Sales</th>
-                                            <th class="text-end">Purchase</th>
-                                            <th class="text-end">Profit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-semibold">Dhaka</td>
-                                            <td class="text-end">৳45.2L</td>
-                                            <td class="text-end text-muted">৳32.4L</td>
-                                            <td class="text-end fw-semibold text-success">৳8.2L</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold">Chittagong</td>
-                                            <td class="text-end">৳32.8L</td>
-                                            <td class="text-end text-muted">৳24.5L</td>
-                                            <td class="text-end fw-semibold text-success">৳6.4L</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold">Sylhet</td>
-                                            <td class="text-end">৳18.4L</td>
-                                            <td class="text-end text-muted">৳13.2L</td>
-                                            <td class="text-end fw-semibold text-success">৳3.8L</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold">Rajshahi</td>
-                                            <td class="text-end">৳12.1L</td>
-                                            <td class="text-end text-muted">৳9.5L</td>
-                                            <td class="text-end fw-semibold text-success">৳2.1L</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Warehouse Overview -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i class="bi bi-boxes"></i>
-                                </div>
-                                <h2 class="panel-title">Warehouse Overview</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Warehouse</th>
-                                            <th class="text-end">Stock Quantity</th>
-                                            <th class="text-end">Stock Value</th>
-                                            <th class="text-end">Reserved</th>
-                                            <th class="text-end">Available</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-semibold"><i
-                                                    class="bi bi-building me-2 text-muted"></i>Central Warehouse</td>
-                                            <td class="text-end">12,450 units</td>
-                                            <td class="text-end fw-semibold">৳48.5L</td>
-                                            <td class="text-end text-warning">1,240</td>
-                                            <td class="text-end text-success fw-semibold">11,210</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold"><i class="bi bi-building me-2 text-muted"></i>Dhaka
-                                                Warehouse</td>
-                                            <td class="text-end">8,420 units</td>
-                                            <td class="text-end fw-semibold">৳32.4L</td>
-                                            <td class="text-end text-warning">820</td>
-                                            <td class="text-end text-success fw-semibold">7,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold"><i
-                                                    class="bi bi-building me-2 text-muted"></i>Chittagong Warehouse</td>
-                                            <td class="text-end">5,100 units</td>
-                                            <td class="text-end fw-semibold">৳18.2L</td>
-                                            <td class="text-end text-warning">450</td>
-                                            <td class="text-end text-success fw-semibold">4,650</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Revenue & Profit Analytics -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-8">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-bar-chart-line-fill"></i></div>
-                                <h2 class="panel-title">Revenue & Profit Analytics</h2>
-                            </div>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-filter dropdown-toggle"
-                                    data-bs-toggle="dropdown">Monthly</button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                                    <li><a class="dropdown-item active" href="#">Monthly</a></li>
-                                    <li><a class="dropdown-item" href="#">Quarterly</a></li>
-                                    <li><a class="dropdown-item" href="#">Yearly</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap"><canvas id="revenueProfitChart"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-pie-chart-fill"></i></div>
-                                <h2 class="panel-title">Sales by Channel</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="donut-layout">
-                                <div class="donut-chart-wrap"><canvas id="salesChannelChart"></canvas></div>
-                                <div class="donut-legend" id="salesChannelLegend"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Receivable & Payable Aging -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-arrow-down-left"></i></div>
-                                <h2 class="panel-title">Accounts Receivable Aging</h2>
-                            </div>
-                            <div class="text-end">
-                                <div class="small text-muted">Total Overdue</div>
-                                <div class="fw-bold text-danger">৳4,20,000</div>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-3">
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>Current</span><span
-                                            class="fw-semibold">৳12,50,000 (68%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" style="width: 68%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>1–30 Days</span><span
-                                            class="fw-semibold">৳3,20,000 (17%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-info" style="width: 17%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>31–60 Days</span><span
-                                            class="fw-semibold">৳1,80,000 (10%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" style="width: 10%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>61–90 Days</span><span
-                                            class="fw-semibold text-warning">৳85,000 (4.5%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" style="width: 4.5%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>90+ Days
-                                            (Critical)</span><span class="fw-bold text-danger">৳15,000 (0.5%)</span>
-                                    </div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" style="width: 0.5%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-6">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-danger bg-opacity-10 text-danger"><i
-                                        class="bi bi-arrow-up-right"></i></div>
-                                <h2 class="panel-title">Accounts Payable Aging</h2>
-                            </div>
-                            <div class="text-end">
-                                <div class="small text-muted">Total Due</div>
-                                <div class="fw-bold text-danger">৳2,40,000</div>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-3">
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>Current</span><span
-                                            class="fw-semibold">৳8,50,000 (72%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" style="width: 72%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>1–30 Days</span><span
-                                            class="fw-semibold">৳2,10,000 (18%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-info" style="width: 18%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>31–60 Days</span><span
-                                            class="fw-semibold">৳95,000 (8%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" style="width: 8%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>61–90 Days</span><span
-                                            class="fw-semibold text-warning">৳15,000 (1.5%)</span></div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" style="width: 1.5%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1"><span>90+ Days
-                                            (Critical)</span><span class="fw-bold text-danger">৳5,000 (0.5%)</span>
-                                    </div>
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" style="width: 0.5%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Inventory Health & Slow/Dead Stock -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-clipboard-check-fill"></i></div>
-                                <h2 class="panel-title">Pending Approvals</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th>Reference</th>
-                                            <th class="text-end">Amount</th>
-                                            <th class="text-end">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><span class="badge bg-warning bg-opacity-25 text-warning">Expense</span>
-                                            </td>
-                                            <td>EXP-117</td>
-                                            <td class="text-end fw-semibold">৳1,50,000</td>
-                                            <td class="text-end"><button class="btn btn-sm btn-primary">Approve</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="badge bg-info bg-opacity-25 text-info">Purchase</span></td>
-                                            <td>PO-1024</td>
-                                            <td class="text-end fw-semibold">৳8,50,000</td>
-                                            <td class="text-end"><button class="btn btn-sm btn-primary">Approve</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="badge bg-danger bg-opacity-25 text-danger">LC</span></td>
-                                            <td>LC-2026-08</td>
-                                            <td class="text-end fw-semibold">৳12,00,000</td>
-                                            <td class="text-end"><button class="btn btn-sm btn-primary">Review</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span
-                                                    class="badge bg-secondary bg-opacity-25 text-secondary">Leave</span>
-                                            </td>
-                                            <td>LV-045</td>
-                                            <td class="text-end text-muted">N/A</td>
-                                            <td class="text-end"><button class="btn btn-sm btn-primary">Approve</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-warning bg-opacity-10 text-warning"><i
-                                        class="bi bi-hourglass-split"></i></div>
-                                <h2 class="panel-title">Slow Moving & Dead Stock</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>SKU</th>
-                                            <th>Product</th>
-                                            <th class="text-end">Qty</th>
-                                            <th class="text-end">Days</th>
-                                            <th class="text-end">Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code class="code-tag">MIC-185</code></td>
-                                            <td>Michelin 185/70</td>
-                                            <td class="text-end">120</td>
-                                            <td class="text-end text-warning">95 Days</td>
-                                            <td class="text-end fw-semibold">৳1,20,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code class="code-tag">DUN-175</code></td>
-                                            <td>Dunlop 175/65</td>
-                                            <td class="text-end">85</td>
-                                            <td class="text-end text-danger">140 Days</td>
-                                            <td class="text-end fw-semibold">৳68,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code class="code-tag">YOK-195</code></td>
-                                            <td>Yokohama 195/60</td>
-                                            <td class="text-end">45</td>
-                                            <td class="text-end text-danger">180+ Days</td>
-                                            <td class="text-end fw-semibold">৳45,000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i
-                                        class="bi bi-bullseye"></i></div>
-                                <h2 class="panel-title">Budget vs Actual (Monthly)</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-compact mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th class="text-end">Budget</th>
-                                            <th class="text-end">Actual</th>
-                                            <th class="text-end">Variance</th>
-                                            <th>Achievement</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-semibold">Revenue</td>
-                                            <td class="text-end">৳50,00,000</td>
-                                            <td class="text-end">৳48,50,000</td>
-                                            <td class="text-end text-danger">-৳1,50,000</td>
-                                            <td>
-                                                <div class="progress" style="height:6px">
-                                                    <div class="progress-bar bg-success" style="width:97%"></div>
-                                                </div><span class="small">97%</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold">Expense</td>
-                                            <td class="text-end">৳15,00,000</td>
-                                            <td class="text-end">৳14,20,000</td>
-                                            <td class="text-end text-success">+৳80,000</td>
-                                            <td>
-                                                <div class="progress" style="height:6px">
-                                                    <div class="progress-bar bg-info" style="width:94%"></div>
-                                                </div><span class="small">94%</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-semibold">Net Profit</td>
-                                            <td class="text-end">৳10,00,000</td>
-                                            <td class="text-end">৳8,42,000</td>
-                                            <td class="text-end text-danger">-৳1,58,000</td>
-                                            <td>
-                                                <div class="progress" style="height:6px">
-                                                    <div class="progress-bar bg-warning" style="width:84%"></div>
-                                                </div><span class="small">84%</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NEW: Logistics, Import/LC, POS & Ecommerce -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-info bg-opacity-10 text-info"><i class="bi bi-truck"></i>
-                                </div>
-                                <h2 class="panel-title">Logistics Overview</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-2">
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Active Shipments</span><span
-                                        class="badge bg-primary">14</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">In Transit</span><span
-                                        class="badge bg-info">8</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Customs Pending</span><span
-                                        class="badge bg-warning text-dark">3</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Delayed</span><span class="badge bg-danger">2</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-purple bg-opacity-10 text-purple" style="color:#8b5cf6"><i
-                                        class="bi bi-file-earmark-ruled"></i></div>
-                                <h2 class="panel-title">Import & LC Overview</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="d-flex flex-column gap-2">
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Active LC</span><span class="fw-bold">৳45.2L</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Expiring Soon</span><span
-                                        class="badge bg-warning text-dark">2 LCs</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Customs Duty Payable</span><span
-                                        class="fw-bold text-danger">৳4,20,000</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light">
-                                    <span class="small fw-semibold">Clearance Pending</span><span
-                                        class="badge bg-info">1 Shipment</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-4">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-success bg-opacity-10 text-success"><i class="bi bi-shop"></i>
-                                </div>
-                                <h2 class="panel-title">Retail POS & Ecommerce</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="row g-2 text-center">
-                                <div class="col-6">
-                                    <div class="p-2 rounded bg-success bg-opacity-10">
-                                        <div class="fw-bold text-success">৳1,25,000</div>
-                                        <div class="small text-muted">POS Sales</div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="p-2 rounded bg-primary bg-opacity-10">
-                                        <div class="fw-bold text-primary">৳85,000</div>
-                                        <div class="small text-muted">Online Orders</div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="p-2 rounded bg-light">
-                                        <div class="fw-bold">42</div>
-                                        <div class="small text-muted">POS Txns</div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="p-2 rounded bg-light">
-                                        <div class="fw-bold">18</div>
-                                        <div class="small text-muted">Pending Online</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- UPGRADED: Pending Approvals, HR Workforce Overview & System Health -->
-            <div class="row g-2 g-md-3 mb-3">
-                <div class="col-12 col-xl-3">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-warning bg-opacity-10 text-warning"><i
-                                        class="bi bi-pie-chart-fill"></i></div>
-                                <h2 class="panel-title">Expense Breakdown</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="chart-wrap" style="height: 220px;"><canvas id="expenseBreakdownChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-3">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-primary bg-opacity-10 text-primary"><i
-                                        class="bi bi-boxes"></i></div>
-                                <h2 class="panel-title">Inventory Health</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="stat-tile-grid">
-                                <div class="stat-tile">
-                                    <div class="stat-tile-icon bg-primary bg-opacity-10 text-primary"><i
-                                            class="bi bi-upc-scan"></i></div>
-                                    <div class="stat-tile-value">1,245</div>
-                                    <div class="stat-tile-label">Total SKU</div>
-                                </div>
-                                <div class="stat-tile">
-                                    <div class="stat-tile-icon bg-primary bg-opacity-10 text-primary"><i
-                                            class="bi bi-boxes"></i></div>
-                                    <div class="stat-tile-value">12,450</div>
-                                    <div class="stat-tile-label">Total Units</div>
-                                </div>
-                                <div class="stat-tile">
-                                    <div class="stat-tile-icon bg-info bg-opacity-10 text-info"><i
-                                            class="bi bi-cash-stack"></i></div>
-                                    <div class="stat-tile-value">৳48.5L</div>
-                                    <div class="stat-tile-label">Stock Value</div>
-                                </div>
-                                <div class="stat-tile">
-                                    <div class="stat-tile-icon bg-success bg-opacity-10 text-success"><i
-                                            class="bi bi-arrow-repeat"></i></div>
-                                    <div class="stat-tile-value">4.2x</div>
-                                    <div class="stat-tile-label">Turnover</div>
-                                </div>
-                                <div class="stat-tile stat-tile-warning">
-                                    <div class="stat-tile-icon bg-warning bg-opacity-10 text-warning"><i
-                                            class="bi bi-exclamation-triangle"></i></div>
-                                    <div class="stat-tile-value">38</div>
-                                    <div class="stat-tile-label">Low Stock</div>
-                                </div>
-                                <div class="stat-tile stat-tile-danger">
-                                    <div class="stat-tile-icon bg-danger bg-opacity-10 text-danger"><i
-                                            class="bi bi-x-octagon"></i></div>
-                                    <div class="stat-tile-value">12</div>
-                                    <div class="stat-tile-label">Out of Stock</div>
-                                </div>
-                                <div class="stat-tile stat-tile-info">
-                                    <div class="stat-tile-icon bg-info bg-opacity-10 text-info"><i
-                                            class="bi bi-layers"></i></div>
-                                    <div class="stat-tile-value">24</div>
-                                    <div class="stat-tile-label">Overstock</div>
-                                </div>
-                                <div class="stat-tile stat-tile-muted">
-                                    <div class="stat-tile-icon bg-secondary bg-opacity-10 text-secondary"><i
-                                            class="bi bi-archive"></i></div>
-                                    <div class="stat-tile-value">৳6.8L</div>
-                                    <div class="stat-tile-label">Dead Stock</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-3">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-opacity-10" style="background:#f5f3ff; color:#8b5cf6"><i
-                                        class="bi bi-people-fill"></i></div>
-                                <h2 class="panel-title">Workforce Overview</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="stat-tile-grid stat-tile-grid-2col">
-                                <div class="stat-tile">
-                                    <div class="stat-tile-icon bg-primary bg-opacity-10 text-primary"><i
-                                            class="bi bi-people"></i></div>
-                                    <div class="stat-tile-value">48</div>
-                                    <div class="stat-tile-label">Total Employees</div>
-                                </div>
-                                <div class="stat-tile stat-tile-success">
-                                    <div class="stat-tile-icon bg-success bg-opacity-10 text-success"><i
-                                            class="bi bi-person-check"></i></div>
-                                    <div class="stat-tile-value">42</div>
-                                    <div class="stat-tile-label">Present Today</div>
-                                </div>
-                                <div class="stat-tile stat-tile-danger">
-                                    <div class="stat-tile-icon bg-danger bg-opacity-10 text-danger"><i
-                                            class="bi bi-person-x"></i></div>
-                                    <div class="stat-tile-value">3</div>
-                                    <div class="stat-tile-label">Absent</div>
-                                </div>
-                                <div class="stat-tile stat-tile-warning">
-                                    <div class="stat-tile-icon bg-warning bg-opacity-10 text-warning"><i
-                                            class="bi bi-person-dash"></i></div>
-                                    <div class="stat-tile-value">3</div>
-                                    <div class="stat-tile-label">On Leave</div>
-                                </div>
-                            </div>
-                            <div class="stat-tile-footer">
-                                <span class="text-muted small">Payroll Due</span>
-                                <span class="fw-bold text-danger">৳2,40,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-3">
-                    <div class="card card-panel">
-                        <div class="card-panel-header">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="panel-icon bg-secondary bg-opacity-10 text-secondary"><i
-                                        class="bi bi-hdd-network-fill"></i></div>
-                                <h2 class="panel-title">System Health</h2>
-                            </div>
-                        </div>
-                        <div class="card-panel-body">
-                            <div class="stat-tile-grid stat-tile-grid-2col">
-                                <div class="status-tile">
-                                    <i class="bi bi-check-circle-fill status-tile-icon text-success"></i>
-                                    <div class="status-tile-name">Database</div>
-                                    <div class="status-tile-state text-success">Operational</div>
-                                </div>
-                                <div class="status-tile">
-                                    <i class="bi bi-check-circle-fill status-tile-icon text-success"></i>
-                                    <div class="status-tile-name">Payment Gateway</div>
-                                    <div class="status-tile-state text-success">Operational</div>
-                                </div>
-                                <div class="status-tile status-tile-warning">
-                                    <i class="bi bi-exclamation-triangle-fill status-tile-icon text-warning"></i>
-                                    <div class="status-tile-name">SMS Service</div>
-                                    <div class="status-tile-state text-warning">Degraded</div>
-                                </div>
-                                <div class="status-tile">
-                                    <i class="bi bi-check-circle-fill status-tile-icon text-success"></i>
-                                    <div class="status-tile-name">Last Backup</div>
-                                    <div class="status-tile-state text-muted">2 hrs ago</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <footer class="dashboard-footer">
-                <div class="text-center text-muted small">Copyright 2026 | Developed by <a href="#"
-                        class="text-decoration-none fw-semibold">STITBD</a></div>
+            <footer class="footer">
+                <div class="footer-left">© 2026 ST TYRE ERP. All rights reserved.</div>
+                <div class="footer-center">Version 1.0.0</div>
+                <div class="footer-right">Developed by <a href="www.stitbd.com">STIT BD</a></div>
             </footer>
-
         </main>
-
-        <!-- ============ MOBILE BOTTOM NAVIGATION ============ -->
-        <nav class="bottom-nav d-lg-none" id="bottomNav" aria-label="Mobile bottom navigation">
-            <a href="index.html" class="bottom-nav-item active">
-                <i class="bi bi-house-door-fill"></i>
-                <span>Home</span>
-            </a>
-            <a href="invoices-list.html" class="bottom-nav-item">
-                <i class="bi bi-receipt"></i>
-                <span>Invoice</span>
-            </a>
-            <a href="#" class="bottom-nav-fab" aria-label="Create Invoice">
-                <i class="bi bi-plus-lg"></i>
-            </a>
-            <a href="warehouse-stock.html" class="bottom-nav-item">
-                <i class="bi bi-box-seam"></i>
-                <span>Stock</span>
-            </a>
-            <button type="button" class="bottom-nav-item bottom-nav-more" id="bottomNavMoreBtn"
-                data-bs-toggle="offcanvas" data-bs-target="#moreMenuOffcanvas" aria-controls="moreMenuOffcanvas">
-                <i class="bi bi-grid-3x3-gap-fill"></i>
-                <span>More</span>
-            </button>
-        </nav>
-
-        <!-- ============ MOBILE MORE MENU (BOTTOM SHEET) ============ -->
-        <div class="offcanvas offcanvas-bottom more-menu-offcanvas d-lg-none" tabindex="-1" id="moreMenuOffcanvas"
-            aria-labelledby="moreMenuLabel">
-            <div class="offcanvas-handle"></div>
-            <div class="offcanvas-header">
-                <div class="d-flex align-items-center gap-2">
-                    <img src="images/Asraf-Mridha.jpg" alt="Asraf Mridha" class="avatar object-fit-cover">
-                    <div>
-                        <div class="fw-semibold" id="moreMenuLabel">Asraf Mridha</div>
-                        <div class="small text-muted">Administrator</div>
-                    </div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <a class="more-menu-item" href="#"><i class="bi bi-person"></i><span>Profile</span></a>
-                <a class="more-menu-item" href="#"><i class="bi bi-gear"></i><span>Account Settings</span></a>
-                <a class="more-menu-item" href="#"><i class="bi bi-clock-history"></i><span>Activity Log</span></a>
-                <hr class="my-2">
-                <a class="more-menu-item text-danger js-logout-btn" href="#"><i
-                        class="bi bi-box-arrow-right"></i><span>Logout</span></a>
-            </div>
-        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav d-lg-none" id="bottomNav">
+        <a href="#" class="bottom-nav-item active">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-receipt"></i>
+            <span>Invoice</span>
+        </a>
+        <a href="#" class="bottom-nav-fab">
+            <i class="bi bi-plus-lg"></i>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-box-seam"></i>
+            <span>Stock</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="js/script.js"></script>
-
-    <!-- NEW ERP CHARTS INITIALIZATION -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (window.Chart) {
-                // Cash Flow Overview Chart
-                const cashFlowCtx = document.getElementById('cashFlowChart');
-                if (cashFlowCtx) {
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    new Chart(cashFlowCtx, {
-                        type: 'line',
-                        data: {
-                            labels: months,
-                            datasets: [
-                                { label: 'Cash Inflow', data: [450, 520, 480, 600, 550, 620, 580, 650, 700, 680, 720, 750], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', borderWidth: 2, tension: 0.4, fill: true, pointRadius: 3, pointHoverRadius: 5 },
-                                { label: 'Cash Outflow', data: [380, 400, 420, 450, 480, 500, 520, 540, 560, 580, 600, 620], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', borderWidth: 2, tension: 0.4, fill: true, pointRadius: 3, pointHoverRadius: 5 },
-                                { label: 'Net Cash Flow', data: [70, 120, 60, 150, 70, 120, 60, 110, 140, 100, 120, 130], borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, borderDash: [5, 5], tension: 0.4, fill: false, pointRadius: 3, pointHoverRadius: 5 }
-                            ],
-                        },
-                        options: {
-                            responsive: true, maintainAspectRatio: false,
-                            interaction: { mode: 'index', intersect: false },
-                            plugins: { legend: { position: 'top', align: 'end' } },
-                            scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-                                y: { beginAtZero: true, ticks: { font: { size: 11 }, callback: v => '৳' + v + 'k' }, grid: { color: '#f1f3f6' } },
-                            },
-                            animation: { duration: 1000 },
-                        },
-                    });
-                }
-
-                // Business Performance Chart
-                const businessPerfCtx = document.getElementById('businessPerformanceChart');
-                if (businessPerfCtx) {
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    new Chart(businessPerfCtx, {
-                        type: 'bar',
-                        data: {
-                            labels: months,
-                            datasets: [
-                                { label: 'Revenue', data: [1200, 1350, 1280, 1400, 1500, 1600, 1550, 1700, 1800, 1750, 1900, 2000], backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.6 },
-                                { label: 'Purchase', data: [800, 900, 850, 950, 1000, 1100, 1050, 1150, 1200, 1180, 1250, 1300], backgroundColor: '#10b981', borderRadius: 4, barPercentage: 0.6 },
-                                { label: 'Expense', data: [200, 220, 210, 230, 250, 260, 240, 270, 280, 275, 290, 300], backgroundColor: '#f59e0b', borderRadius: 4, barPercentage: 0.6 },
-                                { label: 'Gross Profit', type: 'line', data: [400, 450, 430, 450, 500, 500, 500, 550, 600, 570, 650, 700], borderColor: '#8b5cf6', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 3 }
-                            ],
-                        },
-                        options: {
-                            responsive: true, maintainAspectRatio: false,
-                            interaction: { mode: 'index', intersect: false },
-                            plugins: { legend: { position: 'top', align: 'end' } },
-                            scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-                                y: { beginAtZero: true, ticks: { font: { size: 11 }, callback: v => '৳' + v + 'k' }, grid: { color: '#f1f3f6' } },
-                            },
-                            animation: { duration: 1000 },
-                        },
-                    });
-                }
-
-                // Sales by Brand Chart
-                const salesByBrandData = [
-                    { name: 'Michelin', value: 32, color: '#3b82f6' },
-                    { name: 'Bridgestone', value: 24, color: '#10b981' },
-                    { name: 'Continental', value: 18, color: '#f59e0b' },
-                    { name: 'Yokohama', value: 14, color: '#ef4444' },
-                    { name: 'Dunlop', value: 9, color: '#8b5cf6' },
-                    { name: 'Others', value: 3, color: '#94a3b8' },
-                ];
-                const salesByBrandCtx = document.getElementById('salesByBrandChart');
-                if (salesByBrandCtx) {
-                    new Chart(salesByBrandCtx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: salesByBrandData.map(d => d.name),
-                            datasets: [{
-                                data: salesByBrandData.map(d => d.value),
-                                backgroundColor: salesByBrandData.map(d => d.color),
-                                borderWidth: 2, borderColor: '#ffffff',
-                                hoverOffset: 6,
-                            }],
-                        },
-                        options: {
-                            responsive: true, maintainAspectRatio: false, cutout: '65%',
-                            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` } } },
-                            animation: { animateRotate: true, duration: 900 },
-                        },
-                    });
-                    const legendEl = document.getElementById('salesByBrandLegend');
-                    if (legendEl) {
-                        legendEl.innerHTML = salesByBrandData.map(d => `
-                        <div class="legend-item">
-                            <span class="legend-dot" style="background:${d.color}"></span>
-                            <span class="legend-name">${d.name}</span>
-                            <span class="legend-value">${d.value}%</span>
-                        </div>
-                    `).join('');
-                    }
-                }
-
-                // Return Analysis Chart
-                const returnAnalysisCtx = document.getElementById('returnAnalysisChart');
-                if (returnAnalysisCtx) {
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    new Chart(returnAnalysisCtx, {
-                        type: 'line',
-                        data: {
-                            labels: months,
-                            datasets: [
-                                { label: 'Sales Return', data: [12, 15, 10, 18, 14, 20, 16, 22, 19, 25, 21, 24], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.05)', borderWidth: 2, tension: 0.4, fill: true, pointRadius: 2 },
-                                { label: 'Purchase Return', data: [8, 10, 7, 12, 9, 14, 11, 15, 13, 16, 14, 18], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.05)', borderWidth: 2, tension: 0.4, fill: true, pointRadius: 2 }
-                            ],
-                        },
-                        options: {
-                            responsive: true, maintainAspectRatio: false,
-                            interaction: { mode: 'index', intersect: false },
-                            plugins: { legend: { position: 'top', align: 'end', labels: { boxWidth: 10, padding: 10 } } },
-                            scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-                                y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => '৳' + v + 'k' }, grid: { color: '#f1f3f6' } },
-                            },
-                            animation: { duration: 900 },
-                        },
-                    });
-                }
-            }
-        });
-    </script>
 </body>
 
 </html>

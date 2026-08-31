@@ -1,730 +1,357 @@
-(function () {
-  'use strict';
-
-  /* ---------- Navigation Data ---------- */
-  const navSections = [
-    { title: 'Dashboard', items: [{ label: 'Dashboard', icon: 'bi-house-door-fill', active: true, href: 'index.html' }] },
+const navSections = [
+    { title: 'Dashboard', icon: 'bi-house-door-fill', type: 'single', href: 'index.html', active: true },
     {
-      title: 'Activities', items: [
-        { label: 'Expense', icon: 'bi-receipt' },
-        { label: 'Purchases', icon: 'bi-cart' },
-        { label: 'Purchase Return', icon: 'bi-arrow-return-left' },
-        { label: 'Sales', icon: 'bi-graph-up' },
-        { label: 'Sales Return', icon: 'bi-graph-down-arrow' },
-      ]
+        title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
+            { label: 'Company Setup', icon: 'bi-building' },
+            { label: 'Branch Setup', icon: 'bi-geo-alt' },
+            { label: 'Financial Year', icon: 'bi-calendar' },
+        ]
     },
     {
-      title: 'Accounting', items: [
-        { label: 'Cash Book', icon: 'bi-journal-text' },
-        { label: 'Bank Accounts', icon: 'bi-bank2' },
-        { label: 'Payments', icon: 'bi-credit-card' },
-        { label: 'Loan Management', icon: 'bi-piggy-bank' },
-        { label: 'Asset Management', icon: 'bi-building' },
-        { label: 'Payroll', icon: 'bi-people' },
-      ]
+        title: 'Purchase', icon: 'bi-cart3', type: 'group', expanded: false, items: [
+            { label: 'Purchase Order', icon: 'bi-cart-plus' },
+            { label: 'Purchase Invoice', icon: 'bi-file-earmark-text' },
+            { label: 'Purchase Return', icon: 'bi-arrow-return-left' },
+        ]
     },
     {
-      title: 'Import & Shipping', items: [
-        { label: 'Shipment Tracking', icon: 'bi-truck-flatbed' },
-        { label: 'Container Tracking', icon: 'bi-boxes' },
-        { label: 'LC Management', icon: 'bi-bank' },
-        { label: 'Customs & Duty', icon: 'bi-file-earmark-ruled' },
-      ]
+        title: 'Import & LC', icon: 'bi-box-seam', type: 'group', expanded: false, items: [
+            { label: 'LC Opening', icon: 'bi-bank' },
+            { label: 'Shipment Tracking', icon: 'bi-truck' },
+            { label: 'Container Management', icon: 'bi-boxes' },
+        ]
     },
     {
-      title: 'People', items: [
-        { label: 'Dealers / Clients', icon: 'bi-person-badge' },
-        { label: 'Suppliers', icon: 'bi-truck' },
-        { label: 'Employees', icon: 'bi-person-workspace' },
-      ]
+        title: 'Inventory', icon: 'bi-archive', type: 'group', expanded: false, items: [
+            { label: 'Tyre Products', icon: 'bi-box-seam' },
+            { label: 'Stock Management', icon: 'bi-archive' },
+            { label: 'Stock Transfer', icon: 'bi-arrow-left-right' },
+        ]
     },
     {
-      title: 'Inventory', items: [
-        { label: 'Tyre Products', icon: 'bi-box-seam' },
-        { label: 'Warehouse Stock', icon: 'bi-archive' },
-      ]
+        title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
+            { label: 'Sales Invoice', icon: 'bi-file-earmark-text' },
+            { label: 'Sales Order', icon: 'bi-cart-check' },
+            { label: 'POS', icon: 'bi-cash-stack' },
+        ]
     },
     {
-      title: 'Reports', items: [
-        { label: 'Balance Sheet', icon: 'bi-file-earmark-bar-graph' },
-        { label: 'Profit & Loss', icon: 'bi-graph-up-arrow' },
-        { label: 'Summary Report', icon: 'bi-file-earmark-text' },
-        { label: 'Sales Report', icon: 'bi-file-earmark-spreadsheet' },
-        { label: 'Purchase Report', icon: 'bi-file-earmark-spreadsheet' },
-        { label: 'Dealer Ledger', icon: 'bi-journal-check' },
-        { label: 'Supplier Ledger', icon: 'bi-journal-check' },
-        { label: 'Expense Report', icon: 'bi-file-earmark-minus' },
-        { label: 'Inventory Report', icon: 'bi-file-earmark-check' },
-      ]
+        title: 'Accounts', icon: 'bi-calculator', type: 'group', expanded: false, items: [
+            { label: 'Chart of Accounts', icon: 'bi-diagram-3' },
+            { label: 'Journal Entry', icon: 'bi-journal-text' },
+            { label: 'Cash Book', icon: 'bi-wallet2' },
+        ]
     },
     {
-      title: 'Account', items: [
-        { label: 'Users', icon: 'bi-person-gear' },
-        { label: 'Setup', icon: 'bi-gear' },
-      ]
+        title: 'VAT & Mushak', icon: 'bi-receipt-cutoff', type: 'group', expanded: false, items: [
+            { label: 'VAT Setup', icon: 'bi-percent' },
+            { label: 'VAT Return', icon: 'bi-file-earmark-text' },
+        ]
     },
     {
-      title: 'Other', items: [
-        { label: 'Transactions', icon: 'bi-arrow-left-right' },
-        { label: 'Subscription', icon: 'bi-stars' },
-      ]
+        title: 'HR & Payroll', icon: 'bi-people', type: 'group', expanded: false, items: [
+            { label: 'Employee Setup', icon: 'bi-person-plus' },
+            { label: 'Attendance', icon: 'bi-calendar-check' },
+            { label: 'Payroll', icon: 'bi-cash' },
+        ]
     },
     {
-      title: 'App', items: [
-        { label: 'Form', icon: 'bi-file-earmark-plus-fill', href: 'from.html' },
-        { label: 'Table', icon: 'bi-table', href: 'table.html' },
-        { label: 'Model', icon: 'bi-columns', href: 'model.html' },
-      ]
+        title: 'Reports', icon: 'bi-file-earmark-bar-graph', type: 'group', expanded: false, items: [
+            { label: 'Sales Report', icon: 'bi-graph-up' },
+            { label: 'Purchase Report', icon: 'bi-graph-down' },
+            { label: 'Inventory Report', icon: 'bi-box' },
+        ]
     },
-  ];
-
-  /* ---------- Render Sidebar ---------- */
-  function renderSidebarNav(container) {
-    container.innerHTML = '';
-    navSections.forEach((section) => {
-      const sec = document.createElement('div');
-      sec.className = 'nav-section';
-      const title = document.createElement('div');
-      title.className = 'nav-section-title';
-      title.textContent = section.title;
-      sec.appendChild(title);
-      section.items.forEach((item) => {
-        const a = document.createElement('a');
-        a.className = 'nav-item-link' + (item.active ? ' active' : '');
-        a.href = item.href || '#';
-        a.setAttribute('role', 'menuitem');
-        a.setAttribute('data-title', item.label);
-        a.innerHTML = `
-          <span class="nav-icon"><i class="bi ${item.icon}"></i></span>
-          <span class="nav-label">${item.label}</span>
-        `;
-        a.addEventListener('click', (e) => {
-          const href = a.getAttribute('href');
-          if (href && href !== '#' && (href.includes('index.html') || href.includes('from.html') || href.includes('table.html') || href.includes('model.html'))) {
-            return;
-          }
-          e.preventDefault();
-          container.querySelectorAll('.nav-item-link').forEach(el => el.classList.remove('active'));
-          a.classList.add('active');
-        });
-        sec.appendChild(a);
-      });
-      container.appendChild(sec);
-    });
-  }
-
-  const sidebarNav = document.getElementById('sidebarNav');
-  const mobileSidebarBody = document.getElementById('mobileSidebarBody');
-  if (sidebarNav) renderSidebarNav(sidebarNav);
-  if (mobileSidebarBody) renderSidebarNav(mobileSidebarBody);
-
-  /* ---------- Sidebar Toggle (Desktop) ---------- */
-  const sidebar = document.getElementById('sidebar');
-  const sidebarToggle = document.getElementById('sidebarToggle');
-  const topbarSidebarToggle = document.getElementById('topbarSidebarToggle');
-
-  function toggleSidebar() {
-    if (sidebar.classList.contains('pos-hidden')) {
-      sidebar.classList.remove('pos-hidden');
-      document.body.classList.remove('pos-mode');
-      const posBtn = document.getElementById('posBtn');
-      if (posBtn) {
-        posBtn.classList.remove('active-pos');
-        posMode = false;
-      }
-      handleResponsiveSidebar();
-      return;
-    }
-
-    sidebar.classList.toggle('collapsed');
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    document.body.classList.toggle('sidebar-collapsed', isCollapsed);
-    if (sidebarToggle) sidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
-    if (topbarSidebarToggle) topbarSidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
-  }
-
-  if (sidebarToggle) sidebarToggle.addEventListener('click', toggleSidebar);
-  if (topbarSidebarToggle) topbarSidebarToggle.addEventListener('click', toggleSidebar);
-
-  /* ---------- Mobile Menu ---------- */
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileSidebarEl = document.getElementById('mobileSidebar');
-  let mobileSidebarInstance = null;
-
-  function openMobileSidebar() {
-    if (!mobileSidebarInstance) {
-      mobileSidebarInstance = new bootstrap.Offcanvas(mobileSidebarEl);
-    }
-    mobileSidebarInstance.show();
-  }
-
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', openMobileSidebar);
-  }
-
-  /* ---------- Fullscreen Button ---------- */
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
-  if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen?.().catch(() => { });
-      } else {
-        document.exitFullscreen?.();
-      }
-    });
-  }
-
-  /* ---------- POS Button ---------- */
-  const posBtn = document.getElementById('posBtn');
-  let posMode = false;
-
-  if (posBtn) {
-    posBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      posMode = !posMode;
-      posBtn.classList.toggle('active-pos', posMode);
-
-      if (posMode) {
-        sidebar.classList.add('pos-hidden');
-        document.body.classList.add('pos-mode');
-        sidebar.classList.remove('collapsed');
-        document.body.classList.remove('sidebar-collapsed');
-      } else {
-        sidebar.classList.remove('pos-hidden');
-        document.body.classList.remove('pos-mode');
-        handleResponsiveSidebar();
-      }
-    });
-  }
-
-  /* ---------- Responsive Sidebar State ---------- */
-  function handleResponsiveSidebar() {
-    const w = window.innerWidth;
-    if (posMode) return;
-
-    if (w >= 992) {
-      sidebar.classList.remove('collapsed');
-      document.body.classList.remove('sidebar-collapsed');
-    } else {
-      sidebar.classList.remove('show');
-    }
-  }
-
-  window.addEventListener('resize', handleResponsiveSidebar);
-  handleResponsiveSidebar();
-
-  /* ---------- Date Filter ---------- */
-  document.querySelectorAll('[data-filter]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.querySelectorAll('[data-filter]').forEach(x => x.classList.remove('active'));
-      el.classList.add('active');
-      const label = document.getElementById('dateFilterLabel');
-      if (label) label.textContent = el.textContent.trim();
-    });
-  });
-
-  /* ---------- Chart.js Defaults ---------- */
-  if (window.Chart) {
-    Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
-    Chart.defaults.color = '#64748b';
-    Chart.defaults.plugins.legend.labels.usePointStyle = true;
-    Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
-    Chart.defaults.plugins.legend.labels.padding = 16;
-    Chart.defaults.plugins.tooltip.backgroundColor = '#0f172a';
-    Chart.defaults.plugins.tooltip.padding = 10;
-    Chart.defaults.plugins.tooltip.cornerRadius = 8;
-    Chart.defaults.plugins.tooltip.titleFont = { size: 12, weight: '600' };
-    Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
-  }
-
-  /* ---------- Top Selling Donut (Tyre Specific) ---------- */
-  const topSellingData = [
-    { name: 'Michelin 205/55R16', value: 35.5, color: '#4f46e5' },
-    { name: 'Bridgestone 215/60R16', value: 25.0, color: '#10b981' },
-    { name: 'Continental 195/65R15', value: 18.5, color: '#f59e0b' },
-    { name: 'Yokohama 185/70R14', value: 12.0, color: '#ef4444' },
-    { name: 'Dunlop 195/60R15', value: 9.0, color: '#06b6d4' },
-  ];
-
-  const topSellingCtx = document.getElementById('topSellingChart');
-  if (topSellingCtx) {
-    new Chart(topSellingCtx, {
-      type: 'doughnut',
-      data: {
-        labels: topSellingData.map(d => d.name),
-        datasets: [{
-          data: topSellingData.map(d => d.value),
-          backgroundColor: topSellingData.map(d => d.color),
-          borderWidth: 2, borderColor: '#ffffff',
-          hoverOffset: 6,
-        }],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false, cutout: '72%',
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` } },
-        },
-        animation: { animateRotate: true, duration: 900 },
-      },
-    });
-    const legendEl = document.getElementById('topSellingLegend');
-    if (legendEl) {
-      legendEl.innerHTML = topSellingData.map(d => `
-        <div class="legend-item">
-          <span class="legend-dot" style="background:${d.color}"></span>
-          <span class="legend-name">${d.name}</span>
-          <span class="legend-value">${d.value}%</span>
-        </div>
-      `).join('');
-    }
-  }
-
-  /* ---------- Payment Line Chart ---------- */
-  const paymentCtx = document.getElementById('paymentChart');
-  if (paymentCtx) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    new Chart(paymentCtx, {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: 'Payment Sent',
-            data: [580, 160, 200, 150, 120, 100, 90, 80, 70, 60, 50, 40], // in thousands (e.g., 580 = 5,80,000)
-            borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.08)',
-            borderWidth: 2.5, tension: 0.35, fill: true,
-            pointRadius: 3, pointHoverRadius: 6,
-            pointBackgroundColor: '#fff', pointBorderColor: '#ef4444', pointBorderWidth: 2,
-          },
-          {
-            label: 'Payment Received',
-            data: [400, 170, 200, 100, 80, 60, 50, 40, 30, 25, 20, 15],
-            borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.08)',
-            borderWidth: 2.5, tension: 0.35, fill: true,
-            pointRadius: 3, pointHoverRadius: 6,
-            pointBackgroundColor: '#fff', pointBorderColor: '#10b981', pointBorderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: { legend: { position: 'top', align: 'end' } },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-          y: {
-            beginAtZero: true, max: 600,
-            ticks: { font: { size: 11 }, callback: v => '৳' + v + 'k' },
-            grid: { color: '#f1f3f6' },
-          },
-        },
-        animation: { duration: 1000 },
-      },
-    });
-  }
-
-  /* ---------- Sales vs Purchases Bar Chart ---------- */
-  const salesPurchasesCtx = document.getElementById('salesPurchasesChart');
-  if (salesPurchasesCtx) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    new Chart(salesPurchasesCtx, {
-      type: 'bar',
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: 'Sales',
-            data: [480, 1450, 1050, 300, 200, 150, 120, 100, 90, 80, 70, 60],
-            backgroundColor: '#3b82f6', borderRadius: 4,
-            borderSkipped: false, barPercentage: 0.7, categoryPercentage: 0.75,
-          },
-          {
-            label: 'Purchases',
-            data: [1420, 2180, 400, 250, 180, 140, 110, 90, 80, 70, 60, 120],
-            backgroundColor: '#10b981', borderRadius: 4,
-            borderSkipped: false, barPercentage: 0.7, categoryPercentage: 0.75,
-          },
-        ],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', align: 'end' } },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-          y: {
-            beginAtZero: true, max: 2200,
-            ticks: { font: { size: 11 }, callback: v => '৳' + v + 'k' },
-            grid: { color: '#f1f3f6' },
-          },
-        },
-        animation: { duration: 900 },
-      },
-    });
-  }
-
-  /* ---------- Top Clients (Tyre Dealers Specific) ---------- */
-  const clients = [
-    { name: 'Rahim Tyre House', amount: 1463000, sales: 230, img: 'images/dealers/01.jpg' },
-    { name: 'Karim Auto Parts', amount: 685000, sales: 120, img: 'images/dealers/02.jpg' },
-    { name: 'Dhaka Tyre Center', amount: 652000, sales: 115, img: 'images/dealers/03.jpg' },
-    { name: 'Chittagong Rubber House', amount: 401000, sales: 85, img: 'images/dealers/04.jpg' },
-    { name: 'Sylhet Wheel Care', amount: 320000, sales: 70, img: 'images/dealers/05.jpg' },
-  ];
-
-  const maxAmount = Math.max(...clients.map(c => c.amount));
-  const clientListEl = document.getElementById('clientList');
-  if (clientListEl) {
-    clientListEl.innerHTML = clients.map((c, i) => `
-      <div class="client-item">
-        <div class="client-rank ${i === 0 ? 'top' : ''}">${i + 1}</div>
-        <img src="${c.img}" alt="${c.name}" class="client-avatar object-fit-cover">
-        <div class="client-info">
-          <div class="client-name">${c.name}</div>
-          <div class="client-progress">
-            <div class="client-progress-bar" style="width:0%" data-width="${(c.amount / maxAmount) * 100}%"></div>
-          </div>
-        </div>
-        <div class="client-stats">
-          <div class="client-amount">৳${c.amount.toLocaleString()}.00</div>
-          <div class="client-sales">${c.sales} sales</div>
-        </div>
-      </div>
-    `).join('');
-    setTimeout(() => {
-      clientListEl.querySelectorAll('.client-progress-bar').forEach(bar => {
-        bar.style.width = bar.dataset.width;
-      });
-    }, 200);
-  }
-
-})();
-
-
-
-/* ---------- Bottom Nav Active State ---------- */
-const bottomNavItems = document.querySelectorAll('.bottom-nav-item[href]');
-bottomNavItems.forEach((item) => {
-  item.addEventListener('click', () => {
-    bottomNavItems.forEach((el) => el.classList.remove('active'));
-    item.classList.add('active');
-  });
-});
-
-/* ---------- Bottom Nav "More" — reuse mobile sidebar ---------- */
-const bottomNavMoreBtn = document.getElementById('bottomNavMoreBtn');
-if (bottomNavMoreBtn) {
-  bottomNavMoreBtn.addEventListener('click', () => {
-    if (typeof openMobileSidebar === 'function') {
-      openMobileSidebar();
-    }
-  });
-}
-
-/* ---------- Logout Handler ---------- */
-document.querySelectorAll('.js-logout-btn').forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const confirmLogout = window.confirm('আপনি কি সত্যিই লগআউট করতে চান?');
-    if (confirmLogout) {
-      window.location.href = 'login.html';
-    }
-  });
-});
-
-
-/* ---------- Collapsed Sidebar Tooltip ---------- */
-const sidebarTooltip = document.createElement('div');
-sidebarTooltip.className = 'sidebar-tooltip';
-document.body.appendChild(sidebarTooltip);
-
-function isSidebarCollapsedView() {
-  return window.innerWidth >= 992 &&
-    (document.getElementById('sidebar').classList.contains('collapsed') || window.innerWidth < 1200);
-}
-
-document.querySelectorAll('#sidebarNav .nav-item-link[data-title]').forEach((link) => {
-  link.addEventListener('mouseenter', () => {
-    if (!isSidebarCollapsedView()) return;
-    const rect = link.getBoundingClientRect();
-    sidebarTooltip.textContent = link.getAttribute('data-title');
-    sidebarTooltip.style.top = `${rect.top + rect.height / 2}px`;
-    sidebarTooltip.style.left = `${rect.right + 14}px`;
-    sidebarTooltip.classList.add('show');
-  });
-  link.addEventListener('mouseleave', () => {
-    sidebarTooltip.classList.remove('show');
-  });
-});
-
-
-/* ---------- NEW: Revenue & Profit Analytics Chart ---------- */
-const revenueProfitCtx = document.getElementById('revenueProfitChart');
-if (revenueProfitCtx) {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  new Chart(revenueProfitCtx, {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [
-        {
-          label: 'Revenue',
-          data: [4200, 4500, 4100, 4800, 5100, 4900, 5300, 5600, 5400, 5800, 6100, 6400],
-          backgroundColor: 'rgba(79, 70, 229, 0.8)',
-          borderRadius: 4,
-          barPercentage: 0.6,
-          order: 2
-        },
-        {
-          label: 'Gross Profit',
-          data: [1100, 1200, 1050, 1300, 1400, 1350, 1450, 1500, 1480, 1600, 1700, 1800],
-          backgroundColor: 'rgba(16, 185, 129, 0.8)',
-          borderRadius: 4,
-          barPercentage: 0.6,
-          order: 3
-        },
-        {
-          label: 'Net Profit',
-          type: 'line',
-          data: [750, 820, 710, 890, 950, 920, 1000, 1050, 1020, 1100, 1180, 1250],
-          borderColor: '#f59e0b',
-          backgroundColor: 'transparent',
-          borderWidth: 2.5,
-          tension: 0.4,
-          pointRadius: 3,
-          pointHoverRadius: 6,
-          order: 1
-        }
-      ],
+    {
+        title: 'Approval', icon: 'bi-check2-circle', type: 'group', expanded: false, items: [
+            { label: 'Purchase Approval', icon: 'bi-check-circle' },
+            { label: 'Sales Approval', icon: 'bi-check2-circle' },
+        ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { position: 'top', align: 'end', labels: { usePointStyle: true, pointStyleWidth: 10, padding: 16 } },
-        tooltip: {
-          backgroundColor: '#0f172a',
-          padding: 10,
-          cornerRadius: 8,
-          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ৳${ctx.parsed.y.toLocaleString()}` }
-        }
-      },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-        y: {
-          beginAtZero: true,
-          ticks: { font: { size: 11 }, callback: v => '৳' + (v / 1000) + 'k' },
-          grid: { color: '#f1f3f6' }
-        }
-      },
-      animation: { duration: 1000 }
-    }
-  });
-}
-
-/* ---------- NEW: Sales by Channel Donut Chart ---------- */
-const salesChannelData = [
-  { name: 'Retail POS', value: 35, color: '#10b981', amount: '৳18.2L' },
-  { name: 'Dealer', value: 40, color: '#3b82f6', amount: '৳20.8L' },
-  { name: 'Ecommerce', value: 15, color: '#8b5cf6', amount: '৳7.8L' },
-  { name: 'B2B', value: 8, color: '#f59e0b', amount: '৳4.1L' },
-  { name: 'Other', value: 2, color: '#94a3b8', amount: '৳1.0L' }
+    {
+        title: 'Notification', icon: 'bi-bell', type: 'group', expanded: false, badge: 12, items: [
+            { label: 'All Notifications', icon: 'bi-bell' },
+            { label: 'Low Stock Alert', icon: 'bi-exclamation-triangle' },
+        ]
+    },
+    {
+        title: 'User Management', icon: 'bi-people-fill', type: 'group', expanded: false, items: [
+            { label: 'Users', icon: 'bi-people' },
+            { label: 'Roles & Permissions', icon: 'bi-shield-lock' },
+        ]
+    },
+    {
+        title: 'System Settings', icon: 'bi-gear', type: 'group', expanded: false, items: [
+            { label: 'General Settings', icon: 'bi-gear' },
+            { label: 'Backup & Restore', icon: 'bi-hdd' },
+        ]
+    },
 ];
-const salesChannelCtx = document.getElementById('salesChannelChart');
-if (salesChannelCtx) {
-  new Chart(salesChannelCtx, {
-    type: 'doughnut',
-    data: {
-      labels: salesChannelData.map(d => d.name),
-      datasets: [{
-        data: salesChannelData.map(d => d.value),
-        backgroundColor: salesChannelData.map(d => d.color),
-        borderWidth: 2,
-        borderColor: '#ffffff',
-        hoverOffset: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '65%',
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (${salesChannelData[ctx.dataIndex].amount})`
-          }
+
+function renderSidebar() {
+    const sidebarNav = document.getElementById('sidebarNav');
+    if (!sidebarNav) return;
+
+    sidebarNav.innerHTML = '';
+
+    navSections.forEach((section) => {
+        const secDiv = document.createElement('div');
+        secDiv.className = 'nav-section';
+
+        // Single direct link (e.g. Dashboard) — no chevron, no children
+        if (section.type === 'single') {
+            const link = document.createElement('a');
+            link.className = 'nav-section-header' + (section.active ? ' active' : '');
+            link.href = section.href || '#';
+            link.innerHTML = `
+                <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
+                <span class="nav-section-title">${section.title}</span>
+            `;
+            secDiv.appendChild(link);
+            sidebarNav.appendChild(secDiv);
+            return;
         }
-      },
-      animation: { animateRotate: true, duration: 900 }
-    }
-  });
-  const channelLegendEl = document.getElementById('salesChannelLegend');
-  if (channelLegendEl) {
-    channelLegendEl.innerHTML = salesChannelData.map(d => `
-            <div class="legend-item">
-                <span class="legend-dot" style="background:${d.color}"></span>
-                <span class="legend-name">${d.name}</span>
-                <span class="legend-value">${d.value}%</span>
-            </div>
-        `).join('');
-  }
+
+        // Collapsible group header (icon + label + chevron)
+        const sectionHeader = document.createElement('div');
+        sectionHeader.className = 'nav-section-header';
+
+        const badgeHtml = section.badge ? `<span class="badge-notification">${section.badge}</span>` : '';
+        const rotation = section.expanded ? '180deg' : '0deg';
+
+        sectionHeader.innerHTML = `
+            <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
+            <span class="nav-section-title">${section.title}</span>
+            ${badgeHtml}
+            <i class="bi bi-chevron-down" style="font-size:12px; transition: transform 0.2s; transform: rotate(${rotation});"></i>
+        `;
+
+        sectionHeader.addEventListener('click', (e) => {
+            e.stopPropagation();
+            section.expanded = !section.expanded;
+            renderSidebar();
+        });
+
+        secDiv.appendChild(sectionHeader);
+
+        if (section.expanded) {
+            const itemsContainer = document.createElement('div');
+            itemsContainer.className = 'nav-items-container';
+
+            section.items.forEach((item) => {
+                const link = document.createElement('a');
+                link.className = 'nav-item-link';
+                link.href = item.href || '#';
+
+                link.innerHTML = `
+                    <span class="nav-icon"><i class="bi ${item.icon}"></i></span>
+                    <span class="nav-label">${item.label}</span>
+                `;
+
+                link.addEventListener('click', (e) => {
+                    if (!item.href || item.href === '#') {
+                        e.preventDefault();
+                    }
+                    document.querySelectorAll('.nav-item-link, .nav-section-header').forEach(el => el.classList.remove('active'));
+                    link.classList.add('active');
+
+                    if (window.innerWidth <= 767) {
+                        document.getElementById('sidebar').classList.remove('show');
+                        document.getElementById('mobileOverlay').classList.remove('show');
+                    }
+                });
+
+                itemsContainer.appendChild(link);
+            });
+
+            secDiv.appendChild(itemsContainer);
+        }
+
+        sidebarNav.appendChild(secDiv);
+    });
 }
 
-/* ---------- NEW: Expense Breakdown Chart ---------- */
-const expenseBreakdownCtx = document.getElementById('expenseBreakdownChart');
-if (expenseBreakdownCtx) {
-  new Chart(expenseBreakdownCtx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Import Duty', 'Salary', 'Warehouse', 'Transport', 'Marketing', 'Other'],
-      datasets: [{
-        data: [45, 25, 12, 8, 6, 4],
-        backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#94a3b8'],
-        borderWidth: 2,
-        borderColor: '#ffffff',
-        hoverOffset: 6
-      }]
+// --- Functional filter mock data (Sales/Purchase Overview period select) ---
+const OVERVIEW_DATA = {
+    sales: {
+        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: '125,845,750', prev: '111,903,200', labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [12, 19, 15, 25, 22, 30, 28] },
+        lastMonth: { currentLabel: 'Last Month (BDT)', prevLabel: 'Previous Month (BDT)', current: '111,903,200', prev: '104,220,100', labels: ['01 Apr', '06 Apr', '11 Apr', '16 Apr', '21 Apr', '26 Apr', '30 Apr'], data: [10, 16, 14, 21, 19, 26, 24] },
+        last3Months: { currentLabel: 'Last 3 Months (BDT)', prevLabel: 'Previous 3 Months (BDT)', current: '341,969,050', prev: '298,540,200', labels: ['Mar', 'Apr', 'May'], data: [104, 111, 126] },
+        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: '1,285,420,600', prev: '1,102,760,400', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [220, 235, 260, 111, 126] },
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '60%',
-      plugins: {
-        legend: { position: 'right', labels: { usePointStyle: true, pointStyleWidth: 10, padding: 12, font: { size: 11 } } },
-        tooltip: {
-          callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` }
+    purchase: {
+        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: '98,260,500', prev: '90,820,400', labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [10, 15, 12, 20, 18, 24, 22] },
+        lastMonth: { currentLabel: 'Last Month (BDT)', prevLabel: 'Previous Month (BDT)', current: '90,820,400', prev: '85,140,300', labels: ['01 Apr', '06 Apr', '11 Apr', '16 Apr', '21 Apr', '26 Apr', '30 Apr'], data: [9, 13, 11, 18, 16, 21, 19] },
+        last3Months: { currentLabel: 'Last 3 Months (BDT)', prevLabel: 'Previous 3 Months (BDT)', current: '274,221,200', prev: '241,880,900', labels: ['Mar', 'Apr', 'May'], data: [85, 91, 98] },
+        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: '982,450,300', prev: '861,220,700', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [175, 188, 205, 91, 98] },
+    },
+};
+
+let salesChartInstance, purchaseChartInstance;
+
+function buildLineConfig(entry, borderColor, backgroundColor) {
+    return {
+        type: 'line',
+        data: {
+            labels: entry.labels,
+            datasets: [{
+                label: 'Value',
+                data: entry.data,
+                borderColor,
+                backgroundColor,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: borderColor,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { callback: (v) => v + 'M' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { grid: { display: false } }
+            }
         }
-      },
-      animation: { animateRotate: true, duration: 900 }
-    }
-  });
+    };
 }
 
+function initCharts() {
+    const salesCtx = document.getElementById('salesChart');
+    if (salesCtx) salesChartInstance = new Chart(salesCtx, buildLineConfig(OVERVIEW_DATA.sales.thisMonth, '#3b82f6', 'rgba(59, 130, 246, 0.1)'));
 
+    const purchaseCtx = document.getElementById('purchaseChart');
+    if (purchaseCtx) purchaseChartInstance = new Chart(purchaseCtx, buildLineConfig(OVERVIEW_DATA.purchase.thisMonth, '#10b981', 'rgba(16, 185, 129, 0.1)'));
 
-(function () {
-  'use strict';
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Count-up (keeps ৳, %, "Days", "Items", commas exact) ---------- */
-  function parseToken(text) {
-    const m = text.match(/^([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/);
-    if (!m) return null;
-    const [, prefix, numStr, suffix] = m;
-    const value = parseFloat(numStr.replace(/,/g, ''));
-    if (isNaN(value)) return null;
-    const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
-    return { prefix, suffix, value, decimals };
-  }
-
-  function formatIndian(num, decimals) {
-    const fixed = num.toFixed(decimals);
-    const [intPart, decPart] = fixed.split('.');
-    const digits = intPart.replace('-', '');
-    const lastThree = digits.slice(-3);
-    const other = digits.slice(0, -3);
-    let grouped = other ? other.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree : lastThree;
-    if (intPart.startsWith('-')) grouped = '-' + grouped;
-    return decPart !== undefined ? grouped + '.' + decPart : grouped;
-  }
-
-  function animateCountUp(el) {
-    if (el.dataset.counted) return;
-    el.dataset.counted = 'true';
-    const original = el.textContent.trim();
-    if (prefersReducedMotion) return;
-    const parsed = parseToken(original);
-    if (!parsed) return;
-    const { prefix, suffix, value, decimals } = parsed;
-    const duration = 900;
-    const start = performance.now();
-    function tick(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = prefix + formatIndian(value * eased, decimals) + suffix;
-      if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = original;
+    const inventoryCtx = document.getElementById('inventoryChart');
+    if (inventoryCtx) {
+        new Chart(inventoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Available', 'Reserved', 'In-Transit', 'Damage', 'Warranty'],
+                datasets: [{ data: [34256, 5120, 3450, 1250, 2180], backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'], borderWidth: 0 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: false } } }
+        });
     }
-    requestAnimationFrame(tick);
-  }
 
-  function animateProgressBar(bar) {
-    if (prefersReducedMotion || bar.dataset.animated) return;
-    bar.dataset.animated = 'true';
-    const target = bar.style.width;
-    if (!target) return;
-    bar.classList.add('progress-animate');
-    bar.style.width = '0%';
-    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = target; }));
-  }
+    const agingCtx = document.getElementById('agingChart');
+    if (agingCtx) {
+        new Chart(agingCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['0-90 Days', '91-180 Days', '181-365 Days', '1-2 Years', '2+ Years'],
+                datasets: [{ data: [38, 26, 17, 11, 8], backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'], borderWidth: 0 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: false } } }
+        });
+    }
+}
 
-  function revealTableRows(panel) {
-    panel.querySelectorAll('.table-compact tbody tr').forEach((row, i) => {
-      if (row.dataset.revealed) return;
-      row.dataset.revealed = 'true';
-      row.classList.add('row-reveal');
-      setTimeout(() => row.classList.add('active'), i * 40);
+function updateOverviewCard(type, period) {
+    const entry = OVERVIEW_DATA[type] && OVERVIEW_DATA[type][period];
+    if (!entry) return;
+
+    document.getElementById(`${type}CurrentLabel`).textContent = entry.currentLabel;
+    document.getElementById(`${type}PrevLabel`).textContent = entry.prevLabel;
+    document.getElementById(`${type}CurrentValue`).textContent = entry.current;
+    document.getElementById(`${type}PrevValue`).textContent = entry.prev;
+
+    const chart = type === 'sales' ? salesChartInstance : purchaseChartInstance;
+    if (chart) {
+        chart.data.labels = entry.labels;
+        chart.data.datasets[0].data = entry.data;
+        chart.update();
+    }
+}
+
+function initPeriodFilters() {
+    document.querySelectorAll('.period-select').forEach((select) => {
+        select.addEventListener('change', (e) => updateOverviewCard(e.target.dataset.target, e.target.value));
     });
-  }
+}
 
-  function initReveal() {
-    const targets = document.querySelectorAll('.card-panel, .kpi-card');
-    if (!targets.length) return;
+function formatDate(isoDate) {
+    const d = new Date(isoDate);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
 
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      targets.forEach(el => {
-        el.classList.add('reveal', 'active');
-        el.querySelectorAll('.kpi-value').forEach(animateCountUp);
-        el.querySelectorAll('.progress-bar').forEach(animateProgressBar);
-        revealTableRows(el);
-      });
-      return;
+function initTopbarFilters() {
+    const applyBtn = document.getElementById('applyDateRange');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', () => {
+            const from = document.getElementById('dateFrom').value;
+            const to = document.getElementById('dateTo').value;
+            if (from && to) {
+                document.getElementById('dateRangeText').textContent = `${formatDate(from)} - ${formatDate(to)}`;
+            }
+            const dropdownEl = document.getElementById('dateRangeBtn');
+            bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
+        });
     }
 
-    // Stagger delay based on position within its row
-    document.querySelectorAll('.kpi-row, .row').forEach(group => {
-      let i = 0;
-      Array.from(group.children).forEach(child => {
-        const target = child.querySelector('.kpi-card') || child.querySelector(':scope > .card-panel');
-        if (target && !target.dataset.staggerDelay) {
-          target.dataset.staggerDelay = Math.min(i * 60, 240);
-          i++;
+    document.querySelectorAll('.branch-option').forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('branchText').textContent = opt.dataset.branch;
+        });
+    });
+}
+
+function initSidebarToggle() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            sidebarToggle.innerHTML = `<i class="bi bi-${isCollapsed ? 'chevron-right' : 'chevron-left'}"></i>`;
+        });
+    }
+
+    if (menuToggle && mobileOverlay) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('show');
+            mobileOverlay.classList.toggle('show');
+        });
+        mobileOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+            mobileOverlay.classList.remove('show');
+        });
+    }
+}
+
+function initFullscreen() {
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    if (!fullscreenBtn) return;
+
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => console.log(`Error attempting to enable fullscreen: ${err.message}`));
+            fullscreenBtn.innerHTML = '<i class="bi bi-arrows-angle-contract"></i>';
+        } else {
+            document.exitFullscreen();
+            fullscreenBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
         }
-      });
     });
 
-    targets.forEach(el => el.classList.add('reveal'));
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) fullscreenBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
+    });
+}
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const delay = parseInt(el.dataset.staggerDelay || '0', 10);
-        setTimeout(() => {
-          el.classList.add('active');
-          el.querySelectorAll('.kpi-value').forEach(animateCountUp);
-          if (el.classList.contains('kpi-value')) animateCountUp(el);
-          el.querySelectorAll('.progress-bar').forEach(animateProgressBar);
-          revealTableRows(el);
-        }, delay);
-        observer.unobserve(el);
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-    targets.forEach(el => observer.observe(el));
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    initReveal();
-
-    if (!prefersReducedMotion) {
-      document.querySelectorAll('.dealer-alert-item, .kpi-red .kpi-icon-box').forEach((el, i) => {
-        setTimeout(() => el.classList.add('alert-pulse-once'), 500 + i * 80);
-      });
-    }
-  });
-})();
+document.addEventListener('DOMContentLoaded', () => {
+    renderSidebar();
+    initCharts();
+    initSidebarToggle();
+    initFullscreen();
+    initPeriodFilters();
+    initTopbarFilters();
+});
