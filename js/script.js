@@ -49,13 +49,6 @@ const navSections = [
         ]
     },
     {
-        title: 'HR & Payroll', icon: 'bi-people', type: 'group', expanded: false, items: [
-            { label: 'Employee Setup', icon: 'bi-person-plus' },
-            { label: 'Attendance', icon: 'bi-calendar-check' },
-            { label: 'Payroll', icon: 'bi-cash' },
-        ]
-    },
-    {
         title: 'Reports', icon: 'bi-file-earmark-bar-graph', type: 'group', expanded: false, items: [
             { label: 'Sales Report', icon: 'bi-graph-up' },
             { label: 'Purchase Report', icon: 'bi-graph-down' },
