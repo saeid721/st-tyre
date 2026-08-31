@@ -634,17 +634,19 @@ body {
 }
 
 .card-header {
-    padding: 18px 20px;
+    padding: 12px 18px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 48px;
 }
 
 .card-title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--text);
+    letter-spacing: 0.2px;
 }
 
 .card-body {
@@ -1267,7 +1269,8 @@ body {
     }
 
     .card-header {
-        padding: clamp(10px, 1.4vh, 18px) clamp(12px, 1.4vw, 20px);
+        padding: clamp(8px, 1vh, 12px) clamp(12px, 1.4vw, 18px);
+        min-height: 44px;
     }
 
     .card-title {
