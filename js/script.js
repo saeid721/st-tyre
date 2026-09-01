@@ -171,20 +171,20 @@ function renderSidebar() {
 // --- Functional filter mock data (Sales/Purchase Overview period select) ---
 const OVERVIEW_DATA = {
     sales: {
-        today: { currentLabel: 'Today (BDT)', prevLabel: 'Yesterday (BDT)', current: '4,850,200', prev: '4,210,500', labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 4, 3, 6, 5, 8, 7] },
-        yesterday: { currentLabel: 'Yesterday (BDT)', prevLabel: 'Day Before (BDT)', current: '4,210,500', prev: '3,980,200', labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 3, 3, 5, 4, 7, 6] },
-        thisWeek: { currentLabel: 'This Week (BDT)', prevLabel: 'Last Week (BDT)', current: '28,640,300', prev: '26,150,800', labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [3, 4, 5, 6, 5, 7, 8] },
-        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: '125,845,750', prev: '111,903,200', labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [12, 19, 15, 25, 22, 30, 28] },
-        last3Months: { currentLabel: 'This Quarter (BDT)', prevLabel: 'Last Quarter (BDT)', current: '341,969,050', prev: '298,540,200', labels: ['Mar', 'Apr', 'May'], data: [104, 111, 126] },
-        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: '1,285,420,600', prev: '1,102,760,400', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [220, 235, 260, 111, 126] },
+        today: { currentLabel: 'Today (BDT)', prevLabel: 'Yesterday (BDT)', current: 4850200, prev: 4210500, labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 4, 3, 6, 5, 8, 7] },
+        yesterday: { currentLabel: 'Yesterday (BDT)', prevLabel: 'Day Before (BDT)', current: 4210500, prev: 3980200, labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 3, 3, 5, 4, 7, 6] },
+        thisWeek: { currentLabel: 'This Week (BDT)', prevLabel: 'Last Week (BDT)', current: 28640300, prev: 26150800, labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [3, 4, 5, 6, 5, 7, 8] },
+        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: 125845750, prev: 111903200, labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [12, 19, 15, 25, 22, 30, 28] },
+        last3Months: { currentLabel: 'This Quarter (BDT)', prevLabel: 'Last Quarter (BDT)', current: 341969050, prev: 298540200, labels: ['Mar', 'Apr', 'May'], data: [104, 111, 126] },
+        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: 1285420600, prev: 1102760400, labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [220, 235, 260, 111, 126] },
     },
     purchase: {
-        today: { currentLabel: 'Today (BDT)', prevLabel: 'Yesterday (BDT)', current: '3,620,400', prev: '3,050,100', labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 3, 2, 5, 4, 6, 5] },
-        yesterday: { currentLabel: 'Yesterday (BDT)', prevLabel: 'Day Before (BDT)', current: '3,050,100', prev: '2,880,700', labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [1, 2, 2, 4, 3, 5, 4] },
-        thisWeek: { currentLabel: 'This Week (BDT)', prevLabel: 'Last Week (BDT)', current: '21,480,700', prev: '19,860,200', labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [2, 3, 4, 5, 4, 6, 7] },
-        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: '98,260,500', prev: '90,820,400', labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [10, 15, 12, 20, 18, 24, 22] },
-        last3Months: { currentLabel: 'This Quarter (BDT)', prevLabel: 'Last Quarter (BDT)', current: '274,221,200', prev: '241,880,900', labels: ['Mar', 'Apr', 'May'], data: [85, 91, 98] },
-        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: '982,450,300', prev: '861,220,700', labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [175, 188, 205, 91, 98] },
+        today: { currentLabel: 'Today (BDT)', prevLabel: 'Yesterday (BDT)', current: 3620400, prev: 3050100, labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [2, 3, 2, 5, 4, 6, 5] },
+        yesterday: { currentLabel: 'Yesterday (BDT)', prevLabel: 'Day Before (BDT)', current: 3050100, prev: 2880700, labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM', '11 PM'], data: [1, 2, 2, 4, 3, 5, 4] },
+        thisWeek: { currentLabel: 'This Week (BDT)', prevLabel: 'Last Week (BDT)', current: 21480700, prev: 19860200, labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [2, 3, 4, 5, 4, 6, 7] },
+        thisMonth: { currentLabel: 'This Month (BDT)', prevLabel: 'Last Month (BDT)', current: 98260500, prev: 90820400, labels: ['01 May', '06 May', '11 May', '16 May', '21 May', '26 May', '31 May'], data: [10, 15, 12, 20, 18, 24, 22] },
+        last3Months: { currentLabel: 'This Quarter (BDT)', prevLabel: 'Last Quarter (BDT)', current: 274221200, prev: 241880900, labels: ['Mar', 'Apr', 'May'], data: [85, 91, 98] },
+        thisYear: { currentLabel: 'This Year (BDT)', prevLabel: 'Last Year (BDT)', current: 982450300, prev: 861220700, labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], data: [175, 188, 205, 91, 98] },
     },
 };
 
@@ -199,54 +199,131 @@ const PRESET_KEY_MAP = {
 
 const KPI_DATA = {
     today: {
-        sales: { value: '4,850,200', trend: 'up', pct: '+3.15% vs Yesterday' },
-        purchase: { value: '3,620,400', trend: 'up', pct: '+2.40% vs Yesterday' },
-        inventory: { value: '215,478,300', trend: 'up', pct: '+0.18% vs Yesterday' },
-        profit: { value: '৳6,85,200', trend: 'up', pct: '+2.05% vs Yesterday' },
-        receivable: { value: '21,50,600', trend: 'down', pct: '-1.10% vs Yesterday' },
-        payable: { value: '11,80,300', trend: 'down', pct: '-0.85% vs Yesterday' },
+        sales: { value: 4850200, trend: 'up', pct: '+3.15% vs Yesterday' },
+        purchase: { value: 3620400, trend: 'up', pct: '+2.40% vs Yesterday' },
+        inventory: { value: 215478300, trend: 'up', pct: '+0.18% vs Yesterday' },
+        profit: { value: 685200, trend: 'up', pct: '+2.05% vs Yesterday', currency: true },
+        receivable: { value: 2150600, trend: 'down', pct: '-1.10% vs Yesterday' },
+        payable: { value: 1180300, trend: 'down', pct: '-0.85% vs Yesterday' },
     },
     yesterday: {
-        sales: { value: '4,210,500', trend: 'up', pct: '+1.80% vs Day Before' },
-        purchase: { value: '3,050,100', trend: 'up', pct: '+1.25% vs Day Before' },
-        inventory: { value: '215,120,800', trend: 'up', pct: '+0.10% vs Day Before' },
-        profit: { value: '৳6,12,400', trend: 'up', pct: '+1.40% vs Day Before' },
-        receivable: { value: '22,10,900', trend: 'down', pct: '-0.95% vs Day Before' },
-        payable: { value: '12,05,600', trend: 'down', pct: '-0.60% vs Day Before' },
+        sales: { value: 4210500, trend: 'up', pct: '+1.80% vs Day Before' },
+        purchase: { value: 3050100, trend: 'up', pct: '+1.25% vs Day Before' },
+        inventory: { value: 215120800, trend: 'up', pct: '+0.10% vs Day Before' },
+        profit: { value: 612400, trend: 'up', pct: '+1.40% vs Day Before', currency: true },
+        receivable: { value: 2210900, trend: 'down', pct: '-0.95% vs Day Before' },
+        payable: { value: 1205600, trend: 'down', pct: '-0.60% vs Day Before' },
     },
     thisWeek: {
-        sales: { value: '28,640,300', trend: 'up', pct: '+6.80% vs Last Week' },
-        purchase: { value: '21,480,700', trend: 'up', pct: '+5.10% vs Last Week' },
-        inventory: { value: '216,050,400', trend: 'up', pct: '+0.85% vs Last Week' },
-        profit: { value: '৳38,45,200', trend: 'up', pct: '+5.60% vs Last Week' },
-        receivable: { value: '3,01,20,400', trend: 'down', pct: '-2.40% vs Last Week' },
-        payable: { value: '1,79,80,500', trend: 'down', pct: '-3.10% vs Last Week' },
+        sales: { value: 28640300, trend: 'up', pct: '+6.80% vs Last Week' },
+        purchase: { value: 21480700, trend: 'up', pct: '+5.10% vs Last Week' },
+        inventory: { value: 216050400, trend: 'up', pct: '+0.85% vs Last Week' },
+        profit: { value: 3845200, trend: 'up', pct: '+5.60% vs Last Week', currency: true },
+        receivable: { value: 30120400, trend: 'down', pct: '-2.40% vs Last Week' },
+        payable: { value: 17980500, trend: 'down', pct: '-3.10% vs Last Week' },
     },
     thisMonth: {
-        sales: { value: '125,845,750', trend: 'up', pct: '+12.45% vs Last Month' },
-        purchase: { value: '98,260,500', trend: 'up', pct: '+8.21% vs Last Month' },
-        inventory: { value: '215,478,300', trend: 'up', pct: '+6.32% vs Last Month' },
-        profit: { value: '৳18,45,000', trend: 'up', pct: '+8.21% vs Last Month' },
-        receivable: { value: '32,745,600', trend: 'down', pct: '-4.32% vs Last Month' },
-        payable: { value: '18,654,200', trend: 'down', pct: '-6.15% vs Last Month' },
+        sales: { value: 125845750, trend: 'up', pct: '+12.45% vs Last Month' },
+        purchase: { value: 98260500, trend: 'up', pct: '+8.21% vs Last Month' },
+        inventory: { value: 215478300, trend: 'up', pct: '+6.32% vs Last Month' },
+        profit: { value: 1845000, trend: 'up', pct: '+8.21% vs Last Month', currency: true },
+        receivable: { value: 32745600, trend: 'down', pct: '-4.32% vs Last Month' },
+        payable: { value: 18654200, trend: 'down', pct: '-6.15% vs Last Month' },
     },
     last3Months: {
-        sales: { value: '341,969,050', trend: 'up', pct: '+14.55% vs Last Quarter' },
-        purchase: { value: '274,221,200', trend: 'up', pct: '+13.38% vs Last Quarter' },
-        inventory: { value: '218,760,200', trend: 'up', pct: '+7.90% vs Last Quarter' },
-        profit: { value: '৳51,20,400', trend: 'up', pct: '+11.20% vs Last Quarter' },
-        receivable: { value: '35,480,900', trend: 'down', pct: '-3.10% vs Last Quarter' },
-        payable: { value: '20,140,700', trend: 'down', pct: '-5.40% vs Last Quarter' },
+        sales: { value: 341969050, trend: 'up', pct: '+14.55% vs Last Quarter' },
+        purchase: { value: 274221200, trend: 'up', pct: '+13.38% vs Last Quarter' },
+        inventory: { value: 218760200, trend: 'up', pct: '+7.90% vs Last Quarter' },
+        profit: { value: 5120400, trend: 'up', pct: '+11.20% vs Last Quarter', currency: true },
+        receivable: { value: 35480900, trend: 'down', pct: '-3.10% vs Last Quarter' },
+        payable: { value: 20140700, trend: 'down', pct: '-5.40% vs Last Quarter' },
     },
     thisYear: {
-        sales: { value: '1,285,420,600', trend: 'up', pct: '+16.56% vs Last Year' },
-        purchase: { value: '982,450,300', trend: 'up', pct: '+14.06% vs Last Year' },
-        inventory: { value: '225,300,600', trend: 'up', pct: '+9.45% vs Last Year' },
-        profit: { value: '৳1,86,50,200', trend: 'up', pct: '+13.80% vs Last Year' },
-        receivable: { value: '42,180,300', trend: 'down', pct: '-2.85% vs Last Year' },
-        payable: { value: '24,560,900', trend: 'down', pct: '-4.90% vs Last Year' },
+        sales: { value: 1285420600, trend: 'up', pct: '+16.56% vs Last Year' },
+        purchase: { value: 982450300, trend: 'up', pct: '+14.06% vs Last Year' },
+        inventory: { value: 225300600, trend: 'up', pct: '+9.45% vs Last Year' },
+        profit: { value: 18650200, trend: 'up', pct: '+13.80% vs Last Year', currency: true },
+        receivable: { value: 42180300, trend: 'down', pct: '-2.85% vs Last Year' },
+        payable: { value: 24560900, trend: 'down', pct: '-4.90% vs Last Year' },
     },
 };
+
+const PRODUCT_FACTORS = {
+    'All Products': 1,
+    'Tyre': 0.72,
+    'Bearing': 0.18,
+    'Lubrication': 0.10,
+};
+
+const BRANCH_FACTORS = {
+    'All Branch': 1,
+    'Head Office': 0.52,
+    'Chattogram Branch': 0.28,
+    'Sylhet Branch': 0.20,
+};
+
+let currentPresetLabel = 'Today';
+let currentProduct = 'All Products';
+let currentBranch = 'All Branch';
+
+function getCombinedFactor() {
+    return (PRODUCT_FACTORS[currentProduct] ?? 1) * (BRANCH_FACTORS[currentBranch] ?? 1);
+}
+
+function formatBDT(num) {
+    return Math.round(num).toLocaleString('en-US');
+}
+
+function updateOverviewCard(type, period, factor) {
+    const base = OVERVIEW_DATA[type] && OVERVIEW_DATA[type][period];
+    if (!base) return;
+
+    document.getElementById(`${type}CurrentLabel`).textContent = base.currentLabel;
+    document.getElementById(`${type}PrevLabel`).textContent = base.prevLabel;
+    document.getElementById(`${type}CurrentValue`).textContent = formatBDT(base.current * factor);
+    document.getElementById(`${type}PrevValue`).textContent = formatBDT(base.prev * factor);
+
+    const chart = type === 'sales' ? salesChartInstance : purchaseChartInstance;
+    if (chart) {
+        chart.data.labels = base.labels;
+        chart.data.datasets[0].data = base.data.map((v) => +(v * factor).toFixed(1));
+        chart.update();
+    }
+}
+
+function updateKpiCard(prefix, entry, factor) {
+    if (!entry) return;
+    const valueEl = document.getElementById(`${prefix}Value`);
+    const trendEl = document.getElementById(`${prefix}Trend`);
+    if (valueEl) valueEl.textContent = (entry.currency ? '৳' : '') + formatBDT(entry.value * factor);
+    if (trendEl) {
+        trendEl.classList.remove('up', 'down');
+        trendEl.classList.add(entry.trend);
+        trendEl.innerHTML = `<i class="bi bi-arrow-${entry.trend}"></i><span>${entry.pct}</span>`;
+    }
+}
+
+function applyFilters() {
+    const key = PRESET_KEY_MAP[currentPresetLabel] || 'today';
+    const factor = getCombinedFactor();
+
+    updateOverviewCard('sales', key, factor);
+    updateOverviewCard('purchase', key, factor);
+
+    const kpi = KPI_DATA[key];
+    if (!kpi) return;
+    updateKpiCard('totalSales', kpi.sales, factor);
+    updateKpiCard('totalPurchase', kpi.purchase, factor);
+    updateKpiCard('inventoryValue', kpi.inventory, factor);
+    updateKpiCard('grossProfit', kpi.profit, factor);
+    updateKpiCard('receivable', kpi.receivable, factor);
+    updateKpiCard('payable', kpi.payable, factor);
+}
+
+function updateDashboardForPreset(presetLabel) {
+    currentPresetLabel = presetLabel;
+    applyFilters();
+}
 
 let salesChartInstance, purchaseChartInstance;
 
@@ -374,6 +451,7 @@ function initTopbarFilters() {
                 document.getElementById('dateRangeText').textContent = `${formatDate(from)} - ${formatDate(to)}`;
                 document.querySelectorAll('.date-preset-option').forEach(o => o.classList.remove('active'));
                 document.getElementById('customRangeToggle').classList.add('active');
+                applyFilters();
             }
             const dropdownEl = document.getElementById('dateRangeBtn');
             bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
@@ -399,10 +477,21 @@ function initTopbarFilters() {
         });
     });
 
+    document.querySelectorAll('.product-option').forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('productText').textContent = opt.dataset.product;
+            currentProduct = opt.dataset.product;
+            applyFilters();
+        });
+    });
+
     document.querySelectorAll('.branch-option').forEach((opt) => {
         opt.addEventListener('click', (e) => {
             e.preventDefault();
             document.getElementById('branchText').textContent = opt.dataset.branch;
+            currentBranch = opt.dataset.branch;
+            applyFilters();
         });
     });
 }
