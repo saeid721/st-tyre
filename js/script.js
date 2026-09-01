@@ -2,82 +2,82 @@ const navSections = [
     { title: 'Dashboard', icon: 'bi-house-door-fill', type: 'single', href: 'index.html', active: true },
     {
         title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
-            { label: 'Sales Invoice', icon: 'bi-file-earmark-text' },
-            { label: 'Sales Order', icon: 'bi-cart-check' },
-            { label: 'POS', icon: 'bi-cash-stack' },
+            { label: 'Sales Invoice', icon: 'bi-file-earmark-text', href: 'invoice-list.html' },
+            { label: 'Sales Order', icon: 'bi-cart-check', href: 'sales-order.html' },
+            { label: 'POS', icon: 'bi-cash-stack', href: 'pos.html' },
         ]
     },
     {
         title: 'Purchase', icon: 'bi-cart3', type: 'group', expanded: false, items: [
-            { label: 'Purchase Order', icon: 'bi-cart-plus' },
-            { label: 'Purchase Invoice', icon: 'bi-file-earmark-text' },
-            { label: 'Purchase Return', icon: 'bi-arrow-return-left' },
+            { label: 'Purchase Order', icon: 'bi-cart-plus', href: 'purchase-order.html' },
+            { label: 'Purchase Invoice', icon: 'bi-file-earmark-text', href: 'purchase-invoice.html' },
+            { label: 'Purchase Return', icon: 'bi-arrow-return-left', href: 'purchase-return.html' },
         ]
     },
     {
         title: 'Import & LC', icon: 'bi-box-seam', type: 'group', expanded: false, items: [
-            { label: 'LC Opening', icon: 'bi-bank' },
-            { label: 'Shipment Tracking', icon: 'bi-truck' },
-            { label: 'Container Management', icon: 'bi-boxes' },
+            { label: 'LC Opening', icon: 'bi-bank', href: 'lc-opening.html' },
+            { label: 'Shipment Tracking', icon: 'bi-truck', href: 'shipment-tracking.html' },
+            { label: 'Container Management', icon: 'bi-boxes', href: 'container-management.html' },
         ]
     },
     {
         title: 'Inventory', icon: 'bi-archive', type: 'group', expanded: false, items: [
-            { label: 'Tyre Products', icon: 'bi-box-seam' },
-            { label: 'Stock Management', icon: 'bi-archive' },
-            { label: 'Stock Transfer', icon: 'bi-arrow-left-right' },
+            { label: 'Products', icon: 'bi-box-seam', href: 'products.html' },
+            { label: 'Stock Management', icon: 'bi-archive', href: 'stock-management.html' },
+            { label: 'Stock Transfer', icon: 'bi-arrow-left-right', href: 'stock-transfer.html' },
         ]
     },
     {
         title: 'Accounts', icon: 'bi-calculator', type: 'group', expanded: false, items: [
-            { label: 'Chart of Accounts', icon: 'bi-diagram-3' },
-            { label: 'Journal Entry', icon: 'bi-journal-text' },
-            { label: 'Cash Book', icon: 'bi-wallet2' },
+            { label: 'Chart of Accounts', icon: 'bi-diagram-3', href: 'chart-of-accounts.html' },
+            { label: 'Journal Entry', icon: 'bi-journal-text', href: 'journal-entry.html' },
+            { label: 'Cash Book', icon: 'bi-wallet2', href: 'cash-book.html' },
         ]
     },
     {
         title: 'VAT & Mushak', icon: 'bi-receipt-cutoff', type: 'group', expanded: false, items: [
-            { label: 'VAT Setup', icon: 'bi-percent' },
-            { label: 'VAT Return', icon: 'bi-file-earmark-text' },
+            { label: 'VAT Setup', icon: 'bi-percent', href: 'vat-setup.html' },
+            { label: 'VAT Return', icon: 'bi-file-earmark-text', href: 'vat-return.html' },
         ]
     },
     {
         title: 'Reports', icon: 'bi-file-earmark-bar-graph', type: 'group', expanded: false, items: [
-            { label: 'Sales Report', icon: 'bi-graph-up' },
-            { label: 'Purchase Report', icon: 'bi-graph-down' },
-            { label: 'Inventory Report', icon: 'bi-box' },
+            { label: 'Sales Report', icon: 'bi-graph-up', href: 'sales-report.html' },
+            { label: 'Purchase Report', icon: 'bi-graph-down', href: 'purchase-report.html' },
+            { label: 'Inventory Report', icon: 'bi-box', href: 'inventory-report.html' },
         ]
     },
     {
         title: 'Approval', icon: 'bi-check2-circle', type: 'group', expanded: false, items: [
-            { label: 'Purchase Approval', icon: 'bi-check-circle' },
-            { label: 'Sales Approval', icon: 'bi-check2-circle' },
+            { label: 'Purchase Approval', icon: 'bi-check-circle', href: 'purchase-approval.html' },
+            { label: 'Sales Approval', icon: 'bi-check2-circle', href: 'sales-approval.html' },
         ]
     },
     {
         title: 'Notification', icon: 'bi-bell', type: 'group', expanded: false, badge: 12, items: [
-            { label: 'All Notifications', icon: 'bi-bell' },
-            { label: 'Low Stock Alert', icon: 'bi-exclamation-triangle' },
+            { label: 'All Notifications', icon: 'bi-bell', href: 'notifications.html' },
+            { label: 'Low Stock Alert', icon: 'bi-exclamation-triangle', href: 'low-stock-alert.html' },
         ]
     },
     {
         title: 'User Management', icon: 'bi-people-fill', type: 'group', expanded: false, items: [
-            { label: 'Users', icon: 'bi-people' },
-            { label: 'Roles & Permissions', icon: 'bi-shield-lock' },
+            { label: 'Users', icon: 'bi-people', href: 'users.html' },
+            { label: 'Roles & Permissions', icon: 'bi-shield-lock', href: 'roles-permissions.html' },
         ]
     },
     {
         title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
-            { label: 'Basic Information', icon: 'bi-building' },
-            { label: 'Address & Contact', icon: 'bi-telephone-outbound' },
-            { label: 'Business Information', icon: 'bi-info-circle' },
-            { label: 'Financial Settings', icon: 'bi-calculator' },
+            { label: 'Basic Information', icon: 'bi-building', href: 'basic-information.html' },
+            { label: 'Address & Contact', icon: 'bi-telephone-outbound', href: 'address-contact.html' },
+            { label: 'Business Information', icon: 'bi-info-circle', href: 'business-information.html' },
+            { label: 'Financial Settings', icon: 'bi-calculator', href: 'financial-settings.html' },
         ]
     },
     {
         title: 'System Settings', icon: 'bi-gear', type: 'group', expanded: false, items: [
-            { label: 'General Settings', icon: 'bi-gear' },
-            { label: 'Backup & Restore', icon: 'bi-hdd' },
+            { label: 'General Settings', icon: 'bi-gear', href: 'general-settings.html' },
+            { label: 'Backup & Restore', icon: 'bi-hdd', href: 'backup-restore.html' },
         ]
     },
 ];
