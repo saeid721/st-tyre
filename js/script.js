@@ -2,9 +2,10 @@ const navSections = [
     { title: 'Dashboard', icon: 'bi-house-door-fill', type: 'single', href: 'index.html', active: true },
     {
         title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
-            { label: 'Company Setup', icon: 'bi-building' },
-            { label: 'Branch Setup', icon: 'bi-geo-alt' },
-            { label: 'Financial Year', icon: 'bi-calendar' },
+            { label: 'Basic Information', icon: 'bi-building' },
+            { label: 'Address & Contact', icon: 'bi-telephone-outbound' },
+            { label: 'Business Information', icon: 'bi-info-circle' },
+            { label: 'Financial Settings', icon: 'bi-calculator' },
         ]
     },
     {

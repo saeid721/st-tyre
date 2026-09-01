@@ -221,7 +221,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 15px 10px 45px;
+    padding: 10px 15px 10px 30px;
     color: var(--sidebar-text);
     text-decoration: none;
     border-radius: 8px;
