@@ -701,7 +701,7 @@ body {
     font-size: 11px;
     color: var(--text-muted);
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     letter-spacing: 0.5px;
 }
 
@@ -753,11 +753,59 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
+.card-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.card-title-icon.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.card-title-icon.green {
+    background: #d1fae5;
+    color: #10b981;
+}
+
+.card-title-icon.purple {
+    background: #e9d5ff;
+    color: #8b5cf6;
+}
+
+.card-title-icon.teal {
+    background: #00aeef1a;
+    color: #00aeef;
+}
+
+.card-title-icon.orange {
+    background: #ffedd5;
+    color: #f97316;
+}
+
+.card-title-icon.red {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
 .card-title {
     font-size: 14px;
     font-weight: 600;
     color: var(--text);
     letter-spacing: 0.2px;
+    padding-top: 6px;
 }
 
 .card-body {
@@ -1470,6 +1518,13 @@ body {
         padding: 10px 14px;
     }
 
+    .card-title-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+        border-radius: 7px;
+    }
+
     .card-body {
         padding: 14px;
     }
@@ -1498,7 +1553,7 @@ body {
     .kpi-label {
         font-size: 9.5px;
         letter-spacing: 0.2px;
-        margin-bottom: 3px;
+        margin-bottom: 1px;
     }
 
     .kpi-value {
