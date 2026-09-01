@@ -713,7 +713,7 @@ body {
 }
 
 .kpi-trend {
-    font-size: 12px;
+    font-size: clamp(8.5px, 0.25vw + 8px, 10px);
     font-weight: 600;
     display: flex;
     align-items: center;
