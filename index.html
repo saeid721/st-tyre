@@ -66,22 +66,50 @@
             <div class="topbar-center">
                 <div class="dropdown">
                     <div class="date-range dropdown-toggle" id="dateRangeBtn" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                        data-bs-auto-close="outside" aria-expanded="false">
                         <i class="bi bi-calendar"></i>
-                        <span id="dateRangeText">01 May 2026 - 31 May 2026</span>
+                        <span id="dateRangeText">Today</span>
                         <i class="bi bi-chevron-down"></i>
                     </div>
-                    <div class="dropdown-menu date-range-menu p-3" aria-labelledby="dateRangeBtn">
-                        <div class="mb-2">
-                            <label class="form-label small mb-1">From</label>
-                            <input type="date" class="form-control form-control-sm" id="dateFrom" value="2026-05-01">
+                    <div class="dropdown-menu date-range-menu" aria-labelledby="dateRangeBtn">
+                        <ul class="date-preset-list">
+                            <li><a href="#" class="date-preset-option active" data-preset="Today">Today</a></li>
+                            <li><a href="#" class="date-preset-option" data-preset="Yesterday">Yesterday</a></li>
+                            <li><a href="#" class="date-preset-option" data-preset="This Week">This Week</a></li>
+                            <li><a href="#" class="date-preset-option" data-preset="This Month">This Month</a></li>
+                            <li><a href="#" class="date-preset-option" data-preset="This Quarter">This Quarter</a></li>
+                            <li><a href="#" class="date-preset-option" data-preset="This Year">This Year</a></li>
+                        </ul>
+                        <div class="date-preset-divider"></div>
+                        <a href="#" class="date-preset-option" id="customRangeToggle">Custom Range</a>
+                        <div class="custom-range-inputs p-3" id="customRangeInputs">
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">From</label>
+                                <input type="date" class="form-control form-control-sm" id="dateFrom"
+                                    value="2026-05-01">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">To</label>
+                                <input type="date" class="form-control form-control-sm" id="dateTo" value="2026-05-31">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm w-100"
+                                id="applyDateRange">Apply</button>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label small mb-1">To</label>
-                            <input type="date" class="form-control form-control-sm" id="dateTo" value="2026-05-31">
-                        </div>
-                        <button type="button" class="btn btn-primary btn-sm w-100" id="applyDateRange">Apply</button>
                     </div>
+                </div>
+                <div class="dropdown">
+                    <div class="product-select dropdown-toggle" id="productBtn" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-box-seam"></i>
+                        <span id="productText">All Products</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="productBtn">
+                        <li><a class="dropdown-item product-option" href="#" data-product="Tyre">Tyre</a></li>
+                        <li><a class="dropdown-item product-option" href="#" data-product="Bearing">Bearing</a></li>
+                        <li><a class="dropdown-item product-option" href="#" data-product="Lubrication">Lubricationh</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="dropdown">
                     <div class="branch-select dropdown-toggle" id="branchBtn" data-bs-toggle="dropdown"
@@ -135,6 +163,7 @@
         </header>
 
         <main class="main-content">
+            <div class="mobile-filter-bar" id="mobileFilterBar"></div>
             <div class="kpi-grid">
                 <div class="kpi-card">
                     <div class="kpi-icon blue"><i class="bi bi-cart"></i></div>
@@ -157,7 +186,16 @@
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL INVENTORY VALUE</div>
                         <div class="kpi-value">215,478,300</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+6.32% vs Last Month</span></div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+6.32% vs Last Month</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon teal"><i class="bi bi-graph-up"></i></div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">GROSS PROFIT (BDT)</div>
+                        <div class="kpi-value">৳18,45,000</div>
+                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+8.21% vs Last Month</span></div>
                     </div>
                 </div>
                 <div class="kpi-card">
@@ -165,7 +203,8 @@
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL RECEIVABLE (BDT)</div>
                         <div class="kpi-value">32,745,600</div>
-                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-4.32% vs Last Month</span>
+                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-4.32% vs Last
+                                Month</span>
                         </div>
                     </div>
                 </div>
@@ -174,7 +213,8 @@
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL PAYABLE (BDT)</div>
                         <div class="kpi-value">18,654,200</div>
-                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-6.15% vs Last Month</span>
+                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-6.15% vs Last
+                                Month</span>
                         </div>
                     </div>
                 </div>
@@ -457,7 +497,8 @@
                                 <div class="activity-icon green"><i class="bi bi-cart"></i></div>
                                 <div class="activity-content">
                                     <div class="activity-title">Purchase Order Created</div>
-                                    <div class="activity-desc">PO# PO-2605-0058 has been created to Rubber World Ltd.
+                                    <div class="activity-desc">PO# PO-2605-0058 has been created to Rubber World
+                                        Ltd.
                                     </div>
                                     <div class="activity-meta">Today, 11:30 AM by Al Amin</div>
                                 </div>
@@ -492,7 +533,8 @@
                                 <div class="activity-icon orange"><i class="bi bi-file-text"></i></div>
                                 <div class="activity-content">
                                     <div class="activity-title">Sales Invoice</div>
-                                    <div class="activity-desc">Invoice# SI-2605-0456 has been created for Rahman Motors.
+                                    <div class="activity-desc">Invoice# SI-2605-0456 has been created for Rahman
+                                        Motors.
                                     </div>
                                     <div class="activity-meta">Today, 09:40 AM by Jannatul</div>
                                 </div>
@@ -585,15 +627,15 @@
             <span>Home</span>
         </a>
         <a href="#" class="bottom-nav-item">
-            <i class="bi bi-receipt"></i>
-            <span>Invoice</span>
+            <i class="bi bi-cart3"></i>
+            <span>Purchase</span>
         </a>
-        <a href="#" class="bottom-nav-fab">
+        <a href="invoice-add.html" class="bottom-nav-fab" aria-label="New Sales Invoice">
             <i class="bi bi-plus-lg"></i>
         </a>
         <a href="#" class="bottom-nav-item">
             <i class="bi bi-box-seam"></i>
-            <span>Stock</span>
+            <span>Inventory</span>
         </a>
         <a href="#" class="bottom-nav-item">
             <i class="bi bi-grid-3x3-gap-fill"></i>

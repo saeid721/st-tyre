@@ -281,11 +281,31 @@ function initTopbarFilters() {
             const to = document.getElementById('dateTo').value;
             if (from && to) {
                 document.getElementById('dateRangeText').textContent = `${formatDate(from)} - ${formatDate(to)}`;
+                document.querySelectorAll('.date-preset-option').forEach(o => o.classList.remove('active'));
+                document.getElementById('customRangeToggle').classList.add('active');
             }
             const dropdownEl = document.getElementById('dateRangeBtn');
             bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
         });
     }
+
+    document.querySelectorAll('.date-preset-option').forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.date-preset-option').forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+
+            if (opt.id === 'customRangeToggle') {
+                document.getElementById('customRangeInputs').classList.toggle('show');
+                return;
+            }
+
+            document.getElementById('customRangeInputs').classList.remove('show');
+            document.getElementById('dateRangeText').textContent = opt.dataset.preset;
+            const dropdownEl = document.getElementById('dateRangeBtn');
+            bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
+        });
+    });
 
     document.querySelectorAll('.branch-option').forEach((opt) => {
         opt.addEventListener('click', (e) => {
@@ -321,6 +341,26 @@ function initSidebarToggle() {
     }
 }
 
+function initMobileFilterPlacement() {
+    const topbarCenter = document.querySelector('.topbar-center');
+    const topbarLeft = document.querySelector('.topbar-left');
+    const mobileFilterBar = document.getElementById('mobileFilterBar');
+    if (!topbarCenter || !topbarLeft || !mobileFilterBar) return;
+
+    const mq = window.matchMedia('(max-width: 767px)');
+
+    function placeFilters(e) {
+        if (e.matches) {
+            mobileFilterBar.appendChild(topbarCenter);
+        } else {
+            topbarLeft.insertAdjacentElement('afterend', topbarCenter);
+        }
+    }
+
+    placeFilters(mq);
+    mq.addEventListener('change', placeFilters);
+}
+
 function initFullscreen() {
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     if (!fullscreenBtn) return;
@@ -347,4 +387,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initFullscreen();
     initPeriodFilters();
     initTopbarFilters();
+    initMobileFilterPlacement();
 });
