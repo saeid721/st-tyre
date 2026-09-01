@@ -380,6 +380,25 @@ function initFullscreen() {
     });
 }
 
+function initLogout() {
+    const logoutModalEl = document.getElementById('logoutModal');
+    if (!logoutModalEl) return;
+
+    const logoutModal = new bootstrap.Modal(logoutModalEl);
+
+    document.querySelectorAll('.logout-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logoutModal.show();
+        });
+    });
+
+    document.getElementById('confirmLogoutBtn').addEventListener('click', () => {
+        // clear session/local storage here if you store auth state client-side
+        window.location.href = 'login.html';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderSidebar();
     initCharts();
@@ -388,4 +407,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initPeriodFilters();
     initTopbarFilters();
     initMobileFilterPlacement();
+    initLogout();
 });
