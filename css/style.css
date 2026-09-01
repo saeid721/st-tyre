@@ -1829,8 +1829,8 @@ body {
     }
 
     .nav-section-header {
-        padding-top: clamp(6px, 0.9vh, 10px);
-        padding-bottom: clamp(6px, 0.9vh, 10px);
+        padding-top: clamp(4px, 0.7vh, 8px);
+        padding-bottom: clamp(4px, 0.7vh, 10px);
     }
 
     .nav-item-link {

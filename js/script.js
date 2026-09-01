@@ -1,11 +1,10 @@
 const navSections = [
     { title: 'Dashboard', icon: 'bi-house-door-fill', type: 'single', href: 'index.html', active: true },
     {
-        title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
-            { label: 'Basic Information', icon: 'bi-building' },
-            { label: 'Address & Contact', icon: 'bi-telephone-outbound' },
-            { label: 'Business Information', icon: 'bi-info-circle' },
-            { label: 'Financial Settings', icon: 'bi-calculator' },
+        title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
+            { label: 'Sales Invoice', icon: 'bi-file-earmark-text' },
+            { label: 'Sales Order', icon: 'bi-cart-check' },
+            { label: 'POS', icon: 'bi-cash-stack' },
         ]
     },
     {
@@ -27,13 +26,6 @@ const navSections = [
             { label: 'Tyre Products', icon: 'bi-box-seam' },
             { label: 'Stock Management', icon: 'bi-archive' },
             { label: 'Stock Transfer', icon: 'bi-arrow-left-right' },
-        ]
-    },
-    {
-        title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
-            { label: 'Sales Invoice', icon: 'bi-file-earmark-text' },
-            { label: 'Sales Order', icon: 'bi-cart-check' },
-            { label: 'POS', icon: 'bi-cash-stack' },
         ]
     },
     {
@@ -72,6 +64,14 @@ const navSections = [
         title: 'User Management', icon: 'bi-people-fill', type: 'group', expanded: false, items: [
             { label: 'Users', icon: 'bi-people' },
             { label: 'Roles & Permissions', icon: 'bi-shield-lock' },
+        ]
+    },
+    {
+        title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
+            { label: 'Basic Information', icon: 'bi-building' },
+            { label: 'Address & Contact', icon: 'bi-telephone-outbound' },
+            { label: 'Business Information', icon: 'bi-info-circle' },
+            { label: 'Financial Settings', icon: 'bi-calculator' },
         ]
     },
     {
