@@ -11,7 +11,7 @@
     --sidebar-active: #3b82f6;
     --bg: #f1f5f9;
     --card-bg: #ffffff;
-    --border: #e2e8f0;
+    --border: #f1f3f6;
     --text: #001532;
     --text-muted: #64748b;
     --text-soft: #94a3b8;
@@ -738,6 +738,7 @@ body {
 .card {
     background: var(--card-bg);
     border-radius: var(--radius);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow);
     overflow: hidden;
     animation: fadeIn 0.4s ease;
@@ -749,7 +750,7 @@ body {
     align-items: center;
     justify-content: space-between;
     background: white;
-    border-bottom: none;
+    border-bottom: 1px solid var(--border);
 }
 
 .card-title {
