@@ -1481,6 +1481,10 @@ body {
         display: none;
     }
 
+    .mobile-filter-bar .dropdown-menu {
+        position: fixed !important;
+    }
+
     .date-range,
     .branch-select,
     .product-select {
