@@ -37,7 +37,7 @@
                 <i class="bi bi-chevron-expand"></i>
             </div> -->
             <div class="sidebar-user">
-                <img src="images/Asraf-Mridha.jpg" alt="User"
+                <img src="images/profile.jpg" alt="User"
                     onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
                 <div class="sidebar-user-info">
                     <div class="sidebar-user-name">MD. Shaokat Hossain</div>
@@ -147,7 +147,7 @@
                     <span class="notification-badge">12</span>
                 </button>
                 <div class="user-profile dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="images/Asraf-Mridha.jpg" alt="User"
+                    <img src="images/profile.jpg" alt="User"
                         onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
                     <div class="user-info">
                         <div class="user-name">MD. Shaokat Hossain</div>
@@ -174,24 +174,27 @@
                     <div class="kpi-icon blue"><i class="bi bi-cart"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL SALES (BDT)</div>
-                        <div class="kpi-value">125,845,750</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+12.45% vs Last Month</span></div>
+                        <div class="kpi-value" id="totalSalesValue">125,845,750</div>
+                        <div class="kpi-trend up" id="totalSalesTrend"><i class="bi bi-arrow-up"></i><span>+12.45% vs
+                                Last Month</span></div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon green"><i class="bi bi-bag"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL PURCHASE (BDT)</div>
-                        <div class="kpi-value">98,260,500</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+8.21% vs Last Month</span></div>
+                        <div class="kpi-value" id="totalPurchaseValue">98,260,500</div>
+                        <div class="kpi-trend up" id="totalPurchaseTrend"><i class="bi bi-arrow-up"></i><span>+8.21% vs
+                                Last Month</span></div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon purple"><i class="bi bi-box"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL INVENTORY VALUE</div>
-                        <div class="kpi-value">215,478,300</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+6.32% vs Last Month</span>
+                        <div class="kpi-value" id="inventoryValueValue">215,478,300</div>
+                        <div class="kpi-trend up" id="inventoryValueTrend"><i class="bi bi-arrow-up"></i><span>+6.32% vs
+                                Last Month</span>
                         </div>
                     </div>
                 </div>
@@ -199,16 +202,18 @@
                     <div class="kpi-icon teal"><i class="bi bi-graph-up"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">GROSS PROFIT (BDT)</div>
-                        <div class="kpi-value">৳18,45,000</div>
-                        <div class="kpi-trend up"><i class="bi bi-arrow-up"></i><span>+8.21% vs Last Month</span></div>
+                        <div class="kpi-value" id="grossProfitValue">৳18,45,000</div>
+                        <div class="kpi-trend up" id="grossProfitTrend"><i class="bi bi-arrow-up"></i><span>+8.21% vs
+                                Last Month</span></div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon orange"><i class="bi bi-people"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL RECEIVABLE (BDT)</div>
-                        <div class="kpi-value">32,745,600</div>
-                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-4.32% vs Last
+                        <div class="kpi-value" id="receivableValue">32,745,600</div>
+                        <div class="kpi-trend down" id="receivableTrend"><i class="bi bi-arrow-down"></i><span>-4.32% vs
+                                Last
                                 Month</span>
                         </div>
                     </div>
@@ -217,8 +222,9 @@
                     <div class="kpi-icon red"><i class="bi bi-credit-card"></i></div>
                     <div class="kpi-content">
                         <div class="kpi-label">TOTAL PAYABLE (BDT)</div>
-                        <div class="kpi-value">18,654,200</div>
-                        <div class="kpi-trend down"><i class="bi bi-arrow-down"></i><span>-6.15% vs Last
+                        <div class="kpi-value" id="payableValue">18,654,200</div>
+                        <div class="kpi-trend down" id="payableTrend"><i class="bi bi-arrow-down"></i><span>-6.15% vs
+                                Last
                                 Month</span>
                         </div>
                     </div>
@@ -229,13 +235,6 @@
                 <div class="card col-span-4">
                     <div class="card-header">
                         <h3 class="card-title">Sales Overview</h3>
-                        <select class="form-select form-select-sm period-select" id="salesPeriod" data-target="sales"
-                            style="width: auto;">
-                            <option value="thisMonth">This Month</option>
-                            <option value="lastMonth">Last Month</option>
-                            <option value="last3Months">Last 3 Months</option>
-                            <option value="thisYear">This Year</option>
-                        </select>
                     </div>
                     <div class="card-body">
                         <div class="overview-stats">
@@ -257,13 +256,6 @@
                 <div class="card col-span-4">
                     <div class="card-header">
                         <h3 class="card-title">Purchase Overview</h3>
-                        <select class="form-select form-select-sm period-select" id="purchasePeriod"
-                            data-target="purchase" style="width: auto;">
-                            <option value="thisMonth">This Month</option>
-                            <option value="lastMonth">Last Month</option>
-                            <option value="last3Months">Last 3 Months</option>
-                            <option value="thisYear">This Year</option>
-                        </select>
                     </div>
                     <div class="card-body">
                         <div class="overview-stats">
@@ -645,7 +637,7 @@
         <div class="dropup">
             <a href="#" class="bottom-nav-item dropdown-toggle no-caret" id="bottomNavProfileBtn"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="bottom-nav-avatar" src="images/Asraf-Mridha.jpg" alt="Profile"
+                <img class="bottom-nav-avatar" src="images/profile.jpg" alt="Profile"
                     onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
                 <span>Profile</span>
             </a>
