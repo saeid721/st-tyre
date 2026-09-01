@@ -121,7 +121,11 @@ function renderSidebar() {
 
         sectionHeader.addEventListener('click', (e) => {
             e.stopPropagation();
-            section.expanded = !section.expanded;
+            const willExpand = !section.expanded;
+            navSections.forEach((s) => {
+                if (s.type === 'group') s.expanded = false;
+            });
+            section.expanded = willExpand;
             renderSidebar();
         });
 
