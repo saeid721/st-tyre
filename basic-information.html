@@ -102,24 +102,17 @@
         </header>
 
         <main class="main-content">
-            <div class="company-settings-page">
-                <!-- Settings Tabs -->
-                <div class="settings-tabs reveal">
-                    <div class="settings-tab-list">
-                        <button class="settings-tab active" data-tab="company-info">Company Information</button>
-                        <button class="settings-tab" data-tab="address-contact">Address & Contact</button>
-                        <button class="settings-tab" data-tab="business-info">Business Information</button>
-                        <button class="settings-tab" data-tab="financial-settings">Financial Settings</button>
-                        <button class="settings-tab" data-tab="others">Others</button>
+            <div class="company-setup-page">
+                <!-- Page Header -->
+                <div class="setup-header reveal">
+                    <div class="setup-title-section">
+                        <h1>Basic Information</h1>
+                        <p class="setup-subtitle">Set up your basic information in few simple steps.</p>
                     </div>
-                    <div class="settings-actions">
-                        <button class="btn-help" onclick="showHelp()">
-                            <i class="bi bi-question-circle"></i>
-                            Help
-                        </button>
-                        <button class="btn-save" onclick="saveChanges()">
-                            <i class="bi bi-check-lg"></i>
-                            Save Changes
+                    <div class="setup-actions">
+                        <button class="btn-save-exit" onclick="saveAndExit()">
+                            <i class="bi bi-box-arrow-up"></i>
+                            Save & Exit
                         </button>
                     </div>
                 </div>

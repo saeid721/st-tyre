@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ST TYRE ERP - Company Information</title>
+    <title>ST TYRE ERP - Financial Settings</title>
     <link rel="icon" href="images/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,8 +12,9 @@
         rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/basic-information.css" />
+    <link rel="stylesheet" href="css/financial-settings.css" />
 </head>
 
 <body>
@@ -101,392 +102,476 @@
             </div>
         </header>
 
+
         <main class="main-content">
-            <div class="company-settings-page">
-                <!-- Settings Tabs -->
-                <div class="settings-tabs reveal">
-                    <div class="settings-tab-list">
-                        <button class="settings-tab active" data-tab="company-info">Company Information</button>
-                        <button class="settings-tab" data-tab="address-contact">Address & Contact</button>
-                        <button class="settings-tab" data-tab="business-info">Business Information</button>
-                        <button class="settings-tab" data-tab="financial-settings">Financial Settings</button>
-                        <button class="settings-tab" data-tab="others">Others</button>
+            <div class="company-setup-page">
+                <!-- Page Header -->
+                <div class="setup-header reveal">
+                    <div class="setup-title-section">
+                        <h1>Financial Settings</h1>
+                        <p class="setup-subtitle">Set up your financial settings in few simple steps.</p>
                     </div>
-                    <div class="settings-actions">
-                        <button class="btn-help" onclick="showHelp()">
-                            <i class="bi bi-question-circle"></i>
-                            Help
-                        </button>
-                        <button class="btn-save" onclick="saveChanges()">
-                            <i class="bi bi-check-lg"></i>
-                            Save Changes
+                    <div class="setup-actions">
+                        <button class="btn-save-exit" onclick="saveAndExit()">
+                            <i class="bi bi-box-arrow-up"></i>
+                            Save & Exit
                         </button>
                     </div>
                 </div>
 
-                <!-- Settings Grid -->
-                <div class="settings-grid">
+                <!-- Main Grid -->
+                <div class="setup-grid">
                     <!-- Left Column - Form -->
                     <div class="form-card reveal">
-                        <div class="form-section-header">
-                            <h3 class="form-section-title">Basic Information</h3>
-                        </div>
-                        <div class="form-body">
-                            <form id="companyInfoForm">
+                        <div class="card-title-main">Financial Settings</div>
+
+                        <form id="financialSettingsForm">
+                            <!-- Financial Settings Section -->
+                            <div class="form-section">
                                 <div class="form-grid">
-                                    <!-- Left Column -->
                                     <div class="form-group">
-                                        <label class="form-label">Company Name <span class="required">*</span></label>
-                                        <input type="text" class="form-control-custom" value="ST TYRE INDUSTRIES LTD."
-                                            placeholder="Enter company name">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Registration No. <span
-                                                class="required">*</span></label>
-                                        <input type="text" class="form-control-custom" value="C-123456/2014"
-                                            placeholder="Enter registration number">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Company Short Name</label>
-                                        <input type="text" class="form-control-custom" value="ST TYRE"
-                                            placeholder="Enter short name">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Industry Type</label>
-                                        <select class="form-control-custom">
-                                            <option value="manufacturing" selected>Manufacturing</option>
-                                            <option value="trading">Trading</option>
-                                            <option value="services">Services</option>
-                                            <option value="retail">Retail</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Legal Status</label>
-                                        <select class="form-control-custom">
-                                            <option value="private-limited" selected>Private Limited Company</option>
-                                            <option value="public-limited">Public Limited Company</option>
-                                            <option value="partnership">Partnership</option>
-                                            <option value="sole-proprietorship">Sole Proprietorship</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Website</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-globe input-icon"></i>
-                                            <input type="url" class="form-control-custom" value="https://www.sttyre.com"
-                                                placeholder="https://example.com">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Incorporation Date</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-calendar input-icon"></i>
-                                            <input type="date" class="form-control-custom" value="2014-01-15">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Email</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-envelope input-icon"></i>
-                                            <input type="email" class="form-control-custom" value="info@sttyre.com"
-                                                placeholder="email@example.com">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Trade License No.</label>
-                                        <input type="text" class="form-control-custom" value="TL-123456/2024-25"
-                                            placeholder="Enter trade license number">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Phone</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-telephone input-icon"></i>
-                                            <input type="tel" class="form-control-custom" value="+880 2 55012345"
-                                                placeholder="+880 X XXXXXXXX">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">TIN (Taxpayer Identification No.)</label>
-                                        <input type="text" class="form-control-custom" value="123456789012"
-                                            placeholder="Enter TIN">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Mobile</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-phone input-icon"></i>
-                                            <input type="tel" class="form-control-custom" value="+880 1711 123456"
-                                                placeholder="+880 1X XXXXXXXX">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">BIN (Business Identification No.)</label>
-                                        <input type="text" class="form-control-custom" value="000123456-0001"
-                                            placeholder="Enter BIN">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Fax</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-printer input-icon"></i>
-                                            <input type="tel" class="form-control-custom" value="+880 2 55012346"
-                                                placeholder="+880 X XXXXXXXX">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">VAT Registration No.</label>
-                                        <input type="text" class="form-control-custom" value="BD123456789012"
-                                            placeholder="Enter VAT registration number">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Default Language</label>
-                                        <select class="form-control-custom">
-                                            <option value="english" selected>English</option>
-                                            <option value="bengali">Bengali</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Currency</label>
-                                        <select class="form-control-custom">
+                                        <label class="form-label">Base Currency <span class="required">*</span></label>
+                                        <select class="form-control" id="baseCurrency" onchange="updateSummary()">
+                                            <option value="">Select Currency</option>
                                             <option value="bdt" selected>BDT - Bangladeshi Taka</option>
                                             <option value="usd">USD - US Dollar</option>
                                             <option value="eur">EUR - Euro</option>
+                                            <option value="gbp">GBP - British Pound</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Timezone</label>
-                                        <select class="form-control-custom">
-                                            <option value="asia-dhaka" selected>(GMT+06:00) Dhaka, Bangladesh</option>
-                                            <option value="asia-kolkata">(GMT+05:30) Kolkata, India</option>
-                                            <option value="asia-dubai">(GMT+04:00) Dubai, UAE</option>
+                                        <label class="form-label">System Currency Precision <span
+                                                class="required">*</span></label>
+                                        <select class="form-control" id="currencyPrecision" onchange="updateSummary()">
+                                            <option value="">Select Precision</option>
+                                            <option value="0">0 (Example: 100)</option>
+                                            <option value="1">1 (Example: 100.0)</option>
+                                            <option value="2" selected>2 (Example: 100.00)</option>
+                                            <option value="3">3 (Example: 100.000)</option>
+                                            <option value="4">4 (Example: 100.0000)</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Default Country</label>
-                                        <select class="form-control-custom">
-                                            <option value="bangladesh" selected>Bangladesh</option>
-                                            <option value="india">India</option>
-                                            <option value="others">Others</option>
-                                        </select>
+                                        <label class="form-label">Account Code Prefix</label>
+                                        <input type="text" class="form-control" id="accountPrefix" value="STT-"
+                                            placeholder="Enter prefix">
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Financial Year Start</label>
-                                        <div class="input-icon-wrapper">
+                                        <label class="form-label">Financial Year Start <span
+                                                class="required">*</span></label>
+                                        <div class="input-with-icon">
                                             <i class="bi bi-calendar input-icon"></i>
-                                            <input type="text" class="form-control-custom" value="01 July"
-                                                placeholder="Select start date">
+                                            <input type="text" class="form-control" id="fyStart" value="01 July"
+                                                onchange="updateSummary()">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Financial Year End</label>
-                                        <div class="input-icon-wrapper">
+                                        <label class="form-label">Financial Year End <span
+                                                class="required">*</span></label>
+                                        <div class="input-with-icon">
                                             <i class="bi bi-calendar input-icon"></i>
-                                            <input type="text" class="form-control-custom" value="30 June"
-                                                placeholder="Select end date">
+                                            <input type="text" class="form-control" id="fyEnd" value="30 June"
+                                                onchange="updateSummary()">
                                         </div>
                                     </div>
 
-                                    <div class="form-group full-width">
-                                        <label class="form-label">Company Description</label>
-                                        <textarea class="form-control-custom"
-                                            placeholder="Enter company description">ST TYRE INDUSTRIES LTD. is a leading tyre manufacturing company in Bangladesh committed to producing high quality tyres for domestic and international markets.</textarea>
+                                    <div class="form-group">
+                                        <label class="form-label">Default Fiscal Year</label>
+                                        <select class="form-control" id="defaultFiscalYear" onchange="updateSummary()">
+                                            <option value="">Select Year</option>
+                                            <option value="2023-2024">2023-2024</option>
+                                            <option value="2024-2025" selected>2024-2025</option>
+                                            <option value="2025-2026">2025-2026</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Payment Terms</label>
+                                        <select class="form-control" id="paymentTerms" onchange="updateSummary()">
+                                            <option value="">Select Terms</option>
+                                            <option value="0">Immediate</option>
+                                            <option value="15">15 Days</option>
+                                            <option value="30" selected>30 Days</option>
+                                            <option value="45">45 Days</option>
+                                            <option value="60">60 Days</option>
+                                            <option value="90">90 Days</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Credit Limit</label>
+                                        <input type="number" class="form-control" id="creditLimit" value="0.00"
+                                            step="0.01" placeholder="0.00">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Discount(%)</label>
+                                        <input type="number" class="form-control" id="defaultDiscount" value="0.00"
+                                            step="0.01" placeholder="0.00">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Round Off Method</label>
+                                        <select class="form-control" id="roundOffMethod">
+                                            <option value="">Select Method</option>
+                                            <option value="normal" selected>Normal Rounding</option>
+                                            <option value="up">Round Up</option>
+                                            <option value="down">Round Down</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Round Off Limit</label>
+                                        <input type="number" class="form-control" id="roundOffLimit" value="0.50"
+                                            step="0.01" placeholder="0.00">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Maintain Budget</label>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="maintainBudget"
+                                                onclick="toggleBudget()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="budgetLabel">Yes</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+
+                            <!-- Accounting Preferences -->
+                            <div class="form-section">
+                                <h3 class="section-title">Accounting Preferences</h3>
+                                <div class="preferences-grid">
+                                    <div class="preference-item">
+                                        <span class="preference-label">Maintain Accounts</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="maintainAccounts"
+                                                onclick="toggleAccounts()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="accountsLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Maintain Budgets</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="maintainBudgetsPref"
+                                                onclick="toggleBudgetsPref()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="budgetsLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Maintain Cost Center</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="maintainCostCenter"
+                                                onclick="toggleCostCenter()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="costCenterLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Maintain Multi Branch Accounting</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="multiBranch"
+                                                onclick="toggleMultiBranch()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="multiBranchLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Multi Currency</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="multiCurrency"
+                                                onclick="toggleMultiCurrency()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="multiCurrencyLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Enable Interest Calculation</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="interestCalc"
+                                                onclick="toggleInterest()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="interestLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Enable Cheque Management</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="chequeMgmt" onclick="toggleCheque()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="chequeLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preference-item">
+                                        <span class="preference-label">Auto Backup</span>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="autoBackup"
+                                                onclick="toggleAutoBackup()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="autoBackupLabel">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="grid-column: span 2;">
+                                        <label class="form-label">Backup Time</label>
+                                        <select class="form-control" id="backupTime" style="max-width: 200px;">
+                                            <option value="00:00">12:00 AM</option>
+                                            <option value="01:00">01:00 AM</option>
+                                            <option value="02:00" selected>02:00 AM</option>
+                                            <option value="03:00">03:00 AM</option>
+                                            <option value="04:00">04:00 AM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Default Settings -->
+                            <div class="form-section">
+                                <h3 class="section-title">Default Settings</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">Default Bank</label>
+                                        <select class="form-control" id="defaultBank">
+                                            <option value="">Select Bank</option>
+                                            <option value="dbbl">DBBL</option>
+                                            <option value="sonali">Sonali Bank</option>
+                                            <option value="islami">Islami Bank</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Cash Account</label>
+                                        <select class="form-control" id="defaultCash">
+                                            <option value="">Select Account</option>
+                                            <option value="cash-main">Cash in Hand - Main</option>
+                                            <option value="cash-petty">Petty Cash</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Revenue Account</label>
+                                        <select class="form-control" id="defaultRevenue">
+                                            <option value="">Select Account</option>
+                                            <option value="revenue-main">Revenue - Main</option>
+                                            <option value="revenue-other">Other Revenue</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Expense Account</label>
+                                        <select class="form-control" id="defaultExpense">
+                                            <option value="">Select Account</option>
+                                            <option value="expense-main">Operating Expenses</option>
+                                            <option value="expense-admin">Administrative Expenses</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Purchase Account</label>
+                                        <select class="form-control" id="defaultPurchase">
+                                            <option value="">Select Account</option>
+                                            <option value="purchase-main">Purchase - Main</option>
+                                            <option value="purchase-local">Local Purchase</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Default Sales Account</label>
+                                        <select class="form-control" id="defaultSales">
+                                            <option value="">Select Account</option>
+                                            <option value="sales-main">Sales - Main</option>
+                                            <option value="sales-local">Local Sales</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Info Notice -->
+                            <div class="form-section" style="padding-top: 0;">
+                                <div class="info-notice">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>You can change these settings anytime from System Settings.</span>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- Right Column - Sidebar Cards -->
-                    <div class="settings-sidebar">
-                        <!-- Company Logo Card -->
+                    <!-- Right Column - Summary Cards -->
+                    <div class="sidebar-cards">
+                        <!-- Financial Settings Summary -->
                         <div class="sidebar-card reveal">
-                            <div class="card-header-custom">
-                                <h3 class="card-title-custom">Company Logo</h3>
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <div class="card-icon-wrapper">
+                                        <i class="bi bi-receipt"></i>
+                                    </div>
+                                    Financial Settings Summary
+                                </div>
                             </div>
-                            <div class="card-body-custom">
-                                <div class="logo-upload-area">
-                                    <div class="logo-preview">
-                                        <img src="images/logo.png" alt="ST TYRE Logo"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300'">
+                            <div class="card-body">
+                                <div class="summary-list">
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-currency-dollar"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Base Currency</div>
+                                            <div class="summary-value" id="summaryCurrency">BDT - Bangladeshi Taka</div>
+                                        </div>
                                     </div>
-                                    <div class="logo-buttons">
-                                        <button class="btn-logo btn-logo-change" onclick="changeLogo()">
-                                            <i class="bi bi-upload"></i> Change Logo
-                                        </button>
-                                        <button class="btn-logo btn-logo-remove" onclick="removeLogo()">
-                                            <i class="bi bi-trash"></i> Remove
-                                        </button>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-hash"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Currency Precision</div>
+                                            <div class="summary-value" id="summaryPrecision">2 (100.00)</div>
+                                        </div>
                                     </div>
-                                    <div class="logo-hint">Recommended size: 300px X 120px, PNG/JPG</div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-calendar-range"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Financial Year</div>
+                                            <div class="summary-value" id="summaryFY">01 Jul - 30 Jun</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-calendar-check"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Default Fiscal Year</div>
+                                            <div class="summary-value" id="summaryFiscalYear">2024-2025</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-clock"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Default Payment Terms</div>
+                                            <div class="summary-value" id="summaryPayment">30 Days</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-book"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Maintain Accounts</div>
+                                            <span class="badge-success" id="summaryAccounts">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-wallet2"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Multi Currency</div>
+                                            <span class="badge-success" id="summaryMultiCurrency">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-pie-chart"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Maintain Cost Center</div>
+                                            <span class="badge-success" id="summaryCostCenter">Yes</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Registered Address Card -->
+                        <!-- Tax & VAT Settings -->
                         <div class="sidebar-card reveal">
-                            <div class="card-header-custom">
-                                <h3 class="card-title-custom">Registered Address</h3>
+                            <div class="card-header">
+                                <div class="card-title">Tax & VAT Settings</div>
+                                <a href="#" class="card-link" onclick="editTaxSettings()">View / Edit</a>
                             </div>
-                            <div class="card-body-custom">
-                                <div class="address-content">
-                                    <div class="address-info">
-                                        <span class="address-status">
-                                            <i class="bi bi-check-circle-fill" style="margin-right: 4px;"></i>
-                                            Active
-                                        </span>
-                                        <div class="address-text">
-                                            25/2, Lake Circus Road, Kalabagan<br>
-                                            Dhanmondi, Dhaka - 1205, Bangladesh
-                                        </div>
-                                        <div class="address-contact">
-                                            <div class="address-contact-item">
-                                                <i class="bi bi-telephone"></i>
-                                                +880 2 55012345
-                                            </div>
-                                            <div class="address-contact-item">
-                                                <i class="bi bi-envelope"></i>
-                                                info@sttyre.com
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <div class="tax-list">
+                                    <div class="tax-item">
+                                        <span class="tax-label">VAT Registration No.</span>
+                                        <span class="tax-value">BD123456789012</span>
                                     </div>
-                                    <button class="address-map-btn" onclick="showMap()" title="View on Map">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </button>
+                                    <div class="tax-item">
+                                        <span class="tax-label">TIN (Taxpayer ID)</span>
+                                        <span class="tax-value">123456789012</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-label">BIN (Business ID)</span>
+                                        <span class="tax-value">000123456-0001</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-label">VAT Applicable</span>
+                                        <span class="badge-success">Yes</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-label">Default VAT Rate</span>
+                                        <span class="tax-value">15 %</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Branches Card -->
+                        <!-- Opening Balance Settings -->
                         <div class="sidebar-card reveal">
-                            <div class="card-header-custom">
-                                <h3 class="card-title-custom">Branches (3)</h3>
-                                <a href="#" class="card-action-link">View All</a>
+                            <div class="card-header">
+                                <div class="card-title">Opening Balance Settings</div>
+                                <a href="#" class="card-link" onclick="editOpeningBalance()">View / Edit</a>
                             </div>
-                            <div class="card-body-custom" style="padding: 0;">
-                                <table class="branches-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Branch Name</th>
-                                            <th>Location</th>
-                                            <th>Status</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Head Office</td>
-                                            <td>Dhaka</td>
-                                            <td><span class="branch-status">Active</span></td>
-                                            <td>
-                                                <i class="bi bi-pencil branch-action" onclick="editBranch(1)"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Chattogram Branch</td>
-                                            <td>Chattogram</td>
-                                            <td><span class="branch-status">Active</span></td>
-                                            <td>
-                                                <i class="bi bi-pencil branch-action" onclick="editBranch(2)"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sylhet Branch</td>
-                                            <td>Sylhet</td>
-                                            <td><span class="branch-status">Active</span></td>
-                                            <td>
-                                                <i class="bi bi-pencil branch-action" onclick="editBranch(3)"></i>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Contact Persons Card -->
-                        <div class="sidebar-card reveal">
-                            <div class="card-header-custom">
-                                <h3 class="card-title-custom">Contact Persons</h3>
-                                <a href="#" class="card-action-link" onclick="addContact()">Add New</a>
-                            </div>
-                            <div class="card-body-custom">
-                                <div class="contact-list">
-                                    <div class="contact-item">
-                                        <img src="images/profile.jpg" alt="MD. Shaokat Hossain" class="contact-avatar"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
-                                        <div class="contact-info">
-                                            <div class="contact-header">
-                                                <span class="contact-name">MD. Shaokat Hossain</span>
-                                                <span class="contact-badge">Primary</span>
-                                            </div>
-                                            <div class="contact-role">Managing Director</div>
-                                            <a href="mailto:shoakat@sttyre.com"
-                                                class="contact-email">shoakat@sttyre.com</a>
-                                            <div class="contact-phones">
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-phone"></i>
-                                                    +880 1711 123456
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-telephone"></i>
-                                                    +880 2 55012345
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <i class="bi bi-pencil contact-edit" onclick="editContact(1)"></i>
+                            <div class="card-body">
+                                <div class="tax-list">
+                                    <div class="tax-item">
+                                        <span class="tax-label">Opening Balance Required</span>
+                                        <span class="badge-success">Yes</span>
                                     </div>
-
-                                    <div class="contact-item">
-                                        <img src="images/profile2.jpg" alt="Sumaiya Akter" class="contact-avatar"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=Sumaiya+Akter&background=10b981&color=fff'">
-                                        <div class="contact-info">
-                                            <div class="contact-header">
-                                                <span class="contact-name">Sumaiya Akter</span>
-                                                <span class="contact-badge accounts">Accounts Head</span>
-                                            </div>
-                                            <div class="contact-role">Head of Accounts</div>
-                                            <a href="mailto:sumaiya@sttyre.com"
-                                                class="contact-email">sumaiya@sttyre.com</a>
-                                            <div class="contact-phones">
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-phone"></i>
-                                                    +880 1722 654321
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-telephone"></i>
-                                                    +880 2 55012346
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <i class="bi bi-pencil contact-edit" onclick="editContact(2)"></i>
+                                    <div class="tax-item">
+                                        <span class="tax-label">Opening Balance Date</span>
+                                        <span class="tax-value">01 Jul 2024</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-label">Opening Balance Posting</span>
+                                        <span class="tax-value">Manual</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
 
         <!-- Footer -->
@@ -559,7 +644,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/basic-information.js"></script>
+    <script src="js/financial-settings.js"></script>
 </body>
 
 </html>

@@ -103,470 +103,424 @@
         </header>
 
         <main class="main-content">
-            <!-- Page Header -->
-            <div class="setup-header reveal">
-                <div class="setup-title">
-                    <h1>Company Setup</h1>
-                    <p class="setup-subtitle">Set up your company information in few simple steps.</p>
-                </div>
-                <div class="setup-actions">
-                    <button class="btn-custom btn-secondary" onclick="goBack()">
-                        <i class="bi bi-chevron-left"></i>
-                        Back
-                    </button>
-                    <button class="btn-custom btn-secondary" onclick="saveAndExit()">
-                        <i class="bi bi-box-arrow-up"></i>
-                        Save & Exit
-                    </button>
-                    <button class="btn-custom btn-primary" onclick="nextStep()">
-                        Next Step
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Stepper -->
-            <div class="setup-stepper reveal">
-                <div class="stepper-line"></div>
-                <div class="stepper-progress" id="stepperProgress" style="width: 66.66%"></div>
-
-                <div class="stepper-item completed">
-                    <div class="stepper-circle">
-                        <i class="bi bi-check-lg"></i>
+            <div class="company-setup-page">
+                <!-- Page Header -->
+                <div class="setup-header reveal">
+                    <div class="setup-title-section">
+                        <h1>Business Information</h1>
+                        <p class="setup-subtitle">Set up your Business in few simple steps.</p>
                     </div>
-                    <div class="stepper-label">
-                        <div class="stepper-step-num">Step 1</div>
-                        Basic Information
+                    <div class="setup-actions">
+                        <button class="btn-save-exit" onclick="saveAndExit()">
+                            <i class="bi bi-box-arrow-up"></i>
+                            Save & Exit
+                        </button>
                     </div>
                 </div>
 
-                <div class="stepper-item completed">
-                    <div class="stepper-circle">
-                        <i class="bi bi-check-lg"></i>
-                    </div>
-                    <div class="stepper-label">
-                        <div class="stepper-step-num">Step 2</div>
-                        Address & Contact
-                    </div>
-                </div>
+                <!-- Main Grid -->
+                <div class="setup-grid">
+                    <!-- Left Column - Form -->
+                    <div class="form-card reveal">
+                        <div class="card-title-main">Business Information</div>
 
-                <div class="stepper-item active">
-                    <div class="stepper-circle">3</div>
-                    <div class="stepper-label">
-                        <div class="stepper-step-num">Step 3</div>
-                        Business Information
-                    </div>
-                </div>
-
-                <div class="stepper-item">
-                    <div class="stepper-circle">4</div>
-                    <div class="stepper-label">
-                        <div class="stepper-step-num">Step 4</div>
-                        Financial Settings
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Grid -->
-            <div class="setup-grid">
-                <!-- Left Column - Form -->
-                <div class="form-card reveal">
-                    <div class="card-title-main">Business Information</div>
-
-                    <form id="businessInfoForm">
-                        <!-- Basic Info Grid -->
-                        <div class="form-section">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Industry Type <span class="required">*</span></label>
-                                    <select class="form-control" id="industryType" onchange="updateSummary()">
-                                        <option value="">Select Industry</option>
-                                        <option value="manufacturing" selected>Manufacturing</option>
-                                        <option value="trading">Trading</option>
-                                        <option value="services">Services</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Nature of Business <span class="required">*</span></label>
-                                    <select class="form-control" id="natureOfBusiness" onchange="updateSummary()">
-                                        <option value="">Select</option>
-                                        <option value="tyre" selected>Tyre Manufacturing</option>
-                                        <option value="automotive">Automotive</option>
-                                        <option value="general">General Manufacturing</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Business Category</label>
-                                    <select class="form-control" id="businessCategory">
-                                        <option value="private" selected>Private</option>
-                                        <option value="public">Public</option>
-                                        <option value="partnership">Partnership</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Incorporation Type</label>
-                                    <select class="form-control" id="incorporationType" onchange="updateSummary()">
-                                        <option value="">Select</option>
-                                        <option value="private-ltd" selected>Private Limited Company</option>
-                                        <option value="public-ltd">Public Limited Company</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Number of Employees</label>
-                                    <select class="form-control" id="numEmployees" onchange="updateSummary()">
-                                        <option value="">Select</option>
-                                        <option value="251-500" selected>251 - 500</option>
-                                        <option value="501-1000">501 - 1000</option>
-                                        <option value="1000+">1000+</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Company Size</label>
-                                    <select class="form-control" id="companySize">
-                                        <option value="">Select</option>
-                                        <option value="medium" selected>Medium</option>
-                                        <option value="large">Large</option>
-                                        <option value="enterprise">Enterprise</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Year of Establishment</label>
-                                    <div class="input-with-icon">
-                                        <i class="bi bi-calendar input-icon"></i>
-                                        <input type="text" class="form-control" id="yearEstablished" value="2014"
-                                            onchange="updateSummary()">
+                        <form id="businessInfoForm">
+                            <!-- Basic Info Grid -->
+                            <div class="form-section">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">Industry Type <span class="required">*</span></label>
+                                        <select class="form-control" id="industryType" onchange="updateSummary()">
+                                            <option value="">Select Industry</option>
+                                            <option value="manufacturing" selected>Manufacturing</option>
+                                            <option value="trading">Trading</option>
+                                            <option value="services">Services</option>
+                                        </select>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Commencement of Business</label>
-                                    <div class="input-with-icon">
-                                        <i class="bi bi-calendar input-icon"></i>
-                                        <input type="date" class="form-control" id="commencementDate"
-                                            value="2014-01-15">
+                                    <div class="form-group">
+                                        <label class="form-label">Nature of Business <span
+                                                class="required">*</span></label>
+                                        <select class="form-control" id="natureOfBusiness" onchange="updateSummary()">
+                                            <option value="">Select</option>
+                                            <option value="tyre" selected>Tyre Manufacturing</option>
+                                            <option value="automotive">Automotive</option>
+                                            <option value="general">General Manufacturing</option>
+                                        </select>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">GST / VAT Registered</label>
-                                    <div class="toggle-wrapper">
-                                        <div class="toggle-switch active" id="gstToggle" onclick="toggleGST()">
-                                            <div class="toggle-slider"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">Business Category</label>
+                                        <select class="form-control" id="businessCategory">
+                                            <option value="private" selected>Private</option>
+                                            <option value="public">Public</option>
+                                            <option value="partnership">Partnership</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Incorporation Type</label>
+                                        <select class="form-control" id="incorporationType" onchange="updateSummary()">
+                                            <option value="">Select</option>
+                                            <option value="private-ltd" selected>Private Limited Company</option>
+                                            <option value="public-ltd">Public Limited Company</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Number of Employees</label>
+                                        <select class="form-control" id="numEmployees" onchange="updateSummary()">
+                                            <option value="">Select</option>
+                                            <option value="251-500" selected>251 - 500</option>
+                                            <option value="501-1000">501 - 1000</option>
+                                            <option value="1000+">1000+</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Company Size</label>
+                                        <select class="form-control" id="companySize">
+                                            <option value="">Select</option>
+                                            <option value="medium" selected>Medium</option>
+                                            <option value="large">Large</option>
+                                            <option value="enterprise">Enterprise</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Year of Establishment</label>
+                                        <div class="input-with-icon">
+                                            <i class="bi bi-calendar input-icon"></i>
+                                            <input type="text" class="form-control" id="yearEstablished" value="2014"
+                                                onchange="updateSummary()">
                                         </div>
-                                        <span class="toggle-label" id="gstLabel">Yes</span>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Trade License Expiry Date</label>
-                                    <div class="input-with-icon">
-                                        <i class="bi bi-calendar input-icon"></i>
-                                        <input type="date" class="form-control" id="licenseExpiry" value="2025-12-31">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Export Oriented</label>
-                                    <div class="toggle-wrapper">
-                                        <div class="toggle-switch" id="exportToggle" onclick="toggleExport()">
-                                            <div class="toggle-slider"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">Commencement of Business</label>
+                                        <div class="input-with-icon">
+                                            <i class="bi bi-calendar input-icon"></i>
+                                            <input type="date" class="form-control" id="commencementDate"
+                                                value="2014-01-15">
                                         </div>
-                                        <span class="toggle-label" id="exportLabel">No</span>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">ISO Certified</label>
-                                    <div class="toggle-wrapper">
-                                        <div class="toggle-switch active" id="isoToggle" onclick="toggleISO()">
-                                            <div class="toggle-slider"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">GST / VAT Registered</label>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="gstToggle" onclick="toggleGST()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="gstLabel">Yes</span>
                                         </div>
-                                        <span class="toggle-label" id="isoLabel">Yes</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Trade License Expiry Date</label>
+                                        <div class="input-with-icon">
+                                            <i class="bi bi-calendar input-icon"></i>
+                                            <input type="date" class="form-control" id="licenseExpiry"
+                                                value="2025-12-31">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Export Oriented</label>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch" id="exportToggle" onclick="toggleExport()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="exportLabel">No</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">ISO Certified</label>
+                                        <div class="toggle-wrapper">
+                                            <div class="toggle-switch active" id="isoToggle" onclick="toggleISO()">
+                                                <div class="toggle-slider"></div>
+                                            </div>
+                                            <span class="toggle-label" id="isoLabel">Yes</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Business Activities -->
-                        <div class="form-section">
-                            <h3 class="section-title">Business Activities</h3>
-                            <div class="activities-grid">
-                                <div>
-                                    <label class="form-label">Main Products / Services <span
+                            <!-- Business Activities -->
+                            <div class="form-section">
+                                <h3 class="section-title">Business Activities</h3>
+                                <div class="activities-grid">
+                                    <div>
+                                        <label class="form-label">Main Products / Services <span
+                                                class="required">*</span></label>
+                                        <div class="tag-input-container" id="tagContainer" onclick="focusTagInput()">
+                                            <span class="tag">
+                                                Radial Tyres
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <span class="tag">
+                                                Truck Tyres
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <span class="tag">
+                                                OTR Tyres
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <span class="tag">
+                                                Tube & Flap
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <span class="tag">
+                                                Battery
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <span class="tag">
+                                                Retreading Services
+                                                <span class="tag-remove" onclick="removeTag(this, event)">×</span>
+                                            </span>
+                                            <input type="text" class="tag-input" id="tagInput" placeholder=""
+                                                onkeypress="handleTagInput(event)">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="form-label">Other Products / Services</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Enter other products or services">
+
+                                        <div style="margin-top: 16px;">
+                                            <label class="form-label">Key Business Activities</label>
+                                            <div class="checkbox-list">
+                                                <label class="checkbox-item">
+                                                    <input type="checkbox" checked onchange="updateProductsList()">
+                                                    Tyre Manufacturing
+                                                </label>
+                                                <label class="checkbox-item">
+                                                    <input type="checkbox" checked onchange="updateProductsList()">
+                                                    Distribution & Sales
+                                                </label>
+                                                <label class="checkbox-item">
+                                                    <input type="checkbox" checked onchange="updateProductsList()">
+                                                    Import & Export
+                                                </label>
+                                                <label class="checkbox-item">
+                                                    <input type="checkbox" checked onchange="updateProductsList()">
+                                                    After Sales Service
+                                                </label>
+                                                <label class="checkbox-item">
+                                                    <input type="checkbox" id="othersCheckbox"
+                                                        onchange="toggleOthersInput()">
+                                                    Others (Please specify)
+                                                </label>
+                                                <input type="text" class="form-control" id="othersInput"
+                                                    placeholder="Specify other activities"
+                                                    style="margin-top: 8px; display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 20px;">
+                                    <label class="form-label">Business Description <span
                                             class="required">*</span></label>
-                                    <div class="tag-input-container" id="tagContainer" onclick="focusTagInput()">
-                                        <span class="tag">
-                                            Radial Tyres
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <span class="tag">
-                                            Truck Tyres
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <span class="tag">
-                                            OTR Tyres
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <span class="tag">
-                                            Tube & Flap
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <span class="tag">
-                                            Battery
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <span class="tag">
-                                            Retreading Services
-                                            <span class="tag-remove" onclick="removeTag(this, event)">×</span>
-                                        </span>
-                                        <input type="text" class="tag-input" id="tagInput" placeholder=""
-                                            onkeypress="handleTagInput(event)">
-                                    </div>
+                                    <textarea class="textarea-custom" id="businessDesc"
+                                        placeholder="Enter business description">ST TYRE INDUSTRIES LTD. is a leading tyre manufacturing company in Bangladesh committed to producing high quality tyres for domestic and international markets. Our products include radial tyres, truck tyres, OTR tyres, tube & flap, batteries and retreading services.</textarea>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <label class="form-label">Other Products / Services</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Enter other products or services">
-
-                                    <div style="margin-top: 16px;">
-                                        <label class="form-label">Key Business Activities</label>
-                                        <div class="checkbox-list">
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" checked onchange="updateProductsList()">
-                                                Tyre Manufacturing
-                                            </label>
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" checked onchange="updateProductsList()">
-                                                Distribution & Sales
-                                            </label>
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" checked onchange="updateProductsList()">
-                                                Import & Export
-                                            </label>
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" checked onchange="updateProductsList()">
-                                                After Sales Service
-                                            </label>
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" id="othersCheckbox"
-                                                    onchange="toggleOthersInput()">
-                                                Others (Please specify)
-                                            </label>
-                                            <input type="text" class="form-control" id="othersInput"
-                                                placeholder="Specify other activities"
-                                                style="margin-top: 8px; display: none;">
+                            <!-- Documents Upload -->
+                            <div class="form-section">
+                                <h3 class="section-title">Business Registration Documents</h3>
+                                <div class="form-grid">
+                                    <div>
+                                        <label class="upload-label">Upload Registration Certificate</label>
+                                        <div class="upload-container">
+                                            <div class="file-item">
+                                                <div class="file-icon">
+                                                    <i class="bi bi-file-earmark-pdf"></i>
+                                                </div>
+                                                <div class="file-info">
+                                                    <div class="file-name">trade_license_2024.pdf</div>
+                                                    <div class="file-size">1.2 MB</div>
+                                                </div>
+                                                <div class="file-actions">
+                                                    <button type="button" class="file-btn" title="Download">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button type="button" class="file-btn delete" title="Delete"
+                                                        onclick="removeFile(this)">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div style="margin-top: 20px;">
-                                <label class="form-label">Business Description <span class="required">*</span></label>
-                                <textarea class="textarea-custom" id="businessDesc"
-                                    placeholder="Enter business description">ST TYRE INDUSTRIES LTD. is a leading tyre manufacturing company in Bangladesh committed to producing high quality tyres for domestic and international markets. Our products include radial tyres, truck tyres, OTR tyres, tube & flap, batteries and retreading services.</textarea>
-                            </div>
-                        </div>
-
-                        <!-- Documents Upload -->
-                        <div class="form-section">
-                            <h3 class="section-title">Business Registration Documents</h3>
-                            <div class="form-grid">
-                                <div>
-                                    <label class="upload-label">Upload Registration Certificate</label>
-                                    <div class="upload-container">
-                                        <div class="file-item">
-                                            <div class="file-icon">
-                                                <i class="bi bi-file-earmark-pdf"></i>
-                                            </div>
-                                            <div class="file-info">
-                                                <div class="file-name">trade_license_2024.pdf</div>
-                                                <div class="file-size">1.2 MB</div>
-                                            </div>
-                                            <div class="file-actions">
-                                                <button type="button" class="file-btn" title="Download">
-                                                    <i class="bi bi-download"></i>
-                                                </button>
-                                                <button type="button" class="file-btn delete" title="Delete"
-                                                    onclick="removeFile(this)">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
+                                    <div>
+                                        <label class="upload-label">Upload Other Document (Optional)</label>
+                                        <div class="upload-container">
+                                            <div class="file-item">
+                                                <div class="file-icon">
+                                                    <i class="bi bi-file-earmark-pdf"></i>
+                                                </div>
+                                                <div class="file-info">
+                                                    <div class="file-name">certificate_of_incorporation.pdf</div>
+                                                    <div class="file-size">1.5 MB</div>
+                                                </div>
+                                                <div class="file-actions">
+                                                    <button type="button" class="file-btn" title="Download">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button type="button" class="file-btn delete" title="Delete"
+                                                        onclick="removeFile(this)">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div>
-                                    <label class="upload-label">Upload Other Document (Optional)</label>
-                                    <div class="upload-container">
-                                        <div class="file-item">
-                                            <div class="file-icon">
-                                                <i class="bi bi-file-earmark-pdf"></i>
-                                            </div>
-                                            <div class="file-info">
-                                                <div class="file-name">certificate_of_incorporation.pdf</div>
-                                                <div class="file-size">1.5 MB</div>
-                                            </div>
-                                            <div class="file-actions">
-                                                <button type="button" class="file-btn" title="Download">
-                                                    <i class="bi bi-download"></i>
-                                                </button>
-                                                <button type="button" class="file-btn delete" title="Delete"
-                                                    onclick="removeFile(this)">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="upload-footer">
+                                    Accepted formats: PDF, JPG, PNG (Max size: 5MB)
                                 </div>
                             </div>
-                            <div class="upload-footer">
-                                Accepted formats: PDF, JPG, PNG (Max size: 5MB)
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Right Column - Summary Cards -->
-                <div class="sidebar-cards">
-                    <!-- Business Information Summary -->
-                    <div class="sidebar-card reveal">
-                        <div class="card-header">
-                            <h3 class="card-title">Business Information Summary</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="summary-list">
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-building"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">Industry Type</div>
-                                        <div class="summary-value" id="summaryIndustry">Manufacturing</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-briefcase"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">Nature of Business</div>
-                                        <div class="summary-value" id="summaryNature">Tyre Manufacturing</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-file-text"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">Incorporation Type</div>
-                                        <div class="summary-value" id="summaryIncorporation">Private Limited Company
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-calendar"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">Year of Establishment</div>
-                                        <div class="summary-value" id="summaryYear">2014</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">Number of Employees</div>
-                                        <div class="summary-value" id="summaryEmployees">251 - 500</div>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-receipt"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">GST / VAT Registered</div>
-                                        <span class="badge-success" id="summaryGST">Yes</span>
-                                    </div>
-                                </div>
-
-                                <div class="summary-item">
-                                    <div class="summary-icon">
-                                        <i class="bi bi-award"></i>
-                                    </div>
-                                    <div class="summary-content">
-                                        <div class="summary-label">ISO Certified</div>
-                                        <span class="badge-success" id="summaryISO">Yes</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
 
-                    <!-- Products / Services -->
-                    <div class="sidebar-card reveal">
-                        <div class="card-header">
-                            <h3 class="card-title">Products / Services</h3>
-                            <a href="#" class="card-link">View All</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="products-list" id="productsList">
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>Radial Tyres</span>
-                                </div>
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>Truck Tyres</span>
-                                </div>
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>OTR Tyres</span>
-                                </div>
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>Tube & Flap</span>
-                                </div>
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>Battery</span>
-                                </div>
-                                <div class="product-item">
-                                    <span class="product-bullet"></span>
-                                    <span>Retreading Services</span>
-                                </div>
+                    <!-- Right Column - Summary Cards -->
+                    <div class="sidebar-cards">
+                        <!-- Business Information Summary -->
+                        <div class="sidebar-card reveal">
+                            <div class="card-header">
+                                <h3 class="card-title">Business Information Summary</h3>
                             </div>
-                        </div>
-                    </div>
+                            <div class="card-body">
+                                <div class="summary-list">
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-building"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Industry Type</div>
+                                            <div class="summary-value" id="summaryIndustry">Manufacturing</div>
+                                        </div>
+                                    </div>
 
-                    <!-- Tips -->
-                    <div class="tips-card reveal">
-                        <div class="tips-header">
-                            <div class="tips-icon">
-                                <i class="bi bi-lightbulb"></i>
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-briefcase"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Nature of Business</div>
+                                            <div class="summary-value" id="summaryNature">Tyre Manufacturing</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-file-text"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Incorporation Type</div>
+                                            <div class="summary-value" id="summaryIncorporation">Private Limited Company
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-calendar"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Year of Establishment</div>
+                                            <div class="summary-value" id="summaryYear">2014</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">Number of Employees</div>
+                                            <div class="summary-value" id="summaryEmployees">251 - 500</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-receipt"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">GST / VAT Registered</div>
+                                            <span class="badge-success" id="summaryGST">Yes</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary-item">
+                                        <div class="summary-icon">
+                                            <i class="bi bi-award"></i>
+                                        </div>
+                                        <div class="summary-content">
+                                            <div class="summary-label">ISO Certified</div>
+                                            <span class="badge-success" id="summaryISO">Yes</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tips-title">Tips</div>
                         </div>
-                        <div class="tips-content">
-                            Please provide accurate business information. This information will be used for reports,
-                            invoicing and compliance.
+
+                        <!-- Products / Services -->
+                        <div class="sidebar-card reveal">
+                            <div class="card-header">
+                                <h3 class="card-title">Products / Services</h3>
+                                <a href="#" class="card-link">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="products-list" id="productsList">
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>Radial Tyres</span>
+                                    </div>
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>Truck Tyres</span>
+                                    </div>
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>OTR Tyres</span>
+                                    </div>
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>Tube & Flap</span>
+                                    </div>
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>Battery</span>
+                                    </div>
+                                    <div class="product-item">
+                                        <span class="product-bullet"></span>
+                                        <span>Retreading Services</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips -->
+                        <div class="tips-card reveal">
+                            <div class="tips-header">
+                                <div class="tips-icon">
+                                    <i class="bi bi-lightbulb"></i>
+                                </div>
+                                <div class="tips-title">Tips</div>
+                            </div>
+                            <div class="tips-content">
+                                Please provide accurate business information. This information will be used for reports,
+                                invoicing and compliance.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
 
         <!-- Footer -->
