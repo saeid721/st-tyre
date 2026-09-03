@@ -127,6 +127,11 @@ function renderSidebar() {
 
         sectionHeader.addEventListener('click', (e) => {
             e.stopPropagation();
+            const sidebarEl = document.getElementById('sidebar');
+            if (sidebarEl && sidebarEl.classList.contains('collapsed')) {
+                toggleSidebarFlyout(section, sectionHeader);
+                return;
+            }
             const willExpand = !section.expanded;
             navSections.forEach((s) => {
                 if (s.type === 'group') s.expanded = false;
@@ -173,6 +178,57 @@ function renderSidebar() {
         sidebarNav.appendChild(secDiv);
     });
 }
+
+let activeFlyoutSection = null;
+
+function closeSidebarFlyout() {
+    const flyout = document.getElementById('sidebarFlyout');
+    if (flyout) flyout.classList.remove('show');
+    activeFlyoutSection = null;
+}
+
+function toggleSidebarFlyout(section, anchorEl) {
+    if (activeFlyoutSection === section) {
+        closeSidebarFlyout();
+        return;
+    }
+    activeFlyoutSection = section;
+
+    let flyout = document.getElementById('sidebarFlyout');
+    if (!flyout) {
+        flyout = document.createElement('div');
+        flyout.id = 'sidebarFlyout';
+        flyout.className = 'sidebar-flyout';
+        document.body.appendChild(flyout);
+    }
+
+    flyout.innerHTML = `
+        <div class="sidebar-flyout-title">${section.title}</div>
+        ${section.items.map(item => `
+            <a class="sidebar-flyout-item" href="${item.href || '#'}">
+                <i class="bi ${item.icon}"></i>
+                <span>${item.label}</span>
+            </a>
+        `).join('')}
+    `;
+
+    const r = anchorEl.getBoundingClientRect();
+    flyout.style.left = `${r.right + 10}px`;
+    flyout.style.top = `${r.top}px`;
+    flyout.classList.add('show');
+
+    flyout.querySelectorAll('.sidebar-flyout-item').forEach((link) => {
+        link.addEventListener('click', () => closeSidebarFlyout());
+    });
+}
+
+document.addEventListener('click', (e) => {
+    if (!activeFlyoutSection) return;
+    if (e.target.closest('.sidebar-flyout') || e.target.closest('.nav-section-header')) return;
+    closeSidebarFlyout();
+});
+
+window.addEventListener('scroll', closeSidebarFlyout, true);
 
 // --- Functional filter mock data (Sales/Purchase Overview period select) ---
 const OVERVIEW_DATA = {
@@ -547,6 +603,7 @@ function initSidebarToggle() {
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
+            closeSidebarFlyout();
         });
     }
 
