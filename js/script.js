@@ -88,13 +88,10 @@ const navSections = [
 function renderSidebar() {
     const sidebarNav = document.getElementById('sidebarNav');
     if (!sidebarNav) return;
-
     sidebarNav.innerHTML = '';
-
     navSections.forEach((section) => {
         const secDiv = document.createElement('div');
         secDiv.className = 'nav-section';
-
         // Single direct link (e.g. Dashboard) — no chevron, no children
         if (section.type === 'single') {
             const link = document.createElement('a');
@@ -109,22 +106,18 @@ function renderSidebar() {
             sidebarNav.appendChild(secDiv);
             return;
         }
-
         // Collapsible group header (icon + label + chevron)
         const sectionHeader = document.createElement('div');
         sectionHeader.className = 'nav-section-header';
         sectionHeader.setAttribute('data-tip', section.title);
-
         const badgeHtml = section.badge ? `<span class="badge-notification">${section.badge}</span>` : '';
         const rotation = section.expanded ? '180deg' : '0deg';
-
         sectionHeader.innerHTML = `
             <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
             <span class="nav-section-title">${section.title}</span>
             ${badgeHtml}
             <i class="bi bi-chevron-down" style="font-size:12px; transition: transform 0.2s; transform: rotate(${rotation});"></i>
         `;
-
         sectionHeader.addEventListener('click', (e) => {
             e.stopPropagation();
             const sidebarEl = document.getElementById('sidebar');
@@ -139,48 +132,38 @@ function renderSidebar() {
             section.expanded = willExpand;
             renderSidebar();
         });
-
         secDiv.appendChild(sectionHeader);
-
         if (section.expanded) {
             const itemsContainer = document.createElement('div');
             itemsContainer.className = 'nav-items-container';
-
             section.items.forEach((item) => {
                 const link = document.createElement('a');
                 link.className = 'nav-item-link';
                 link.href = item.href || '#';
-
                 link.innerHTML = `
                     <span class="nav-icon"><i class="bi ${item.icon}"></i></span>
                     <span class="nav-label">${item.label}</span>
                 `;
-
                 link.addEventListener('click', (e) => {
                     if (!item.href || item.href === '#') {
                         e.preventDefault();
                     }
                     document.querySelectorAll('.nav-item-link, .nav-section-header').forEach(el => el.classList.remove('active'));
                     link.classList.add('active');
-
                     if (window.innerWidth <= 767) {
                         document.getElementById('sidebar').classList.remove('show');
                         document.getElementById('mobileOverlay').classList.remove('show');
                     }
                 });
-
                 itemsContainer.appendChild(link);
             });
-
             secDiv.appendChild(itemsContainer);
         }
-
         sidebarNav.appendChild(secDiv);
     });
 }
 
 let activeFlyoutSection = null;
-
 function closeSidebarFlyout() {
     const flyout = document.getElementById('sidebarFlyout');
     if (flyout) flyout.classList.remove('show');
@@ -193,7 +176,6 @@ function toggleSidebarFlyout(section, anchorEl) {
         return;
     }
     activeFlyoutSection = section;
-
     let flyout = document.getElementById('sidebarFlyout');
     if (!flyout) {
         flyout = document.createElement('div');
@@ -201,7 +183,6 @@ function toggleSidebarFlyout(section, anchorEl) {
         flyout.className = 'sidebar-flyout';
         document.body.appendChild(flyout);
     }
-
     flyout.innerHTML = `
         <div class="sidebar-flyout-title">${section.title}</div>
         ${section.items.map(item => `
@@ -211,12 +192,10 @@ function toggleSidebarFlyout(section, anchorEl) {
             </a>
         `).join('')}
     `;
-
     const r = anchorEl.getBoundingClientRect();
     flyout.style.left = `${r.right + 10}px`;
     flyout.style.top = `${r.top}px`;
     flyout.classList.add('show');
-
     flyout.querySelectorAll('.sidebar-flyout-item').forEach((link) => {
         link.addEventListener('click', () => closeSidebarFlyout());
     });
@@ -339,12 +318,10 @@ function formatBDT(num) {
 function updateOverviewCard(type, period, factor) {
     const base = OVERVIEW_DATA[type] && OVERVIEW_DATA[type][period];
     if (!base) return;
-
     document.getElementById(`${type}CurrentLabel`).textContent = base.currentLabel;
     document.getElementById(`${type}PrevLabel`).textContent = base.prevLabel;
     document.getElementById(`${type}CurrentValue`).textContent = formatBDT(base.current * factor);
     document.getElementById(`${type}PrevValue`).textContent = formatBDT(base.prev * factor);
-
     const chart = type === 'sales' ? salesChartInstance : purchaseChartInstance;
     if (chart) {
         chart.data.labels = base.labels;
@@ -368,10 +345,8 @@ function updateKpiCard(prefix, entry, factor) {
 function applyFilters() {
     const key = PRESET_KEY_MAP[currentPresetLabel] || 'today';
     const factor = getCombinedFactor();
-
     updateOverviewCard('sales', key, factor);
     updateOverviewCard('purchase', key, factor);
-
     const kpi = KPI_DATA[key];
     if (!kpi) return;
     updateKpiCard('totalSales', kpi.sales, factor);
@@ -422,10 +397,8 @@ function buildLineConfig(entry, borderColor, backgroundColor) {
 function initCharts() {
     const salesCtx = document.getElementById('salesChart');
     if (salesCtx) salesChartInstance = new Chart(salesCtx, buildLineConfig(OVERVIEW_DATA.sales.thisMonth, '#3b82f6', 'rgba(59, 130, 246, 0.1)'));
-
     const purchaseCtx = document.getElementById('purchaseChart');
     if (purchaseCtx) purchaseChartInstance = new Chart(purchaseCtx, buildLineConfig(OVERVIEW_DATA.purchase.thisMonth, '#10b981', 'rgba(16, 185, 129, 0.1)'));
-
     const inventoryCtx = document.getElementById('inventoryChart');
     if (inventoryCtx) {
         new Chart(inventoryCtx, {
@@ -437,7 +410,6 @@ function initCharts() {
             options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: false } } }
         });
     }
-
     const agingCtx = document.getElementById('agingChart');
     if (agingCtx) {
         new Chart(agingCtx, {
@@ -449,52 +421,6 @@ function initCharts() {
             options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: false } } }
         });
     }
-}
-
-function updateOverviewCard(type, period) {
-    const entry = OVERVIEW_DATA[type] && OVERVIEW_DATA[type][period];
-    if (!entry) return;
-
-    document.getElementById(`${type}CurrentLabel`).textContent = entry.currentLabel;
-    document.getElementById(`${type}PrevLabel`).textContent = entry.prevLabel;
-    document.getElementById(`${type}CurrentValue`).textContent = entry.current;
-    document.getElementById(`${type}PrevValue`).textContent = entry.prev;
-
-    const chart = type === 'sales' ? salesChartInstance : purchaseChartInstance;
-    if (chart) {
-        chart.data.labels = entry.labels;
-        chart.data.datasets[0].data = entry.data;
-        chart.update();
-    }
-}
-
-function updateKpiCard(prefix, entry) {
-    if (!entry) return;
-    const valueEl = document.getElementById(`${prefix}Value`);
-    const trendEl = document.getElementById(`${prefix}Trend`);
-    if (valueEl) valueEl.textContent = entry.value;
-    if (trendEl) {
-        trendEl.classList.remove('up', 'down');
-        trendEl.classList.add(entry.trend);
-        trendEl.innerHTML = `<i class="bi bi-arrow-${entry.trend}"></i><span>${entry.pct}</span>`;
-    }
-}
-
-function updateDashboardForPreset(presetLabel) {
-    const key = PRESET_KEY_MAP[presetLabel];
-    if (!key) return;
-
-    updateOverviewCard('sales', key);
-    updateOverviewCard('purchase', key);
-
-    const kpi = KPI_DATA[key];
-    if (!kpi) return;
-    updateKpiCard('totalSales', kpi.sales);
-    updateKpiCard('totalPurchase', kpi.purchase);
-    updateKpiCard('inventoryValue', kpi.inventory);
-    updateKpiCard('grossProfit', kpi.profit);
-    updateKpiCard('receivable', kpi.receivable);
-    updateKpiCard('payable', kpi.payable);
 }
 
 function formatDate(isoDate) {
@@ -519,18 +445,15 @@ function initTopbarFilters() {
             bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
         });
     }
-
     document.querySelectorAll('.date-preset-option').forEach((opt) => {
         opt.addEventListener('click', (e) => {
             e.preventDefault();
             document.querySelectorAll('.date-preset-option').forEach(o => o.classList.remove('active'));
             opt.classList.add('active');
-
             if (opt.id === 'customRangeToggle') {
                 document.getElementById('customRangeInputs').classList.toggle('show');
                 return;
             }
-
             document.getElementById('customRangeInputs').classList.remove('show');
             document.getElementById('dateRangeText').textContent = opt.dataset.preset;
             updateDashboardForPreset(opt.dataset.preset);
@@ -538,7 +461,6 @@ function initTopbarFilters() {
             bootstrap.Dropdown.getOrCreateInstance(dropdownEl).hide();
         });
     });
-
     document.querySelectorAll('.product-option').forEach((opt) => {
         opt.addEventListener('click', (e) => {
             e.preventDefault();
@@ -547,7 +469,6 @@ function initTopbarFilters() {
             applyFilters();
         });
     });
-
     document.querySelectorAll('.branch-option').forEach((opt) => {
         opt.addEventListener('click', (e) => {
             e.preventDefault();
@@ -561,28 +482,23 @@ function initTopbarFilters() {
 function initSidebarTooltips() {
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
-
     const tip = document.createElement('div');
     tip.className = 'sidebar-tooltip';
     document.body.appendChild(tip);
-
     sidebar.addEventListener('mouseover', (e) => {
         const target = e.target.closest('[data-tip]');
         if (!target || !sidebar.classList.contains('collapsed')) return;
-
         const role = target.getAttribute('data-tip-role');
         if (role) {
             tip.innerHTML = `<strong>${target.getAttribute('data-tip')}</strong><span>${role}</span>`;
         } else {
             tip.textContent = target.getAttribute('data-tip');
         }
-
         const r = target.getBoundingClientRect();
         tip.style.left = `${r.right + 12}px`;
         tip.style.top = `${r.top + r.height / 2}px`;
         tip.classList.add('show');
     });
-
     sidebar.addEventListener('mouseout', (e) => {
         const target = e.target.closest('[data-tip]');
         const toEl = e.relatedTarget;
@@ -590,7 +506,6 @@ function initSidebarTooltips() {
             tip.classList.remove('show');
         }
     });
-
     window.addEventListener('scroll', () => tip.classList.remove('show'), true);
 }
 
@@ -599,14 +514,12 @@ function initSidebarToggle() {
     const sidebarToggle = document.getElementById('topbarSidebarToggle');
     const menuToggle = document.getElementById('menuToggle');
     const mobileOverlay = document.getElementById('mobileOverlay');
-
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
             closeSidebarFlyout();
         });
     }
-
     if (menuToggle && mobileOverlay) {
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('show');
@@ -624,9 +537,7 @@ function initMobileFilterPlacement() {
     const topbarLeft = document.querySelector('.topbar-left');
     const mobileFilterBar = document.getElementById('mobileFilterBar');
     if (!topbarCenter || !topbarLeft || !mobileFilterBar) return;
-
     const mq = window.matchMedia('(max-width: 767px)');
-
     function placeFilters(e) {
         if (e.matches) {
             mobileFilterBar.appendChild(topbarCenter);
@@ -634,7 +545,6 @@ function initMobileFilterPlacement() {
             topbarLeft.insertAdjacentElement('afterend', topbarCenter);
         }
     }
-
     placeFilters(mq);
     mq.addEventListener('change', placeFilters);
 }
@@ -642,7 +552,6 @@ function initMobileFilterPlacement() {
 function initFullscreen() {
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     if (!fullscreenBtn) return;
-
     fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().catch(err => console.log(`Error attempting to enable fullscreen: ${err.message}`));
@@ -652,7 +561,6 @@ function initFullscreen() {
             fullscreenBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
         }
     });
-
     document.addEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement) fullscreenBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
     });
@@ -661,18 +569,14 @@ function initFullscreen() {
 function initLogout() {
     const logoutModalEl = document.getElementById('logoutModal');
     if (!logoutModalEl) return;
-
     const logoutModal = new bootstrap.Modal(logoutModalEl);
-
     document.querySelectorAll('.logout-btn').forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             logoutModal.show();
         });
     });
-
     document.getElementById('confirmLogoutBtn').addEventListener('click', () => {
-        // clear session/local storage here if you store auth state client-side
         window.location.href = 'login.html';
     });
 }
