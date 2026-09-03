@@ -97,6 +97,7 @@ function renderSidebar() {
             const link = document.createElement('a');
             link.className = 'nav-section-header' + (section.active ? ' active' : '');
             link.href = section.href || '#';
+            link.setAttribute('data-tip', section.title);
             link.innerHTML = `
                 <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
                 <span class="nav-section-title">${section.title}</span>
@@ -109,6 +110,7 @@ function renderSidebar() {
         // Collapsible group header (icon + label + chevron)
         const sectionHeader = document.createElement('div');
         sectionHeader.className = 'nav-section-header';
+        sectionHeader.setAttribute('data-tip', section.title);
 
         const badgeHtml = section.badge ? `<span class="badge-notification">${section.badge}</span>` : '';
         const rotation = section.expanded ? '180deg' : '0deg';
@@ -497,17 +499,51 @@ function initTopbarFilters() {
     });
 }
 
+function initSidebarTooltips() {
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) return;
+
+    const tip = document.createElement('div');
+    tip.className = 'sidebar-tooltip';
+    document.body.appendChild(tip);
+
+    sidebar.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('[data-tip]');
+        if (!target || !sidebar.classList.contains('collapsed')) return;
+
+        const role = target.getAttribute('data-tip-role');
+        if (role) {
+            tip.innerHTML = `<strong>${target.getAttribute('data-tip')}</strong><span>${role}</span>`;
+        } else {
+            tip.textContent = target.getAttribute('data-tip');
+        }
+
+        const r = target.getBoundingClientRect();
+        tip.style.left = `${r.right + 12}px`;
+        tip.style.top = `${r.top + r.height / 2}px`;
+        tip.classList.add('show');
+    });
+
+    sidebar.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('[data-tip]');
+        const toEl = e.relatedTarget;
+        if (target && (!toEl || !target.contains(toEl))) {
+            tip.classList.remove('show');
+        }
+    });
+
+    window.addEventListener('scroll', () => tip.classList.remove('show'), true);
+}
+
 function initSidebarToggle() {
     const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarToggle = document.getElementById('topbarSidebarToggle');
     const menuToggle = document.getElementById('menuToggle');
     const mobileOverlay = document.getElementById('mobileOverlay');
 
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
-            const isCollapsed = sidebar.classList.contains('collapsed');
-            sidebarToggle.innerHTML = `<i class="bi bi-${isCollapsed ? 'chevron-right' : 'chevron-left'}"></i>`;
         });
     }
 
@@ -585,6 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSidebar();
     initCharts();
     initSidebarToggle();
+    initSidebarTooltips();
     initFullscreen();
     initTopbarFilters();
     initMobileFilterPlacement();
