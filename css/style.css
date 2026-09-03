@@ -1550,6 +1550,11 @@ body {
         padding-bottom: 80px;
     }
 
+    .kpi-grid {
+        padding: 5px;
+        gap: 5px;
+    }
+
     .sidebar {
         transform: translateX(-100%);
         z-index: 1050;
@@ -1821,7 +1826,16 @@ body {
 /* Small Mobile (max-width: 575px) */
 @media (max-width: 575px) {
     .kpi-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kpi-label {
+        font-size: 10px;
+        text-transform: lowercase;
+    }
+
+    .kpi-card {
+        padding: 10px 5px 5px;
     }
 
     .inventory-grid {
