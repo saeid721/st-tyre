@@ -598,30 +598,40 @@
                     </div>
 
                     <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="req-table" id="reqTable">
-                            <thead>
-                                <tr>
-                                    <th style="width:50px" class="text-center">#</th>
-                                    <th class="sortable" data-sort="no">Requisition No <i
-                                            class="bi bi-chevron-expand"></i></th>
-                                    <th class="sortable" data-sort="wing">Wing</th>
-                                    <th>Warehouse</th>
-                                    <th class="text-center">Type</th>
-                                    <th class="sortable text-end" data-sort="qty">Total Qty <i
-                                            class="bi bi-chevron-expand"></i>
-                                    </th>
-                                    <th class="sortable text-center" data-sort="date">Date <i
-                                            class="bi bi-chevron-expand"></i></th>
-                                    <th>Place of Supply</th>
-                                    <th class="text-center">Status</th>
-                                    <th style="width:220px" class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="reqTableBody">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
+                    <div class="table-loading-wrap">
+                        <div class="loading-overlay" id="loadingOverlay">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="loading-text">Loading requisitions...</div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="req-table" id="reqTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px" class="text-center">#</th>
+                                        <th class="sortable" data-sort="no">Requisition No <i
+                                                class="bi bi-chevron-expand"></i></th>
+                                        <th class="sortable" data-sort="wing">Wing</th>
+                                        <th>Warehouse</th>
+                                        <th class="text-center">Type</th>
+                                        <th class="sortable text-end" data-sort="qty">Total Qty <i
+                                                class="bi bi-chevron-expand"></i>
+                                        </th>
+                                        <th class="sortable text-center" data-sort="date">Date <i
+                                                class="bi bi-chevron-expand"></i></th>
+                                        <th>Place of Supply</th>
+                                        <th class="text-center">Status</th>
+                                        <th style="width:220px" class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reqTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Pagination -->
@@ -677,16 +687,6 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <div class="loading-text">Loading requisitions...</div>
-        </div>
-    </div>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>

@@ -26,16 +26,285 @@
             </div>
         </div>
 
-        <nav class="sidebar-nav" id="sidebarNav"></nav>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="nav-section">
+                <a class="nav-section-header active" href="index.html" data-tip="Dashboard">
+                    <span class="nav-icon"><i class="bi bi-house-door-fill"></i></span>
+                    <span class="nav-section-title">Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Sales">
+                    <span class="nav-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                    <span class="nav-section-title">Sales</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="invoice-list.html">
+                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-label">Sales Invoice</span>
+                    </a>
+                    <a class="nav-item-link" href="sales-return.html">
+                        <span class="nav-icon"><i class="bi bi-arrow-return-left"></i></span>
+                        <span class="nav-label">Sales Return</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Purchase">
+                    <span class="nav-icon"><i class="bi bi-cart3"></i></span>
+                    <span class="nav-section-title">Purchase</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="purchase-invoice.html">
+                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-label">Purchase Invoice</span>
+                    </a>
+                    <a class="nav-item-link" href="purchase-return.html">
+                        <span class="nav-icon"><i class="bi bi-arrow-return-left"></i></span>
+                        <span class="nav-label">Purchase Return</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Import & LC">
+                    <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
+                    <span class="nav-section-title">Import &amp; LC</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="lc-opening.html">
+                        <span class="nav-icon"><i class="bi bi-bank"></i></span>
+                        <span class="nav-label">LC Opening</span>
+                    </a>
+                    <a class="nav-item-link" href="shipment-tracking.html">
+                        <span class="nav-icon"><i class="bi bi-truck"></i></span>
+                        <span class="nav-label">Shipment Tracking</span>
+                    </a>
+                    <a class="nav-item-link" href="container-management.html">
+                        <span class="nav-icon"><i class="bi bi-boxes"></i></span>
+                        <span class="nav-label">Container Management</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Inventory">
+                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                    <span class="nav-section-title">Inventory</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="products.html">
+                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
+                        <span class="nav-label">Products</span>
+                    </a>
+                    <a class="nav-item-link" href="stock-management.html">
+                        <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                        <span class="nav-label">Stock Management</span>
+                    </a>
+                    <a class="nav-item-link" href="stock-transfer.html">
+                        <span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span>
+                        <span class="nav-label">Stock Transfer</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Requisition">
+                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                    <span class="nav-section-title">Requisition</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="requisition.html">
+                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
+                        <span class="nav-label">Requisition List</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Expenses">
+                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                    <span class="nav-section-title">Expenses</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="expense.html">
+                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
+                        <span class="nav-label">Expenses List</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Accounts">
+                    <span class="nav-icon"><i class="bi bi-calculator"></i></span>
+                    <span class="nav-section-title">Accounts</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="chart-of-accounts.html">
+                        <span class="nav-icon"><i class="bi bi-diagram-3"></i></span>
+                        <span class="nav-label">Chart of Accounts</span>
+                    </a>
+                    <a class="nav-item-link" href="journal-entry.html">
+                        <span class="nav-icon"><i class="bi bi-journal-text"></i></span>
+                        <span class="nav-label">Journal Entry</span>
+                    </a>
+                    <a class="nav-item-link" href="cash-book.html">
+                        <span class="nav-icon"><i class="bi bi-wallet2"></i></span>
+                        <span class="nav-label">Cash Book</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="VAT & Mushak">
+                    <span class="nav-icon"><i class="bi bi-receipt-cutoff"></i></span>
+                    <span class="nav-section-title">VAT &amp; Mushak</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="vat-setup.html">
+                        <span class="nav-icon"><i class="bi bi-percent"></i></span>
+                        <span class="nav-label">VAT Setup</span>
+                    </a>
+                    <a class="nav-item-link" href="vat-return.html">
+                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-label">VAT Return</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Reports">
+                    <span class="nav-icon"><i class="bi bi-file-earmark-bar-graph"></i></span>
+                    <span class="nav-section-title">Reports</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="sales-report.html">
+                        <span class="nav-icon"><i class="bi bi-graph-up"></i></span>
+                        <span class="nav-label">Sales Report</span>
+                    </a>
+                    <a class="nav-item-link" href="purchase-report.html">
+                        <span class="nav-icon"><i class="bi bi-graph-down"></i></span>
+                        <span class="nav-label">Purchase Report</span>
+                    </a>
+                    <a class="nav-item-link" href="inventory-report.html">
+                        <span class="nav-icon"><i class="bi bi-box"></i></span>
+                        <span class="nav-label">Inventory Report</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Approval">
+                    <span class="nav-icon"><i class="bi bi-check2-circle"></i></span>
+                    <span class="nav-section-title">Approval</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="purchase-approval.html">
+                        <span class="nav-icon"><i class="bi bi-check-circle"></i></span>
+                        <span class="nav-label">Purchase Approval</span>
+                    </a>
+                    <a class="nav-item-link" href="sales-approval.html">
+                        <span class="nav-icon"><i class="bi bi-check2-circle"></i></span>
+                        <span class="nav-label">Sales Approval</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Notification">
+                    <span class="nav-icon"><i class="bi bi-bell"></i></span>
+                    <span class="nav-section-title">Notification</span>
+                    <span class="badge-notification">12</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="notifications.html">
+                        <span class="nav-icon"><i class="bi bi-bell"></i></span>
+                        <span class="nav-label">All Notifications</span>
+                    </a>
+                    <a class="nav-item-link" href="low-stock-alert.html">
+                        <span class="nav-icon"><i class="bi bi-exclamation-triangle"></i></span>
+                        <span class="nav-label">Low Stock Alert</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="User Management">
+                    <span class="nav-icon"><i class="bi bi-people-fill"></i></span>
+                    <span class="nav-section-title">User Management</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="users.html">
+                        <span class="nav-icon"><i class="bi bi-people"></i></span>
+                        <span class="nav-label">Users</span>
+                    </a>
+                    <a class="nav-item-link" href="roles-permissions.html">
+                        <span class="nav-icon"><i class="bi bi-shield-lock"></i></span>
+                        <span class="nav-label">Roles &amp; Permissions</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Master Setup">
+                    <span class="nav-icon"><i class="bi bi-building"></i></span>
+                    <span class="nav-section-title">Master Setup</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="basic-information.html">
+                        <span class="nav-icon"><i class="bi bi-building"></i></span>
+                        <span class="nav-label">Basic Information</span>
+                    </a>
+                    <a class="nav-item-link" href="address-contact.html">
+                        <span class="nav-icon"><i class="bi bi-telephone-outbound"></i></span>
+                        <span class="nav-label">Address &amp; Contact</span>
+                    </a>
+                    <a class="nav-item-link" href="business-information.html">
+                        <span class="nav-icon"><i class="bi bi-info-circle"></i></span>
+                        <span class="nav-label">Business Information</span>
+                    </a>
+                    <a class="nav-item-link" href="financial-settings.html">
+                        <span class="nav-icon"><i class="bi bi-calculator"></i></span>
+                        <span class="nav-label">Financial Settings</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="System Settings">
+                    <span class="nav-icon"><i class="bi bi-gear"></i></span>
+                    <span class="nav-section-title">System Settings</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+                <div class="nav-items-container" style="display:none;">
+                    <a class="nav-item-link" href="general-settings.html">
+                        <span class="nav-icon"><i class="bi bi-gear"></i></span>
+                        <span class="nav-label">General Settings</span>
+                    </a>
+                    <a class="nav-item-link" href="backup-restore.html">
+                        <span class="nav-icon"><i class="bi bi-hdd"></i></span>
+                        <span class="nav-label">Backup &amp; Restore</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
 
         <div class="sidebar-footer">
-            <!-- <div class="sidebar-company">
-                <div>
-                    <div class="company-name">ST TYRE Ltd.</div>
-                    <div class="company-location">Head Office</div>
-                </div>
-                <i class="bi bi-chevron-expand"></i>
-            </div> -->
             <div class="sidebar-user" data-tip="MD. Shaokat Hossain" data-tip-role="Managing Director">
                 <img src="images/profile.jpg" alt="User"
                     onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
@@ -172,7 +441,6 @@
                 </ul>
             </div>
         </header>
-
 
         <main class="main-content">
             <div class="company-setup-page">
