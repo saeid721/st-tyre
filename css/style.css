@@ -1830,8 +1830,8 @@ body {
     }
 
     .kpi-label {
-        font-size: 10px;
-        text-transform: lowercase;
+        font-size: 9px;
+        text-transform: capitalize;
     }
 
     .kpi-card {
