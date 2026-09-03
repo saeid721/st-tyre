@@ -36,7 +36,14 @@
         sortKey: null,
         sortDir: 'asc',
         search: '',
-        deleteId: null
+        deleteId: null,
+        activeFilters: {
+            wing: '',
+            warehouse: '',
+            type: '',
+            dateFrom: '',
+            dateTo: ''
+        }
     };
 
     // Utility Functions
@@ -52,7 +59,7 @@
     const formatQty = (n) => Number(n).toFixed(2);
 
     const STATUS_MAP = {
-        created: { label: 'On created User', cls: 'status-created' },
+        created: { label: 'Created', cls: 'status-created' },
         pending: { label: 'Pending Approval', cls: 'status-pending' },
         approved: { label: 'Approved', cls: 'status-approved' },
         rejected: { label: 'Rejected', cls: 'status-rejected' },
@@ -64,6 +71,23 @@
         import: { label: 'Import', cls: 'type-import' },
         transfer: { label: 'Transfer', cls: 'type-transfer' },
     };
+
+    // ========================================
+    // KPI UPDATE FUNCTION
+    // ========================================
+    function updateKPIStats() {
+        const total = state.data.length;
+        const pending = state.data.filter(r => r.status === 'pending').length;
+        const approved = state.data.filter(r => r.status === 'approved').length;
+        const completed = state.data.filter(r => r.status === 'completed').length;
+        const totalQty = state.data.reduce((sum, r) => sum + Number(r.qty || 0), 0);
+
+        $('kpiTotal').textContent = total;
+        $('kpiPending').textContent = pending;
+        $('kpiApproved').textContent = approved;
+        $('kpiCompleted').textContent = completed;
+        $('kpiQty').textContent = formatQty(totalQty);
+    }
 
     // Loading Overlay
     function showLoading() {
@@ -90,26 +114,96 @@
         };
 
         toast.innerHTML = `
-                <div class="toast-icon">
-                    <i class="bi bi-${icons[type]}"></i>
-                </div>
-                <div class="toast-content">
-                    <div class="toast-title">${title}</div>
-                    <div class="toast-msg">${message}</div>
-                </div>
-            `;
+            <div class="toast-icon">
+                <i class="bi bi-${icons[type]}"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-msg">${message}</div>
+            </div>
+        `;
 
         container.appendChild(toast);
+
+        // Trigger animation
+        setTimeout(() => toast.classList.add('show'), 10);
 
         setTimeout(() => {
             toast.classList.add('hiding');
             setTimeout(() => {
                 toast.remove();
-            }, 400);
+            }, 300);
         }, 3000);
     }
 
-    // Render Table
+    // ========================================
+    // ACTIVE FILTER CHIPS
+    // ========================================
+    function updateActiveFilterChips() {
+        const chipsContainer = $('filterChips');
+        const activeFiltersDiv = $('activeFilters');
+        const filters = state.activeFilters;
+
+        let chips = [];
+
+        if (filters.wing) {
+            chips.push({ label: `Wing: ${filters.wing}`, key: 'wing', value: filters.wing });
+        }
+        if (filters.warehouse) {
+            chips.push({ label: `Warehouse: ${filters.warehouse}`, key: 'warehouse', value: filters.warehouse });
+        }
+        if (filters.type) {
+            const typeLabel = TYPE_MAP[filters.type]?.label || filters.type;
+            chips.push({ label: `Type: ${typeLabel}`, key: 'type', value: filters.type });
+        }
+        if (filters.dateFrom) {
+            chips.push({ label: `From: ${formatDate(filters.dateFrom)}`, key: 'dateFrom', value: filters.dateFrom });
+        }
+        if (filters.dateTo) {
+            chips.push({ label: `To: ${formatDate(filters.dateTo)}`, key: 'dateTo', value: filters.dateTo });
+        }
+
+        if (chips.length === 0) {
+            activeFiltersDiv.classList.remove('show');
+            chipsContainer.innerHTML = '';
+        } else {
+            activeFiltersDiv.classList.add('show');
+            chipsContainer.innerHTML = chips.map(chip => `
+                <span class="filter-chip" data-key="${chip.key}">
+                    ${chip.label}
+                    <span class="filter-chip-remove" data-key="${chip.key}">
+                        <i class="bi bi-x"></i>
+                    </span>
+                </span>
+            `).join('');
+
+            // Bind remove events
+            chipsContainer.querySelectorAll('.filter-chip-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const key = btn.dataset.key;
+                    removeFilter(key);
+                });
+            });
+        }
+    }
+
+    function removeFilter(key) {
+        state.activeFilters[key] = '';
+
+        // Update UI
+        if (key === 'wing') $('filterWing').value = '';
+        if (key === 'warehouse') $('filterWarehouse').value = '';
+        if (key === 'type') $('filterType').value = '';
+        if (key === 'dateFrom') $('filterDateFrom').value = '';
+        if (key === 'dateTo') $('filterDateTo').value = '';
+
+        applyFilters();
+    }
+
+    // ========================================
+    // RENDER TABLE
+    // ========================================
     function renderTable() {
         const tbody = $('reqTableBody');
         let data = [...state.filtered];
@@ -121,7 +215,9 @@
                 r.no.toLowerCase().includes(q) ||
                 r.wing.toLowerCase().includes(q) ||
                 r.warehouse.toLowerCase().includes(q) ||
-                r.place.toLowerCase().includes(q)
+                r.type.toLowerCase().includes(q) ||
+                (r.place && r.place.toLowerCase().includes(q)) ||
+                STATUS_MAP[r.status]?.label.toLowerCase().includes(q)
             );
         }
 
@@ -146,57 +242,63 @@
 
         // Render
         if (pageData.length === 0) {
+            const hasActiveFilters = Object.values(state.activeFilters).some(v => v !== '') || state.search !== '';
             tbody.innerHTML = `
-                    <tr>
-                        <td colspan="10">
-                            <div class="empty-state">
-                                <i class="bi bi-inbox"></i>
-                                <h4>No requisitions found</h4>
-                                <p>Try adjusting your filters or search query.</p>
-                            </div>
-                        </td>
-                    </tr>`;
+                <tr>
+                    <td colspan="10">
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            <h4>No requisitions found</h4>
+                            <p>There are no requisitions matching your current filters.</p>
+                            ${hasActiveFilters ? '<button class="btn-clear-filters" id="clearFiltersBtn"><i class="bi bi-x-circle"></i> Clear Filters</button>' : ''}
+                        </div>
+                    </td>
+                </tr>`;
+
+            if (hasActiveFilters) {
+                $('clearFiltersBtn')?.addEventListener('click', resetFilters);
+            }
         } else {
             tbody.innerHTML = pageData.map((r, i) => {
                 const status = STATUS_MAP[r.status] || STATUS_MAP.created;
                 const type = TYPE_MAP[r.type] || TYPE_MAP.local;
                 return `
-                        <tr class="animate-fade-in" style="animation-delay: ${i * 0.05}s">
-                            <td><span class="req-row-num">${start + i + 1}</span></td>
-                            <td><span class="req-no">${r.no}</span></td>
-                            <td><span class="req-wing">${r.wing}</span></td>
-                            <td><span class="req-warehouse">${r.warehouse}</span></td>
-                            <td><span class="req-type ${type.cls}">${type.label}</span></td>
-                            <td><span class="req-qty">${formatQty(r.qty)}</span></td>
-                            <td><span class="req-date">${formatDate(r.date)}</span></td>
-                            <td><span class="req-place">${r.place || '-'}</span></td>
-                            <td><span class="status-badge ${status.cls}">${status.label}</span></td>
-                            <td>
-                                <div class="action-btns">
-                                    <button class="action-btn view" title="View" data-id="${r.id}">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                    <button class="action-btn print" title="Print" data-id="${r.id}">
-                                        <i class="bi bi-printer"></i>
-                                    </button>
-                                    <button class="action-btn doc" title="Document" data-id="${r.id}">
-                                        <i class="bi bi-file-earmark-text"></i>
-                                    </button>
-                                    <button class="action-btn edit" title="Edit" data-id="${r.id}">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="action-btn delete" title="Delete" data-id="${r.id}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>`;
+                    <tr class="animate-fade-in" style="animation-delay: ${i * 0.05}s">
+                        <td class="text-center"><span class="req-row-num">${start + i + 1}</span></td>
+                        <td><span class="req-no">${r.no}</span></td>
+                        <td><span class="req-wing">${r.wing}</span></td>
+                        <td><span class="req-warehouse">${r.warehouse}</span></td>
+                        <td class="text-center"><span class="req-type ${type.cls}">${type.label}</span></td>
+                        <td class="text-end"><span class="req-qty">${formatQty(r.qty)}</span></td>
+                        <td class="text-center"><span class="req-date">${formatDate(r.date)}</span></td>
+                        <td><span class="req-place">${r.place || '-'}</span></td>
+                        <td class="text-center"><span class="status-badge ${status.cls}">${status.label}</span></td>
+                        <td class="text-center">
+                            <div class="action-btns">
+                                <button class="action-btn view" title="View" data-id="${r.id}" aria-label="View requisition">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="action-btn print" title="Print" data-id="${r.id}" aria-label="Print requisition">
+                                    <i class="bi bi-printer"></i>
+                                </button>
+                                <button class="action-btn doc" title="Document" data-id="${r.id}" aria-label="View document">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </button>
+                                <button class="action-btn edit" title="Edit" data-id="${r.id}" aria-label="Edit requisition">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="action-btn delete" title="Delete" data-id="${r.id}" aria-label="Delete requisition">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>`;
             }).join('');
         }
 
         // Update info
-        const showing = pageData.length > 0 ? `${start + 1} to ${Math.min(start + state.perPage, total)}` : '0';
-        $('tableInfo').textContent = `Showing ${showing} of ${total} entries`;
+        const showing = pageData.length > 0 ? `${start + 1}–${Math.min(start + state.perPage, total)}` : '0';
+        $('tableInfo').textContent = `Showing ${showing} of ${total} requisitions`;
 
         // Render pagination
         renderPagination(totalPages);
@@ -208,18 +310,36 @@
     function renderPagination(totalPages) {
         const container = $('pagination');
         let html = `
-                <button class="page-btn" ${state.currentPage === 1 ? 'disabled' : ''} data-page="prev">
-                    <i class="bi bi-chevron-left"></i>
-                </button>`;
+            <button class="page-btn" ${state.currentPage === 1 ? 'disabled' : ''} data-page="prev" aria-label="Previous page">
+                <i class="bi bi-chevron-left"></i>
+            </button>`;
 
-        for (let i = 1; i <= totalPages; i++) {
+        // Smart pagination - show limited pages
+        let startPage = Math.max(1, state.currentPage - 2);
+        let endPage = Math.min(totalPages, state.currentPage + 2);
+
+        if (startPage > 1) {
+            html += `<button class="page-btn" data-page="1">1</button>`;
+            if (startPage > 2) {
+                html += `<button class="page-btn" disabled>...</button>`;
+            }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
             html += `<button class="page-btn ${i === state.currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
         }
 
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                html += `<button class="page-btn" disabled>...</button>`;
+            }
+            html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+        }
+
         html += `
-                <button class="page-btn" ${state.currentPage === totalPages ? 'disabled' : ''} data-page="next">
-                    <i class="bi bi-chevron-right"></i>
-                </button>`;
+            <button class="page-btn" ${state.currentPage === totalPages ? 'disabled' : ''} data-page="next" aria-label="Next page">
+                <i class="bi bi-chevron-right"></i>
+            </button>`;
 
         container.innerHTML = html;
 
@@ -266,15 +386,20 @@
         });
     }
 
-    // Filter Functions
+    // ========================================
+    // FILTER FUNCTIONS
+    // ========================================
     function applyFilters() {
         showLoading();
 
         const wing = $('filterWing').value;
         const warehouse = $('filterWarehouse').value;
         const type = $('filterType').value;
-        const dateFrom = $('dateFrom').value;
-        const dateTo = $('dateTo').value;
+        const dateFrom = $('filterDateFrom').value;
+        const dateTo = $('filterDateTo').value;
+
+        // Update active filters state
+        state.activeFilters = { wing, warehouse, type, dateFrom, dateTo };
 
         state.filtered = state.data.filter(r => {
             if (wing && r.wing !== wing) return false;
@@ -289,8 +414,11 @@
 
         setTimeout(() => {
             renderTable();
+            updateActiveFilterChips();
             hideLoading();
-            showToast('Filter Applied', 'Showing filtered results', 'success');
+            if (wing || warehouse || type || dateFrom || dateTo) {
+                showToast('Filter Applied', 'Showing filtered results', 'success');
+            }
         }, 300);
     }
 
@@ -298,17 +426,21 @@
         $('filterWing').value = '';
         $('filterWarehouse').value = '';
         $('filterType').value = '';
-        $('dateFrom').value = '';
-        $('dateTo').value = '';
+        $('filterDateFrom').value = '';
+        $('filterDateTo').value = '';
         $('tableSearch').value = '';
         state.search = '';
+        state.activeFilters = { wing: '', warehouse: '', type: '', dateFrom: '', dateTo: '' };
         state.filtered = [...state.data];
         state.currentPage = 1;
         renderTable();
+        updateActiveFilterChips();
         showToast('Filters Reset', 'Showing all requisitions', 'info');
     }
 
-    // Sort Function
+    // ========================================
+    // SORT FUNCTION
+    // ========================================
     function handleSort(key) {
         if (state.sortKey === key) {
             state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
@@ -319,7 +451,9 @@
         renderTable();
     }
 
-    // Modal Functions
+    // ========================================
+    // MODAL FUNCTIONS
+    // ========================================
     function openViewModal(id) {
         const r = state.data.find(x => x.id === id);
         if (!r) return;
@@ -375,6 +509,7 @@
             if (idx > -1) {
                 state.data.splice(idx, 1);
                 applyFilters();
+                updateKPIStats();
                 showToast('Deleted', `${r.no} has been deleted successfully`, 'success');
             }
             hideLoading();
@@ -383,7 +518,9 @@
         }, 500);
     }
 
-    // Save New Requisition
+    // ========================================
+    // SAVE NEW REQUISITION
+    // ========================================
     function saveRequisition() {
         const form = $('addReqForm');
         if (!form.checkValidity()) {
@@ -413,6 +550,7 @@
 
             state.data.unshift(newReq);
             applyFilters();
+            updateKPIStats();
 
             bootstrap.Modal.getInstance($('addRequisitionModal')).hide();
             form.reset();
@@ -422,7 +560,9 @@
         }, 600);
     }
 
-    // Update Requisition
+    // ========================================
+    // UPDATE REQUISITION
+    // ========================================
     function updateRequisition() {
         const form = $('editReqForm');
         if (!form.checkValidity()) {
@@ -451,6 +591,7 @@
                 };
 
                 applyFilters();
+                updateKPIStats();
                 bootstrap.Modal.getInstance($('editRequisitionModal')).hide();
 
                 hideLoading();
@@ -459,7 +600,9 @@
         }, 600);
     }
 
-    // Export to Excel (CSV)
+    // ========================================
+    // EXPORT TO EXCEL (CSV)
+    // ========================================
     function exportExcel() {
         showLoading();
 
@@ -483,10 +626,14 @@
         }, 500);
     }
 
-    // Initialize
+    // ========================================
+    // INITIALIZATION
+    // ========================================
     document.addEventListener('DOMContentLoaded', () => {
         // Initial render
         renderTable();
+        updateKPIStats();
+        updateActiveFilterChips();
 
         // Event Listeners
         $('applyFilter').addEventListener('click', applyFilters);
@@ -522,10 +669,8 @@
         $('confirmDeleteBtn').addEventListener('click', deleteRequisition);
 
         // Clear form on modal close
-        $$('#addRequisitionModal').forEach(modal => {
-            modal.addEventListener('hidden.bs.modal', () => {
-                $('addReqForm').reset();
-            });
+        $('addRequisitionModal').addEventListener('hidden.bs.modal', () => {
+            $('addReqForm').reset();
         });
     });
 })();

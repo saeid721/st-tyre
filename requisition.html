@@ -461,6 +461,55 @@
                 </button>
             </div>
 
+            <!-- KPI Summary Cards -->
+            <div class="kpi-summary">
+                <div class="kpi-card">
+                    <div class="kpi-icon blue">
+                        <i class="bi bi-clipboard-data"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Total Requisitions</div>
+                        <div class="kpi-value" id="kpiTotal">0</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon amber">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Pending Approval</div>
+                        <div class="kpi-value" id="kpiPending">0</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon green">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Approved</div>
+                        <div class="kpi-value" id="kpiApproved">0</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon purple">
+                        <i class="bi bi-check2-all"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Completed</div>
+                        <div class="kpi-value" id="kpiCompleted">0</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon indigo">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Total Quantity</div>
+                        <div class="kpi-value" id="kpiQty">0</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Requisition List Card -->
             <div class="card requisition-card">
                 <div class="card-header">
@@ -469,11 +518,11 @@
                         <div class="card-title">Requisition List</div>
                     </div>
                     <div class="card-header-actions">
-                        <button class="btn-export btn-excel" id="exportExcel">
+                        <button class="btn-export btn-excel" id="exportExcel" title="Export to Excel">
                             <i class="bi bi-file-earmark-excel"></i>
                             <span>Excel</span>
                         </button>
-                        <button class="btn-export btn-print" id="printList">
+                        <button class="btn-export btn-print" id="printList" title="Print List">
                             <i class="bi bi-printer"></i>
                             <span>Print</span>
                         </button>
@@ -483,6 +532,10 @@
                 <div class="card-body">
                     <!-- Filters -->
                     <div class="filter-bar">
+                        <div class="filter-header">
+                            <i class="bi bi-funnel"></i>
+                            <span>Filters</span>
+                        </div>
                         <div class="filter-group">
                             <select class="filter-select" id="filterWing">
                                 <option value="">All Wings</option>
@@ -503,9 +556,9 @@
                                 <option value="transfer">Transfer</option>
                             </select>
                             <div class="date-filter">
-                                <input type="date" class="filter-date" id="dateFrom" placeholder="From" />
+                                <input type="date" class="filter-date" id="filterDateFrom" placeholder="From" />
                                 <span class="date-sep">to</span>
-                                <input type="date" class="filter-date" id="dateTo" placeholder="To" />
+                                <input type="date" class="filter-date" id="filterDateTo" placeholder="To" />
                             </div>
                         </div>
                         <div class="filter-actions">
@@ -513,10 +566,16 @@
                                 <i class="bi bi-funnel"></i>
                                 <span>Filter</span>
                             </button>
-                            <button class="btn-reset" id="resetFilter" title="Reset">
+                            <button class="btn-reset" id="resetFilter" title="Reset Filters">
                                 <i class="bi bi-x-circle"></i>
                             </button>
                         </div>
+                    </div>
+
+                    <!-- Active Filter Chips -->
+                    <div class="active-filters" id="activeFilters">
+                        <span class="active-filters-label">Active Filters:</span>
+                        <div class="filter-chips" id="filterChips"></div>
                     </div>
 
                     <!-- Table Controls -->
@@ -543,18 +602,20 @@
                         <table class="req-table" id="reqTable">
                             <thead>
                                 <tr>
-                                    <th style="width:50px">#</th>
+                                    <th style="width:50px" class="text-center">#</th>
                                     <th class="sortable" data-sort="no">Requisition No <i
                                             class="bi bi-chevron-expand"></i></th>
                                     <th class="sortable" data-sort="wing">Wing</th>
                                     <th>Warehouse</th>
-                                    <th>Type</th>
-                                    <th class="sortable" data-sort="qty">Total Qty <i class="bi bi-chevron-expand"></i>
+                                    <th class="text-center">Type</th>
+                                    <th class="sortable text-end" data-sort="qty">Total Qty <i
+                                            class="bi bi-chevron-expand"></i>
                                     </th>
-                                    <th class="sortable" data-sort="date">Date <i class="bi bi-chevron-expand"></i></th>
+                                    <th class="sortable text-center" data-sort="date">Date <i
+                                            class="bi bi-chevron-expand"></i></th>
                                     <th>Place of Supply</th>
-                                    <th>Status</th>
-                                    <th style="width:220px">Action</th>
+                                    <th class="text-center">Status</th>
+                                    <th style="width:220px" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="reqTableBody">
@@ -616,6 +677,19 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="loading-text">Loading requisitions...</div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
 
     <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1">
@@ -840,7 +914,7 @@
                         <div class="req-detail-item">
                             <div class="req-detail-label">Status</div>
                             <div class="req-detail-value" id="vStatus">
-                                <span class="status-badge status-created">On created User</span>
+                                <span class="status-badge status-created">Created</span>
                             </div>
                         </div>
                     </div>
