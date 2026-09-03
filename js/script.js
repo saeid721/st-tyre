@@ -3,13 +3,11 @@ const navSections = [
     {
         title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
             { label: 'Sales Invoice', icon: 'bi-file-earmark-text', href: 'invoice-list.html' },
-            { label: 'Sales Order', icon: 'bi-cart-check', href: 'sales-order.html' },
-            { label: 'POS', icon: 'bi-cash-stack', href: 'pos.html' },
+            { label: 'Sales Return', icon: 'bi-arrow-return-left', href: 'sales-return.html' },
         ]
     },
     {
         title: 'Purchase', icon: 'bi-cart3', type: 'group', expanded: false, items: [
-            { label: 'Purchase Order', icon: 'bi-cart-plus', href: 'purchase-order.html' },
             { label: 'Purchase Invoice', icon: 'bi-file-earmark-text', href: 'purchase-invoice.html' },
             { label: 'Purchase Return', icon: 'bi-arrow-return-left', href: 'purchase-return.html' },
         ]
@@ -26,6 +24,11 @@ const navSections = [
             { label: 'Products', icon: 'bi-box-seam', href: 'products.html' },
             { label: 'Stock Management', icon: 'bi-archive', href: 'stock-management.html' },
             { label: 'Stock Transfer', icon: 'bi-arrow-left-right', href: 'stock-transfer.html' },
+        ]
+    },
+    {
+        title: 'Expenses', icon: 'bi-archive', type: 'group', expanded: false, items: [
+            { label: 'Expenses List', icon: 'bi-box-seam', href: 'expense.html' },
         ]
     },
     {
