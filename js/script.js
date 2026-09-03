@@ -1,167 +1,3 @@
-const navSections = [
-    { title: 'Dashboard', icon: 'bi-house-door-fill', type: 'single', href: 'index.html', active: true },
-    {
-        title: 'Sales', icon: 'bi-graph-up-arrow', type: 'group', expanded: false, items: [
-            { label: 'Sales Invoice', icon: 'bi-file-earmark-text', href: 'invoice-list.html' },
-            { label: 'Sales Return', icon: 'bi-arrow-return-left', href: 'sales-return.html' },
-        ]
-    },
-    {
-        title: 'Purchase', icon: 'bi-cart3', type: 'group', expanded: false, items: [
-            { label: 'Purchase Invoice', icon: 'bi-file-earmark-text', href: 'purchase-invoice.html' },
-            { label: 'Purchase Return', icon: 'bi-arrow-return-left', href: 'purchase-return.html' },
-        ]
-    },
-    {
-        title: 'Import & LC', icon: 'bi-box-seam', type: 'group', expanded: false, items: [
-            { label: 'LC Opening', icon: 'bi-bank', href: 'lc-opening.html' },
-            { label: 'Shipment Tracking', icon: 'bi-truck', href: 'shipment-tracking.html' },
-            { label: 'Container Management', icon: 'bi-boxes', href: 'container-management.html' },
-        ]
-    },
-    {
-        title: 'Inventory', icon: 'bi-archive', type: 'group', expanded: false, items: [
-            { label: 'Products', icon: 'bi-box-seam', href: 'products.html' },
-            { label: 'Stock Management', icon: 'bi-archive', href: 'stock-management.html' },
-            { label: 'Stock Transfer', icon: 'bi-arrow-left-right', href: 'stock-transfer.html' },
-        ]
-    },
-    {
-        title: 'Expenses', icon: 'bi-archive', type: 'group', expanded: false, items: [
-            { label: 'Expenses List', icon: 'bi-box-seam', href: 'expense.html' },
-        ]
-    },
-    {
-        title: 'Accounts', icon: 'bi-calculator', type: 'group', expanded: false, items: [
-            { label: 'Chart of Accounts', icon: 'bi-diagram-3', href: 'chart-of-accounts.html' },
-            { label: 'Journal Entry', icon: 'bi-journal-text', href: 'journal-entry.html' },
-            { label: 'Cash Book', icon: 'bi-wallet2', href: 'cash-book.html' },
-        ]
-    },
-    {
-        title: 'VAT & Mushak', icon: 'bi-receipt-cutoff', type: 'group', expanded: false, items: [
-            { label: 'VAT Setup', icon: 'bi-percent', href: 'vat-setup.html' },
-            { label: 'VAT Return', icon: 'bi-file-earmark-text', href: 'vat-return.html' },
-        ]
-    },
-    {
-        title: 'Reports', icon: 'bi-file-earmark-bar-graph', type: 'group', expanded: false, items: [
-            { label: 'Sales Report', icon: 'bi-graph-up', href: 'sales-report.html' },
-            { label: 'Purchase Report', icon: 'bi-graph-down', href: 'purchase-report.html' },
-            { label: 'Inventory Report', icon: 'bi-box', href: 'inventory-report.html' },
-        ]
-    },
-    {
-        title: 'Approval', icon: 'bi-check2-circle', type: 'group', expanded: false, items: [
-            { label: 'Purchase Approval', icon: 'bi-check-circle', href: 'purchase-approval.html' },
-            { label: 'Sales Approval', icon: 'bi-check2-circle', href: 'sales-approval.html' },
-        ]
-    },
-    {
-        title: 'Notification', icon: 'bi-bell', type: 'group', expanded: false, badge: 12, items: [
-            { label: 'All Notifications', icon: 'bi-bell', href: 'notifications.html' },
-            { label: 'Low Stock Alert', icon: 'bi-exclamation-triangle', href: 'low-stock-alert.html' },
-        ]
-    },
-    {
-        title: 'User Management', icon: 'bi-people-fill', type: 'group', expanded: false, items: [
-            { label: 'Users', icon: 'bi-people', href: 'users.html' },
-            { label: 'Roles & Permissions', icon: 'bi-shield-lock', href: 'roles-permissions.html' },
-        ]
-    },
-    {
-        title: 'Master Setup', icon: 'bi-building', type: 'group', expanded: false, items: [
-            { label: 'Basic Information', icon: 'bi-building', href: 'basic-information.html' },
-            { label: 'Address & Contact', icon: 'bi-telephone-outbound', href: 'address-contact.html' },
-            { label: 'Business Information', icon: 'bi-info-circle', href: 'business-information.html' },
-            { label: 'Financial Settings', icon: 'bi-calculator', href: 'financial-settings.html' },
-        ]
-    },
-    {
-        title: 'System Settings', icon: 'bi-gear', type: 'group', expanded: false, items: [
-            { label: 'General Settings', icon: 'bi-gear', href: 'general-settings.html' },
-            { label: 'Backup & Restore', icon: 'bi-hdd', href: 'backup-restore.html' },
-        ]
-    },
-];
-
-function renderSidebar() {
-    const sidebarNav = document.getElementById('sidebarNav');
-    if (!sidebarNav) return;
-    sidebarNav.innerHTML = '';
-    navSections.forEach((section) => {
-        const secDiv = document.createElement('div');
-        secDiv.className = 'nav-section';
-        // Single direct link (e.g. Dashboard) — no chevron, no children
-        if (section.type === 'single') {
-            const link = document.createElement('a');
-            link.className = 'nav-section-header' + (section.active ? ' active' : '');
-            link.href = section.href || '#';
-            link.setAttribute('data-tip', section.title);
-            link.innerHTML = `
-                <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
-                <span class="nav-section-title">${section.title}</span>
-            `;
-            secDiv.appendChild(link);
-            sidebarNav.appendChild(secDiv);
-            return;
-        }
-        // Collapsible group header (icon + label + chevron)
-        const sectionHeader = document.createElement('div');
-        sectionHeader.className = 'nav-section-header';
-        sectionHeader.setAttribute('data-tip', section.title);
-        const badgeHtml = section.badge ? `<span class="badge-notification">${section.badge}</span>` : '';
-        const rotation = section.expanded ? '180deg' : '0deg';
-        sectionHeader.innerHTML = `
-            <span class="nav-icon"><i class="bi ${section.icon}"></i></span>
-            <span class="nav-section-title">${section.title}</span>
-            ${badgeHtml}
-            <i class="bi bi-chevron-down" style="font-size:12px; transition: transform 0.2s; transform: rotate(${rotation});"></i>
-        `;
-        sectionHeader.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const sidebarEl = document.getElementById('sidebar');
-            if (sidebarEl && sidebarEl.classList.contains('collapsed')) {
-                toggleSidebarFlyout(section, sectionHeader);
-                return;
-            }
-            const willExpand = !section.expanded;
-            navSections.forEach((s) => {
-                if (s.type === 'group') s.expanded = false;
-            });
-            section.expanded = willExpand;
-            renderSidebar();
-        });
-        secDiv.appendChild(sectionHeader);
-        if (section.expanded) {
-            const itemsContainer = document.createElement('div');
-            itemsContainer.className = 'nav-items-container';
-            section.items.forEach((item) => {
-                const link = document.createElement('a');
-                link.className = 'nav-item-link';
-                link.href = item.href || '#';
-                link.innerHTML = `
-                    <span class="nav-icon"><i class="bi ${item.icon}"></i></span>
-                    <span class="nav-label">${item.label}</span>
-                `;
-                link.addEventListener('click', (e) => {
-                    if (!item.href || item.href === '#') {
-                        e.preventDefault();
-                    }
-                    document.querySelectorAll('.nav-item-link, .nav-section-header').forEach(el => el.classList.remove('active'));
-                    link.classList.add('active');
-                    if (window.innerWidth <= 767) {
-                        document.getElementById('sidebar').classList.remove('show');
-                        document.getElementById('mobileOverlay').classList.remove('show');
-                    }
-                });
-                itemsContainer.appendChild(link);
-            });
-            secDiv.appendChild(itemsContainer);
-        }
-        sidebarNav.appendChild(secDiv);
-    });
-}
 
 let activeFlyoutSection = null;
 function closeSidebarFlyout() {
@@ -170,12 +6,12 @@ function closeSidebarFlyout() {
     activeFlyoutSection = null;
 }
 
-function toggleSidebarFlyout(section, anchorEl) {
-    if (activeFlyoutSection === section) {
+function toggleSidebarFlyout(headerEl) {
+    if (activeFlyoutSection === headerEl) {
         closeSidebarFlyout();
         return;
     }
-    activeFlyoutSection = section;
+    activeFlyoutSection = headerEl;
     let flyout = document.getElementById('sidebarFlyout');
     if (!flyout) {
         flyout = document.createElement('div');
@@ -183,21 +19,57 @@ function toggleSidebarFlyout(section, anchorEl) {
         flyout.className = 'sidebar-flyout';
         document.body.appendChild(flyout);
     }
+    const title = headerEl.querySelector('.nav-section-title').textContent;
+    const itemsContainer = headerEl.nextElementSibling;
     flyout.innerHTML = `
-        <div class="sidebar-flyout-title">${section.title}</div>
-        ${section.items.map(item => `
-            <a class="sidebar-flyout-item" href="${item.href || '#'}">
-                <i class="bi ${item.icon}"></i>
-                <span>${item.label}</span>
-            </a>
-        `).join('')}
+        <div class="sidebar-flyout-title">${title}</div>
+        ${itemsContainer ? itemsContainer.innerHTML : ''}
     `;
-    const r = anchorEl.getBoundingClientRect();
+    const r = headerEl.getBoundingClientRect();
     flyout.style.left = `${r.right + 10}px`;
     flyout.style.top = `${r.top}px`;
     flyout.classList.add('show');
-    flyout.querySelectorAll('.sidebar-flyout-item').forEach((link) => {
+    flyout.querySelectorAll('a').forEach((link) => {
+        link.classList.add('sidebar-flyout-item');
         link.addEventListener('click', () => closeSidebarFlyout());
+    });
+}
+
+function initStaticSidebar() {
+    document.querySelectorAll('.nav-section-header').forEach((header) => {
+        const itemsContainer = header.nextElementSibling;
+        const isGroup = itemsContainer && itemsContainer.classList.contains('nav-items-container');
+        if (!isGroup) return;
+
+        header.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sidebarEl = document.getElementById('sidebar');
+            if (sidebarEl && sidebarEl.classList.contains('collapsed')) {
+                toggleSidebarFlyout(header);
+                return;
+            }
+            const isOpen = itemsContainer.style.display === 'block';
+            document.querySelectorAll('.nav-items-container').forEach((c) => c.style.display = 'none');
+            document.querySelectorAll('.nav-chevron').forEach((chev) => chev.style.transform = 'rotate(0deg)');
+            if (!isOpen) {
+                itemsContainer.style.display = 'block';
+                header.querySelector('.nav-chevron').style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+
+    document.querySelectorAll('.nav-item-link').forEach((link) => {
+        link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+            document.querySelectorAll('.nav-item-link, .nav-section-header').forEach(el => el.classList.remove('active'));
+            link.classList.add('active');
+            if (window.innerWidth <= 767) {
+                document.getElementById('sidebar').classList.remove('show');
+                document.getElementById('mobileOverlay').classList.remove('show');
+            }
+        });
     });
 }
 
@@ -582,7 +454,7 @@ function initLogout() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderSidebar();
+    initStaticSidebar();
     initCharts();
     initSidebarToggle();
     initSidebarTooltips();
