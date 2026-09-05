@@ -1084,6 +1084,125 @@ textarea.textarea-custom {
     margin-bottom: 8px;
 }
 
+/* Business Registration Documents — tile grid */
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.doc-tile {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doc-tile:hover {
+    border-color: #c7ccd6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.doc-tile-wide {
+    grid-column: span 2;
+}
+
+.doc-tile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.doc-tile-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.doc-tile-icon.chip-blue {
+    background: rgba(var(--chip-blue), 0.12);
+    color: rgb(var(--chip-blue));
+}
+
+.doc-tile-icon.chip-indigo {
+    background: rgba(var(--chip-indigo), 0.12);
+    color: rgb(var(--chip-indigo));
+}
+
+.doc-tile-icon.chip-teal {
+    background: rgba(var(--chip-teal), 0.12);
+    color: rgb(var(--chip-teal));
+}
+
+.doc-tile-icon.chip-amber {
+    background: rgba(var(--chip-amber), 0.14);
+    color: rgb(var(--chip-amber));
+}
+
+.doc-tile-icon.chip-purple {
+    background: rgba(var(--chip-purple), 0.12);
+    color: rgb(var(--chip-purple));
+}
+
+.doc-tile-icon.chip-sky {
+    background: rgba(var(--chip-sky), 0.12);
+    color: rgb(var(--chip-sky));
+}
+
+.doc-tile-title {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.doc-status {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.doc-status-done {
+    color: var(--success);
+    background: rgba(var(--chip-green), 0.12);
+}
+
+/* Nicer empty dropzone: icon stacked above text */
+.upload-dropzone {
+    min-height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-dropzone-btn {
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 12px;
+}
+
+.upload-dropzone-btn i {
+    font-size: 22px;
+}
+
+.upload-dropzone-btn span {
+    font-size: 12.5px;
+    line-height: 1.4;
+}
+
 .upload-container {
     border: 1.5px dashed var(--border);
     border-radius: var(--radius-sm);
@@ -1204,6 +1323,120 @@ textarea.textarea-custom {
     font-size: 12px;
     color: var(--text-muted);
     margin-top: 12px;
+}
+
+/* Other Document — count badge + thumbnails */
+.upload-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    margin-left: 6px;
+    background: rgba(var(--chip-blue), 0.12);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.upload-container-list {
+    max-height: 360px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.file-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+}
+
+.file-icon-pdf {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+
+.file-icon-generic {
+    background: rgba(var(--chip-indigo), 0.1);
+    color: rgb(var(--chip-indigo));
+}
+
+.file-item {
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(var(--chip-blue), 0.12);
+}
+
+/* File preview modal */
+.file-preview-content {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.file-preview-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    padding: 16px;
+    min-height: 320px;
+    max-height: 70vh;
+}
+
+.file-preview-image {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.file-preview-pdf {
+    width: 100%;
+    height: 65vh;
+    border: none;
+    border-radius: 8px;
+    background: white;
+}
+
+.file-preview-unsupported {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.file-preview-unsupported i {
+    font-size: 48px;
+    color: rgb(var(--chip-indigo));
+}
+
+.file-preview-size {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-right: auto;
+}
+
+@media (max-width: 575px) {
+    .file-preview-body {
+        min-height: 220px;
+        padding: 10px;
+    }
+
+    .file-preview-pdf {
+        height: 50vh;
+    }
 }
 
 /* Summary & Lists */
@@ -1607,6 +1840,16 @@ textarea.textarea-custom {
 
     .preferences-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 991px) {
+    .doc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doc-tile-wide {
+        grid-column: span 1;
     }
 }
 

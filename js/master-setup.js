@@ -279,6 +279,42 @@ function updateSummary() {
 // =========================================
 // FILE UPLOAD & LOGO
 // =========================================
+function renderLogoButtons(hasImage) {
+    const container = document.getElementById('logoButtonsContainer');
+    if (!container) return;
+    container.innerHTML = hasImage
+        ? `<button class="btn-logo btn-logo-change" type="button" onclick="changeLogo()"><i class="bi bi-upload"></i> Change Logo</button>
+           <button class="btn-logo btn-logo-remove" type="button" onclick="removeLogo()"><i class="bi bi-trash"></i> Remove</button>`
+        : `<button class="btn-logo btn-logo-change" type="button" onclick="changeLogo()"><i class="bi bi-upload"></i> Upload Logo</button>`;
+}
+
+function renderSignatureButtons(hasImage) {
+    const container = document.getElementById('signatureButtonsContainer');
+    if (!container) return;
+    container.innerHTML = hasImage
+        ? `<button class="btn-logo btn-logo-change" type="button" onclick="document.getElementById('signatureFileInput').click()"><i class="bi bi-upload"></i> Change</button>
+           <button class="btn-logo btn-logo-remove" type="button" onclick="removeSignature()"><i class="bi bi-trash"></i> Remove</button>`
+        : `<button class="btn-logo btn-logo-change" type="button" onclick="document.getElementById('signatureFileInput').click()"><i class="bi bi-upload"></i> Upload</button>`;
+}
+
+function handleImgLoad(img, type) {
+    if (img.dataset.fallback === 'true') return;
+    if (type === 'logo') renderLogoButtons(true);
+    if (type === 'signature') renderSignatureButtons(true);
+}
+
+function handleImgError(img, type) {
+    img.dataset.fallback = 'true';
+    if (type === 'logo') {
+        img.src = 'https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300';
+        renderLogoButtons(false);
+    }
+    if (type === 'signature') {
+        img.style.display = 'none';
+        renderSignatureButtons(false);
+    }
+}
+
 function changeLogo() {
     document.getElementById('logoFileInput').click();
 }
@@ -288,37 +324,105 @@ function handleLogoSelect(event) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
-        document.querySelector('.logo-preview img').src = e.target.result;
+        const img = document.getElementById('companyLogoImg');
+        img.dataset.fallback = 'false';
+        img.src = e.target.result;
+        renderLogoButtons(true);
         showToast('Success', 'Logo updated successfully!');
     };
     reader.readAsDataURL(file);
 }
 
 function removeLogo() {
-    document.querySelector('.logo-preview img').src =
-        'https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300';
+    const img = document.getElementById('companyLogoImg');
+    img.dataset.fallback = 'true';
+    img.src = 'https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300';
     document.getElementById('logoFileInput').value = '';
+    renderLogoButtons(false);
     showToast('Success', 'Logo removed successfully!');
+}
+
+function handleSignatureSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = document.getElementById('signatureImg');
+        img.dataset.fallback = 'false';
+        img.src = e.target.result;
+        img.style.display = 'block';
+        renderSignatureButtons(true);
+        showToast('Success', 'Signature updated successfully!');
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeSignature() {
+    const img = document.getElementById('signatureImg');
+    img.dataset.fallback = 'true';
+    img.removeAttribute('src');
+    img.style.display = 'none';
+    document.getElementById('signatureFileInput').value = '';
+    renderSignatureButtons(false);
+    showToast('Success', 'Signature removed successfully!');
 }
 
 function removeFile(element, event) {
     if (event) event.stopPropagation();
     if (confirm('Are you sure you want to delete this file?')) {
-        element.closest('.file-item').remove();
+        const container = element.closest('.upload-container');
+        const item = element.closest('.file-item');
+        if (item.dataset.fileUrl) URL.revokeObjectURL(item.dataset.fileUrl);
+        item.remove();
+        if (container) {
+            updateUploadCount(container.id);
+            updateDocStatus(container.id);
+        }
     }
+}
+
+function updateUploadCount(containerId) {
+    const container = document.getElementById(containerId);
+    const badge = document.getElementById(containerId.replace('Upload', 'Count'));
+    if (!container || !badge) return;
+    const count = container.querySelectorAll('.file-item').length;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
 }
 
 function formatFileSize(bytes) {
     return bytes >= 1048576 ? (bytes / 1048576).toFixed(1) + ' MB' : (bytes / 1024).toFixed(0) + ' KB';
 }
 
+function updateDocStatus(containerId) {
+    const container = document.getElementById(containerId);
+    const status = document.getElementById('status-' + containerId);
+    if (!container || !status) return;
+    const has = container.querySelectorAll('.file-item').length > 0;
+    status.textContent = has ? 'Uploaded' : 'Pending';
+    status.classList.toggle('doc-status-done', has);
+}
+
 function addFileItem(containerId, file) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    const ext = file.name.split('.').pop().toLowerCase();
+    const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+    const fileUrl = URL.createObjectURL(file);
+    const thumbHtml = isImage
+        ? `<img src="${fileUrl}" class="file-thumb" alt="${file.name}">`
+        : `<div class="file-icon ${ext === 'pdf' ? 'file-icon-pdf' : 'file-icon-generic'}">
+               <i class="bi ${ext === 'pdf' ? 'bi-file-earmark-pdf' : 'bi-file-earmark-text'}"></i>
+           </div>`;
+
     const item = document.createElement('div');
     item.className = 'file-item';
+    item.dataset.fileUrl = fileUrl;
+    item.dataset.fileName = file.name;
+    item.dataset.fileSize = formatFileSize(file.size);
+    item.dataset.fileExt = ext;
     item.innerHTML = `
-        <div class="file-icon"><i class="bi bi-file-earmark-pdf"></i></div>
+        ${thumbHtml}
         <div class="file-info">
             <div class="file-name">${file.name}</div>
             <div class="file-size">${formatFileSize(file.size)}</div>
@@ -327,12 +431,43 @@ function addFileItem(containerId, file) {
             <button type="button" class="file-btn" title="Download"><i class="bi bi-download"></i></button>
             <button type="button" class="file-btn delete" title="Delete" onclick="removeFile(this, event)"><i class="bi bi-trash"></i></button>
         </div>`;
+    item.addEventListener('click', (e) => {
+        if (!e.target.closest('.file-actions')) openFilePreview(item);
+    });
     container.insertBefore(item, container.querySelector('.upload-add-btn'));
+    updateUploadCount(containerId);
+    updateDocStatus(containerId);
+}
+
+function openFilePreview(item) {
+    const { fileUrl, fileName, fileSize, fileExt } = item.dataset;
+    if (!fileUrl) return;
+    const body = document.getElementById('filePreviewBody');
+    const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExt);
+    const isPdf = fileExt === 'pdf';
+
+    body.innerHTML = isImage
+        ? `<img src="${fileUrl}" class="file-preview-image" alt="${fileName}">`
+        : isPdf
+            ? `<iframe src="${fileUrl}" class="file-preview-pdf" title="${fileName}"></iframe>`
+            : `<div class="file-preview-unsupported">
+                   <i class="bi bi-file-earmark-text"></i>
+                   <p>Preview not available for this file type.</p>
+               </div>`;
+
+    document.getElementById('filePreviewName').textContent = fileName;
+    document.getElementById('filePreviewSize').textContent = fileSize;
+    document.getElementById('filePreviewDownload').href = fileUrl;
+    document.getElementById('filePreviewDownload').setAttribute('download', fileName);
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('filePreviewModal')).show();
 }
 
 function handleFileSelect(event, containerId) {
     const files = event.target.files;
-    if (files && files.length) addFileItem(containerId, files[0]);
+    if (files && files.length) {
+        Array.from(files).forEach(file => addFileItem(containerId, file));
+    }
     event.target.value = '';
 }
 
@@ -778,4 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initRealTimeValidation();
     renderBranches();
     renderContacts();
+    updateUploadCount('otherDocUpload');
+    ['tradeLicenseUpload', 'tinCertUpload', 'vatRegUpload', 'vatReturnUpload', 'taxReturnUpload', 'regCertUpload']
+        .forEach(updateDocStatus);
 });

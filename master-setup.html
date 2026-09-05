@@ -315,9 +315,7 @@
                 <div class="breadcrumb">
                     <span>Home</span>
                     <span class="separator">></span>
-                    <span>Master Setup</span>
-                    <span class="separator">></span>
-                    <span class="current">Company Setup</span>
+                    <span class="current">Master Setup</span>
                 </div>
             </div>
 
@@ -636,12 +634,12 @@
                             <div class="card-body-custom">
                                 <div class="logo-upload-area">
                                     <div class="logo-preview">
-                                        <img src="images/logo.png" alt="ST TYRE Logo"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300'">
+                                        <img id="companyLogoImg" src="images/logo.png" alt="ST TYRE Logo"
+                                            onload="handleImgLoad(this,'logo')" onerror="handleImgError(this,'logo')">
                                     </div>
                                     <input type="file" id="logoFileInput" hidden accept="image/png,image/jpeg"
                                         onchange="handleLogoSelect(event)">
-                                    <div class="logo-buttons">
+                                    <div class="logo-buttons" id="logoButtonsContainer">
                                         <button class="btn-logo btn-logo-change" type="button" onclick="changeLogo()">
                                             <i class="bi bi-upload"></i> Change Logo
                                         </button>
@@ -669,7 +667,11 @@
                                     <div class="logo-buttons">
                                         <button class="btn-logo btn-logo-change" type="button"
                                             onclick="document.getElementById('signatureFileInput').click()">
-                                            <i class="bi bi-upload"></i> Upload
+                                            <i class="bi bi-upload"></i> Change Signature
+                                        </button>
+                                        <button class="btn-logo btn-logo-remove" type="button"
+                                            onclick="removeSignature()">
+                                            <i class="bi bi-trash"></i> Remove
                                         </button>
                                     </div>
                                     <div class="logo-hint">Used on invoices, LC docs, and vouchers</div>
@@ -1333,29 +1335,153 @@
                             <!-- Documents Upload -->
                             <div class="form-section">
                                 <h3 class="section-title">Business Registration Documents</h3>
-                                <div class="form-grid">
-                                    <div>
-                                        <label class="upload-label">Registration Certificate</label>
+                                <div class="doc-grid">
+
+                                    <div class="doc-tile" id="tile-tradeLicenseUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-blue"><i class="bi bi-file-earmark-text"></i>
+                                            </div>
+                                            <div class="doc-tile-title">
+                                                <span>Trade License</span>
+                                                <span class="doc-status" id="status-tradeLicenseUpload">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-dropzone" id="tradeLicenseUpload"
+                                            ondragover="event.preventDefault(); this.classList.add('dragover');"
+                                            ondragleave="this.classList.remove('dragover');"
+                                            ondrop="handleFileDrop(event, 'tradeLicenseUpload')">
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
+                                                onclick="document.getElementById('tradeLicenseFileInput').click()">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                                <span>Click or drag a file here to upload</span>
+                                            </button>
+                                            <input type="file" id="tradeLicenseFileInput" hidden
+                                                accept=".pdf,.jpg,.jpeg,.png"
+                                                onchange="handleFileSelect(event, 'tradeLicenseUpload')">
+                                        </div>
+                                    </div>
+
+                                    <div class="doc-tile" id="tile-tinCertUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-indigo"><i
+                                                    class="bi bi-file-earmark-text"></i></div>
+                                            <div class="doc-tile-title">
+                                                <span>TIN Certificate</span>
+                                                <span class="doc-status" id="status-tinCertUpload">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-dropzone" id="tinCertUpload"
+                                            ondragover="event.preventDefault(); this.classList.add('dragover');"
+                                            ondragleave="this.classList.remove('dragover');"
+                                            ondrop="handleFileDrop(event, 'tinCertUpload')">
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
+                                                onclick="document.getElementById('tinCertFileInput').click()">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                                <span>Click or drag a file here to upload</span>
+                                            </button>
+                                            <input type="file" id="tinCertFileInput" hidden
+                                                accept=".pdf,.jpg,.jpeg,.png"
+                                                onchange="handleFileSelect(event, 'tinCertUpload')">
+                                        </div>
+                                    </div>
+
+                                    <div class="doc-tile" id="tile-vatRegUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-teal"><i class="bi bi-receipt"></i></div>
+                                            <div class="doc-tile-title">
+                                                <span>VAT Registration Certificate</span>
+                                                <span class="doc-status" id="status-vatRegUpload">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-dropzone" id="vatRegUpload"
+                                            ondragover="event.preventDefault(); this.classList.add('dragover');"
+                                            ondragleave="this.classList.remove('dragover');"
+                                            ondrop="handleFileDrop(event, 'vatRegUpload')">
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
+                                                onclick="document.getElementById('vatRegFileInput').click()">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                                <span>Click or drag a file here to upload</span>
+                                            </button>
+                                            <input type="file" id="vatRegFileInput" hidden accept=".pdf,.jpg,.jpeg,.png"
+                                                onchange="handleFileSelect(event, 'vatRegUpload')">
+                                        </div>
+                                    </div>
+
+                                    <div class="doc-tile" id="tile-vatReturnUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-teal"><i class="bi bi-receipt-cutoff"></i>
+                                            </div>
+                                            <div class="doc-tile-title">
+                                                <span>VAT Return Copy</span>
+                                                <span class="doc-status" id="status-vatReturnUpload">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-dropzone" id="vatReturnUpload"
+                                            ondragover="event.preventDefault(); this.classList.add('dragover');"
+                                            ondragleave="this.classList.remove('dragover');"
+                                            ondrop="handleFileDrop(event, 'vatReturnUpload')">
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
+                                                onclick="document.getElementById('vatReturnFileInput').click()">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                                <span>Click or drag a file here to upload</span>
+                                            </button>
+                                            <input type="file" id="vatReturnFileInput" hidden
+                                                accept=".pdf,.jpg,.jpeg,.png"
+                                                onchange="handleFileSelect(event, 'vatReturnUpload')">
+                                        </div>
+                                    </div>
+
+                                    <div class="doc-tile" id="tile-taxReturnUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-amber"><i
+                                                    class="bi bi-file-earmark-bar-graph"></i></div>
+                                            <div class="doc-tile-title">
+                                                <span>Income Tax Return Certificate</span>
+                                                <span class="doc-status" id="status-taxReturnUpload">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-dropzone" id="taxReturnUpload"
+                                            ondragover="event.preventDefault(); this.classList.add('dragover');"
+                                            ondragleave="this.classList.remove('dragover');"
+                                            ondrop="handleFileDrop(event, 'taxReturnUpload')">
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
+                                                onclick="document.getElementById('taxReturnFileInput').click()">
+                                                <i class="bi bi-cloud-arrow-up"></i>
+                                                <span>Click or drag a file here to upload</span>
+                                            </button>
+                                            <input type="file" id="taxReturnFileInput" hidden
+                                                accept=".pdf,.jpg,.jpeg,.png"
+                                                onchange="handleFileSelect(event, 'taxReturnUpload')">
+                                        </div>
+                                    </div>
+
+                                    <div class="doc-tile" id="tile-regCertUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-purple"><i class="bi bi-patch-check"></i>
+                                            </div>
+                                            <div class="doc-tile-title">
+                                                <span>Certificate of Incorporation</span>
+                                                <span class="doc-status doc-status-done"
+                                                    id="status-regCertUpload">Uploaded</span>
+                                            </div>
+                                        </div>
                                         <div class="upload-container" id="regCertUpload"
                                             ondragover="event.preventDefault(); this.classList.add('dragover');"
                                             ondragleave="this.classList.remove('dragover');"
                                             ondrop="handleFileDrop(event, 'regCertUpload')">
                                             <div class="file-item">
-                                                <div class="file-icon">
-                                                    <i class="bi bi-file-earmark-pdf"></i>
-                                                </div>
+                                                <div class="file-icon file-icon-pdf"><i
+                                                        class="bi bi-file-earmark-pdf"></i></div>
                                                 <div class="file-info">
-                                                    <div class="file-name">trade_license_2024.pdf</div>
-                                                    <div class="file-size">1.2 MB</div>
+                                                    <div class="file-name">certificate_of_incorporation.pdf</div>
+                                                    <div class="file-size">1.5 MB</div>
                                                 </div>
                                                 <div class="file-actions">
-                                                    <button type="button" class="file-btn" title="Download">
-                                                        <i class="bi bi-download"></i>
-                                                    </button>
+                                                    <button type="button" class="file-btn" title="Download"><i
+                                                            class="bi bi-download"></i></button>
                                                     <button type="button" class="file-btn delete" title="Delete"
-                                                        onclick="removeFile(this, event)">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
+                                                        onclick="removeFile(this, event)"><i
+                                                            class="bi bi-trash"></i></button>
                                                 </div>
                                             </div>
                                             <button type="button" class="upload-add-btn"
@@ -1369,40 +1495,30 @@
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <label class="upload-label">Other Document (Optional)</label>
-                                        <div class="upload-container" id="otherDocUpload"
+                                    <div class="doc-tile doc-tile-wide" id="tile-otherDocUpload">
+                                        <div class="doc-tile-header">
+                                            <div class="doc-tile-icon chip-sky"><i class="bi bi-folder2-open"></i></div>
+                                            <div class="doc-tile-title">
+                                                <span>Other Document (Optional)</span>
+                                                <span class="upload-count" id="otherDocCount"
+                                                    style="display:none;">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="upload-container upload-container-list" id="otherDocUpload"
                                             ondragover="event.preventDefault(); this.classList.add('dragover');"
                                             ondragleave="this.classList.remove('dragover');"
                                             ondrop="handleFileDrop(event, 'otherDocUpload')">
-                                            <div class="file-item">
-                                                <div class="file-icon">
-                                                    <i class="bi bi-file-earmark-pdf"></i>
-                                                </div>
-                                                <div class="file-info">
-                                                    <div class="file-name">certificate_of_incorporation.pdf</div>
-                                                    <div class="file-size">1.5 MB</div>
-                                                </div>
-                                                <div class="file-actions">
-                                                    <button type="button" class="file-btn" title="Download">
-                                                        <i class="bi bi-download"></i>
-                                                    </button>
-                                                    <button type="button" class="file-btn delete" title="Delete"
-                                                        onclick="removeFile(this, event)">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="upload-add-btn"
+                                            <button type="button" class="upload-add-btn upload-dropzone-btn"
                                                 onclick="document.getElementById('otherDocFileInput').click()">
                                                 <i class="bi bi-cloud-arrow-up"></i>
-                                                Click or drag a file here to add another
+                                                <span>Click or drag files here to upload</span>
                                             </button>
                                             <input type="file" id="otherDocFileInput" hidden
-                                                accept=".pdf,.jpg,.jpeg,.png"
+                                                accept=".pdf,.jpg,.jpeg,.png" multiple
                                                 onchange="handleFileSelect(event, 'otherDocUpload')">
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="upload-footer">
                                     Accepted formats: PDF, JPG, PNG (Max size: 5MB)
@@ -2047,6 +2163,28 @@
             <div class="footer-center">Version 1.0.0</div>
             <div class="footer-right">Developed by <a href="https://www.stitbd.com">STIT BD</a></div>
         </footer>
+    </div>
+
+    <!-- File Preview Modal -->
+    <div class="modal fade" id="filePreviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content file-preview-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-truncate" id="filePreviewName">Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body file-preview-body" id="filePreviewBody">
+                    <!-- image/pdf/unsupported content injected here -->
+                </div>
+                <div class="modal-footer">
+                    <span class="file-preview-size" id="filePreviewSize"></span>
+                    <a href="#" class="btn btn-secondary" id="filePreviewDownload" download>
+                        <i class="bi bi-download"></i> Download
+                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Toast Container -->
