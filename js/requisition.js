@@ -268,32 +268,34 @@
                 const type = TYPE_MAP[r.type] || TYPE_MAP.local;
                 return `
                     <tr class="animate-fade-in" style="animation-delay: ${i * 0.05}s">
-                        <td class="text-center"><span class="req-row-num">${start + i + 1}</span></td>
-                        <td><span class="req-no">${r.no}</span></td>
-                        <td><span class="req-wing">${escapeHtml(r.wing)}</span></td>
-                        <td><span class="req-warehouse">${escapeHtml(r.warehouse)}</span></td>
-                        <td class="text-center"><span class="req-type ${type.cls}">${type.label}</span></td>
-                        <td class="text-end"><span class="req-qty">${formatQty(r.qty)}</span></td>
-                        <td class="text-center"><span class="req-date">${formatDate(r.date)}</span></td>
-                        <td><span class="req-place">${escapeHtml(r.place) || '-'}</span></td>
-                        <td class="text-center"><span class="status-badge ${status.cls}">${status.label}</span></td>
-                        <td class="text-center">
+                        <td class="text-center" data-label="#"><span class="req-row-num">${start + i + 1}</span></td>
+<td data-label="Req No"><span class="req-no">${r.no}</span></td>
+<td data-label="Wing"><span class="req-wing">${escapeHtml(r.wing)}</span></td>
+<td data-label="Warehouse"><span class="req-warehouse">${escapeHtml(r.warehouse)}</span></td>
+<td class="text-center" data-label="Type"><span class="req-type ${type.cls}">${type.label}</span></td>
+<td class="text-end" data-label="Qty"><span class="req-qty">${formatQty(r.qty)}</span></td>
+<td class="text-center" data-label="Date"><span class="req-date">${formatDate(r.date)}</span></td>
+<td data-label="Place"><span class="req-place">${escapeHtml(r.place) || '-'}</span></td>
+<td class="text-center" data-label="Status"><span class="status-badge ${status.cls}">${status.label}</span></td>
+                        <td class="text-center" data-label="Action">
                             <div class="action-btns">
                                 <button class="action-btn view" title="View" data-id="${r.id}" aria-label="View requisition">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="action-btn print" title="Print" data-id="${r.id}" aria-label="Print requisition">
-                                    <i class="bi bi-printer"></i>
-                                </button>
-                                <button class="action-btn doc" title="Document" data-id="${r.id}" aria-label="View document">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                </button>
                                 <button class="action-btn edit" title="Edit" data-id="${r.id}" aria-label="Edit requisition">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                <button class="action-btn delete" title="Delete" data-id="${r.id}" aria-label="Delete requisition">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <div class="dropdown d-inline-block">
+                                    <button class="action-btn more dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-label="More actions">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                        <li><a class="dropdown-item action-btn-print" href="#" data-id="${r.id}"><i class="bi bi-printer me-2"></i>Print</a></li>
+                                        <li><a class="dropdown-item action-btn-doc" href="#" data-id="${r.id}"><i class="bi bi-file-earmark-text me-2"></i>Document</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-danger action-btn-delete" href="#" data-id="${r.id}"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </td>
                     </tr>`;
@@ -370,21 +372,24 @@
         });
 
         // Delete
-        $$('.action-btn.delete').forEach(btn => {
-            btn.addEventListener('click', () => confirmDelete(parseInt(btn.dataset.id)));
+        $$('.action-btn-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.preventDefault(); confirmDelete(parseInt(btn.dataset.id)); });
         });
 
+
         // Print
-        $$('.action-btn.print').forEach(btn => {
-            btn.addEventListener('click', () => {
+        $$('.action-btn-print').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 showToast('Print', 'Preparing print document...', 'info');
                 setTimeout(() => window.print(), 500);
             });
         });
 
         // Document
-        $$('.action-btn.doc').forEach(btn => {
-            btn.addEventListener('click', () => {
+        $$('.action-btn-doc').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 showToast('Document', 'Document viewer coming soon', 'info');
             });
         });
