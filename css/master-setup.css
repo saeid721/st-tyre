@@ -1464,8 +1464,9 @@ textarea.textarea-custom {
 }
 
 .btn-secondary:hover {
-    background: var(--primary);
-    border-color: var(--primary-dark);
+    background: var(--bg);
+    color: var(--text);
+    border-color: var(--text-muted);
 }
 
 .btn-primary {

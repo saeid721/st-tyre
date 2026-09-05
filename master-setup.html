@@ -582,15 +582,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Currency</label>
-                                        <select class="form-control-custom">
-                                            <option value="bdt" selected>BDT - Bangladeshi Taka</option>
-                                            <option value="usd">USD - US Dollar</option>
-                                            <option value="eur">EUR - Euro</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label class="form-label">Timezone</label>
                                         <select class="form-control-custom">
                                             <option value="asia-dhaka" selected>(GMT+06:00) Dhaka, Bangladesh</option>
@@ -609,21 +600,20 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Financial Year Start</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-calendar input-icon"></i>
-                                            <input type="text" class="form-control-custom" value="01 July"
-                                                placeholder="Select start date">
-                                        </div>
+                                        <label class="form-label">Date Format</label>
+                                        <select class="form-control-custom">
+                                            <option value="dd-mm-yyyy" selected>DD/MM/YYYY</option>
+                                            <option value="mm-dd-yyyy">MM/DD/YYYY</option>
+                                            <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Financial Year End</label>
-                                        <div class="input-icon-wrapper">
-                                            <i class="bi bi-calendar input-icon"></i>
-                                            <input type="text" class="form-control-custom" value="30 June"
-                                                placeholder="Select end date">
-                                        </div>
+                                        <label class="form-label">Number Format</label>
+                                        <select class="form-control-custom">
+                                            <option value="en" selected>1,234.56 (International)</option>
+                                            <option value="in">12,34,56 (Bangladeshi/Lakh)</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group full-width">
@@ -664,6 +654,28 @@
                             </div>
                         </div>
 
+                        <!-- Authorized Signature / Seal -->
+                        <div class="sidebar-card">
+                            <div class="card-header-custom">
+                                <h3 class="card-title-custom">Authorized Signature / Seal</h3>
+                            </div>
+                            <div class="card-body-custom">
+                                <div class="logo-upload-area">
+                                    <div class="logo-preview">
+                                        <img src="images/authorized-sign-seal.png" alt="Signature"
+                                            onerror="this.style.display='none'">
+                                    </div>
+                                    <input type="file" id="signatureFileInput" hidden accept="image/png,image/jpeg">
+                                    <div class="logo-buttons">
+                                        <button class="btn-logo btn-logo-change" type="button"
+                                            onclick="document.getElementById('signatureFileInput').click()">
+                                            <i class="bi bi-upload"></i> Upload
+                                        </button>
+                                    </div>
+                                    <div class="logo-hint">Used on invoices, LC docs, and vouchers</div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Registered Address Card -->
                         <div class="sidebar-card">
                             <div class="card-header-custom">
@@ -677,8 +689,7 @@
                                             Active
                                         </span>
                                         <div class="address-text">
-                                            25/2, Lake Circus Road, Kalabagan<br>
-                                            Dhanmondi, Dhaka - 1205, Bangladesh
+                                            25/2, Lake Circus Road, Dhanmondi, Dhaka-1205, Bangladesh
                                         </div>
                                         <div class="address-contact">
                                             <div class="address-contact-item">
@@ -703,7 +714,8 @@
                         <div class="sidebar-card">
                             <div class="card-header-custom">
                                 <h3 class="card-title-custom">Branches (3)</h3>
-                                <a href="#" class="card-action-link">View All</a>
+                                <a href="#" class="card-action-link"
+                                    onclick="event.preventDefault(); openBranchModal();">Add New</a>
                             </div>
                             <div class="card-body-custom" style="padding: 0;">
                                 <table class="branches-table">
@@ -716,7 +728,7 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="branchesTableBody">
                                         <tr>
                                             <td>1</td>
                                             <td>Head Office</td>
@@ -746,67 +758,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-
-                        <!-- Contact Persons Card -->
-                        <div class="sidebar-card">
-                            <div class="card-header-custom">
-                                <h3 class="card-title-custom">Contact Persons</h3>
-                                <a href="#" class="card-action-link" onclick="addContact()">Add New</a>
-                            </div>
-                            <div class="card-body-custom">
-                                <div class="contact-list">
-                                    <div class="contact-item">
-                                        <img src="images/profile.jpg" alt="MD. Shaokat Hossain" class="contact-avatar"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
-                                        <div class="contact-info">
-                                            <div class="contact-header">
-                                                <span class="contact-name">MD. Shaokat Hossain</span>
-                                                <span class="contact-badge">Primary</span>
-                                            </div>
-                                            <div class="contact-role">Managing Director</div>
-                                            <a href="mailto:shoakat@sttyre.com"
-                                                class="contact-email">shoakat@sttyre.com</a>
-                                            <div class="contact-phones">
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-phone"></i>
-                                                    +880 1711 123456
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-telephone"></i>
-                                                    +880 2 55012345
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <i class="bi bi-pencil contact-edit" onclick="editContact(1)"></i>
-                                    </div>
-
-                                    <div class="contact-item">
-                                        <img src="images/profile2.jpg" alt="Sumaiya Akter" class="contact-avatar"
-                                            onerror="this.src='https://ui-avatars.com/api/?name=Sumaiya+Akter&background=10b981&color=fff'">
-                                        <div class="contact-info">
-                                            <div class="contact-header">
-                                                <span class="contact-name">Sumaiya Akter</span>
-                                                <span class="contact-badge accounts">Accounts Head</span>
-                                            </div>
-                                            <div class="contact-role">Head of Accounts</div>
-                                            <a href="mailto:sumaiya@sttyre.com"
-                                                class="contact-email">sumaiya@sttyre.com</a>
-                                            <div class="contact-phones">
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-phone"></i>
-                                                    +880 1722 654321
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <i class="bi bi-telephone"></i>
-                                                    +880 2 55012346
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <i class="bi bi-pencil contact-edit" onclick="editContact(2)"></i>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1051,8 +1002,8 @@
                                 </div>
                                 <div class="address-text">
                                     <strong>Registered Address</strong><br>
-                                    <span id="previewAddress">25/2, Lake Circus Road<br>Dhanmondi, Dhaka -
-                                        1205<br>Dhaka, Bangladesh</span>
+                                    <span id="previewAddress">25/2, Lake Circus Road, Dhanmondi, Dhaka-1205,
+                                        Bangladesh</span>
                                 </div>
                                 <div class="address-details">
                                     <div class="address-detail-item">
@@ -1082,7 +1033,7 @@
                                 <a href="#" class="card-action-link" onclick="addContact()">Add New</a>
                             </div>
                             <div class="card-body-custom">
-                                <div class="contact-list">
+                                <div class="contact-list" id="contactsList">
                                     <div class="contact-item">
                                         <img src="images/profile.jpg" alt="MD. Shaokat Hossain" class="contact-avatar"
                                             onerror="this.src='https://ui-avatars.com/api/?name=MD+Shaokat&background=2563eb&color=fff'">
@@ -1637,6 +1588,12 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="form-label">Invoice Number Prefix</label>
+                                        <input type="text" class="form-control mono" id="invoicePrefix" value="INV-"
+                                            placeholder="e.g. INV-">
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="form-label" for="fyStart">Financial Year Start <span
                                                 class="required">*</span></label>
                                         <div class="input-with-icon">
@@ -2147,6 +2104,175 @@
                     <button type="button" class="btn btn-danger px-4" id="confirmLogoutBtn">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="branchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="branchModalTitle">Add Branch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="branchEditId">
+                    <div class="form-group mb-3">
+                        <label class="form-label">Branch Name <span class="required">*</span></label>
+                        <input type="text" class="form-control-custom" id="branchNameInput"
+                            placeholder="e.g. Rajshahi Branch">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Location <span class="required">*</span></label>
+                        <input type="text" class="form-control-custom" id="branchLocationInput"
+                            placeholder="e.g. Rajshahi">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-control-custom" id="branchStatusInput">
+                            <option value="Active" selected>Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveBranch()">Save Branch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalTitle">Add Contact Person</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="contactEditId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Full Name <span class="required">*</span></label>
+                            <input type="text" class="form-control-custom" id="contactNameInput"
+                                placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Designation</label>
+                            <input type="text" class="form-control-custom" id="contactRoleInput"
+                                placeholder="e.g. Head of Sales">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Badge Label</label>
+                            <input type="text" class="form-control-custom" id="contactBadgeInput"
+                                placeholder="e.g. Primary">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Badge Style</label>
+                            <select class="form-control-custom" id="contactBadgeTypeInput">
+                                <option value="">Default (Blue)</option>
+                                <option value="accounts">Green</option>
+                                <option value="it">Purple</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control-custom" id="contactEmailInput"
+                                placeholder="name@sttyre.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mobile</label>
+                            <input type="tel" class="form-control-custom" id="contactMobileInput"
+                                placeholder="+880 1X XXXXXXXX">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Phone (Landline)</label>
+                            <input type="tel" class="form-control-custom" id="contactPhoneInput"
+                                placeholder="+880 X XXXXXXXX">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveContact()">Save Contact</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="taxSettingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tax & VAT Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label class="form-label">VAT Registration No.</label>
+                        <input type="text" class="form-control-custom mono" id="taxVatRegInput" value="BD123456789012">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">TIN (Taxpayer ID)</label>
+                        <input type="text" class="form-control-custom mono" id="taxTinInput" value="123456789012">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">BIN (Business ID)</label>
+                        <input type="text" class="form-control-custom mono" id="taxBinInput" value="000123456-0001">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Default VAT Rate (%)</label>
+                        <input type="number" class="form-control-custom mono" id="taxVatRateInput" value="15"
+                            step="0.01">
+                    </div>
+                    <div class="toggle-wrapper">
+                        <div class="toggle-switch active" id="taxApplicableToggle" role="switch" aria-checked="true"
+                            tabindex="0" onclick="this.classList.toggle('active')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span class="toggle-label">VAT Applicable</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveTaxSettings()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="openingBalanceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Opening Balance Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="toggle-wrapper mb-3">
+                        <div class="toggle-switch active" id="obRequiredToggle" role="switch" aria-checked="true"
+                            tabindex="0" onclick="this.classList.toggle('active')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span class="toggle-label">Opening Balance Required</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Opening Balance Date</label>
+                        <input type="date" class="form-control-custom" id="obDateInput" value="2024-07-01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Opening Balance Posting</label>
+                        <select class="form-control-custom" id="obPostingInput">
+                            <option value="Manual" selected>Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveOpeningBalance()">Save Changes</button>
                 </div>
             </div>
         </div>

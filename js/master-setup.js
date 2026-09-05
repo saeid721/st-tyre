@@ -504,20 +504,193 @@ function showToast(title, message) {
 function showMap() {
     showToast('Map', 'Opening map location...');
 }
+
+let branchesData = [
+    { id: 1, name: 'Head Office', location: 'Dhaka', status: 'Active' },
+    { id: 2, name: 'Chattogram Branch', location: 'Chattogram', status: 'Active' },
+    { id: 3, name: 'Sylhet Branch', location: 'Sylhet', status: 'Active' }
+];
+let contactsData = [
+    { id: 1, name: 'MD. Shaokat Hossain', role: 'Managing Director', badge: 'Primary', badgeType: '', email: 'shoakat@sttyre.com', mobile: '+880 1711 123456', phone: '+880 2 55012345' },
+    { id: 2, name: 'Sumaiya Akter', role: 'Head of Accounts', badge: 'Accounts Head', badgeType: 'accounts', email: 'sumaiya@sttyre.com', mobile: '+880 1722 654321', phone: '+880 2 55012346' },
+    { id: 3, name: 'Abdullah Al Mamun', role: 'IT Manager', badge: 'IT Manager', badgeType: 'it', email: 'it@sttyre.com', mobile: '+880 1844 112233', phone: '+880 2 55012347' }
+];
+
+function renderBranches() {
+    const tbody = document.getElementById('branchesTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = branchesData.map((b, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${b.name}</td>
+            <td>${b.location}</td>
+            <td><span class="branch-status">${b.status}</span></td>
+            <td><i class="bi bi-pencil branch-action" onclick="editBranch(${b.id})"></i></td>
+        </tr>`).join('');
+    document.querySelectorAll('.card-title-custom').forEach(el => {
+        if (el.textContent.trim().startsWith('Branches')) el.textContent = `Branches (${branchesData.length})`;
+    });
+}
+
+function openBranchModal(id) {
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('branchModal'));
+    const branch = branchesData.find(b => b.id === id);
+    document.getElementById('branchModalTitle').textContent = branch ? 'Edit Branch' : 'Add Branch';
+    document.getElementById('branchEditId').value = branch ? branch.id : '';
+    document.getElementById('branchNameInput').value = branch ? branch.name : '';
+    document.getElementById('branchLocationInput').value = branch ? branch.location : '';
+    document.getElementById('branchStatusInput').value = branch ? branch.status : 'Active';
+    modal.show();
+}
+
 function editBranch(id) {
-    showToast('Edit', `Editing branch ${id}...`);
+    openBranchModal(id);
 }
+
+function saveBranch() {
+    const name = document.getElementById('branchNameInput').value.trim();
+    const location = document.getElementById('branchLocationInput').value.trim();
+    const status = document.getElementById('branchStatusInput').value;
+    const editId = document.getElementById('branchEditId').value;
+    if (!name || !location) {
+        showToast('Error', 'Branch name and location are required');
+        return;
+    }
+    if (editId) {
+        const branch = branchesData.find(b => b.id === Number(editId));
+        if (branch) { branch.name = name; branch.location = location; branch.status = status; }
+        showToast('Success', 'Branch updated successfully!');
+    } else {
+        const newId = branchesData.length ? Math.max(...branchesData.map(b => b.id)) + 1 : 1;
+        branchesData.push({ id: newId, name, location, status });
+        showToast('Success', 'Branch added successfully!');
+    }
+    renderBranches();
+    bootstrap.Modal.getInstance(document.getElementById('branchModal')).hide();
+}
+
+function renderContacts() {
+    const list = document.getElementById('contactsList');
+    if (!list) return;
+    list.innerHTML = contactsData.map(c => `
+        <div class="contact-item">
+            <img src="images/profile.jpg" alt="${c.name}" class="contact-avatar"
+                onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(c.name)}&background=2563eb&color=fff'">
+            <div class="contact-info">
+                <div class="contact-header">
+                    <span class="contact-name">${c.name}</span>
+                    ${c.badge ? `<span class="contact-badge ${c.badgeType}">${c.badge}</span>` : ''}
+                </div>
+                <div class="contact-role">${c.role || ''}</div>
+                ${c.email ? `<a href="mailto:${c.email}" class="contact-email">${c.email}</a>` : ''}
+                <div class="contact-phones">
+                    ${c.mobile ? `<div class="contact-phone"><i class="bi bi-phone"></i>${c.mobile}</div>` : ''}
+                    ${c.phone ? `<div class="contact-phone"><i class="bi bi-telephone"></i>${c.phone}</div>` : ''}
+                </div>
+            </div>
+            <i class="bi bi-pencil contact-edit" onclick="editContact(${c.id})"></i>
+        </div>`).join('');
+}
+
+function openContactModal(id) {
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('contactModal'));
+    const contact = contactsData.find(c => c.id === id);
+    document.getElementById('contactModalTitle').textContent = contact ? 'Edit Contact Person' : 'Add Contact Person';
+    document.getElementById('contactEditId').value = contact ? contact.id : '';
+    document.getElementById('contactNameInput').value = contact ? contact.name : '';
+    document.getElementById('contactRoleInput').value = contact ? contact.role : '';
+    document.getElementById('contactBadgeInput').value = contact ? contact.badge : '';
+    document.getElementById('contactBadgeTypeInput').value = contact ? contact.badgeType : '';
+    document.getElementById('contactEmailInput').value = contact ? contact.email : '';
+    document.getElementById('contactMobileInput').value = contact ? contact.mobile : '';
+    document.getElementById('contactPhoneInput').value = contact ? contact.phone : '';
+    modal.show();
+}
+
 function addContact() {
-    showToast('Add Contact', 'Add new contact form will open here');
+    openContactModal();
 }
+
 function editContact(id) {
-    showToast('Edit', `Editing contact ${id}...`);
+    openContactModal(id);
 }
+
+function saveContact() {
+    const name = document.getElementById('contactNameInput').value.trim();
+    if (!name) {
+        showToast('Error', 'Contact name is required');
+        return;
+    }
+    const data = {
+        name,
+        role: document.getElementById('contactRoleInput').value.trim(),
+        badge: document.getElementById('contactBadgeInput').value.trim(),
+        badgeType: document.getElementById('contactBadgeTypeInput').value,
+        email: document.getElementById('contactEmailInput').value.trim(),
+        mobile: document.getElementById('contactMobileInput').value.trim(),
+        phone: document.getElementById('contactPhoneInput').value.trim()
+    };
+    const editId = document.getElementById('contactEditId').value;
+    if (editId) {
+        const contact = contactsData.find(c => c.id === Number(editId));
+        if (contact) Object.assign(contact, data);
+        showToast('Success', 'Contact updated successfully!');
+    } else {
+        const newId = contactsData.length ? Math.max(...contactsData.map(c => c.id)) + 1 : 1;
+        contactsData.push({ id: newId, ...data });
+        showToast('Success', 'Contact added successfully!');
+    }
+    renderContacts();
+    bootstrap.Modal.getInstance(document.getElementById('contactModal')).hide();
+}
+
 function editTaxSettings() {
-    showToast('Edit', 'Opening tax settings...');
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('taxSettingsModal')).show();
 }
+
+function saveTaxSettings() {
+    const vatReg = document.getElementById('taxVatRegInput').value.trim();
+    const tin = document.getElementById('taxTinInput').value.trim();
+    const bin = document.getElementById('taxBinInput').value.trim();
+    const rate = document.getElementById('taxVatRateInput').value;
+    const applicable = document.getElementById('taxApplicableToggle').classList.contains('active');
+    document.querySelectorAll('.tax-list .tax-item').forEach(item => {
+        const label = item.querySelector('.tax-label')?.textContent.trim();
+        const valueEl = item.querySelector('.tax-value, .badge-success');
+        if (!label || !valueEl) return;
+        if (label.startsWith('VAT Registration')) valueEl.textContent = vatReg;
+        if (label.startsWith('TIN')) valueEl.textContent = tin;
+        if (label.startsWith('BIN')) valueEl.textContent = bin;
+        if (label.startsWith('VAT Applicable')) valueEl.textContent = applicable ? 'Yes' : 'No';
+        if (label.startsWith('Default VAT Rate')) valueEl.textContent = `${rate} %`;
+    });
+    showToast('Success', 'Tax & VAT settings updated!');
+    bootstrap.Modal.getInstance(document.getElementById('taxSettingsModal')).hide();
+}
+
 function editOpeningBalance() {
-    showToast('Edit', 'Opening balance settings...');
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('openingBalanceModal')).show();
+}
+
+function saveOpeningBalance() {
+    const required = document.getElementById('obRequiredToggle').classList.contains('active');
+    const date = document.getElementById('obDateInput').value;
+    const posting = document.getElementById('obPostingInput').value;
+    const formattedDate = date ? new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+    document.querySelectorAll('.sidebar-card').forEach(card => {
+        const title = card.querySelector('.card-title')?.textContent.trim();
+        if (title !== 'Opening Balance Settings') return;
+        card.querySelectorAll('.tax-item').forEach(item => {
+            const label = item.querySelector('.tax-label')?.textContent.trim();
+            const valueEl = item.querySelector('.tax-value, .badge-success');
+            if (!label || !valueEl) return;
+            if (label.startsWith('Opening Balance Required')) valueEl.textContent = required ? 'Yes' : 'No';
+            if (label.startsWith('Opening Balance Date')) valueEl.textContent = formattedDate;
+            if (label.startsWith('Opening Balance Posting')) valueEl.textContent = posting;
+        });
+    });
+    showToast('Success', 'Opening balance settings updated!');
+    bootstrap.Modal.getInstance(document.getElementById('openingBalanceModal')).hide();
 }
 
 // =========================================
@@ -603,4 +776,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initPreviewUpdates();
     initRealTimeValidation();
+    renderBranches();
+    renderContacts();
 });
