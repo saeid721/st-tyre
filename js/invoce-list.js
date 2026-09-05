@@ -1,678 +1,660 @@
-// ========================================
-// REQUISITION MANAGEMENT SYSTEM
-// ========================================
-
-// Rich Dummy Data (20 Records)
-(function () {
-    const REQUISITION_DATA = [
-        { id: 1, no: 'REQ-0003', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 11.00, date: '2026-08-01', place: '-', status: 'created', remarks: '' },
-        { id: 2, no: 'REQ-0002', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 57.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
-        { id: 3, no: 'REQ-0001', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 4.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
-        { id: 4, no: 'REQ-0004', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'import', qty: 120.50, date: '2026-09-01', place: 'Chattogram Port', status: 'pending', remarks: 'Urgent delivery' },
-        { id: 5, no: 'REQ-0005', wing: 'Bearing Div', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 85.00, date: '2026-08-28', place: 'Sylhet', status: 'approved', remarks: '' },
-        { id: 6, no: 'REQ-0006', wing: 'ST Tyre', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 200.00, date: '2026-08-25', place: 'Mirpur', status: 'completed', remarks: 'Completed successfully' },
-        { id: 7, no: 'REQ-0007', wing: 'Ifat Tayer', warehouse: 'Chattogram Warehouse', type: 'import', qty: 45.75, date: '2026-08-20', place: 'Chattogram', status: 'rejected', remarks: 'Quality issue' },
-        { id: 8, no: 'REQ-0008', wing: 'Bearing Div', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 32.00, date: '2026-08-15', place: 'Gulshan', status: 'created', remarks: '' },
-        { id: 9, no: 'REQ-0009', wing: 'ST Tyre', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 150.00, date: '2026-08-10', place: 'Sylhet City', status: 'pending', remarks: '' },
-        { id: 10, no: 'REQ-0010', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 78.25, date: '2026-08-05', place: 'Uttara', status: 'approved', remarks: '' },
-        { id: 11, no: 'REQ-0011', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'import', qty: 310.00, date: '2026-07-28', place: 'Chattogram Port', status: 'completed', remarks: 'Delivered on time' },
-        { id: 12, no: 'REQ-0012', wing: 'Bearing Div', warehouse: 'Sylhet Warehouse', type: 'local', qty: 18.50, date: '2026-07-22', place: 'Sylhet', status: 'created', remarks: '' },
-        { id: 13, no: 'REQ-0013', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 95.00, date: '2026-07-18', place: 'Banani', status: 'approved', remarks: '' },
-        { id: 14, no: 'REQ-0014', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'local', qty: 62.00, date: '2026-07-15', place: 'Agrabad', status: 'pending', remarks: '' },
-        { id: 15, no: 'REQ-0015', wing: 'Bearing Div', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'import', qty: 420.00, date: '2026-07-10', place: 'Dhaka Port', status: 'rejected', remarks: 'Documentation incomplete' },
-        { id: 16, no: 'REQ-0016', wing: 'Ifat Tayer', warehouse: 'Sylhet Warehouse', type: 'local', qty: 14.25, date: '2026-07-05', place: 'Sylhet', status: 'completed', remarks: '' },
-        { id: 17, no: 'REQ-0017', wing: 'ST Tyre', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 88.00, date: '2026-06-28', place: 'Motijheel', status: 'created', remarks: '' },
-        { id: 18, no: 'REQ-0018', wing: 'Bearing Div', warehouse: 'Chattogram Warehouse', type: 'import', qty: 250.00, date: '2026-06-20', place: 'Chattogram Port', status: 'approved', remarks: '' },
-        { id: 19, no: 'REQ-0019', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 36.50, date: '2026-06-15', place: 'Dhanmondi', status: 'pending', remarks: '' },
-        { id: 20, no: 'REQ-0020', wing: 'ST Tyre', warehouse: 'Sylhet Warehouse', type: 'local', qty: 112.00, date: '2026-06-10', place: 'Sylhet City', status: 'completed', remarks: 'Successfully completed' },
-    ];
-
-    // State Management
-    const state = {
-        data: [...REQUISITION_DATA],
-        filtered: [...REQUISITION_DATA],
-        currentPage: 1,
-        perPage: 10,
-        sortKey: null,
-        sortDir: 'asc',
-        search: '',
-        deleteId: null,
-        activeFilters: {
-            wing: '',
-            warehouse: '',
-            type: '',
-            dateFrom: '',
-            dateTo: ''
-        }
-    };
-
-    // Utility Functions
-    const $ = (id) => document.getElementById(id);
-    const $$ = (selector) => document.querySelectorAll(selector);
-
-    const formatDate = (iso) => {
-        if (!iso) return '-';
-        const [y, m, d] = iso.split('-');
-        return `${d}-${m}-${y}`;
-    };
-
-    const formatQty = (n) => Number(n).toFixed(2);
-
-    const STATUS_MAP = {
-        created: { label: 'Created', cls: 'status-created' },
-        pending: { label: 'Pending Approval', cls: 'status-pending' },
-        approved: { label: 'Approved', cls: 'status-approved' },
-        rejected: { label: 'Rejected', cls: 'status-rejected' },
-        completed: { label: 'Completed', cls: 'status-completed' },
-    };
-
-    const TYPE_MAP = {
-        local: { label: 'Local', cls: 'type-local' },
-        import: { label: 'Import', cls: 'type-import' },
-        transfer: { label: 'Transfer', cls: 'type-transfer' },
-    };
-
-    // ========================================
-    // KPI UPDATE FUNCTION
-    // ========================================
-    function updateKPIStats() {
-        const total = state.data.length;
-        const pending = state.data.filter(r => r.status === 'pending').length;
-        const approved = state.data.filter(r => r.status === 'approved').length;
-        const completed = state.data.filter(r => r.status === 'completed').length;
-        const totalQty = state.data.reduce((sum, r) => sum + Number(r.qty || 0), 0);
-
-        $('kpiTotal').textContent = total;
-        $('kpiPending').textContent = pending;
-        $('kpiApproved').textContent = approved;
-        $('kpiCompleted').textContent = completed;
-        $('kpiQty').textContent = formatQty(totalQty);
-    }
-
-    // Loading Overlay
-    function showLoading() {
-        $('loadingOverlay').classList.add('active');
-    }
-
-    function hideLoading() {
-        setTimeout(() => {
-            $('loadingOverlay').classList.remove('active');
-        }, 300);
-    }
-
-    // Toast Notification
-    function showToast(title, message, type = 'success') {
-        const container = $('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = `toast-modern ${type}`;
-
-        const icons = {
-            success: 'check-circle-fill',
-            error: 'x-circle-fill',
-            warning: 'exclamation-triangle-fill',
-            info: 'info-circle-fill'
-        };
-
-        toast.innerHTML = `
-            <div class="toast-icon">
-                <i class="bi bi-${icons[type]}"></i>
-            </div>
-            <div class="toast-content">
-                <div class="toast-title">${title}</div>
-                <div class="toast-msg">${message}</div>
-            </div>
-        `;
-
-        container.appendChild(toast);
-
-        // Trigger animation
-        setTimeout(() => toast.classList.add('show'), 10);
-
-        setTimeout(() => {
-            toast.classList.add('hiding');
-            setTimeout(() => {
-                toast.remove();
-            }, 300);
-        }, 3000);
-    }
-
-    // ========================================
-    // ACTIVE FILTER CHIPS
-    // ========================================
-    function updateActiveFilterChips() {
-        const chipsContainer = $('filterChips');
-        const activeFiltersDiv = $('activeFilters');
-        const filters = state.activeFilters;
-
-        let chips = [];
-
-        if (filters.wing) {
-            chips.push({ label: `Wing: ${filters.wing}`, key: 'wing', value: filters.wing });
-        }
-        if (filters.warehouse) {
-            chips.push({ label: `Warehouse: ${filters.warehouse}`, key: 'warehouse', value: filters.warehouse });
-        }
-        if (filters.type) {
-            const typeLabel = TYPE_MAP[filters.type]?.label || filters.type;
-            chips.push({ label: `Type: ${typeLabel}`, key: 'type', value: filters.type });
-        }
-        if (filters.dateFrom) {
-            chips.push({ label: `From: ${formatDate(filters.dateFrom)}`, key: 'dateFrom', value: filters.dateFrom });
-        }
-        if (filters.dateTo) {
-            chips.push({ label: `To: ${formatDate(filters.dateTo)}`, key: 'dateTo', value: filters.dateTo });
-        }
-
-        if (chips.length === 0) {
-            activeFiltersDiv.classList.remove('show');
-            chipsContainer.innerHTML = '';
-        } else {
-            activeFiltersDiv.classList.add('show');
-            chipsContainer.innerHTML = chips.map(chip => `
-                <span class="filter-chip" data-key="${chip.key}">
-                    ${chip.label}
-                    <span class="filter-chip-remove" data-key="${chip.key}">
-                        <i class="bi bi-x"></i>
-                    </span>
-                </span>
-            `).join('');
-
-            // Bind remove events
-            chipsContainer.querySelectorAll('.filter-chip-remove').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const key = btn.dataset.key;
-                    removeFilter(key);
-                });
-            });
-        }
-    }
-
-    function removeFilter(key) {
-        state.activeFilters[key] = '';
-
-        // Update UI
-        if (key === 'wing') $('filterWing').value = '';
-        if (key === 'warehouse') $('filterWarehouse').value = '';
-        if (key === 'type') $('filterType').value = '';
-        if (key === 'dateFrom') $('filterDateFrom').value = '';
-        if (key === 'dateTo') $('filterDateTo').value = '';
-
-        applyFilters();
-    }
-
-    // ========================================
-    // RENDER TABLE
-    // ========================================
-    function renderTable() {
-        const tbody = $('reqTableBody');
-        let data = [...state.filtered];
-
-        // Search
-        if (state.search) {
-            const q = state.search.toLowerCase();
-            data = data.filter(r =>
-                r.no.toLowerCase().includes(q) ||
-                r.wing.toLowerCase().includes(q) ||
-                r.warehouse.toLowerCase().includes(q) ||
-                r.type.toLowerCase().includes(q) ||
-                (r.place && r.place.toLowerCase().includes(q)) ||
-                STATUS_MAP[r.status]?.label.toLowerCase().includes(q)
-            );
-        }
-
-        // Sort
-        if (state.sortKey) {
-            data.sort((a, b) => {
-                let va = a[state.sortKey], vb = b[state.sortKey];
-                if (typeof va === 'string') va = va.toLowerCase();
-                if (typeof vb === 'string') vb = vb.toLowerCase();
-                if (va < vb) return state.sortDir === 'asc' ? -1 : 1;
-                if (va > vb) return state.sortDir === 'asc' ? 1 : -1;
-                return 0;
-            });
-        }
-
-        // Pagination
-        const total = data.length;
-        const totalPages = Math.max(1, Math.ceil(total / state.perPage));
-        if (state.currentPage > totalPages) state.currentPage = totalPages;
-        const start = (state.currentPage - 1) * state.perPage;
-        const pageData = data.slice(start, start + state.perPage);
-
-        // Render
-        if (pageData.length === 0) {
-            const hasActiveFilters = Object.values(state.activeFilters).some(v => v !== '') || state.search !== '';
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="10">
-                        <div class="empty-state">
-                            <i class="bi bi-inbox"></i>
-                            <h4>No requisitions found</h4>
-                            <p>There are no requisitions matching your current filters.</p>
-                            ${hasActiveFilters ? '<button class="btn-clear-filters" id="clearFiltersBtn"><i class="bi bi-x-circle"></i> Clear Filters</button>' : ''}
-                        </div>
-                    </td>
-                </tr>`;
-
-            if (hasActiveFilters) {
-                $('clearFiltersBtn')?.addEventListener('click', resetFilters);
-            }
-        } else {
-            tbody.innerHTML = pageData.map((r, i) => {
-                const status = STATUS_MAP[r.status] || STATUS_MAP.created;
-                const type = TYPE_MAP[r.type] || TYPE_MAP.local;
-                return `
-                    <tr class="animate-fade-in" style="animation-delay: ${i * 0.05}s">
-                        <td class="text-center"><span class="req-row-num">${start + i + 1}</span></td>
-                        <td><span class="req-no">${r.no}</span></td>
-                        <td><span class="req-wing">${r.wing}</span></td>
-                        <td><span class="req-warehouse">${r.warehouse}</span></td>
-                        <td class="text-center"><span class="req-type ${type.cls}">${type.label}</span></td>
-                        <td class="text-end"><span class="req-qty">${formatQty(r.qty)}</span></td>
-                        <td class="text-center"><span class="req-date">${formatDate(r.date)}</span></td>
-                        <td><span class="req-place">${r.place || '-'}</span></td>
-                        <td class="text-center"><span class="status-badge ${status.cls}">${status.label}</span></td>
-                        <td class="text-center">
-                            <div class="action-btns">
-                                <button class="action-btn view" title="View" data-id="${r.id}" aria-label="View requisition">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="action-btn print" title="Print" data-id="${r.id}" aria-label="Print requisition">
-                                    <i class="bi bi-printer"></i>
-                                </button>
-                                <button class="action-btn doc" title="Document" data-id="${r.id}" aria-label="View document">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                </button>
-                                <button class="action-btn edit" title="Edit" data-id="${r.id}" aria-label="Edit requisition">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                                <button class="action-btn delete" title="Delete" data-id="${r.id}" aria-label="Delete requisition">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>`;
-            }).join('');
-        }
-
-        // Update info
-        const showing = pageData.length > 0 ? `${start + 1}–${Math.min(start + state.perPage, total)}` : '0';
-        $('tableInfo').textContent = `Showing ${showing} of ${total} requisitions`;
-
-        // Render pagination
-        renderPagination(totalPages);
-
-        // Bind events
-        bindTableEvents();
-    }
-
-    function renderPagination(totalPages) {
-        const container = $('pagination');
-        let html = `
-            <button class="page-btn" ${state.currentPage === 1 ? 'disabled' : ''} data-page="prev" aria-label="Previous page">
-                <i class="bi bi-chevron-left"></i>
-            </button>`;
-
-        // Smart pagination - show limited pages
-        let startPage = Math.max(1, state.currentPage - 2);
-        let endPage = Math.min(totalPages, state.currentPage + 2);
-
-        if (startPage > 1) {
-            html += `<button class="page-btn" data-page="1">1</button>`;
-            if (startPage > 2) {
-                html += `<button class="page-btn" disabled>...</button>`;
-            }
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-            html += `<button class="page-btn ${i === state.currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-        }
-
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                html += `<button class="page-btn" disabled>...</button>`;
-            }
-            html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
-        }
-
-        html += `
-            <button class="page-btn" ${state.currentPage === totalPages ? 'disabled' : ''} data-page="next" aria-label="Next page">
-                <i class="bi bi-chevron-right"></i>
-            </button>`;
-
-        container.innerHTML = html;
-
-        container.querySelectorAll('.page-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const p = btn.dataset.page;
-                if (p === 'prev') state.currentPage--;
-                else if (p === 'next') state.currentPage++;
-                else state.currentPage = parseInt(p);
-                renderTable();
-            });
-        });
-    }
-
-    function bindTableEvents() {
-        // View
-        $$('.action-btn.view').forEach(btn => {
-            btn.addEventListener('click', () => openViewModal(parseInt(btn.dataset.id)));
-        });
-
-        // Edit
-        $$('.action-btn.edit').forEach(btn => {
-            btn.addEventListener('click', () => openEditModal(parseInt(btn.dataset.id)));
-        });
-
-        // Delete
-        $$('.action-btn.delete').forEach(btn => {
-            btn.addEventListener('click', () => confirmDelete(parseInt(btn.dataset.id)));
-        });
-
-        // Print
-        $$('.action-btn.print').forEach(btn => {
-            btn.addEventListener('click', () => {
-                showToast('Print', 'Preparing print document...', 'info');
-                setTimeout(() => window.print(), 500);
-            });
-        });
-
-        // Document
-        $$('.action-btn.doc').forEach(btn => {
-            btn.addEventListener('click', () => {
-                showToast('Document', 'Document viewer coming soon', 'info');
-            });
-        });
-    }
-
-    // ========================================
-    // FILTER FUNCTIONS
-    // ========================================
-    function applyFilters() {
-        showLoading();
-
-        const wing = $('filterWing').value;
-        const warehouse = $('filterWarehouse').value;
-        const type = $('filterType').value;
-        const dateFrom = $('filterDateFrom').value;
-        const dateTo = $('filterDateTo').value;
-
-        // Update active filters state
-        state.activeFilters = { wing, warehouse, type, dateFrom, dateTo };
-
-        state.filtered = state.data.filter(r => {
-            if (wing && r.wing !== wing) return false;
-            if (warehouse && r.warehouse !== warehouse) return false;
-            if (type && r.type !== type) return false;
-            if (dateFrom && r.date < dateFrom) return false;
-            if (dateTo && r.date > dateTo) return false;
-            return true;
-        });
-
-        state.currentPage = 1;
-
-        setTimeout(() => {
-            renderTable();
-            updateActiveFilterChips();
-            hideLoading();
-            if (wing || warehouse || type || dateFrom || dateTo) {
-                showToast('Filter Applied', 'Showing filtered results', 'success');
-            }
-        }, 300);
-    }
-
-    function resetFilters() {
-        $('filterWing').value = '';
-        $('filterWarehouse').value = '';
-        $('filterType').value = '';
-        $('filterDateFrom').value = '';
-        $('filterDateTo').value = '';
-        $('tableSearch').value = '';
-        state.search = '';
-        state.activeFilters = { wing: '', warehouse: '', type: '', dateFrom: '', dateTo: '' };
-        state.filtered = [...state.data];
-        state.currentPage = 1;
-        renderTable();
-        updateActiveFilterChips();
-        showToast('Filters Reset', 'Showing all requisitions', 'info');
-    }
-
-    // ========================================
-    // SORT FUNCTION
-    // ========================================
-    function handleSort(key) {
-        if (state.sortKey === key) {
-            state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
-        } else {
-            state.sortKey = key;
-            state.sortDir = 'asc';
-        }
-        renderTable();
-    }
-
-    // ========================================
-    // MODAL FUNCTIONS
-    // ========================================
-    function openViewModal(id) {
-        const r = state.data.find(x => x.id === id);
-        if (!r) return;
-
-        const status = STATUS_MAP[r.status];
-        $('vNo').textContent = r.no;
-        $('vWing').textContent = r.wing;
-        $('vWarehouse').textContent = r.warehouse;
-        $('vType').textContent = TYPE_MAP[r.type].label;
-        $('vQty').textContent = formatQty(r.qty);
-        $('vDate').textContent = formatDate(r.date);
-        $('vPlace').textContent = r.place || '-';
-        $('vStatus').innerHTML = `<span class="status-badge ${status.cls}">${status.label}</span>`;
-        $('viewReqNo').textContent = r.no;
-
-        new bootstrap.Modal($('viewReqModal')).show();
-    }
-
-    function openEditModal(id) {
-        const r = state.data.find(x => x.id === id);
-        if (!r) return;
-
-        $('editId').value = r.id;
-        $('editWing').value = r.wing;
-        $('editWarehouse').value = r.warehouse;
-        $('editType').value = r.type;
-        $('editDate').value = r.date;
-        $('editPlace').value = r.place || '';
-        $('editQty').value = r.qty;
-        $('editRemarks').value = r.remarks || '';
-        $('editReqNo').textContent = r.no;
-
-        new bootstrap.Modal($('editRequisitionModal')).show();
-    }
-
-    function confirmDelete(id) {
-        const r = state.data.find(x => x.id === id);
-        if (!r) return;
-
-        state.deleteId = id;
-        $('deleteReqNo').textContent = r.no;
-        new bootstrap.Modal($('deleteConfirmModal')).show();
-    }
-
-    function deleteRequisition() {
-        if (!state.deleteId) return;
-
-        showLoading();
-        const r = state.data.find(x => x.id === state.deleteId);
-
-        setTimeout(() => {
-            const idx = state.data.findIndex(x => x.id === state.deleteId);
-            if (idx > -1) {
-                state.data.splice(idx, 1);
-                applyFilters();
-                updateKPIStats();
-                showToast('Deleted', `${r.no} has been deleted successfully`, 'success');
-            }
-            hideLoading();
-            bootstrap.Modal.getInstance($('deleteConfirmModal')).hide();
-            state.deleteId = null;
-        }, 500);
-    }
-
-    // ========================================
-    // SAVE NEW REQUISITION
-    // ========================================
-    function saveRequisition() {
-        const form = $('addReqForm');
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            showToast('Validation Error', 'Please fill all required fields', 'error');
-            return;
-        }
-
-        showLoading();
-
-        setTimeout(() => {
-            const formData = new FormData(form);
-            const newId = Math.max(...state.data.map(r => r.id)) + 1;
-
-            const newReq = {
-                id: newId,
-                no: `REQ-${String(newId).padStart(4, '0')}`,
-                wing: formData.get('wing'),
-                warehouse: formData.get('warehouse'),
-                type: formData.get('type'),
-                qty: parseFloat(formData.get('qty')) || 0,
-                date: formData.get('date'),
-                place: formData.get('place') || '-',
-                status: 'created',
-                remarks: formData.get('remarks') || ''
-            };
-
-            state.data.unshift(newReq);
-            applyFilters();
-            updateKPIStats();
-
-            bootstrap.Modal.getInstance($('addRequisitionModal')).hide();
-            form.reset();
-
-            hideLoading();
-            showToast('Success', `${newReq.no} has been created successfully`, 'success');
-        }, 600);
-    }
-
-    // ========================================
-    // UPDATE REQUISITION
-    // ========================================
-    function updateRequisition() {
-        const form = $('editReqForm');
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            showToast('Validation Error', 'Please fill all required fields', 'error');
-            return;
-        }
-
-        showLoading();
-
-        setTimeout(() => {
-            const formData = new FormData(form);
-            const id = parseInt(formData.get('id'));
-            const idx = state.data.findIndex(x => x.id === id);
-
-            if (idx > -1) {
-                state.data[idx] = {
-                    ...state.data[idx],
-                    wing: formData.get('wing'),
-                    warehouse: formData.get('warehouse'),
-                    type: formData.get('type'),
-                    qty: parseFloat(formData.get('qty')) || 0,
-                    date: formData.get('date'),
-                    place: formData.get('place') || '-',
-                    remarks: formData.get('remarks') || ''
-                };
-
-                applyFilters();
-                updateKPIStats();
-                bootstrap.Modal.getInstance($('editRequisitionModal')).hide();
-
-                hideLoading();
-                showToast('Updated', `${state.data[idx].no} has been updated successfully`, 'success');
-            }
-        }, 600);
-    }
-
-    // ========================================
-    // EXPORT TO EXCEL (CSV)
-    // ========================================
-    function exportExcel() {
-        showLoading();
-
-        setTimeout(() => {
-            const headers = ['#', 'Requisition No', 'Wing', 'Warehouse', 'Type', 'Total Qty', 'Date', 'Place of Supply', 'Status'];
-            const rows = state.filtered.map((r, i) => [
-                i + 1, r.no, r.wing, r.warehouse, TYPE_MAP[r.type].label, r.qty, r.date, r.place, STATUS_MAP[r.status].label
-            ]);
-
-            const csv = [headers, ...rows].map(row => row.map(v => `"${v}"`).join(',')).join('\n');
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `requisitions_${new Date().toISOString().slice(0, 10)}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
-
-            hideLoading();
-            showToast('Exported', 'Requisition list exported as CSV', 'success');
-        }, 500);
-    }
-
-    // ========================================
-    // INITIALIZATION
-    // ========================================
-    document.addEventListener('DOMContentLoaded', () => {
-        // Initial render
-        renderTable();
-        updateKPIStats();
-        updateActiveFilterChips();
-
-        // Event Listeners
-        $('applyFilter').addEventListener('click', applyFilters);
-        $('resetFilter').addEventListener('click', resetFilters);
-
-        $('tableSearch').addEventListener('input', (e) => {
-            state.search = e.target.value;
-            state.currentPage = 1;
-            renderTable();
-        });
-
-        $('entryCount').addEventListener('change', (e) => {
-            state.perPage = parseInt(e.target.value);
-            state.currentPage = 1;
-            renderTable();
-        });
-
-        // Sort headers
-        $$('.req-table th.sortable').forEach(th => {
-            th.addEventListener('click', () => handleSort(th.dataset.sort));
-        });
-
-        // Export and Print
-        $('exportExcel').addEventListener('click', exportExcel);
-        $('printList').addEventListener('click', () => {
-            showToast('Print', 'Preparing document...', 'info');
-            setTimeout(() => window.print(), 500);
-        });
-
-        // Save buttons
-        $('saveReqBtn').addEventListener('click', saveRequisition);
-        $('updateReqBtn').addEventListener('click', updateRequisition);
-        $('confirmDeleteBtn').addEventListener('click', deleteRequisition);
-
-        // Clear form on modal close
-        $('addRequisitionModal').addEventListener('hidden.bs.modal', () => {
-            $('addReqForm').reset();
-        });
-
-        $('clearAllFilters')?.addEventListener('click', resetFilters);
+// ==========================================
+// STATE & MOCK DATA
+// ==========================================
+const AppState = {
+    invoices: [],
+    filtered: [],
+    currentPage: 1,
+    perPage: 10,
+    selectedIds: new Set(),
+    filters: { dateFrom: '', dateTo: '', customer: '', branch: '', paymentStatus: '', invoiceStatus: '', salesType: '' },
+    search: '',
+    deleteId: null
+};
+
+const MOCK_DATA = [
+    { id: 1, invoiceNo: 'INV-000001', date: '2026-09-03', dueDate: '2026-09-18', customer: 'ABC Trading Ltd.', phone: '01712345678', address: '123 Business Park, Dhaka', branch: 'Dhaka Branch', salesType: 'Corporate', subtotal: 85000, discount: 2000, vat: 12450, shipping: 0, grandTotal: 95450, paid: 70000, due: 25450, paymentStatus: 'Partial', invoiceStatus: 'Confirmed', items: [{ product: 'ST Tyre 12R22.5', qty: 2, unit: 'Pcs', unitPrice: 25000, discount: 0, vat: 15, total: 50000 }, { product: 'ST Tyre 11R22.5', qty: 1, unit: 'Pcs', unitPrice: 35000, discount: 2000, vat: 15, total: 35000 }], notes: 'Deliver before 5 PM' },
+    { id: 2, invoiceNo: 'INV-000002', date: '2026-09-02', dueDate: '2026-09-17', customer: 'XYZ Motors', phone: '01812345678', address: '456 Road, Chattogram', branch: 'Chattogram Branch', salesType: 'Wholesale', subtotal: 150000, discount: 0, vat: 22500, shipping: 500, grandTotal: 173000, paid: 173000, due: 0, paymentStatus: 'Paid', invoiceStatus: 'Confirmed', items: [{ product: 'Tube 12R', qty: 10, unit: 'Pcs', unitPrice: 15000, discount: 0, vat: 15, total: 150000 }], notes: '' },
+    { id: 3, invoiceNo: 'INV-000003', date: '2026-09-01', dueDate: '2026-09-16', customer: 'Rahim Enterprise', phone: '01912345678', address: '789 Street, Sylhet', branch: 'Sylhet Branch', salesType: 'Retail', subtotal: 45000, discount: 1000, vat: 6600, shipping: 0, grandTotal: 50600, paid: 0, due: 50600, paymentStatus: 'Due', invoiceStatus: 'Draft', items: [{ product: 'ST Tyre 10R', qty: 3, unit: 'Pcs', unitPrice: 15000, discount: 1000, vat: 15, total: 45000 }], notes: '' },
+    { id: 4, invoiceNo: 'INV-000004', date: '2026-08-28', dueDate: '2026-09-12', customer: 'ABC Trading Ltd.', phone: '01712345678', address: '123 Business Park, Dhaka', branch: 'Dhaka Branch', salesType: 'Corporate', subtotal: 200000, discount: 5000, vat: 29250, shipping: 1000, grandTotal: 225250, paid: 100000, due: 125250, paymentStatus: 'Partial', invoiceStatus: 'Confirmed', items: [{ product: 'ST Tyre 12R22.5', qty: 8, unit: 'Pcs', unitPrice: 25000, discount: 5000, vat: 15, total: 200000 }], notes: '' },
+    { id: 5, invoiceNo: 'INV-000005', date: '2026-08-25', dueDate: '2026-09-09', customer: 'XYZ Motors', phone: '01812345678', address: '456 Road, Chattogram', branch: 'Chattogram Branch', salesType: 'Wholesale', subtotal: 75000, discount: 0, vat: 11250, shipping: 0, grandTotal: 86250, paid: 86250, due: 0, paymentStatus: 'Paid', invoiceStatus: 'Confirmed', items: [{ product: 'Tube 11R', qty: 5, unit: 'Pcs', unitPrice: 15000, discount: 0, vat: 15, total: 75000 }], notes: '' },
+    { id: 6, invoiceNo: 'INV-000006', date: '2026-08-20', dueDate: '2026-09-04', customer: 'Rahim Enterprise', phone: '01912345678', address: '789 Street, Sylhet', branch: 'Sylhet Branch', salesType: 'Retail', subtotal: 30000, discount: 0, vat: 4500, shipping: 0, grandTotal: 34500, paid: 0, due: 34500, paymentStatus: 'Due', invoiceStatus: 'Cancelled', items: [{ product: 'ST Tyre 9R', qty: 2, unit: 'Pcs', unitPrice: 15000, discount: 0, vat: 15, total: 30000 }], notes: 'Cancelled by customer' }
+];
+
+// ==========================================
+// INITIALIZATION
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    AppState.invoices = [...MOCK_DATA];
+    AppState.filtered = [...MOCK_DATA];
+
+    document.getElementById('payDate').valueAsDate = new Date();
+
+    renderTable();
+    updateKPIs();
+    bindEvents();
+});
+
+function bindEvents() {
+    // Sidebar toggle
+    document.getElementById('topbarSidebarToggle').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('show');
+        document.getElementById('mobileOverlay').classList.toggle('show');
     });
-})();
+    document.getElementById('mobileOverlay').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('show');
+        document.getElementById('mobileOverlay').classList.remove('show');
+    });
+
+    // Header buttons
+    document.getElementById('btnCreateInvoice').addEventListener('click', openCreateInvoice);
+    document.getElementById('btnExport').addEventListener('click', exportToExcel);
+    document.getElementById('btnPrintList').addEventListener('click', () => window.print());
+    document.getElementById('btnToggleFilters').addEventListener('click', () => {
+        document.getElementById('filterBar').classList.toggle('show');
+    });
+
+    // Filter buttons
+    document.getElementById('btnApplyFilters').addEventListener('click', applyFilters);
+    document.getElementById('btnResetFilters').addEventListener('click', resetFilters);
+
+    // Search & Pagination
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        AppState.search = e.target.value;
+        AppState.currentPage = 1;
+        renderTable();
+    });
+    document.getElementById('perPageSelect').addEventListener('change', (e) => {
+        AppState.perPage = parseInt(e.target.value);
+        AppState.currentPage = 1;
+        renderTable();
+    });
+
+    // Selection
+    document.getElementById('selectAll').addEventListener('change', (e) => toggleSelectAll(e.target));
+
+    // Bulk actions
+    document.getElementById('btnBulkExport').addEventListener('click', () => bulkAction('export'));
+    document.getElementById('btnBulkConfirm').addEventListener('click', () => bulkAction('confirm'));
+    document.getElementById('btnBulkCancel').addEventListener('click', () => bulkAction('cancel'));
+
+    // Offcanvas form
+    document.getElementById('btnAddItem').addEventListener('click', () => addInvoiceItem());
+    document.getElementById('invPaid').addEventListener('input', calculateInvoice);
+    document.getElementById('invShipping').addEventListener('input', calculateInvoice);
+    document.getElementById('invCustomer').addEventListener('change', (e) => fillCustomerDetails(e.target.value));
+
+    // Delegate events for dynamic item rows
+    document.getElementById('itemsBody').addEventListener('input', (e) => {
+        if (e.target.classList.contains('item-qty') || e.target.classList.contains('item-price') ||
+            e.target.classList.contains('item-discount') || e.target.classList.contains('item-vat')) {
+            calculateInvoice();
+        }
+    });
+    document.getElementById('itemsBody').addEventListener('click', (e) => {
+        if (e.target.closest('.btn-remove-row')) {
+            e.target.closest('tr').remove();
+            calculateInvoice();
+        }
+    });
+
+    // Save buttons
+    document.getElementById('btnSaveDraft').addEventListener('click', () => saveInvoice('Draft'));
+    document.getElementById('btnSaveInvoice').addEventListener('click', () => saveInvoice('Confirmed'));
+
+    // Payment modal
+    document.getElementById('btnSubmitPayment').addEventListener('click', submitPayment);
+
+    // Delete modal
+    document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDeleteAction);
+
+    // Print invoice from modal
+    document.getElementById('btnPrintInvoice').addEventListener('click', () => window.print());
+}
+
+// ==========================================
+// RENDER & LOGIC
+// ==========================================
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-BD', { style: 'currency', currency: 'BDT' }).format(amount);
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '-';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB');
+}
+
+function updateKPIs() {
+    const total = AppState.invoices.length;
+    const currentMonth = new Date().getMonth();
+    const now = new Date();
+    const monthCount = AppState.invoices.filter(inv => {
+        const d = new Date(inv.date);
+        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }).length;
+    const paid = AppState.invoices.filter(inv => inv.paymentStatus === 'Paid').reduce((sum, inv) => sum + inv.grandTotal, 0);
+    const due = AppState.invoices.filter(inv => inv.paymentStatus !== 'Paid').reduce((sum, inv) => sum + inv.due, 0);
+    const sales = AppState.invoices.filter(inv => inv.invoiceStatus !== 'Cancelled').reduce((sum, inv) => sum + inv.grandTotal, 0);
+
+    document.getElementById('kpiTotal').textContent = total;
+    document.getElementById('kpiMonth').textContent = monthCount;
+    document.getElementById('kpiPaid').textContent = formatCurrency(paid);
+    document.getElementById('kpiDue').textContent = formatCurrency(due);
+    document.getElementById('kpiSales').textContent = formatCurrency(sales);
+}
+
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    let data = [...AppState.filtered];
+
+    if (AppState.search) {
+        const q = AppState.search.toLowerCase();
+        data = data.filter(inv =>
+            inv.invoiceNo.toLowerCase().includes(q) ||
+            inv.customer.toLowerCase().includes(q) ||
+            inv.phone.includes(q)
+        );
+    }
+
+    const total = data.length;
+    const totalPages = Math.max(1, Math.ceil(total / AppState.perPage));
+    if (AppState.currentPage > totalPages) AppState.currentPage = totalPages;
+    const start = (AppState.currentPage - 1) * AppState.perPage;
+    const pageData = data.slice(start, start + AppState.perPage);
+
+    if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="text-center py-5 text-muted">No invoices found matching your criteria.</td></tr>`;
+    } else {
+        tbody.innerHTML = pageData.map(inv => `
+            <tr>
+                <td><input type="checkbox" class="form-check-input row-checkbox" value="${inv.id}" ${AppState.selectedIds.has(inv.id) ? 'checked' : ''}></td>
+                <td><span class="req-no" data-id="${inv.id}">${inv.invoiceNo}</span></td>
+                <td>${formatDate(inv.date)}</td>
+                <td><strong>${inv.customer}</strong></td>
+                <td>${inv.phone}</td>
+                <td><span class="badge bg-light text-dark border">${inv.salesType}</span></td>
+                <td class="text-end fw-bold">${formatCurrency(inv.grandTotal)}</td>
+                <td class="text-end text-success">${formatCurrency(inv.paid)}</td>
+                <td class="text-end text-danger">${formatCurrency(inv.due)}</td>
+                <td class="text-center"><span class="status-badge status-${inv.paymentStatus.toLowerCase()}">${inv.paymentStatus}</span></td>
+                <td class="text-center"><span class="status-badge status-${inv.invoiceStatus.toLowerCase()}">${inv.invoiceStatus}</span></td>
+                <td class="text-center">
+                    <div class="action-btns">
+                        <button class="action-btn view" title="View" data-action="view" data-id="${inv.id}"><i class="bi bi-eye"></i></button>
+                        <button class="action-btn edit" title="Edit" data-action="edit" data-id="${inv.id}"><i class="bi bi-pencil"></i></button>
+                        <button class="action-btn pay" title="Payment" data-action="pay" data-id="${inv.id}"><i class="bi bi-cash-coin"></i></button>
+                        <button class="action-btn print" title="Print" data-action="print" data-id="${inv.id}"><i class="bi bi-printer"></i></button>
+                        <button class="action-btn delete" title="Delete" data-action="delete" data-id="${inv.id}"><i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Update info & pagination
+    const showing = pageData.length > 0 ? `${start + 1}–${Math.min(start + AppState.perPage, total)}` : '0';
+    document.getElementById('tableInfo').textContent = `Showing ${showing} of ${total} invoices`;
+
+    const pagContainer = document.getElementById('pagination');
+    let pagHtml = `<button class="page-btn" ${AppState.currentPage === 1 ? 'disabled' : ''} data-page="prev"><i class="bi bi-chevron-left"></i></button>`;
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= AppState.currentPage - 1 && i <= AppState.currentPage + 1)) {
+            pagHtml += `<button class="page-btn ${i === AppState.currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        } else if (i === AppState.currentPage - 2 || i === AppState.currentPage + 2) {
+            pagHtml += `<button class="page-btn" disabled>...</button>`;
+        }
+    }
+    pagHtml += `<button class="page-btn" ${AppState.currentPage === totalPages ? 'disabled' : ''} data-page="next"><i class="bi bi-chevron-right"></i></button>`;
+    pagContainer.innerHTML = pagHtml;
+
+    // Bind table events
+    tbody.querySelectorAll('.row-checkbox').forEach(cb => {
+        cb.addEventListener('change', (e) => {
+            const id = parseInt(e.target.value);
+            if (e.target.checked) AppState.selectedIds.add(id);
+            else AppState.selectedIds.delete(id);
+            updateBulkActions();
+        });
+    });
+
+    tbody.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            const action = btn.dataset.action;
+            if (action === 'view') openViewInvoice(id);
+            else if (action === 'edit') openEditInvoice(id);
+            else if (action === 'pay') openPaymentModal(id);
+            else if (action === 'print') { openViewInvoice(id); setTimeout(() => window.print(), 300); }
+            else if (action === 'delete') confirmDelete(id);
+        });
+    });
+
+    pagContainer.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const page = btn.dataset.page;
+            if (page === 'prev') AppState.currentPage--;
+            else if (page === 'next') AppState.currentPage++;
+            else AppState.currentPage = parseInt(page);
+            renderTable();
+        });
+    });
+
+    updateBulkActions();
+}
+
+// ==========================================
+// FILTERS & SEARCH
+// ==========================================
+function applyFilters() {
+    AppState.filters = {
+        dateFrom: document.getElementById('filterDateFrom').value,
+        dateTo: document.getElementById('filterDateTo').value,
+        customer: document.getElementById('filterCustomer').value.toLowerCase(),
+        branch: document.getElementById('filterBranch').value,
+        paymentStatus: document.getElementById('filterPaymentStatus').value,
+        invoiceStatus: document.getElementById('filterInvoiceStatus').value,
+        salesType: document.getElementById('filterSalesType').value
+    };
+
+    AppState.filtered = AppState.invoices.filter(inv => {
+        if (AppState.filters.dateFrom && inv.date < AppState.filters.dateFrom) return false;
+        if (AppState.filters.dateTo && inv.date > AppState.filters.dateTo) return false;
+        if (AppState.filters.customer && !inv.customer.toLowerCase().includes(AppState.filters.customer)) return false;
+        if (AppState.filters.branch && inv.branch !== AppState.filters.branch) return false;
+        if (AppState.filters.paymentStatus && inv.paymentStatus !== AppState.filters.paymentStatus) return false;
+        if (AppState.filters.invoiceStatus && inv.invoiceStatus !== AppState.filters.invoiceStatus) return false;
+        if (AppState.filters.salesType && inv.salesType !== AppState.filters.salesType) return false;
+        return true;
+    });
+    AppState.currentPage = 1;
+    renderTable();
+    showToast('Success', 'Filters applied successfully', 'success');
+}
+
+function resetFilters() {
+    document.getElementById('filterDateFrom').value = '';
+    document.getElementById('filterDateTo').value = '';
+    document.getElementById('filterCustomer').value = '';
+    document.getElementById('filterBranch').value = '';
+    document.getElementById('filterPaymentStatus').value = '';
+    document.getElementById('filterInvoiceStatus').value = '';
+    document.getElementById('filterSalesType').value = '';
+    document.getElementById('searchInput').value = '';
+    AppState.filters = { dateFrom: '', dateTo: '', customer: '', branch: '', paymentStatus: '', invoiceStatus: '', salesType: '' };
+    AppState.search = '';
+    AppState.filtered = [...AppState.invoices];
+    AppState.currentPage = 1;
+    renderTable();
+}
+
+// ==========================================
+// SELECTION & BULK ACTIONS
+// ==========================================
+function toggleSelectAll(checkbox) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(cb => {
+        cb.checked = checkbox.checked;
+        const id = parseInt(cb.value);
+        if (checkbox.checked) AppState.selectedIds.add(id);
+        else AppState.selectedIds.delete(id);
+    });
+    updateBulkActions();
+}
+
+function updateBulkActions() {
+    const bar = document.getElementById('bulkActions');
+    const count = AppState.selectedIds.size;
+    document.getElementById('selectedCount').textContent = count;
+    if (count > 0) bar.classList.add('show');
+    else bar.classList.remove('show');
+
+    const visibleCheckboxes = document.querySelectorAll('.row-checkbox');
+    const allChecked = visibleCheckboxes.length > 0 && Array.from(visibleCheckboxes).every(cb => cb.checked);
+    document.getElementById('selectAll').checked = allChecked;
+}
+
+function bulkAction(action) {
+    if (action === 'confirm') {
+        AppState.invoices.forEach(inv => {
+            if (AppState.selectedIds.has(inv.id)) inv.invoiceStatus = 'Confirmed';
+        });
+        showToast('Success', 'Selected invoices marked as confirmed', 'success');
+    } else if (action === 'cancel') {
+        if (!confirm('Are you sure you want to cancel selected invoices?')) return;
+        AppState.invoices.forEach(inv => {
+            if (AppState.selectedIds.has(inv.id)) inv.invoiceStatus = 'Cancelled';
+        });
+        showToast('Success', 'Selected invoices cancelled', 'success');
+    } else if (action === 'export') {
+        exportToExcel();
+    }
+    AppState.selectedIds.clear();
+    applyFilters();
+}
+
+// ==========================================
+// INVOICE CRUD
+// ==========================================
+function openCreateInvoice() {
+    document.getElementById('invoiceForm').reset();
+    document.getElementById('editInvoiceId').value = '';
+    document.getElementById('offcanvasTitle').textContent = 'Create Sales Invoice';
+    document.getElementById('offcanvasSubtitle').textContent = 'Create a new customer sales invoice';
+
+    const nextId = Math.max(...AppState.invoices.map(i => i.id)) + 1;
+    document.getElementById('invNo').value = `INV-${String(nextId).padStart(6, '0')}`;
+    document.getElementById('invDate').valueAsDate = new Date();
+
+    document.getElementById('itemsBody').innerHTML = '';
+    addInvoiceItem();
+    calculateInvoice();
+
+    new bootstrap.Offcanvas(document.getElementById('invoiceOffcanvas')).show();
+}
+
+function openEditInvoice(id) {
+    const inv = AppState.invoices.find(i => i.id === id);
+    if (!inv) return;
+
+    document.getElementById('editInvoiceId').value = inv.id;
+    document.getElementById('offcanvasTitle').textContent = 'Edit Sales Invoice';
+    document.getElementById('offcanvasSubtitle').textContent = `Editing ${inv.invoiceNo}`;
+
+    document.getElementById('invNo').value = inv.invoiceNo;
+    document.getElementById('invDate').value = inv.date;
+    document.getElementById('invDueDate').value = inv.dueDate;
+    document.getElementById('invBranch').value = inv.branch;
+    document.getElementById('invSalesType').value = inv.salesType;
+    document.getElementById('invCustomer').value = inv.customer;
+    document.getElementById('invPhone').value = inv.phone;
+    document.getElementById('invAddress').value = inv.address;
+    document.getElementById('invPayMethod').value = inv.paymentMethod || 'Cash';
+    document.getElementById('invPaid').value = inv.paid;
+    document.getElementById('invShipping').value = inv.shipping || 0;
+    document.getElementById('invNotes').value = inv.notes || '';
+
+    const tbody = document.getElementById('itemsBody');
+    tbody.innerHTML = '';
+    inv.items.forEach(item => addInvoiceItem(item));
+    calculateInvoice();
+
+    new bootstrap.Offcanvas(document.getElementById('invoiceOffcanvas')).show();
+}
+
+function addInvoiceItem(data = null) {
+    const tbody = document.getElementById('itemsBody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><input type="text" class="item-product" value="${data ? data.product : ''}" placeholder="Product name" required></td>
+        <td><input type="number" class="item-qty" value="${data ? data.qty : 1}" min="1" required></td>
+        <td>
+            <select class="item-unit">
+                <option value="Pcs" ${data && data.unit === 'Pcs' ? 'selected' : ''}>Pcs</option>
+                <option value="Box" ${data && data.unit === 'Box' ? 'selected' : ''}>Box</option>
+            </select>
+        </td>
+        <td><input type="number" class="item-price" value="${data ? data.unitPrice : 0}" min="0" step="0.01" required></td>
+        <td><input type="number" class="item-discount" value="${data ? data.discount : 0}" min="0" step="0.01"></td>
+        <td><input type="number" class="item-vat" value="${data ? data.vat : 15}" min="0" max="100"></td>
+        <td class="text-end fw-bold item-total">৳ 0.00</td>
+        <td class="text-center"><button type="button" class="btn-remove-row"><i class="bi bi-x-lg"></i></button></td>
+    `;
+    tbody.appendChild(row);
+    calculateInvoice();
+}
+
+function calculateInvoice() {
+    let subtotal = 0;
+    let totalDiscount = 0;
+    let totalVat = 0;
+
+    document.querySelectorAll('#itemsBody tr').forEach(row => {
+        const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+        const price = parseFloat(row.querySelector('.item-price').value) || 0;
+        const discount = parseFloat(row.querySelector('.item-discount').value) || 0;
+        const vatPercent = parseFloat(row.querySelector('.item-vat').value) || 0;
+
+        const lineSubtotal = qty * price;
+        const taxable = Math.max(0, lineSubtotal - discount);
+        const lineVat = taxable * (vatPercent / 100);
+        const lineTotal = taxable + lineVat;
+
+        row.querySelector('.item-total').textContent = formatCurrency(lineTotal);
+
+        subtotal += lineSubtotal;
+        totalDiscount += discount;
+        totalVat += lineVat;
+    });
+
+    const shipping = parseFloat(document.getElementById('invShipping').value) || 0;
+    const grandTotal = subtotal - totalDiscount + totalVat + shipping;
+    const paid = parseFloat(document.getElementById('invPaid').value) || 0;
+    const due = Math.max(0, grandTotal - paid);
+
+    document.getElementById('sumSubtotal').textContent = formatCurrency(subtotal);
+    document.getElementById('sumDiscount').textContent = `- ${formatCurrency(totalDiscount)}`;
+    document.getElementById('sumVat').textContent = formatCurrency(totalVat);
+    document.getElementById('sumGrandTotal').textContent = formatCurrency(grandTotal);
+    document.getElementById('sumPaid').textContent = formatCurrency(paid);
+    document.getElementById('sumDue').textContent = formatCurrency(due);
+}
+
+function saveInvoice(status) {
+    const form = document.getElementById('invoiceForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    const editId = document.getElementById('editInvoiceId').value;
+    const items = [];
+    document.querySelectorAll('#itemsBody tr').forEach(row => {
+        items.push({
+            product: row.querySelector('.item-product').value,
+            qty: parseFloat(row.querySelector('.item-qty').value) || 0,
+            unit: row.querySelector('.item-unit').value,
+            unitPrice: parseFloat(row.querySelector('.item-price').value) || 0,
+            discount: parseFloat(row.querySelector('.item-discount').value) || 0,
+            vat: parseFloat(row.querySelector('.item-vat').value) || 0,
+            total: 0
+        });
+    });
+
+    let subtotal = 0, totalDiscount = 0, totalVat = 0;
+    items.forEach(item => {
+        const lineSub = item.qty * item.unitPrice;
+        const taxable = Math.max(0, lineSub - item.discount);
+        item.total = taxable + (taxable * (item.vat / 100));
+        subtotal += lineSub;
+        totalDiscount += item.discount;
+        totalVat += (taxable * (item.vat / 100));
+    });
+
+    const shipping = parseFloat(document.getElementById('invShipping').value) || 0;
+    const grandTotal = subtotal - totalDiscount + totalVat + shipping;
+    const paid = parseFloat(document.getElementById('invPaid').value) || 0;
+    const due = Math.max(0, grandTotal - paid);
+
+    let payStatus = 'Due';
+    if (paid >= grandTotal) payStatus = 'Paid';
+    else if (paid > 0) payStatus = 'Partial';
+
+    const invoiceData = {
+        id: editId ? parseInt(editId) : Math.max(...AppState.invoices.map(i => i.id)) + 1,
+        invoiceNo: document.getElementById('invNo').value,
+        date: document.getElementById('invDate').value,
+        dueDate: document.getElementById('invDueDate').value,
+        customer: document.getElementById('invCustomer').value,
+        phone: document.getElementById('invPhone').value,
+        address: document.getElementById('invAddress').value,
+        branch: document.getElementById('invBranch').value,
+        salesType: document.getElementById('invSalesType').value,
+        paymentMethod: document.getElementById('invPayMethod').value,
+        subtotal, discount: totalDiscount, vat: totalVat, shipping, grandTotal, paid, due,
+        paymentStatus: payStatus,
+        invoiceStatus: status,
+        items,
+        notes: document.getElementById('invNotes').value
+    };
+
+    if (editId) {
+        const idx = AppState.invoices.findIndex(i => i.id === parseInt(editId));
+        AppState.invoices[idx] = invoiceData;
+        showToast('Success', `${invoiceData.invoiceNo} updated successfully`, 'success');
+    } else {
+        AppState.invoices.unshift(invoiceData);
+        showToast('Success', `${invoiceData.invoiceNo} created successfully`, 'success');
+    }
+
+    bootstrap.Offcanvas.getInstance(document.getElementById('invoiceOffcanvas')).hide();
+    applyFilters();
+    updateKPIs();
+}
+
+// ==========================================
+// VIEW & PAYMENT
+// ==========================================
+function openViewInvoice(id) {
+    const inv = AppState.invoices.find(i => i.id === id);
+    if (!inv) return;
+
+    document.getElementById('viewInvNo').textContent = inv.invoiceNo;
+    document.getElementById('viewInvDate').textContent = formatDate(inv.date);
+    document.getElementById('viewInvDue').textContent = formatDate(inv.dueDate);
+    document.getElementById('viewCustomer').textContent = inv.customer;
+    document.getElementById('viewAddress').textContent = inv.address || '-';
+    document.getElementById('viewPhone').textContent = inv.phone || '-';
+    document.getElementById('viewNotes').textContent = inv.notes || 'Thank you for your business.';
+
+    const tbody = document.getElementById('viewItemsBody');
+    tbody.innerHTML = inv.items.map((item, idx) => `
+        <tr>
+            <td>${idx + 1}</td>
+            <td>${item.product}</td>
+            <td class="text-center">${item.qty} ${item.unit}</td>
+            <td class="text-end">${formatCurrency(item.unitPrice)}</td>
+            <td class="text-end">${formatCurrency(item.discount)}</td>
+            <td class="text-end">${item.vat}%</td>
+            <td class="text-end fw-bold">${formatCurrency(item.total)}</td>
+        </tr>
+    `).join('');
+
+    document.getElementById('viewSubtotal').textContent = formatCurrency(inv.subtotal);
+    document.getElementById('viewDiscount').textContent = `- ${formatCurrency(inv.discount)}`;
+    document.getElementById('viewVat').textContent = formatCurrency(inv.vat);
+    document.getElementById('viewShipping').textContent = formatCurrency(inv.shipping);
+    document.getElementById('viewGrandTotal').textContent = formatCurrency(inv.grandTotal);
+
+    new bootstrap.Modal(document.getElementById('viewInvoiceModal')).show();
+}
+
+function openPaymentModal(id) {
+    const inv = AppState.invoices.find(i => i.id === id);
+    if (!inv) return;
+
+    document.getElementById('payInvoiceId').value = id;
+    document.getElementById('payInvNo').textContent = inv.invoiceNo;
+    document.getElementById('payCustomer').textContent = inv.customer;
+    document.getElementById('payDue').textContent = formatCurrency(inv.due);
+    document.getElementById('payAmount').value = inv.due;
+    document.getElementById('payAmount').max = inv.due;
+
+    new bootstrap.Modal(document.getElementById('paymentModal')).show();
+}
+
+function submitPayment() {
+    const id = parseInt(document.getElementById('payInvoiceId').value);
+    const amount = parseFloat(document.getElementById('payAmount').value) || 0;
+    const inv = AppState.invoices.find(i => i.id === id);
+
+    if (amount <= 0 || amount > inv.due) {
+        showToast('Error', 'Invalid payment amount', 'error');
+        return;
+    }
+
+    inv.paid += amount;
+    inv.due = Math.max(0, inv.grandTotal - inv.paid);
+    inv.paymentStatus = inv.due === 0 ? 'Paid' : 'Partial';
+
+    bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+    applyFilters();
+    updateKPIs();
+    showToast('Success', 'Payment recorded successfully', 'success');
+}
+
+// ==========================================
+// DELETE
+// ==========================================
+function confirmDelete(id) {
+    const inv = AppState.invoices.find(i => i.id === id);
+    AppState.deleteId = id;
+    document.getElementById('deleteInvNo').textContent = inv.invoiceNo;
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+}
+
+function confirmDeleteAction() {
+    if (AppState.deleteId) {
+        AppState.invoices = AppState.invoices.filter(i => i.id !== AppState.deleteId);
+        bootstrap.Modal.getInstance(document.getElementById('deleteModal')).hide();
+        applyFilters();
+        updateKPIs();
+        showToast('Success', 'Invoice deleted successfully', 'success');
+        AppState.deleteId = null;
+    }
+}
+
+// ==========================================
+// UTILS
+// ==========================================
+function showToast(title, message, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast-modern ${type}`;
+    const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
+    toast.innerHTML = `
+        <div class="toast-icon"><i class="bi bi-${icon}"></i></div>
+        <div>
+            <div class="toast-title">${title}</div>
+            <div class="toast-msg">${message}</div>
+        </div>
+    `;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+function exportToExcel() {
+    showToast('Info', 'Preparing CSV export...', 'info');
+    setTimeout(() => {
+        const headers = ['Invoice No', 'Date', 'Customer', 'Branch', 'Sales Type', 'Grand Total', 'Paid', 'Due', 'Status'];
+        const rows = AppState.filtered.map(inv => [
+            inv.invoiceNo, inv.date, inv.customer, inv.branch, inv.salesType,
+            inv.grandTotal, inv.paid, inv.due, inv.invoiceStatus
+        ]);
+        const csv = [headers, ...rows].map(row => row.map(v => `"${v}"`).join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `invoices_${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        showToast('Success', 'Export downloaded successfully', 'success');
+    }, 500);
+}
+
+function fillCustomerDetails(val) {
+    if (val === 'ABC Trading Ltd.') {
+        document.getElementById('invPhone').value = '01712345678';
+        document.getElementById('invAddress').value = '123 Business Park, Dhaka';
+    } else if (val === 'XYZ Motors') {
+        document.getElementById('invPhone').value = '01812345678';
+        document.getElementById('invAddress').value = '456 Road, Chattogram';
+    } else {
+        document.getElementById('invPhone').value = '';
+        document.getElementById('invAddress').value = '';
+    }
+}

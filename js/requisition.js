@@ -56,6 +56,10 @@
         return `${d}-${m}-${y}`;
     };
 
+    const escapeHtml = (str) => String(str ?? '').replace(/[&<>"']/g, m => (
+        { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
+    ));
+
     const formatQty = (n) => Number(n).toFixed(2);
 
     const STATUS_MAP = {
@@ -86,7 +90,7 @@
         $('kpiPending').textContent = pending;
         $('kpiApproved').textContent = approved;
         $('kpiCompleted').textContent = completed;
-        $('kpiQty').textContent = formatQty(totalQty);
+        $('kpiQty').textContent = totalQty.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     // Loading Overlay
@@ -266,12 +270,12 @@
                     <tr class="animate-fade-in" style="animation-delay: ${i * 0.05}s">
                         <td class="text-center"><span class="req-row-num">${start + i + 1}</span></td>
                         <td><span class="req-no">${r.no}</span></td>
-                        <td><span class="req-wing">${r.wing}</span></td>
-                        <td><span class="req-warehouse">${r.warehouse}</span></td>
+                        <td><span class="req-wing">${escapeHtml(r.wing)}</span></td>
+                        <td><span class="req-warehouse">${escapeHtml(r.warehouse)}</span></td>
                         <td class="text-center"><span class="req-type ${type.cls}">${type.label}</span></td>
                         <td class="text-end"><span class="req-qty">${formatQty(r.qty)}</span></td>
                         <td class="text-center"><span class="req-date">${formatDate(r.date)}</span></td>
-                        <td><span class="req-place">${r.place || '-'}</span></td>
+                        <td><span class="req-place">${escapeHtml(r.place) || '-'}</span></td>
                         <td class="text-center"><span class="status-badge ${status.cls}">${status.label}</span></td>
                         <td class="text-center">
                             <div class="action-btns">
@@ -449,6 +453,15 @@
             state.sortDir = 'asc';
         }
         renderTable();
+    }
+
+
+    function updateSortIcons() {
+        $$('.req-table th.sortable i').forEach(i => i.className = 'bi bi-chevron-expand');
+        if (state.sortKey) {
+            const th = document.querySelector(`.req-table th[data-sort="${state.sortKey}"] i`);
+            if (th) th.className = state.sortDir === 'asc' ? 'bi bi-chevron-up' : 'bi bi-chevron-down';
+        }
     }
 
     // ========================================
@@ -631,6 +644,7 @@
     // ========================================
     document.addEventListener('DOMContentLoaded', () => {
         // Initial render
+        updateSortIcons();
         renderTable();
         updateKPIStats();
         updateActiveFilterChips();

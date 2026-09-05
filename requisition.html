@@ -548,10 +548,16 @@
                             branches and warehouses.</p>
                     </div>
                 </div>
-                <button class="btn-add" data-bs-toggle="modal" data-bs-target="#addRequisitionModal">
-                    <i class="bi bi-plus-lg"></i>
-                    <span>Create Requisition</span>
-                </button>
+                <div class="d-flex gap-2">
+                    <button class="btn-export btn-excel" id="exportExcel" title="Export to Excel"><i
+                            class="bi bi-file-earmark-excel"></i>
+                        Export</button>
+                    <button class="btn-export btn-print" id="printList" title="Print List"><i class="bi bi-printer"></i>
+                        Print</button>
+                    <button class="btn-add" data-bs-toggle="modal" data-bs-target="#addRequisitionModal">
+                        <i class="bi bi-plus-lg"></i> Create Requisition
+                    </button>
+                </div>
             </div>
 
             <!-- KPI Summary Cards -->
@@ -572,7 +578,7 @@
                     </div>
                     <div class="kpi-content">
                         <div class="kpi-label">Pending Approval</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
+                        <div class="kpi-value" id="kpiPending">0</div>
                         <div class="kpi-subtext">Needs attention</div>
                     </div>
                 </div>
@@ -582,7 +588,7 @@
                     </div>
                     <div class="kpi-content">
                         <div class="kpi-label">Approved</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
+                        <div class="kpi-value" id="kpiApproved">0</div>
                         <div class="kpi-subtext">This period</div>
                     </div>
                 </div>
@@ -592,8 +598,8 @@
                     </div>
                     <div class="kpi-content">
                         <div class="kpi-label">Completed</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
-                        <div class="kpi-subtext">Fulfilled</div>
+                        <div class="kpi-value" id="kpiCompleted">0</div>
+                        <div class="kpi-subtext">Total units</div>
                     </div>
                 </div>
                 <div class="kpi-card">
@@ -602,8 +608,8 @@
                     </div>
                     <div class="kpi-content">
                         <div class="kpi-label">Total Quantity</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
-                        <div class="kpi-subtext">FulfUnitsilled</div>
+                        <div class="kpi-value" id="kpiQty">0</div>
+                        <div class="kpi-subtext">Total units</div>
                     </div>
                 </div>
             </div>
@@ -615,19 +621,6 @@
                         <div class="card-title-icon blue"><i class="bi bi-list-ul"></i></div>
                         <div class="card-title">Requisition List</div>
                     </div>
-                    <div class="card-header-actions">
-                        <button class="btn-export btn-excel" id="exportExcel" title="Export to Excel">
-                            <i class="bi bi-file-earmark-excel"></i>
-                            <span>Excel</span>
-                        </button>
-                        <button class="btn-export btn-print" id="printList" title="Print List">
-                            <i class="bi bi-printer"></i>
-                            <span>Print</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card-body">
                     <!-- Filters -->
                     <div class="filter-bar">
                         <div class="filter-label">
@@ -670,6 +663,7 @@
                         </div>
                     </div>
 
+
                     <!-- Active Filter Chips -->
                     <div class="active-filters" id="activeFilters">
                         <span class="active-filters-label">Active filters:</span>
@@ -677,12 +671,9 @@
                         <button class="btn-clear-all" id="clearAllFilters">Clear all</button>
                     </div>
 
-                    <!-- Active Filter Chips -->
-                    <div class="active-filters" id="activeFilters">
-                        <span class="active-filters-label">Active Filters:</span>
-                        <div class="filter-chips" id="filterChips"></div>
-                    </div>
+                </div>
 
+                <div class="card-body">
                     <!-- Table Controls -->
                     <div class="table-controls">
                         <div class="entries-select">
