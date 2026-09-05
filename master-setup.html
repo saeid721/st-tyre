@@ -26,265 +26,445 @@
             </div>
         </div>
 
+        <!-- ==========================================
+     ADMIN ROLE — PREMIUM ERP SIDEBAR
+=========================================== -->
+
         <nav class="sidebar-nav" id="sidebarNav">
+
+            <!-- OVERVIEW -->
             <div class="nav-section">
-                <a class="nav-section-header" href="index.html" data-tip="Dashboard">
-                    <span class="nav-icon"><i class="bi bi-house-door-fill"></i></span>
+                <a class="nav-section-header active" href="index.html" data-tip="Dashboard">
+                    <span class="nav-icon">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                    </span>
                     <span class="nav-section-title">Dashboard</span>
                 </a>
             </div>
 
+
+            <!-- SALES -->
+            <div class="nav-group-label">Sales</div>
+
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Sales">
-                    <span class="nav-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </span>
                     <span class="nav-section-title">Sales</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="invoice-list.html">
-                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-receipt"></i>
+                        </span>
                         <span class="nav-label">Sales Invoice</span>
                     </a>
+
                     <a class="nav-item-link" href="sales-return.html">
-                        <span class="nav-icon"><i class="bi bi-arrow-return-left"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-arrow-return-left"></i>
+                        </span>
                         <span class="nav-label">Sales Return</span>
                     </a>
+
                 </div>
             </div>
 
+
+            <!-- PROCUREMENT -->
+            <div class="nav-group-label">Procurement</div>
+
+            <!-- Purchase -->
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Purchase">
-                    <span class="nav-icon"><i class="bi bi-cart3"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-cart3"></i>
+                    </span>
                     <span class="nav-section-title">Purchase</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="purchase-invoice.html">
-                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-receipt-cutoff"></i>
+                        </span>
                         <span class="nav-label">Purchase Invoice</span>
                     </a>
+
                     <a class="nav-item-link" href="purchase-return.html">
-                        <span class="nav-icon"><i class="bi bi-arrow-return-left"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-arrow-return-left"></i>
+                        </span>
                         <span class="nav-label">Purchase Return</span>
                     </a>
+
                 </div>
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-header" data-tip="Import & LC">
-                    <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
-                    <span class="nav-section-title">Import &amp; LC</span>
-                    <i class="bi bi-chevron-down nav-chevron"></i>
-                </div>
-                <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="lc-opening.html">
-                        <span class="nav-icon"><i class="bi bi-bank"></i></span>
-                        <span class="nav-label">LC Opening</span>
-                    </a>
-                    <a class="nav-item-link" href="shipment-tracking.html">
-                        <span class="nav-icon"><i class="bi bi-truck"></i></span>
-                        <span class="nav-label">Shipment Tracking</span>
-                    </a>
-                    <a class="nav-item-link" href="container-management.html">
-                        <span class="nav-icon"><i class="bi bi-boxes"></i></span>
-                        <span class="nav-label">Container Management</span>
-                    </a>
-                </div>
-            </div>
 
-            <div class="nav-section">
-                <div class="nav-section-header" data-tip="Inventory">
-                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
-                    <span class="nav-section-title">Inventory</span>
-                    <i class="bi bi-chevron-down nav-chevron"></i>
-                </div>
-                <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="products.html">
-                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
-                        <span class="nav-label">Products</span>
-                    </a>
-                    <a class="nav-item-link" href="stock-management.html">
-                        <span class="nav-icon"><i class="bi bi-archive"></i></span>
-                        <span class="nav-label">Stock Management</span>
-                    </a>
-                    <a class="nav-item-link" href="stock-transfer.html">
-                        <span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span>
-                        <span class="nav-label">Stock Transfer</span>
-                    </a>
-                </div>
-            </div>
-
+            <!-- Requisition -->
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Requisition">
-                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-file-earmark-plus"></i>
+                    </span>
                     <span class="nav-section-title">Requisition</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="requisition.html">
-                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
-                        <span class="nav-label">Requisition List</span>
+                        <span class="nav-icon">
+                            <i class="bi bi-list-check"></i>
+                        </span>
+                        <span class="nav-label">All Requisitions</span>
                     </a>
+
                 </div>
             </div>
 
+
+            <!-- Import & LC -->
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Import & LC">
+                    <span class="nav-icon">
+                        <i class="bi bi-globe2"></i>
+                    </span>
+                    <span class="nav-section-title">Import &amp; LC</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+
+                <div class="nav-items-container" style="display:none;">
+
+                    <a class="nav-item-link" href="lc-opening.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-bank"></i>
+                        </span>
+                        <span class="nav-label">LC Opening</span>
+                    </a>
+
+                    <a class="nav-item-link" href="shipment-tracking.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-truck"></i>
+                        </span>
+                        <span class="nav-label">Shipment Tracking</span>
+                    </a>
+
+                    <a class="nav-item-link" href="container-management.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-boxes"></i>
+                        </span>
+                        <span class="nav-label">Container Management</span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- INVENTORY -->
+            <div class="nav-group-label">Inventory</div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Inventory">
+                    <span class="nav-icon">
+                        <i class="bi bi-boxes"></i>
+                    </span>
+                    <span class="nav-section-title">Inventory</span>
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+
+                <div class="nav-items-container" style="display:none;">
+
+                    <a class="nav-item-link" href="products.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </span>
+                        <span class="nav-label">Products</span>
+                    </a>
+
+                    <a class="nav-item-link" href="stock-management.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-bar-chart-line"></i>
+                        </span>
+                        <span class="nav-label">Stock Management</span>
+                    </a>
+
+                    <a class="nav-item-link" href="stock-transfer.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </span>
+                        <span class="nav-label">Stock Transfer</span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- FINANCE -->
+            <div class="nav-group-label">Finance</div>
+
+            <!-- Expenses -->
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Expenses">
-                    <span class="nav-icon"><i class="bi bi-archive"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
                     <span class="nav-section-title">Expenses</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="expense.html">
-                        <span class="nav-icon"><i class="bi bi-box-seam"></i></span>
-                        <span class="nav-label">Expenses List</span>
+                        <span class="nav-icon">
+                            <i class="bi bi-receipt"></i>
+                        </span>
+                        <span class="nav-label">Expenses</span>
                     </a>
+
                 </div>
             </div>
 
+
+            <!-- Accounts -->
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Accounts">
-                    <span class="nav-icon"><i class="bi bi-calculator"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-calculator"></i>
+                    </span>
                     <span class="nav-section-title">Accounts</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="chart-of-accounts.html">
-                        <span class="nav-icon"><i class="bi bi-diagram-3"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </span>
                         <span class="nav-label">Chart of Accounts</span>
                     </a>
+
                     <a class="nav-item-link" href="journal-entry.html">
-                        <span class="nav-icon"><i class="bi bi-journal-text"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-journal-text"></i>
+                        </span>
                         <span class="nav-label">Journal Entry</span>
                     </a>
+
                     <a class="nav-item-link" href="cash-book.html">
-                        <span class="nav-icon"><i class="bi bi-wallet2"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-wallet2"></i>
+                        </span>
                         <span class="nav-label">Cash Book</span>
                     </a>
+
                 </div>
             </div>
+
+
+            <!-- TAX & COMPLIANCE -->
+            <div class="nav-group-label">Tax &amp; Compliance</div>
 
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="VAT & Mushak">
-                    <span class="nav-icon"><i class="bi bi-receipt-cutoff"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-receipt-cutoff"></i>
+                    </span>
                     <span class="nav-section-title">VAT &amp; Mushak</span>
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="vat-setup.html">
-                        <span class="nav-icon"><i class="bi bi-percent"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-percent"></i>
+                        </span>
                         <span class="nav-label">VAT Setup</span>
                     </a>
+
                     <a class="nav-item-link" href="vat-return.html">
-                        <span class="nav-icon"><i class="bi bi-file-earmark-text"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </span>
                         <span class="nav-label">VAT Return</span>
                     </a>
+
                 </div>
             </div>
+
+
+            <!-- WORKFLOW -->
+            <div class="nav-group-label">Workflow</div>
+
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="Approvals">
+                    <span class="nav-icon">
+                        <i class="bi bi-check2-square"></i>
+                    </span>
+
+                    <span class="nav-section-title">Approvals</span>
+
+                    <span class="badge-notification">12</span>
+
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+
+                <div class="nav-items-container" style="display:none;">
+
+                    <a class="nav-item-link" href="purchase-approval.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-cart-check"></i>
+                        </span>
+                        <span class="nav-label">Purchase Approval</span>
+                    </a>
+
+                    <a class="nav-item-link" href="sales-approval.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </span>
+                        <span class="nav-label">Sales Approval</span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- ANALYTICS -->
+            <div class="nav-group-label">Analytics</div>
 
             <div class="nav-section">
                 <div class="nav-section-header" data-tip="Reports">
-                    <span class="nav-icon"><i class="bi bi-file-earmark-bar-graph"></i></span>
+                    <span class="nav-icon">
+                        <i class="bi bi-bar-chart-line"></i>
+                    </span>
+
                     <span class="nav-section-title">Reports</span>
+
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
+
                     <a class="nav-item-link" href="sales-report.html">
-                        <span class="nav-icon"><i class="bi bi-graph-up"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </span>
                         <span class="nav-label">Sales Report</span>
                     </a>
+
                     <a class="nav-item-link" href="purchase-report.html">
-                        <span class="nav-icon"><i class="bi bi-graph-down"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-graph-down"></i>
+                        </span>
                         <span class="nav-label">Purchase Report</span>
                     </a>
+
                     <a class="nav-item-link" href="inventory-report.html">
-                        <span class="nav-icon"><i class="bi bi-box"></i></span>
+                        <span class="nav-icon">
+                            <i class="bi bi-box"></i>
+                        </span>
                         <span class="nav-label">Inventory Report</span>
                     </a>
-                </div>
-            </div>
 
-            <div class="nav-section">
-                <div class="nav-section-header" data-tip="Approval">
-                    <span class="nav-icon"><i class="bi bi-check2-circle"></i></span>
-                    <span class="nav-section-title">Approval</span>
-                    <i class="bi bi-chevron-down nav-chevron"></i>
-                </div>
-                <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="purchase-approval.html">
-                        <span class="nav-icon"><i class="bi bi-check-circle"></i></span>
-                        <span class="nav-label">Purchase Approval</span>
-                    </a>
-                    <a class="nav-item-link" href="sales-approval.html">
-                        <span class="nav-icon"><i class="bi bi-check2-circle"></i></span>
-                        <span class="nav-label">Sales Approval</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" data-tip="Notification">
-                    <span class="nav-icon"><i class="bi bi-bell"></i></span>
-                    <span class="nav-section-title">Notification</span>
-                    <span class="badge-notification">12</span>
-                    <i class="bi bi-chevron-down nav-chevron"></i>
-                </div>
-                <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="notifications.html">
-                        <span class="nav-icon"><i class="bi bi-bell"></i></span>
-                        <span class="nav-label">All Notifications</span>
-                    </a>
-                    <a class="nav-item-link" href="low-stock-alert.html">
-                        <span class="nav-icon"><i class="bi bi-exclamation-triangle"></i></span>
-                        <span class="nav-label">Low Stock Alert</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" data-tip="User Management">
-                    <span class="nav-icon"><i class="bi bi-people-fill"></i></span>
-                    <span class="nav-section-title">User Management</span>
-                    <i class="bi bi-chevron-down nav-chevron"></i>
-                </div>
-                <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="users.html">
-                        <span class="nav-icon"><i class="bi bi-people"></i></span>
-                        <span class="nav-label">Users</span>
-                    </a>
-                    <a class="nav-item-link" href="roles-permissions.html">
-                        <span class="nav-icon"><i class="bi bi-shield-lock"></i></span>
-                        <span class="nav-label">Roles &amp; Permissions</span>
-                    </a>
                 </div>
             </div>
 
 
+            <!-- ADMINISTRATION -->
+            <div class="nav-group-label">Administration</div>
+
+            <!-- Master Data -->
             <div class="nav-section">
-                <a class="nav-section-header active" href="master-setup.html" data-tip="Master Setup"
-                    aria-current="page">
+                <a class="nav-section-header" href="master-setup.html" data-tip="Master Setup">
                     <span class="nav-icon"><i class="bi bi-building"></i></span>
                     <span class="nav-section-title">Master Setup</span>
                 </a>
             </div>
 
+            <!-- User Management -->
             <div class="nav-section">
-                <div class="nav-section-header" data-tip="System Settings">
-                    <span class="nav-icon"><i class="bi bi-gear"></i></span>
-                    <span class="nav-section-title">System Settings</span>
+                <div class="nav-section-header" data-tip="User Management">
+                    <span class="nav-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </span>
+
+                    <span class="nav-section-title">User Management</span>
+
                     <i class="bi bi-chevron-down nav-chevron"></i>
                 </div>
+
                 <div class="nav-items-container" style="display:none;">
-                    <a class="nav-item-link" href="general-settings.html">
-                        <span class="nav-icon"><i class="bi bi-gear"></i></span>
-                        <span class="nav-label">General Settings</span>
+
+                    <a class="nav-item-link" href="users.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-people"></i>
+                        </span>
+                        <span class="nav-label">Users</span>
                     </a>
-                    <a class="nav-item-link" href="backup-restore.html">
-                        <span class="nav-icon"><i class="bi bi-hdd"></i></span>
-                        <span class="nav-label">Backup &amp; Restore</span>
+
+                    <a class="nav-item-link" href="roles-permissions.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </span>
+                        <span class="nav-label">Roles &amp; Permissions</span>
                     </a>
+
                 </div>
             </div>
+
+            <!-- System Settings -->
+            <div class="nav-section">
+                <div class="nav-section-header" data-tip="System Settings">
+                    <span class="nav-icon">
+                        <i class="bi bi-gear"></i>
+                    </span>
+
+                    <span class="nav-section-title">System Settings</span>
+
+                    <i class="bi bi-chevron-down nav-chevron"></i>
+                </div>
+
+                <div class="nav-items-container" style="display:none;">
+
+                    <a class="nav-item-link" href="general-settings.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-sliders"></i>
+                        </span>
+                        <span class="nav-label">General Settings</span>
+                    </a>
+
+                    <a class="nav-item-link" href="backup-restore.html">
+                        <span class="nav-icon">
+                            <i class="bi bi-hdd"></i>
+                        </span>
+                        <span class="nav-label">Backup &amp; Restore</span>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- Audit Logs -->
+            <div class="nav-section">
+                <a class="nav-section-header" href="audit-logs.html" data-tip="Audit Logs">
+
+                    <span class="nav-icon">
+                        <i class="bi bi-clock-history"></i>
+                    </span>
+
+                    <span class="nav-section-title">Audit Logs</span>
+                </a>
+            </div>
+
         </nav>
 
         <div class="sidebar-footer">
@@ -315,7 +495,7 @@
                 <div class="breadcrumb">
                     <span>Home</span>
                     <span class="separator">></span>
-                    <span class="current">Master Setup</span>
+                    <span class="current">Dashboard</span>
                 </div>
             </div>
 
