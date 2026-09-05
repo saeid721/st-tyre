@@ -280,19 +280,77 @@ function updateSummary() {
 // FILE UPLOAD & LOGO
 // =========================================
 function changeLogo() {
-    showToast('Info', 'Logo upload dialog would open here.');
+    document.getElementById('logoFileInput').click();
+}
+
+function handleLogoSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        document.querySelector('.logo-preview img').src = e.target.result;
+        showToast('Success', 'Logo updated successfully!');
+    };
+    reader.readAsDataURL(file);
 }
 
 function removeLogo() {
+    document.querySelector('.logo-preview img').src =
+        'https://ui-avatars.com/api/?name=ST+TYRE&background=2563eb&color=fff&size=300';
+    document.getElementById('logoFileInput').value = '';
     showToast('Success', 'Logo removed successfully!');
 }
 
-function removeFile(element) {
+function removeFile(element, event) {
+    if (event) event.stopPropagation();
     if (confirm('Are you sure you want to delete this file?')) {
         element.closest('.file-item').remove();
     }
 }
 
+function formatFileSize(bytes) {
+    return bytes >= 1048576 ? (bytes / 1048576).toFixed(1) + ' MB' : (bytes / 1024).toFixed(0) + ' KB';
+}
+
+function addFileItem(containerId, file) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `
+        <div class="file-icon"><i class="bi bi-file-earmark-pdf"></i></div>
+        <div class="file-info">
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${formatFileSize(file.size)}</div>
+        </div>
+        <div class="file-actions">
+            <button type="button" class="file-btn" title="Download"><i class="bi bi-download"></i></button>
+            <button type="button" class="file-btn delete" title="Delete" onclick="removeFile(this, event)"><i class="bi bi-trash"></i></button>
+        </div>`;
+    container.insertBefore(item, container.querySelector('.upload-add-btn'));
+}
+
+function handleFileSelect(event, containerId) {
+    const files = event.target.files;
+    if (files && files.length) addFileItem(containerId, files[0]);
+    event.target.value = '';
+}
+
+function handleFileDrop(event, containerId) {
+    event.preventDefault();
+    const container = document.getElementById(containerId);
+    if (container) container.classList.remove('dragover');
+    const files = event.dataTransfer.files;
+    if (files && files.length) addFileItem(containerId, files[0]);
+}
+
+function toggleOthersInput() {
+    const checkbox = document.getElementById('othersCheckbox');
+    const input = document.getElementById('othersInput');
+    if (!checkbox || !input) return;
+    input.style.display = checkbox.checked ? 'block' : 'none';
+    if (checkbox.checked) input.focus();
+}
 // =========================================
 // NAVIGATION
 // =========================================
@@ -352,17 +410,27 @@ function updateButtons() {
     const btnBack = document.getElementById('btnBack');
     const btnNext = document.getElementById('btnNext');
     const btnFinish = document.getElementById('btnFinish');
+    const btnBackTop = document.getElementById('btnBackTop');
+    const btnNextTop = document.getElementById('btnNextTop');
+    const btnFinishTop = document.getElementById('btnFinishTop');
 
-    if (btnBack) btnBack.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+    const backVisibility = currentStep === 1 ? 'hidden' : 'visible';
+    if (btnBack) btnBack.style.visibility = backVisibility;
+    if (btnBackTop) btnBackTop.style.visibility = backVisibility;
 
-    if (currentStep === totalSteps) {
-        if (btnNext) btnNext.style.display = 'none';
-        if (btnFinish) btnFinish.style.display = 'inline-flex';
-    } else {
-        if (btnNext) btnNext.style.display = 'inline-flex';
-        if (btnFinish) btnFinish.style.display = 'none';
-    }
+    const onLastStep = currentStep === totalSteps;
+    if (btnNext) btnNext.style.display = onLastStep ? 'none' : 'inline-flex';
+    if (btnFinish) btnFinish.style.display = onLastStep ? 'inline-flex' : 'none';
+    if (btnNextTop) btnNextTop.style.display = onLastStep ? 'none' : 'inline-flex';
+    if (btnFinishTop) btnFinishTop.style.display = onLastStep ? 'inline-flex' : 'none';
+
+    const setupStepLabel = document.getElementById('setupStepLabel');
+    if (setupStepLabel) setupStepLabel.textContent = `Step ${currentStep} of ${totalSteps}`;
+
+    const headerProgress = document.getElementById('setupHeaderProgress');
+    if (headerProgress) headerProgress.style.width = `${((currentStep - 1) / (totalSteps - 1)) * 100}%`;
 }
+
 
 function saveAndExit() {
     if (validateCurrentStep()) {
