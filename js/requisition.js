@@ -64,7 +64,7 @@
 
     const STATUS_MAP = {
         created: { label: 'Created', cls: 'status-created' },
-        pending: { label: 'Pending Approval', cls: 'status-pending' },
+        pending: { label: 'Pending', cls: 'status-pending' },
         approved: { label: 'Approved', cls: 'status-approved' },
         rejected: { label: 'Rejected', cls: 'status-rejected' },
         completed: { label: 'Completed', cls: 'status-completed' },
@@ -619,6 +619,27 @@
     }
 
     // ========================================
+    // PRINT ALL DATA (Bypass Pagination)
+    // ========================================
+    function printAllData() {
+        const originalPerPage = state.perPage;
+        const originalPage = state.currentPage;
+
+        state.perPage = state.filtered.length || 1;
+        state.currentPage = 1;
+        renderTable();
+
+        showToast('Print', 'Preparing document...', 'info');
+
+        setTimeout(() => {
+            window.print();
+            state.perPage = originalPerPage;
+            state.currentPage = originalPage;
+            renderTable();
+        }, 500);
+    }
+
+    // ========================================
     // EXPORT TO EXCEL (CSV)
     // ========================================
     function exportExcel() {
@@ -677,10 +698,7 @@
 
         // Export and Print
         $('exportExcel').addEventListener('click', exportExcel);
-        $('printList').addEventListener('click', () => {
-            showToast('Print', 'Preparing document...', 'info');
-            setTimeout(() => window.print(), 500);
-        });
+        $('printList').addEventListener('click', printAllData);
 
         // Save buttons
         $('saveReqBtn').addEventListener('click', saveRequisition);
