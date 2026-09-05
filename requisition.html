@@ -493,8 +493,10 @@
                 </button>
                 <div class="breadcrumb">
                     <span>Home</span>
-                    <span class="separator">></span>
-                    <span class="current">Dashboard</span>
+                    <span class="separator">/</span>
+                    <span>Procurement</span>
+                    <span class="separator">/</span>
+                    <span class="current">Requisition</span>
                 </div>
             </div>
 
@@ -540,66 +542,69 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="page-header-left">
-                    <div class="page-icon">
-                        <i class="bi bi-clipboard2-check"></i>
-                    </div>
                     <div>
                         <h1 class="page-title">Requisition</h1>
-                        <p class="page-subtitle">Manage internal requisitions across all wings & warehouses</p>
+                        <p class="page-subtitle">Create, review and manage internal material requisitions across wings,
+                            branches and warehouses.</p>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-add" data-bs-toggle="modal" data-bs-target="#addRequisitionModal">
+                <button class="btn-add" data-bs-toggle="modal" data-bs-target="#addRequisitionModal">
                     <i class="bi bi-plus-lg"></i>
-                    <span>Add Requisition</span>
+                    <span>Create Requisition</span>
                 </button>
             </div>
 
             <!-- KPI Summary Cards -->
             <div class="kpi-summary">
                 <div class="kpi-card">
-                    <div class="kpi-icon blue">
-                        <i class="bi bi-clipboard-data"></i>
-                    </div>
-                    <div class="kpi-content">
+                    <div class="kpi-card-header">
+                        <div class="kpi-icon blue">
+                            <i class="bi bi-clipboard-data"></i>
+                        </div>
                         <div class="kpi-label">Total Requisitions</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
                     </div>
+                    <div class="kpi-value" id="kpiTotal">0</div>
+                    <div class="kpi-subtext">All time</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-icon amber">
-                        <i class="bi bi-clock-history"></i>
-                    </div>
-                    <div class="kpi-content">
+                    <div class="kpi-card-header">
+                        <div class="kpi-icon amber">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
                         <div class="kpi-label">Pending Approval</div>
-                        <div class="kpi-value" id="kpiPending">0</div>
                     </div>
+                    <div class="kpi-value" id="kpiPending">0</div>
+                    <div class="kpi-subtext">Needs attention</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-icon green">
-                        <i class="bi bi-check-circle"></i>
-                    </div>
-                    <div class="kpi-content">
+                    <div class="kpi-card-header">
+                        <div class="kpi-icon green">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
                         <div class="kpi-label">Approved</div>
-                        <div class="kpi-value" id="kpiApproved">0</div>
                     </div>
+                    <div class="kpi-value" id="kpiApproved">0</div>
+                    <div class="kpi-subtext">This period</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-icon purple">
-                        <i class="bi bi-check2-all"></i>
-                    </div>
-                    <div class="kpi-content">
+                    <div class="kpi-card-header">
+                        <div class="kpi-icon purple">
+                            <i class="bi bi-check2-all"></i>
+                        </div>
                         <div class="kpi-label">Completed</div>
-                        <div class="kpi-value" id="kpiCompleted">0</div>
                     </div>
+                    <div class="kpi-value" id="kpiCompleted">0</div>
+                    <div class="kpi-subtext">Fulfilled</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="kpi-icon indigo">
-                        <i class="bi bi-box-seam"></i>
-                    </div>
-                    <div class="kpi-content">
+                    <div class="kpi-card-header">
+                        <div class="kpi-icon indigo">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
                         <div class="kpi-label">Total Quantity</div>
-                        <div class="kpi-value" id="kpiQty">0</div>
                     </div>
+                    <div class="kpi-value" id="kpiQty">0</div>
+                    <div class="kpi-subtext">Units</div>
                 </div>
             </div>
 
@@ -625,7 +630,7 @@
                 <div class="card-body">
                     <!-- Filters -->
                     <div class="filter-bar">
-                        <div class="filter-header">
+                        <div class="filter-label">
                             <i class="bi bi-funnel"></i>
                             <span>Filters</span>
                         </div>
@@ -657,12 +662,19 @@
                         <div class="filter-actions">
                             <button class="btn-filter" id="applyFilter">
                                 <i class="bi bi-funnel"></i>
-                                <span>Filter</span>
+                                <span>Apply</span>
                             </button>
                             <button class="btn-reset" id="resetFilter" title="Reset Filters">
-                                <i class="bi bi-x-circle"></i>
+                                <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
+                    </div>
+
+                    <!-- Active Filter Chips -->
+                    <div class="active-filters" id="activeFilters">
+                        <span class="active-filters-label">Active filters:</span>
+                        <div class="filter-chips" id="filterChips"></div>
+                        <button class="btn-clear-all" id="clearAllFilters">Clear all</button>
                     </div>
 
                     <!-- Active Filter Chips -->
@@ -686,7 +698,7 @@
                         <div class="table-search">
                             <i class="bi bi-search"></i>
                             <input type="text" class="search-input" id="tableSearch"
-                                placeholder="Search requisition..." />
+                                placeholder="Search requisition no, requester, warehouse, item..." />
                         </div>
                     </div>
 
@@ -707,12 +719,12 @@
                                         <th style="width:50px" class="text-center">#</th>
                                         <th class="sortable" data-sort="no">Requisition No <i
                                                 class="bi bi-chevron-expand"></i></th>
-                                        <th class="sortable" data-sort="wing">Wing</th>
+                                        <th class="sortable" data-sort="wing">Wing <i class="bi bi-chevron-expand"></i>
+                                        </th>
                                         <th>Warehouse</th>
                                         <th class="text-center">Type</th>
                                         <th class="sortable text-end" data-sort="qty">Total Qty <i
-                                                class="bi bi-chevron-expand"></i>
-                                        </th>
+                                                class="bi bi-chevron-expand"></i></th>
                                         <th class="sortable text-center" data-sort="date">Date <i
                                                 class="bi bi-chevron-expand"></i></th>
                                         <th>Place of Supply</th>
