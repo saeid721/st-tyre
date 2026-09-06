@@ -4,7 +4,8 @@
 (function () {
     'use strict';
 
-    const RAW_DATA = window.INVOICE_CONFIG.DATA;
+    const RAW_DATA = window.INVOICE_CONFIG.load();
+    function persist() { window.INVOICE_CONFIG.save(RAW_DATA); }
 
     const state = {
         entriesPerPage: 10,
@@ -322,7 +323,8 @@
             RAW_DATA.unshift({ id: maxId + 1, ...data });
             showToast('Created', `${data.invoiceNo} created successfully.`);
         }
-        bootstrap.Offcanvas.getInstance(document.getElementById('invoiceOffcanvas'))?.hide();
+        persist();
+        bootstrap.Modal.getInstance(document.getElementById('invoiceEditModal'))?.hide();
         state.currentPage = 1;
         renderTable();
     }
@@ -334,6 +336,9 @@
         const r = RAW_DATA.find(x => x.id === id);
         if (!r) return;
         document.getElementById('viewInvNo').textContent = r.invoiceNo;
+        const badge = document.getElementById('viewStatusBadge');
+        badge.textContent = r.paymentStatus;
+        badge.className = 'inv-status-badge inv-status-' + r.paymentStatus.toLowerCase();
         document.getElementById('viewInvDate').textContent = formatDate(r.date);
         document.getElementById('viewInvDue').textContent = formatDate(r.dueDate);
         document.getElementById('viewCustomer').textContent = r.customer;
@@ -371,7 +376,7 @@
         r.items.forEach(addItemRow);
         document.getElementById('offcanvasTitle').textContent = 'Edit Sales Invoice';
         document.getElementById('offcanvasSubtitle').textContent = `Editing ${r.invoiceNo}`;
-        new bootstrap.Offcanvas(document.getElementById('invoiceOffcanvas')).show();
+        new bootstrap.Modal(document.getElementById('invoiceEditModal')).show();
     }
 
     function openPayment(id) {
@@ -396,6 +401,7 @@
         r.paid += amount;
         r.due -= amount;
         r.paymentStatus = r.due <= 0 ? 'Paid' : 'Partial';
+        persist();
         bootstrap.Modal.getInstance(document.getElementById('paymentModal'))?.hide();
         showToast('Payment Recorded', `${formatCurrency(amount)} recorded for ${r.invoiceNo}.`);
         renderTable();
@@ -414,6 +420,7 @@
         if (idx > -1) {
             const inv = RAW_DATA[idx].invoiceNo;
             RAW_DATA.splice(idx, 1);
+            persist();
             showToast('Deleted', `${inv} has been deleted.`, 'warning');
         }
         bootstrap.Modal.getInstance(document.getElementById('deleteModal'))?.hide();
@@ -437,8 +444,6 @@
 
     // ---------- Init & Events ----------
     function init() {
-        addItemRow(); // one blank row ready by default
-
         document.getElementById('entryCount').addEventListener('change', e => {
             state.entriesPerPage = Number(e.target.value); state.currentPage = 1; renderTable();
         });
@@ -473,9 +478,6 @@
         document.getElementById('btnAddItem').addEventListener('click', () => addItemRow());
         document.getElementById('invShipping').addEventListener('input', recalcSummary);
         document.getElementById('invPaid').addEventListener('input', recalcSummary);
-        document.getElementById('invoiceOffcanvas').addEventListener('show.bs.offcanvas', () => {
-            if (!document.getElementById('editInvoiceId').value) resetInvoiceForm();
-        });
         document.getElementById('btnSaveInvoice').addEventListener('click', () => saveInvoice(false));
         document.getElementById('btnSaveDraft').addEventListener('click', () => saveInvoice(true));
         document.getElementById('btnSubmitPayment').addEventListener('click', submitPayment);

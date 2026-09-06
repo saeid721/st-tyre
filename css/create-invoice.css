@@ -1,0 +1,125 @@
+.ci-topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.ci-back {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1e293b;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.ci-back:hover {
+    background: #e2e8f0;
+}
+
+.ci-topbar-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.ci-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    align-items: start;
+}
+
+.ci-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ci-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .05);
+}
+
+.ci-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.ci-card-title i {
+    color: #2563eb;
+}
+
+.ci-sidebar {
+    position: sticky;
+    top: 20px;
+}
+
+.ci-summary {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.ci-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.ci-summary-row.grand {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    border-bottom: 2px solid #2563eb;
+    padding: 14px 0;
+    margin: 6px 0;
+}
+
+.ci-shipping-input {
+    width: 100px;
+    text-align: right;
+}
+
+@media (max-width: 991px) {
+    .ci-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ci-sidebar {
+        position: static;
+    }
+
+    .ci-topbar-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .ci-topbar-actions .btn {
+        flex: 1;
+    }
+}

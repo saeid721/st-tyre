@@ -2,7 +2,15 @@
 // INVOICE - Dummy data
 // ========================================
 window.INVOICE_CONFIG = {
-    DATA: [
+    STORAGE_KEY: 'st_tyre_invoices_v1',
+    load() {
+        const raw = localStorage.getItem(this.STORAGE_KEY);
+        if (raw) { try { return JSON.parse(raw); } catch (e) { /* fall through to seed */ } }
+        this.save(this.SEED);
+        return JSON.parse(JSON.stringify(this.SEED));
+    },
+    save(data) { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data)); },
+    SEED: [
         { id: 1, invoiceNo: 'INV-000001', date: '2026-09-03', dueDate: '2026-09-18', customer: 'ABC Trading Ltd.', phone: '01712345678', address: '123 Business Park, Dhaka', branch: 'Dhaka Branch', salesType: 'Corporate', subtotal: 85000, discount: 2000, vat: 12450, shipping: 0, grandTotal: 95450, paid: 70000, due: 25450, paymentStatus: 'Partial', invoiceStatus: 'Confirmed', items: [{ product: 'ST Tyre 12R22.5', qty: 2, unit: 'Pcs', unitPrice: 25000, discount: 0, vat: 15, total: 50000 }, { product: 'ST Tyre 11R22.5', qty: 1, unit: 'Pcs', unitPrice: 35000, discount: 2000, vat: 15, total: 35000 }], notes: 'Deliver before 5 PM' },
         { id: 2, invoiceNo: 'INV-000002', date: '2026-09-02', dueDate: '2026-09-17', customer: 'XYZ Motors', phone: '01812345678', address: '456 Road, Chattogram', branch: 'Chattogram Branch', salesType: 'Wholesale', subtotal: 150000, discount: 0, vat: 22500, shipping: 500, grandTotal: 173000, paid: 173000, due: 0, paymentStatus: 'Paid', invoiceStatus: 'Confirmed', items: [{ product: 'Tube 12R', qty: 10, unit: 'Pcs', unitPrice: 15000, discount: 0, vat: 15, total: 150000 }], notes: '' },
         { id: 3, invoiceNo: 'INV-000003', date: '2026-09-01', dueDate: '2026-09-16', customer: 'Rahim Enterprise', phone: '01912345678', address: '789 Street, Sylhet', branch: 'Sylhet Branch', salesType: 'Retail', subtotal: 45000, discount: 1000, vat: 6600, shipping: 0, grandTotal: 50600, paid: 0, due: 50600, paymentStatus: 'Due', invoiceStatus: 'Draft', items: [{ product: 'ST Tyre 10R', qty: 3, unit: 'Pcs', unitPrice: 15000, discount: 1000, vat: 15, total: 45000 }], notes: '' },
@@ -24,6 +32,5 @@ window.INVOICE_CONFIG = {
         { id: 19, invoiceNo: 'INV-000019', date: '2026-09-01', dueDate: '2026-09-16', customer: 'Rahim Enterprise', phone: '01912345678', address: '789 Street, Sylhet', branch: 'Sylhet Branch', salesType: 'Retail', subtotal: 45000, discount: 1000, vat: 6600, shipping: 0, grandTotal: 50600, paid: 0, due: 50600, paymentStatus: 'Due', invoiceStatus: 'Draft', items: [{ product: 'ST Tyre 10R', qty: 3, unit: 'Pcs', unitPrice: 15000, discount: 1000, vat: 15, total: 45000 }], notes: '' },
         { id: 20, invoiceNo: 'INV-000020', date: '2026-08-28', dueDate: '2026-09-12', customer: 'ABC Trading Ltd.', phone: '01712345678', address: '123 Business Park, Dhaka', branch: 'Dhaka Branch', salesType: 'Corporate', subtotal: 200000, discount: 5000, vat: 29250, shipping: 1000, grandTotal: 225250, paid: 100000, due: 125250, paymentStatus: 'Partial', invoiceStatus: 'Confirmed', items: [{ product: 'ST Tyre 12R22.5', qty: 8, unit: 'Pcs', unitPrice: 25000, discount: 5000, vat: 15, total: 200000 }], notes: '' },
     ],
-
 };
 

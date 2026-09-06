@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/invoice-list.css" />
     <link rel="stylesheet" href="css/invoice-preview.css" />
+    <link rel="stylesheet" href="css/create-invoice.css" />
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 
         <!-- ==========================================
      ADMIN ROLE — PREMIUM ERP SIDEBAR
-=========================================== -->
+        =========================================== -->
 
         <nav class="sidebar-nav" id="sidebarNav">
 
@@ -539,210 +540,140 @@
 
         <!-- Main Content -->
         <main class="main-content">
-
-            <!-- Page Header -->
-            <div class="page-header">
-                <div class="page-header-left">
-                    <div>
-                        <h1 class="page-title">Sales Invoice</h1>
-                        <p class="page-subtitle">Manage customer invoices, payments and sales transactions</p>
-                    </div>
+            <div class="ci-topbar">
+                <a href="invoice-list.html" class="ci-back"><i class="bi bi-arrow-left"></i></a>
+                <div>
+                    <h1 class="page-title mb-0">Create Sales Invoice</h1>
+                    <p class="page-subtitle mb-0">Fill in the details to generate a new customer invoice</p>
                 </div>
-                <div class="d-flex gap-2">
-                    <button class="btn-export btn-excel" id="exportExcel" title="Export to Excel"><i
-                            class="bi bi-file-earmark-excel"></i>
-                        Export</button>
-                    <button class="btn-export btn-print" id="printList" title="Print List"><i class="bi bi-printer"></i>
-                        Print</button>
-                    <a class="btn-add" id="btnCreateInvoice" href="create-invoice.html">
-                        <i class="bi bi-plus-lg"></i> Create Invoice
-                    </a>
+                <div class="ci-topbar-actions">
+                    <a href="invoice-list.html" class="btn btn-light">Cancel</a>
+                    <button type="button" class="btn btn-outline-primary" id="btnSaveDraft">Save as Draft</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveInvoice"><i
+                            class="bi bi-check2-circle"></i> Create Invoice</button>
                 </div>
             </div>
 
-            <!-- KPI Summary Cards -->
-            <div class="kpi-summary">
-                <div class="kpi-card">
-                    <div class="kpi-icon blue"><i class="bi bi-clipboard-data"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">Total Invoices</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
-                        <div class="kpi-subtext">All time</div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon amber"><i class="bi bi-hourglass-split"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">Pending Approval</div>
-                        <div class="kpi-value" id="kpiPending">0</div>
-                        <div class="kpi-subtext"></div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon green"><i class="bi bi-check-circle"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">This Month</div>
-                        <div class="kpi-value" id="kpiApproved">0</div>
-                        <div class="kpi-subtext"></div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon purple"><i class="bi bi-check2-all"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">Paid</div>
-                        <div class="kpi-value" id="kpiCompleted">0</div>
-                        <div class="kpi-subtext"></div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon indigo"><i class="bi bi-boxes"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">Pending / Due</div>
-                        <div class="kpi-value" id="kpiQty">0</div>
-                        <div class="kpi-subtext"></div>
-                    </div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-icon indigo"><i class="bi bi-boxes"></i></div>
-                    <div class="kpi-content">
-                        <div class="kpi-label">Total Sales</div>
-                        <div class="kpi-value" id="kpiTotalSales">0</div>
-                        <div class="kpi-subtext"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sales Invoice List Card -->
-            <div class="card requisition-card">
-                <div class="card-header">
-                    <div class="card-title-wrap">
-                        <div class="card-title-icon blue"><i class="bi bi-list-ul"></i></div>
-                        <div class="card-title">Sales Invoice List</div>
-                    </div>
-                    <!-- Filters -->
-                    <div class="filter-bar">
-                        <div class="filter-label">
-                            <i class="bi bi-funnel"></i>
-                            <span>Filters</span>
-                        </div>
-                        <div class="filter-group">
-                            <select class="filter-select" id="filterWing">
-                                <option value="">All Sales Types</option>
-                                <option value="Retail">Retail</option>
-                                <option value="Wholesale">Wholesale</option>
-                                <option value="Corporate">Corporate</option>
-                            </select>
-                            <select class="filter-select" id="filterWarehouse">
-                                <option value="">All Branches</option>
-                                <option value="Dhaka Branch">Dhaka Branch</option>
-                                <option value="Chattogram Branch">Chattogram Branch</option>
-                                <option value="Sylhet Branch">Sylhet Branch</option>
-                            </select>
-                            <select class="filter-select" id="filterType">
-                                <option value="">All Payment Status</option>
-                                <option value="Paid">Paid</option>
-                                <option value="Partial">Partial</option>
-                                <option value="Due">Due</option>
-                            </select>
-                            <div class="date-filter">
-                                <input type="date" class="filter-date" id="filterDateFrom" placeholder="From" />
-                                <span class="date-sep">to</span>
-                                <input type="date" class="filter-date" id="filterDateTo" placeholder="To" />
-                            </div>
-                        </div>
-                        <div class="filter-actions">
-                            <button class="btn-filter" id="applyFilter">
-                                <i class="bi bi-funnel"></i>
-                                <span>Apply</span>
-                            </button>
-                            <button class="btn-reset" id="resetFilter" title="Reset Filters">
-                                <i class="bi bi-x-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <!-- Active Filter Chips -->
-                    <div class="active-filters" id="activeFilters">
-                        <span class="active-filters-label">Active filters:</span>
-                        <div class="filter-chips" id="filterChips"></div>
-                        <button class="btn-clear-all" id="clearAllFilters">Clear all</button>
-                    </div>
-
-                </div>
-
-                <div class="card-body">
-                    <!-- Table Controls -->
-                    <div class="table-controls">
-                        <div class="entries-select">
-                            <span>Show</span>
-                            <select class="entry-count" id="entryCount">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <span>entries</span>
-                        </div>
-                        <div class="table-search">
-                            <i class="bi bi-search"></i>
-                            <input type="text" class="search-input" id="tableSearch"
-                                placeholder="Search requisition no, requester, warehouse, item..." />
-                        </div>
-                    </div>
-
-                    <!-- Table -->
-                    <div class="table-loading-wrap">
-                        <div class="loading-overlay" id="loadingOverlay">
-                            <div class="loading-spinner">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+            <form id="invoiceForm">
+                <div class="ci-grid">
+                    <div class="ci-main">
+                        <div class="ci-card">
+                            <div class="ci-card-title"><i class="bi bi-info-circle"></i> Invoice Information</div>
+                            <div class="row g-3">
+                                <div class="col-md-4"><label class="form-label-sm">Invoice Number</label><input
+                                        type="text" class="form-control-sm" id="invNo" readonly></div>
+                                <div class="col-md-4"><label class="form-label-sm">Invoice Date *</label><input
+                                        type="date" class="form-control-sm" id="invDate" required></div>
+                                <div class="col-md-4"><label class="form-label-sm">Due Date</label><input type="date"
+                                        class="form-control-sm" id="invDueDate"></div>
+                                <div class="col-md-6"><label class="form-label-sm">Branch *</label>
+                                    <select class="form-select-sm" id="invBranch" required>
+                                        <option>Dhaka Branch</option>
+                                        <option>Chattogram Branch</option>
+                                        <option>Sylhet Branch</option>
+                                    </select>
                                 </div>
-                                <div class="loading-text">Loading Invoice...</div>
+                                <div class="col-md-6"><label class="form-label-sm">Sales Type *</label>
+                                    <select class="form-select-sm" id="invSalesType" required>
+                                        <option>Retail</option>
+                                        <option>Wholesale</option>
+                                        <option>Corporate</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="req-table" id="reqTable">
-                                <thead>
-                                    <tr>
-                                        <th style="width:50px" class="text-center">#</th>
-                                        <th class="sortable" data-sort="no">Invoice No <i
-                                                class="bi bi-chevron-expand"></i></th>
-                                        <th class="sortable" data-sort="customer">Customer <i
-                                                class="bi bi-chevron-expand"></i></th>
-                                        <th>Phone</th>
-                                        <th>Sales Type</th>
-                                        <th class="text-center">Grand Total</th>
-                                        <th class="sortable text-end" data-sort="paid">Paid <i
-                                                class="bi bi-chevron-expand"></i></th>
-                                        <th class="sortable text-center" data-sort="due">Due <i
-                                                class="bi bi-chevron-expand"></i></th>
-                                        <th>Pay. Status</th>
-                                        <th class="text-center">Inv. Status</th>
-                                        <th style="width:140px" class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="reqTableBody">
-                                    <!-- Populated by JS -->
-                                </tbody>
-                            </table>
+
+                        <div class="ci-card">
+                            <div class="ci-card-title"><i class="bi bi-person"></i> Customer Details</div>
+                            <div class="row g-3">
+                                <div class="col-md-6"><label class="form-label-sm">Customer Name *</label>
+                                    <select class="form-select-sm" id="invCustomer" required>
+                                        <option value="">Select Customer</option>
+                                        <option>ABC Trading Ltd.</option>
+                                        <option>XYZ Motors</option>
+                                        <option>Rahim Enterprise</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6"><label class="form-label-sm">Phone</label><input type="text"
+                                        class="form-control-sm" id="invPhone" placeholder="017XXXXXXXX"></div>
+                                <div class="col-12"><label class="form-label-sm">Billing Address</label><input
+                                        type="text" class="form-control-sm" id="invAddress"></div>
+                            </div>
+                        </div>
+
+                        <div class="ci-card">
+                            <div class="ci-card-title"><i class="bi bi-box-seam"></i> Invoice Items</div>
+                            <datalist id="productList">
+                                <option value="ST Tyre 12R22.5"></option>
+                                <option value="ST Tyre 11R22.5"></option>
+                                <option value="ST Tyre 10R"></option>
+                                <option value="ST Tyre 9R"></option>
+                                <option value="Tube 12R"></option>
+                                <option value="Tube 11R"></option>
+                            </datalist>
+                            <div class="table-responsive">
+                                <table class="items-table" id="itemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Qty</th>
+                                            <th>Unit</th>
+                                            <th>Unit Price</th>
+                                            <th>Discount</th>
+                                            <th>VAT %</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemsBody"></tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn-add-row" id="btnAddItem"><i class="bi bi-plus-lg"></i> Add
+                                Product</button>
+                        </div>
+
+                        <div class="ci-card">
+                            <div class="ci-card-title"><i class="bi bi-cash-coin"></i> Payment &amp; Notes</div>
+                            <div class="row g-3">
+                                <div class="col-md-6"><label class="form-label-sm">Payment Method</label>
+                                    <select class="form-select-sm" id="invPayMethod">
+                                        <option>Cash</option>
+                                        <option>Bank Transfer</option>
+                                        <option>bKash</option>
+                                        <option>Cheque</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6"><label class="form-label-sm">Paid Amount</label><input
+                                        type="number" class="form-control-sm" id="invPaid" value="0" step="0.01"></div>
+                                <div class="col-12"><label class="form-label-sm">Customer Note</label><textarea
+                                        class="form-control-sm" id="invNotes" rows="2"></textarea></div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Pagination -->
-                    <div class="table-footer">
-                        <div class="table-info" id="tableInfo">Showing 1 to 10 of 20 entries</div>
-                        <div class="pagination" id="pagination"></div>
-                    </div>
+                    <aside class="ci-sidebar">
+                        <div class="ci-summary">
+                            <div class="ci-summary-row"><span>Subtotal</span><span id="sumSubtotal">৳ 0.00</span></div>
+                            <div class="ci-summary-row"><span>Discount</span><span id="sumDiscount"
+                                    class="text-danger">- ৳ 0.00</span></div>
+                            <div class="ci-summary-row"><span>VAT</span><span id="sumVat">৳ 0.00</span></div>
+                            <div class="ci-summary-row"><span>Shipping</span><input type="number"
+                                    class="form-control-sm ci-shipping-input" id="invShipping" value="0"></div>
+                            <div class="ci-summary-row grand"><span>Grand Total</span><span id="sumGrandTotal">৳
+                                    0.00</span></div>
+                            <div class="ci-summary-row"><span>Paid</span><span id="sumPaid" class="text-success">৳
+                                    0.00</span></div>
+                            <div class="ci-summary-row"><span>Due</span><span id="sumDue" class="text-danger">৳
+                                    0.00</span></div>
+                        </div>
+                    </aside>
                 </div>
-            </div>
+            </form>
 
-            <!-- Footer -->
             <footer class="footer">
                 <div>© 2026 ST TYRE ERP. All rights reserved.</div>
                 <div>Version 1.0.0 · Developed by <a href="https://www.stitbd.com" target="_blank">STIT BD</a></div>
             </footer>
-
         </main>
     </div>
 
@@ -1102,6 +1033,7 @@
     <script src="js/script.js"></script>
     <script src="js/invoice-data.js"></script>
     <script src="js/invoice-list.js"></script>
+    <script src="js/create-invoice.js"></script>
 </body>
 
 </html>
