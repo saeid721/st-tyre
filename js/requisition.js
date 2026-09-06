@@ -5,26 +5,26 @@
 // Rich Dummy Data (20 Records)
 (function () {
     const REQUISITION_DATA = [
-        { id: 1, no: 'REQ-0003', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 11.00, date: '2026-08-01', place: '-', status: 'created', remarks: '' },
-        { id: 2, no: 'REQ-0002', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 57.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
-        { id: 3, no: 'REQ-0001', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 4.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
-        { id: 4, no: 'REQ-0004', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'import', qty: 120.50, date: '2026-09-01', place: 'Chattogram Port', status: 'pending', remarks: 'Urgent delivery' },
-        { id: 5, no: 'REQ-0005', wing: 'Bearing Div', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 85.00, date: '2026-08-28', place: 'Sylhet', status: 'approved', remarks: '' },
-        { id: 6, no: 'REQ-0006', wing: 'ST Tyre', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 200.00, date: '2026-08-25', place: 'Mirpur', status: 'completed', remarks: 'Completed successfully' },
-        { id: 7, no: 'REQ-0007', wing: 'Ifat Tayer', warehouse: 'Chattogram Warehouse', type: 'import', qty: 45.75, date: '2026-08-20', place: 'Chattogram', status: 'rejected', remarks: 'Quality issue' },
-        { id: 8, no: 'REQ-0008', wing: 'Bearing Div', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 32.00, date: '2026-08-15', place: 'Gulshan', status: 'created', remarks: '' },
-        { id: 9, no: 'REQ-0009', wing: 'ST Tyre', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 150.00, date: '2026-08-10', place: 'Sylhet City', status: 'pending', remarks: '' },
-        { id: 10, no: 'REQ-0010', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 78.25, date: '2026-08-05', place: 'Uttara', status: 'approved', remarks: '' },
-        { id: 11, no: 'REQ-0011', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'import', qty: 310.00, date: '2026-07-28', place: 'Chattogram Port', status: 'completed', remarks: 'Delivered on time' },
-        { id: 12, no: 'REQ-0012', wing: 'Bearing Div', warehouse: 'Sylhet Warehouse', type: 'local', qty: 18.50, date: '2026-07-22', place: 'Sylhet', status: 'created', remarks: '' },
-        { id: 13, no: 'REQ-0013', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 95.00, date: '2026-07-18', place: 'Banani', status: 'approved', remarks: '' },
-        { id: 14, no: 'REQ-0014', wing: 'ST Tyre', warehouse: 'Chattogram Warehouse', type: 'local', qty: 62.00, date: '2026-07-15', place: 'Agrabad', status: 'pending', remarks: '' },
-        { id: 15, no: 'REQ-0015', wing: 'Bearing Div', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'import', qty: 420.00, date: '2026-07-10', place: 'Dhaka Port', status: 'rejected', remarks: 'Documentation incomplete' },
-        { id: 16, no: 'REQ-0016', wing: 'Ifat Tayer', warehouse: 'Sylhet Warehouse', type: 'local', qty: 14.25, date: '2026-07-05', place: 'Sylhet', status: 'completed', remarks: '' },
-        { id: 17, no: 'REQ-0017', wing: 'ST Tyre', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 88.00, date: '2026-06-28', place: 'Motijheel', status: 'created', remarks: '' },
-        { id: 18, no: 'REQ-0018', wing: 'Bearing Div', warehouse: 'Chattogram Warehouse', type: 'import', qty: 250.00, date: '2026-06-20', place: 'Chattogram Port', status: 'approved', remarks: '' },
-        { id: 19, no: 'REQ-0019', wing: 'Ifat Tayer', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 36.50, date: '2026-06-15', place: 'Dhanmondi', status: 'pending', remarks: '' },
-        { id: 20, no: 'REQ-0020', wing: 'ST Tyre', warehouse: 'Sylhet Warehouse', type: 'local', qty: 112.00, date: '2026-06-10', place: 'Sylhet City', status: 'completed', remarks: 'Successfully completed' },
+        { id: 1, no: 'REQ-0003', wing: 'Lubrication', size: '1L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 11.00, date: '2026-08-01', place: '-', status: 'created', remarks: '' },
+        { id: 2, no: 'REQ-0002', wing: 'Lubrication', size: '5L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 57.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
+        { id: 3, no: 'REQ-0001', wing: 'Lubrication', size: '1L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 4.00, date: '2026-09-03', place: 'Dhanmondi', status: 'created', remarks: '' },
+        { id: 4, no: 'REQ-0004', wing: 'Tyre', size: '185/65R15', warehouse: 'Chattogram Warehouse', type: 'import', qty: 120.50, date: '2026-09-01', place: 'Chattogram Port', status: 'pending', remarks: 'Urgent delivery' },
+        { id: 5, no: 'REQ-0005', wing: 'Bearing', size: '6205ZZ', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 85.00, date: '2026-08-28', place: 'Sylhet', status: 'approved', remarks: '' },
+        { id: 6, no: 'REQ-0006', wing: 'Tyre', size: '195/65R15', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 200.00, date: '2026-08-25', place: 'Mirpur', status: 'completed', remarks: 'Completed successfully' },
+        { id: 7, no: 'REQ-0007', wing: 'Lubrication', size: '4L', warehouse: 'Chattogram Warehouse', type: 'import', qty: 45.75, date: '2026-08-20', place: 'Chattogram', status: 'rejected', remarks: 'Quality issue' },
+        { id: 8, no: 'REQ-0008', wing: 'Bearing', size: '6004ZZ', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 32.00, date: '2026-08-15', place: 'Gulshan', status: 'created', remarks: '' },
+        { id: 9, no: 'REQ-0009', wing: 'Tyre', size: '175/70R13', warehouse: 'Sylhet Warehouse', type: 'transfer', qty: 150.00, date: '2026-08-10', place: 'Sylhet City', status: 'pending', remarks: '' },
+        { id: 10, no: 'REQ-0010', wing: 'Lubrication', size: '1L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 78.25, date: '2026-08-05', place: 'Uttara', status: 'approved', remarks: '' },
+        { id: 11, no: 'REQ-0011', wing: 'Tyre', size: '205/55R16', warehouse: 'Chattogram Warehouse', type: 'import', qty: 310.00, date: '2026-07-28', place: 'Chattogram Port', status: 'completed', remarks: 'Delivered on time' },
+        { id: 12, no: 'REQ-0012', wing: 'Bearing', size: '6202ZZ', warehouse: 'Sylhet Warehouse', type: 'local', qty: 18.50, date: '2026-07-22', place: 'Sylhet', status: 'created', remarks: '' },
+        { id: 13, no: 'REQ-0013', wing: 'Lubrication', size: '5L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 95.00, date: '2026-07-18', place: 'Banani', status: 'approved', remarks: '' },
+        { id: 14, no: 'REQ-0014', wing: 'Tyre', size: '155/65R13', warehouse: 'Chattogram Warehouse', type: 'local', qty: 62.00, date: '2026-07-15', place: 'Agrabad', status: 'pending', remarks: '' },
+        { id: 15, no: 'REQ-0015', wing: 'Bearing', size: '6301ZZ', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'import', qty: 420.00, date: '2026-07-10', place: 'Dhaka Port', status: 'rejected', remarks: 'Documentation incomplete' },
+        { id: 16, no: 'REQ-0016', wing: 'Lubrication', size: '1L', warehouse: 'Sylhet Warehouse', type: 'local', qty: 14.25, date: '2026-07-05', place: 'Sylhet', status: 'completed', remarks: '' },
+        { id: 17, no: 'REQ-0017', wing: 'Tyre', size: '215/60R16', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'transfer', qty: 88.00, date: '2026-06-28', place: 'Motijheel', status: 'created', remarks: '' },
+        { id: 18, no: 'REQ-0018', wing: 'Bearing', size: '6206ZZ', warehouse: 'Chattogram Warehouse', type: 'import', qty: 250.00, date: '2026-06-20', place: 'Chattogram Port', status: 'approved', remarks: '' },
+        { id: 19, no: 'REQ-0019', wing: 'Lubrication', size: '4L', warehouse: 'Dhaka Dhanmondi Warehouse', type: 'local', qty: 36.50, date: '2026-06-15', place: 'Dhanmondi', status: 'pending', remarks: '' },
+        { id: 20, no: 'REQ-0020', wing: 'Tyre', size: '185/70R14', warehouse: 'Sylhet Warehouse', type: 'local', qty: 112.00, date: '2026-06-10', place: 'Sylhet City', status: 'completed', remarks: 'Successfully completed' },
     ];
 
     // State Management
@@ -210,6 +210,8 @@
     // ========================================
     function renderTable() {
         const tbody = $('reqTableBody');
+        // Remove any menus that were portal-moved to <body> in a previous render
+        document.querySelectorAll('body > .row-action-menu').forEach(m => m.remove());
         let data = [...state.filtered];
 
         // Search
@@ -218,6 +220,7 @@
             data = data.filter(r =>
                 r.no.toLowerCase().includes(q) ||
                 r.wing.toLowerCase().includes(q) ||
+                (r.size && r.size.toLowerCase().includes(q)) ||
                 r.warehouse.toLowerCase().includes(q) ||
                 r.type.toLowerCase().includes(q) ||
                 (r.place && r.place.toLowerCase().includes(q)) ||
@@ -249,7 +252,7 @@
             const hasActiveFilters = Object.values(state.activeFilters).some(v => v !== '') || state.search !== '';
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="10">
+                    <td colspan="11">
                         <div class="empty-state">
                             <i class="bi bi-inbox"></i>
                             <h4>No requisitions found</h4>
@@ -271,6 +274,7 @@
                         <td class="text-center" data-label="#"><span class="req-row-num">${start + i + 1}</span></td>
 <td data-label="Req No"><span class="req-no">${r.no}</span></td>
 <td data-label="Wing"><span class="req-wing">${escapeHtml(r.wing)}</span></td>
+<td data-label="Size"><span class="req-place">${escapeHtml(r.size) || '-'}</span></td>
 <td data-label="Warehouse"><span class="req-warehouse">${escapeHtml(r.warehouse)}</span></td>
 <td class="text-center" data-label="Type"><span class="req-type ${type.cls}">${type.label}</span></td>
 <td class="text-end" data-label="Qty"><span class="req-qty">${formatQty(r.qty)}</span></td>
@@ -289,7 +293,7 @@
                                     <button class="action-btn more dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-label="More actions">
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm row-action-menu">
                                         <li><a class="dropdown-item action-btn-print" href="#" data-id="${r.id}"><i class="bi bi-printer me-2"></i>Print</a></li>
                                         <li><a class="dropdown-item action-btn-doc" href="#" data-id="${r.id}"><i class="bi bi-file-earmark-text me-2"></i>Document</a></li>
                                         <li><hr class="dropdown-divider"></li>
@@ -361,6 +365,25 @@
     }
 
     function bindTableEvents() {
+        // More (dropdown) — portal the menu to <body> on open so no table
+        // row, border, or hover background can ever paint above it
+        $$('.action-btn.more').forEach(btn => {
+            bootstrap.Dropdown.getOrCreateInstance(btn, {
+                popperConfig: { strategy: 'fixed' }
+            });
+
+            const dropdownEl = btn.closest('.dropdown');
+            const menu = btn.nextElementSibling;
+            if (dropdownEl && menu) {
+                dropdownEl.addEventListener('show.bs.dropdown', () => {
+                    document.body.appendChild(menu);
+                });
+                dropdownEl.addEventListener('hidden.bs.dropdown', () => {
+                    dropdownEl.appendChild(menu);
+                });
+            }
+        });
+
         // View
         $$('.action-btn.view').forEach(btn => {
             btn.addEventListener('click', () => openViewModal(parseInt(btn.dataset.id)));
@@ -479,6 +502,7 @@
         const status = STATUS_MAP[r.status];
         $('vNo').textContent = r.no;
         $('vWing').textContent = r.wing;
+        $('vSize').textContent = r.size || '-';
         $('vWarehouse').textContent = r.warehouse;
         $('vType').textContent = TYPE_MAP[r.type].label;
         $('vQty').textContent = formatQty(r.qty);
@@ -496,6 +520,7 @@
 
         $('editId').value = r.id;
         $('editWing').value = r.wing;
+        $('editSize').value = r.size || '';
         $('editWarehouse').value = r.warehouse;
         $('editType').value = r.type;
         $('editDate').value = r.date;
@@ -557,6 +582,7 @@
                 id: newId,
                 no: `REQ-${String(newId).padStart(4, '0')}`,
                 wing: formData.get('wing'),
+                size: formData.get('size') || '-',
                 warehouse: formData.get('warehouse'),
                 type: formData.get('type'),
                 qty: parseFloat(formData.get('qty')) || 0,
@@ -600,6 +626,7 @@
                 state.data[idx] = {
                     ...state.data[idx],
                     wing: formData.get('wing'),
+                    size: formData.get('size') || '-',
                     warehouse: formData.get('warehouse'),
                     type: formData.get('type'),
                     qty: parseFloat(formData.get('qty')) || 0,
@@ -646,9 +673,9 @@
         showLoading();
 
         setTimeout(() => {
-            const headers = ['#', 'Requisition No', 'Wing', 'Warehouse', 'Type', 'Total Qty', 'Date', 'Place of Supply', 'Status'];
+            const headers = ['#', 'Requisition No', 'Wing', 'Size', 'Warehouse', 'Type', 'Total Qty', 'Date', 'Place of Supply', 'Status'];
             const rows = state.filtered.map((r, i) => [
-                i + 1, r.no, r.wing, r.warehouse, TYPE_MAP[r.type].label, r.qty, r.date, r.place, STATUS_MAP[r.status].label
+                i + 1, r.no, r.wing, r.size || '-', r.warehouse, TYPE_MAP[r.type].label, r.qty, r.date, r.place, STATUS_MAP[r.status].label
             ]);
 
             const csv = [headers, ...rows].map(row => row.map(v => `"${v}"`).join(',')).join('\n');

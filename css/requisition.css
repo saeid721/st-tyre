@@ -752,6 +752,10 @@ body {
     z-index: 10;
 }
 
+.row-action-menu {
+    z-index: 1080;
+}
+
 .req-table th {
     padding: 8px 14px;
     text-align: left;
@@ -1697,12 +1701,10 @@ textarea.form-control-modern {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
