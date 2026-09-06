@@ -83,7 +83,7 @@ body {
     justify-content: space-between;
     gap: var(--space-lg);
     margin-bottom: var(--space-lg);
-    padding: var(--space-lg) var(--space-xl);
+    padding: var(--space-md) var(--space-lg);
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -380,7 +380,6 @@ body {
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    margin-bottom: var(--space-md);
     flex-wrap: wrap;
 }
 
