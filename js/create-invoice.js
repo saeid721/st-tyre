@@ -87,8 +87,8 @@
                         <span class="ci-cust-phone-inline"><i class="bi bi-telephone"></i> ${c.phone}</span>
                     </div>
                     <div class="ci-cust-row ci-search-item-meta">
-                        <span><strong>ID:</strong> ${c.id}</span>
-                        <span class="text-danger"><strong>Due:</strong> ${formatCurrency(c.prevDue)}</span>
+                        <span class="ci-cust-id-inline"><strong>ID:</strong> ${c.id}</span>
+                        <span class="ci-cust-due-inline text-danger"><strong>Due:</strong> ${formatCurrency(c.prevDue)}</span>
                     </div>
                 </div>
             `).join('');
