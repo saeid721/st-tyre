@@ -5,12 +5,17 @@
 
 .ci-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-    gap: 16px;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
 }
+
 
 .ci-header-left {
     display: flex;
@@ -788,6 +793,8 @@
     .ci-header {
         flex-direction: column;
         align-items: stretch;
+
+        padding: 10px 5px;
     }
 
     .ci-header-left {
@@ -970,6 +977,10 @@
 
     .ci-summary-divider {
         margin: 8px 0;
+    }
+
+    .ci-side-col {
+        margin-bottom: 80px;
     }
 }
 
