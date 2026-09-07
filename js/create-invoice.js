@@ -171,8 +171,8 @@
                             <span class="ci-prod-price-inline"><strong>Price:</strong> ${formatCurrency(p.price)}</span>
                         </div>
                         <div class="ci-prod-row ci-search-item-meta">
-                            <span><strong>SKU:</strong> ${p.sku}</span>
-                            <span class="${stockClass}"><i class="bi bi-box-seam"></i> ${stockText}</span>
+                            <span class="ci-prod-sku-inline"><strong>SKU:</strong> ${p.sku}</span>
+                            <span class="${stockClass} ci-prod-stock-inline"><i class="bi bi-box-seam"></i> ${stockText}</span>
                         </div>
                     </div>
                 `;

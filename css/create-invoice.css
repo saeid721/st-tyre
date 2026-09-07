@@ -975,10 +975,10 @@
 
 @media (min-width: 768px) {
     .ci-search-item:has(.ci-cust-row-name) {
-        display: flex;
+        display: grid;
+        grid-template-columns: 180px 110px 140px 1fr;
         align-items: center;
-        gap: 16px;
-        flex-wrap: nowrap;
+        column-gap: 16px;
     }
 
     .ci-search-item:has(.ci-cust-row-name) .ci-cust-row-name,
@@ -992,26 +992,71 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        flex: 0 0 180px;
     }
 
     .ci-search-item:has(.ci-cust-row-name) .ci-cust-id-inline {
         order: 2;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         color: #64748b;
         font-size: 13px;
-        flex: 0 0 110px;
     }
 
     .ci-search-item:has(.ci-cust-row-name) .ci-cust-phone-inline {
         order: 3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    .ci-search-item:has(.ci-cust-row-name) .ci-cust-due-inline {
+        order: 4;
+        white-space: nowrap;
+        font-size: 13px;
+        text-align: right;
+        justify-self: end;
+    }
+
+    .ci-search-item:has(.ci-prod-row-name) {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: nowrap;
+    }
+
+    .ci-search-item:has(.ci-prod-row-name) .ci-prod-row-name,
+    .ci-search-item:has(.ci-prod-row-name) .ci-search-item-meta.ci-prod-row {
+        display: contents;
+    }
+
+    .ci-search-item:has(.ci-prod-row-name) .ci-search-item-title {
+        order: 1;
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 0 0 220px;
+    }
+
+    .ci-search-item:has(.ci-prod-row-name) .ci-prod-sku-inline {
+        order: 2;
         white-space: nowrap;
         color: #64748b;
         font-size: 13px;
         flex: 0 0 140px;
     }
 
-    .ci-search-item:has(.ci-cust-row-name) .ci-cust-due-inline {
+    .ci-search-item:has(.ci-prod-row-name) .ci-prod-stock-inline {
+        order: 3;
+        white-space: nowrap;
+        font-size: 13px;
+        flex: 0 0 160px;
+    }
+
+    .ci-search-item:has(.ci-prod-row-name) .ci-prod-price-inline {
         order: 4;
         white-space: nowrap;
         font-size: 13px;
