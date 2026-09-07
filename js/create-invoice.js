@@ -78,17 +78,17 @@
         );
 
         if (results.length === 0) {
-            custDropdown.innerHTML = '<div class="ci-search-item text-center text-muted">No customers found</div>';
+            custDropdown.innerHTML = '<div class="page-search-item text-center text-muted">No customers found</div>';
         } else {
             custDropdown.innerHTML = results.map(c => `
-                <div class="ci-search-item" data-id="${c.id}">
-                    <div class="ci-cust-row ci-cust-row-name">
-                        <div class="ci-search-item-title">${c.name}</div>
-                        <span class="ci-cust-phone-inline"><i class="bi bi-telephone"></i> ${c.phone}</span>
+                <div class="page-search-item" data-id="${c.id}">
+                    <div class="page-cust-row page-cust-row-name">
+                        <div class="page-search-item-title">${c.name}</div>
+                        <span class="page-cust-phone-inline"><i class="bi bi-telephone"></i> ${c.phone}</span>
                     </div>
-                    <div class="ci-cust-row ci-search-item-meta">
-                        <span class="ci-cust-id-inline"><strong>ID:</strong> ${c.id}</span>
-                        <span class="ci-cust-due-inline text-danger"><strong>Due:</strong> ${formatCurrency(c.prevDue)}</span>
+                    <div class="page-cust-row page-search-item-meta">
+                        <span class="page-cust-id-inline"><strong>ID:</strong> ${c.id}</span>
+                        <span class="page-cust-due-inline text-danger"><strong>Due:</strong> ${formatCurrency(c.prevDue)}</span>
                     </div>
                 </div>
             `).join('');
@@ -97,7 +97,7 @@
     });
 
     custDropdown.addEventListener('click', function (e) {
-        const item = e.target.closest('.ci-search-item');
+        const item = e.target.closest('.page-search-item');
         if (!item || !item.dataset.id) return;
 
         const cust = MOCK_CUSTOMERS.find(c => c.id === item.dataset.id);
@@ -151,10 +151,10 @@
         );
 
         if (results.length === 0) {
-            prodDropdown.innerHTML = '<div class="ci-search-item text-center text-muted">No products found</div>';
+            prodDropdown.innerHTML = '<div class="page-search-item text-center text-muted">No products found</div>';
         } else {
             prodDropdown.innerHTML = results.map(p => {
-                let stockClass = 'ci-search-item-stock';
+                let stockClass = 'page-search-item-stock';
                 let stockText = `Stock: ${p.stock} ${p.unit}`;
                 if (p.stock === 0) {
                     stockClass += ' out';
@@ -165,14 +165,14 @@
                 }
 
                 return `
-                    <div class="ci-search-item" data-sku="${p.sku}">
-                        <div class="ci-prod-row ci-prod-row-name">
-                            <div class="ci-search-item-title">${p.name}</div>
-                            <span class="ci-prod-price-inline"><strong>Price:</strong> ${formatCurrency(p.price)}</span>
+                    <div class="page-search-item" data-sku="${p.sku}">
+                        <div class="page-prod-row page-prod-row-name">
+                            <div class="page-search-item-title">${p.name}</div>
+                            <span class="page-prod-price-inline"><strong>Price:</strong> ${formatCurrency(p.price)}</span>
                         </div>
-                        <div class="ci-prod-row ci-search-item-meta">
-                            <span class="ci-prod-sku-inline"><strong>SKU:</strong> ${p.sku}</span>
-                            <span class="${stockClass} ci-prod-stock-inline"><i class="bi bi-box-seam"></i> ${stockText}</span>
+                        <div class="page-prod-row page-search-item-meta">
+                            <span class="page-prod-sku-inline"><strong>SKU:</strong> ${p.sku}</span>
+                            <span class="${stockClass} page-prod-stock-inline"><i class="bi bi-box-seam"></i> ${stockText}</span>
                         </div>
                     </div>
                 `;
@@ -182,7 +182,7 @@
     });
 
     prodDropdown.addEventListener('click', function (e) {
-        const item = e.target.closest('.ci-search-item');
+        const item = e.target.closest('.page-search-item');
         if (!item || !item.dataset.sku) return;
 
         const prod = MOCK_PRODUCTS.find(p => p.sku === item.dataset.sku);
