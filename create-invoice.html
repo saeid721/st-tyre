@@ -540,500 +540,411 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="ci-topbar">
-                <a href="invoice-list.html" class="ci-back"><i class="bi bi-arrow-left"></i></a>
-                <div>
-                    <h1 class="page-title mb-0">Create Sales Invoice</h1>
-                    <p class="page-subtitle mb-0">Fill in the details to generate a new customer invoice</p>
+            <!-- Page Header -->
+            <div class="ci-header">
+                <div class="ci-header-left">
+                    <a href="invoice-list.html" class="ci-back-btn" title="Back to Invoices">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h1 class="ci-page-title">Create Sales Invoice</h1>
+                        <p class="ci-page-subtitle">Fill in the details to generate a new customer invoice</p>
+                    </div>
                 </div>
-                <div class="ci-topbar-actions">
+                <div class="ci-header-actions">
                     <a href="invoice-list.html" class="btn btn-light">Cancel</a>
-                    <button type="button" class="btn btn-outline-primary" id="btnSaveDraft">Save as Draft</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveInvoice"><i
-                            class="bi bi-check2-circle"></i> Create Invoice</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnSaveDraft">
+                        <i class="bi bi-file-earmark-text"></i> Save as Draft
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnSaveInvoice">
+                        <span class="btn-text"><i class="bi bi-check2-circle"></i> Create Invoice</span>
+                        <span class="btn-loader" style="display:none;"><span
+                                class="spinner-border spinner-border-sm"></span> Creating...</span>
+                    </button>
                 </div>
             </div>
 
-            <form id="invoiceForm">
-                <div class="ci-grid">
-                    <div class="ci-main">
+            <form id="invoiceForm" class="ci-form" novalidate>
+                <div class="ci-layout">
+                    <!-- Left Column: Main Form -->
+                    <div class="ci-main-col">
+
+                        <!-- 1. Invoice Information -->
                         <div class="ci-card">
-                            <div class="ci-card-title"><i class="bi bi-info-circle"></i> Invoice Information</div>
-                            <div class="row g-3">
-                                <div class="col-md-4"><label class="form-label-sm">Invoice Number</label><input
-                                        type="text" class="form-control-sm" id="invNo" readonly></div>
-                                <div class="col-md-4"><label class="form-label-sm">Invoice Date *</label><input
-                                        type="date" class="form-control-sm" id="invDate" required></div>
-                                <div class="col-md-4"><label class="form-label-sm">Due Date</label><input type="date"
-                                        class="form-control-sm" id="invDueDate"></div>
-                                <div class="col-md-6"><label class="form-label-sm">Branch *</label>
-                                    <select class="form-select-sm" id="invBranch" required>
-                                        <option>Dhaka Branch</option>
-                                        <option>Chattogram Branch</option>
-                                        <option>Sylhet Branch</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6"><label class="form-label-sm">Sales Type *</label>
-                                    <select class="form-select-sm" id="invSalesType" required>
-                                        <option>Retail</option>
-                                        <option>Wholesale</option>
-                                        <option>Corporate</option>
-                                    </select>
+                            <div class="ci-card-header">
+                                <h3 class="ci-card-title"><i class="bi bi-file-earmark-text"></i> Invoice Information
+                                </h3>
+                            </div>
+                            <div class="ci-card-body">
+                                <div class="ci-grid-3">
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Invoice Number</label>
+                                        <input type="text" class="ci-input" id="invNo" readonly>
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label" for="invDate">Invoice Date <span
+                                                class="req">*</span></label>
+                                        <input type="date" class="ci-input" id="invDate" required>
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Due Date</label>
+                                        <input type="date" class="ci-input" id="invDueDate">
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label" for="invBranch">Branch <span
+                                                class="req">*</span></label>
+                                        <select class="ci-select" id="invBranch" required>
+                                            <option value="Dhaka Branch">Dhaka Branch</option>
+                                            <option value="Chattogram Branch">Chattogram Branch</option>
+                                            <option value="Sylhet Branch">Sylhet Branch</option>
+                                        </select>
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Warehouse <span class="req">*</span></label>
+                                        <select class="ci-select" id="invWarehouse" required>
+                                            <option value="Main Warehouse">Main Warehouse</option>
+                                            <option value="Secondary Warehouse">Secondary Warehouse</option>
+                                        </select>
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Sales Type <span class="req">*</span></label>
+                                        <select class="ci-select" id="invSalesType" required>
+                                            <option value="Retail">Retail</option>
+                                            <option value="Wholesale">Wholesale</option>
+                                            <option value="Corporate">Corporate</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- 2. Customer Information -->
                         <div class="ci-card">
-                            <div class="ci-card-title"><i class="bi bi-person"></i> Customer Details</div>
-                            <div class="row g-3">
-                                <div class="col-md-6"><label class="form-label-sm">Customer Name *</label>
-                                    <select class="form-select-sm" id="invCustomer" required>
-                                        <option value="">Select Customer</option>
-                                        <option>ABC Trading Ltd.</option>
-                                        <option>XYZ Motors</option>
-                                        <option>Rahim Enterprise</option>
-                                    </select>
+                            <div class="ci-card-header">
+                                <h3 class="ci-card-title"><i class="bi bi-person-badge"></i> Customer Information</h3>
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="btnAddNewCustomer">
+                                    <i class="bi bi-plus-lg"></i> Add New Customer
+                                </button>
+                            </div>
+                            <div class="ci-card-body">
+                                <div class="ci-form-group ci-search-group">
+                                    <label class="ci-label">Search Customer <span class="req">*</span></label>
+                                    <div class="ci-search-wrapper">
+                                        <i class="bi bi-search ci-search-icon"></i>
+                                        <input type="text" class="ci-input ci-search-input" id="custSearch"
+                                            placeholder="Search by name, phone, or ID..." autocomplete="off" required>
+                                        <div class="ci-search-dropdown" id="custDropdown"></div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6"><label class="form-label-sm">Phone</label><input type="text"
-                                        class="form-control-sm" id="invPhone" placeholder="017XXXXXXXX"></div>
-                                <div class="col-12"><label class="form-label-sm">Billing Address</label><input
-                                        type="text" class="form-control-sm" id="invAddress"></div>
+
+                                <div id="custDetails" class="ci-cust-details" style="display:none;">
+                                    <div class="ci-cust-grid">
+                                        <div class="ci-cust-info">
+                                            <div class="ci-cust-row ci-cust-row-name">
+                                                <h4 id="custName">Customer Name</h4>
+                                                <span class="ci-cust-type-inline"><strong>Type:</strong> <span
+                                                        id="custType">-</span></span>
+                                            </div>
+                                            <div class="ci-cust-row ci-cust-row-meta">
+                                                <p class="ci-cust-meta"><strong>ID:</strong> <span id="custId">-</span>
+                                                </p>
+                                                <p class="ci-cust-meta"><strong>Phone:</strong> <span
+                                                        id="custPhone">-</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="ci-cust-info">
+                                            <h5>Billing Address</h5>
+                                            <p id="custAddress" class="ci-text-muted">-</p>
+                                        </div>
+                                        <div class="ci-cust-info">
+                                            <h5>Shipping Address</h5>
+                                            <p id="custShipAddress" class="ci-text-muted">-</p>
+                                        </div>
+                                        <div class="ci-cust-financials">
+                                            <div class="ci-fin-item">
+                                                <span class="ci-fin-label">Previous Due</span>
+                                                <span class="ci-fin-value text-danger" id="custPrevDue">৳0.00</span>
+                                            </div>
+                                            <div class="ci-fin-item">
+                                                <span class="ci-fin-label">Credit Limit</span>
+                                                <span class="ci-fin-value" id="custCreditLimit">৳0.00</span>
+                                            </div>
+                                            <div class="ci-fin-item">
+                                                <span class="ci-fin-label">Available Credit</span>
+                                                <span class="ci-fin-value text-success"
+                                                    id="custAvailCredit">৳0.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="custCreditWarning" class="ci-alert ci-alert-warning" style="display:none;">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Credit limit exceeded! Please
+                                        collect partial payment.
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- 3. Product Selection & Items -->
                         <div class="ci-card">
-                            <div class="ci-card-title"><i class="bi bi-box-seam"></i> Invoice Items</div>
-                            <datalist id="productList">
-                                <option value="ST Tyre 12R22.5"></option>
-                                <option value="ST Tyre 11R22.5"></option>
-                                <option value="ST Tyre 10R"></option>
-                                <option value="ST Tyre 9R"></option>
-                                <option value="Tube 12R"></option>
-                                <option value="Tube 11R"></option>
-                            </datalist>
-                            <div class="table-responsive">
-                                <table class="items-table" id="itemsTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Qty</th>
-                                            <th>Unit</th>
-                                            <th>Unit Price</th>
-                                            <th>Discount</th>
-                                            <th>VAT %</th>
-                                            <th>Total</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="itemsBody"></tbody>
-                                </table>
+                            <div class="ci-card-header">
+                                <h3 class="ci-card-title"><i class="bi bi-box-seam"></i> Invoice Items</h3>
                             </div>
-                            <button type="button" class="btn-add-row" id="btnAddItem"><i class="bi bi-plus-lg"></i> Add
-                                Product</button>
+                            <div class="ci-card-body">
+                                <div class="ci-form-group ci-search-group">
+                                    <div class="ci-search-wrapper">
+                                        <i class="bi bi-search ci-search-icon"></i>
+                                        <input type="text" class="ci-input ci-search-input" id="prodSearch"
+                                            placeholder="Search product by name, SKU, or barcode..." autocomplete="off">
+                                        <div class="ci-search-dropdown ci-prod-dropdown" id="prodDropdown"></div>
+                                    </div>
+                                </div>
+
+                                <div class="ci-table-wrapper">
+                                    <table class="ci-table" id="itemsTable" style="display:none;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 25%">Product</th>
+                                                <th>Stock</th>
+                                                <th>Qty</th>
+                                                <th>Unit</th>
+                                                <th>Price</th>
+                                                <th>Discount</th>
+                                                <th>VAT</th>
+                                                <th class="text-end">Total</th>
+                                                <th style="width: 60px"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="itemsBody"></tbody>
+                                    </table>
+                                    <div id="itemsEmptyState" class="ci-empty-state">
+                                        <i class="bi bi-box-seam"></i>
+                                        <p>No products added yet</p>
+                                        <span>Search for a product above to start adding invoice items.</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- 4. Payment & Notes -->
                         <div class="ci-card">
-                            <div class="ci-card-title"><i class="bi bi-cash-coin"></i> Payment &amp; Notes</div>
-                            <div class="row g-3">
-                                <div class="col-md-6"><label class="form-label-sm">Payment Method</label>
-                                    <select class="form-select-sm" id="invPayMethod">
-                                        <option>Cash</option>
-                                        <option>Bank Transfer</option>
-                                        <option>bKash</option>
-                                        <option>Cheque</option>
-                                    </select>
+                            <div class="ci-card-header">
+                                <h3 class="ci-card-title"><i class="bi bi-cash-coin"></i> Payment & Notes</h3>
+                            </div>
+                            <div class="ci-card-body">
+                                <div class="ci-grid-2">
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Payment Method</label>
+                                        <select class="ci-select" id="invPayMethod">
+                                            <option value="Cash">Cash</option>
+                                            <option value="Bank">Bank Transfer</option>
+                                            <option value="Card">Card</option>
+                                            <option value="bKash">bKash</option>
+                                            <option value="Nagad">Nagad</option>
+                                            <option value="Cheque">Cheque</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Paid Amount</label>
+                                        <input type="number" class="ci-input" id="invPaid" value="0" step="0.01"
+                                            min="0">
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Payment Reference</label>
+                                        <input type="text" class="ci-input" id="invPayRef"
+                                            placeholder="Trx ID / Cheque No.">
+                                    </div>
+                                    <div class="ci-form-group">
+                                        <label class="ci-label">Payment Date</label>
+                                        <input type="date" class="ci-input" id="invPayDate">
+                                    </div>
                                 </div>
-                                <div class="col-md-6"><label class="form-label-sm">Paid Amount</label><input
-                                        type="number" class="form-control-sm" id="invPaid" value="0" step="0.01"></div>
-                                <div class="col-12"><label class="form-label-sm">Customer Note</label><textarea
-                                        class="form-control-sm" id="invNotes" rows="2"></textarea></div>
+                                <div class="ci-form-group mt-3">
+                                    <label class="ci-label">Customer Note</label>
+                                    <textarea class="ci-input" id="invNotes" rows="3"
+                                        placeholder="Enter customer note..."></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <aside class="ci-sidebar">
-                        <div class="ci-summary">
-                            <div class="ci-summary-row"><span>Subtotal</span><span id="sumSubtotal">৳ 0.00</span></div>
-                            <div class="ci-summary-row"><span>Discount</span><span id="sumDiscount"
-                                    class="text-danger">- ৳ 0.00</span></div>
-                            <div class="ci-summary-row"><span>VAT</span><span id="sumVat">৳ 0.00</span></div>
-                            <div class="ci-summary-row"><span>Shipping</span><input type="number"
-                                    class="form-control-sm ci-shipping-input" id="invShipping" value="0"></div>
-                            <div class="ci-summary-row grand"><span>Grand Total</span><span id="sumGrandTotal">৳
-                                    0.00</span></div>
-                            <div class="ci-summary-row"><span>Paid</span><span id="sumPaid" class="text-success">৳
-                                    0.00</span></div>
-                            <div class="ci-summary-row"><span>Due</span><span id="sumDue" class="text-danger">৳
-                                    0.00</span></div>
+                    <!-- Right Column: Summary (Sticky) -->
+                    <div class="ci-side-col">
+                        <div class="ci-summary-card">
+                            <h3 class="ci-summary-title">Invoice Summary</h3>
+                            <div class="ci-summary-stats">
+                                <div class="ci-stat">
+                                    <span>Items</span>
+                                    <strong id="sumItems">0</strong>
+                                </div>
+                                <div class="ci-stat">
+                                    <span>Quantity</span>
+                                    <strong id="sumQty">0</strong>
+                                </div>
+                            </div>
+                            <div class="ci-summary-divider"></div>
+                            <div class="ci-summary-rows">
+                                <div class="ci-sum-row">
+                                    <span>Subtotal</span>
+                                    <span id="sumSubtotal">৳0.00</span>
+                                </div>
+                                <div class="ci-sum-row">
+                                    <span>Item Discount</span>
+                                    <span class="text-danger" id="sumLineDiscount">-৳0.00</span>
+                                </div>
+                                <div class="ci-sum-row ci-sum-editable ci-sum-disc-row">
+                                    <span>Extra Discount</span>
+                                    <div class="ci-disc-input-group">
+                                        <select class="ci-disc-type" id="invDiscType">
+                                            <option value="amount">৳</option>
+                                            <option value="percent">%</option>
+                                        </select>
+                                        <input type="number" class="ci-sum-input" id="invDiscValue" value="0" min="0"
+                                            step="0.01">
+                                    </div>
+                                </div>
+                                <div class="ci-sum-row">
+                                    <span>VAT</span>
+                                    <span id="sumVat">৳0.00</span>
+                                </div>
+                                <div class="ci-sum-row ci-sum-editable">
+                                    <span>Shipping</span>
+                                    <input type="number" class="ci-sum-input" id="invShipping" value="0" min="0"
+                                        step="0.01">
+                                </div>
+                            </div>
+                            <div class="ci-summary-divider"></div>
+                            <div class="ci-sum-row ci-sum-grand">
+                                <span>Grand Total</span>
+                                <span id="sumGrandTotal">৳0.00</span>
+                            </div>
+                            <div class="ci-summary-rows mt-2">
+                                <div class="ci-sum-row">
+                                    <span>Paid</span>
+                                    <span class="text-success" id="sumPaid">৳0.00</span>
+                                </div>
+                                <div class="ci-sum-row ci-sum-due">
+                                    <span>Due</span>
+                                    <span id="sumDue">৳0.00</span>
+                                </div>
+                            </div>
+
+                            <div id="custOutstanding" class="ci-summary-outstanding" style="display:none;">
+                                <div class="ci-summary-divider"></div>
+                                <div class="ci-sum-row">
+                                    <span>Previous Due</span>
+                                    <span id="sumPrevDue">৳0.00</span>
+                                </div>
+                                <div class="ci-sum-row ci-sum-outstanding">
+                                    <span>Total Outstanding</span>
+                                    <span id="sumTotalOutstanding">৳0.00</span>
+                                </div>
+                            </div>
                         </div>
-                    </aside>
+                    </div>
                 </div>
             </form>
 
-            <footer class="footer">
-                <div>© 2026 ST TYRE ERP. All rights reserved.</div>
-                <div>Version 1.0.0 · Developed by <a href="https://www.stitbd.com" target="_blank">STIT BD</a></div>
-            </footer>
+            <!-- Delete Item Confirmation Modal -->
+            <div class="modal fade" id="deleteItemModal" tabindex="-1">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <div class="mb-3 text-danger"><i class="bi bi-exclamation-triangle-fill"
+                                    style="font-size: 48px;"></i></div>
+                            <h5 class="mb-2">Remove this product?</h5>
+                            <p class="text-muted small mb-4">Are you sure you want to remove this item from the invoice?
+                            </p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-danger" id="confirmDeleteItemBtn">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
-    </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
+        <!-- Toast Container (Ensure this exists in your layout) -->
+        <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Edit Invoice Modal -->
-    <div class="modal fade" tabindex="-1" id="invoiceEditModal">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-invoice-edit">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="mb-1" id="offcanvasTitle">Create Sales Invoice</h5>
-                        <small class="text-muted" id="offcanvasSubtitle">Create a new customer sales invoice</small>
+        <!-- ==========================================
+         ADD NEW CUSTOMER MODAL
+    ========================================== -->
+        <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content ci-modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCustomerModalLabel">
+                            <i class="bi bi-person-plus-fill me-2"></i>Add New Customer
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="invoiceForm">
-                        <input type="hidden" id="editInvoiceId">
-
-                        <div class="section-title"><i class="bi bi-info-circle"></i> Invoice Information</div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label class="form-label-sm">Invoice Number</label>
-                                <input type="text" class="form-control-sm" id="invNo" readonly>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label-sm">Invoice Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control-sm" id="invDate" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label-sm">Due Date</label>
-                                <input type="date" class="form-control-sm" id="invDueDate">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label-sm">Branch <span class="text-danger">*</span></label>
-                                <select class="form-select-sm" id="invBranch" required>
-                                    <option value="Dhaka Branch">Dhaka Branch</option>
-                                    <option value="Chattogram Branch">Chattogram Branch</option>
-                                    <option value="Sylhet Branch">Sylhet Branch</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label-sm">Sales Type <span class="text-danger">*</span></label>
-                                <select class="form-select-sm" id="invSalesType" required>
-                                    <option value="Retail">Retail</option>
-                                    <option value="Wholesale">Wholesale</option>
-                                    <option value="Corporate">Corporate</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="section-title"><i class="bi bi-person"></i> Customer Details</div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <label class="form-label-sm">Customer Name <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <select class="form-select-sm" id="invCustomer" required>
-                                        <option value="">Select Customer</option>
-                                        <option value="ABC Trading Ltd.">ABC Trading Ltd.</option>
-                                        <option value="XYZ Motors">XYZ Motors</option>
-                                        <option value="Rahim Enterprise">Rahim Enterprise</option>
+                    <div class="modal-body">
+                        <form id="addCustomerForm">
+                            <div class="ci-grid-2">
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Customer ID</label>
+                                    <input type="text" class="ci-input" id="newCustId" readonly>
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Customer Type</label>
+                                    <select class="ci-select" id="newCustType" required>
+                                        <option value="Retail">Retail</option>
+                                        <option value="Wholesale">Wholesale</option>
+                                        <option value="Corporate">Corporate</option>
                                     </select>
-                                    <button class="btn btn-outline-primary btn-sm" type="button"
-                                        id="btnAddCustomer">+</button>
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Customer Name <span class="req">*</span></label>
+                                    <input type="text" class="ci-input" id="newCustName" required
+                                        placeholder="Enter customer name">
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Phone <span class="req">*</span></label>
+                                    <input type="text" class="ci-input" id="newCustPhone" required
+                                        placeholder="017XXXXXXXX">
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Billing Address</label>
+                                    <input type="text" class="ci-input" id="newCustAddress"
+                                        placeholder="Enter billing address">
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Shipping Address</label>
+                                    <input type="text" class="ci-input" id="newCustShipAddress"
+                                        placeholder="Enter shipping address">
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Credit Limit (৳)</label>
+                                    <input type="number" class="ci-input" id="newCustCreditLimit" value="0" min="0"
+                                        step="0.01">
+                                </div>
+                                <div class="ci-form-group">
+                                    <label class="ci-label">Previous Due (৳)</label>
+                                    <input type="number" class="ci-input" id="newCustPrevDue" value="0" min="0"
+                                        step="0.01">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label-sm">Phone</label>
-                                <input type="text" class="form-control-sm" id="invPhone" placeholder="017XXXXXXXX">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label-sm">Billing Address</label>
-                                <input type="text" class="form-control-sm" id="invAddress" placeholder="Full address">
-                            </div>
-                        </div>
-
-                        <div class="section-title"><i class="bi bi-box-seam"></i> Invoice Items</div>
-                        <datalist id="productList">
-                            <option value="ST Tyre 12R22.5"></option>
-                            <option value="ST Tyre 11R22.5"></option>
-                            <option value="ST Tyre 10R"></option>
-                            <option value="ST Tyre 9R"></option>
-                            <option value="Tube 12R"></option>
-                            <option value="Tube 11R"></option>
-                        </datalist>
-                        <div class="table-responsive mb-3">
-                            <table class="items-table" id="itemsTable">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 30%">Product</th>
-                                        <th style="width: 10%">Qty</th>
-                                        <th style="width: 10%">Unit</th>
-                                        <th style="width: 15%">Unit Price</th>
-                                        <th style="width: 10%">Discount</th>
-                                        <th style="width: 10%">VAT %</th>
-                                        <th style="width: 15%">Total</th>
-                                        <th style="width: 5%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemsBody">
-                                    <!-- Dynamic rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <button type="button" class="btn-add-row" id="btnAddItem">
-                            <i class="bi bi-plus-lg"></i> Add Product
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="btnSaveNewCustomer">
+                            <i class="bi bi-check2-circle"></i> Save Customer
                         </button>
-
-                        <div class="row g-4 mt-2">
-                            <div class="col-md-7">
-                                <div class="section-title"><i class="bi bi-cash-coin"></i> Payment & Notes</div>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label-sm">Payment Method</label>
-                                        <select class="form-select-sm" id="invPayMethod">
-                                            <option value="Cash">Cash</option>
-                                            <option value="Bank">Bank Transfer</option>
-                                            <option value="bKash">bKash</option>
-                                            <option value="Cheque">Cheque</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label-sm">Paid Amount</label>
-                                        <input type="number" class="form-control-sm" id="invPaid" value="0" step="0.01">
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label-sm">Customer Note</label>
-                                        <textarea class="form-control-sm" id="invNotes" rows="2"
-                                            placeholder="Optional notes for customer"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="invoice-summary">
-                                    <div class="summary-row">
-                                        <span>Subtotal</span>
-                                        <span id="sumSubtotal">৳ 0.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>Discount</span>
-                                        <span id="sumDiscount" class="text-danger">- ৳ 0.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>VAT</span>
-                                        <span id="sumVat">৳ 0.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>Shipping</span>
-                                        <input type="number" class="form-control-sm" id="invShipping" value="0"
-                                            style="width: 100px; text-align: right; padding: 2px 6px;">
-                                    </div>
-                                    <div class="summary-row total">
-                                        <span>Grand Total</span>
-                                        <span id="sumGrandTotal">৳ 0.00</span>
-                                    </div>
-                                    <div class="summary-row mt-2">
-                                        <span>Paid</span>
-                                        <span id="sumPaid" class="text-success">৳ 0.00</span>
-                                    </div>
-                                    <div class="summary-row">
-                                        <span>Due</span>
-                                        <span id="sumDue" class="text-danger">৳ 0.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-primary" id="btnSaveDraft">Save as Draft</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveInvoice">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- View Invoice Modal -->
-    <div class="modal fade" id="viewInvoiceModal" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header no-print">
-                    <h5 class="modal-title">Invoice Preview</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="invoice-preview inv-pro" id="printArea">
-                        <div class="inv-header">
-                            <div class="inv-logo">
-                                <i class="bi bi-circle-fill text-primary"></i> ST TYRE ERP
-                            </div>
-                            <div>
-                                <div class="inv-title-row">
-                                    <div class="inv-title">INVOICE</div>
-                                    <span class="inv-status-badge" id="viewStatusBadge">Paid</span>
-                                </div>
-                                <div class="inv-meta">
-                                    <div>Invoice No: <strong id="viewInvNo">INV-000000</strong></div>
-                                    <div>Date: <span id="viewInvDate">-</span></div>
-                                    <div>Due Date: <span id="viewInvDue">-</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="inv-parties">
-                            <div class="inv-party">
-                                <h6>Bill To</h6>
-                                <h4 id="viewCustomer">Customer Name</h4>
-                                <p id="viewAddress">Address line 1<br>City, Country</p>
-                                <p class="mt-2"><i class="bi bi-telephone"></i> <span id="viewPhone">-</span>
-                                </p>
-                            </div>
-                            <div class="inv-party text-end">
-                                <h6>From</h6>
-                                <h4>ST TYRE Enterprise</h4>
-                                <p>123 Business Park, Dhaka<br>Bangladesh</p>
-                                <p class="mt-2">VAT Reg: 123456789</p>
-                            </div>
-                        </div>
-
-                        <table class="inv-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product</th>
-                                    <th class="text-center">Qty</th>
-                                    <th class="text-end">Unit Price</th>
-                                    <th class="text-end">Discount</th>
-                                    <th class="text-end">VAT</th>
-                                    <th class="text-end">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="viewItemsBody">
-                                <!-- Dynamic -->
-                            </tbody>
-                        </table>
-
-                        <div class="inv-totals">
-                            <div class="inv-totals-box">
-                                <div class="inv-totals-row">
-                                    <span>Subtotal</span>
-                                    <span id="viewSubtotal">৳ 0.00</span>
-                                </div>
-                                <div class="inv-totals-row">
-                                    <span>Discount</span>
-                                    <span id="viewDiscount">- ৳ 0.00</span>
-                                </div>
-                                <div class="inv-totals-row">
-                                    <span>VAT</span>
-                                    <span id="viewVat">৳ 0.00</span>
-                                </div>
-                                <div class="inv-totals-row">
-                                    <span>Shipping</span>
-                                    <span id="viewShipping">৳ 0.00</span>
-                                </div>
-                                <div class="inv-totals-row grand">
-                                    <span>Grand Total</span>
-                                    <span id="viewGrandTotal">৳ 0.00</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="inv-footer">
-                            <div class="inv-notes">
-                                <h6>Notes</h6>
-                                <p id="viewNotes">Thank you for your business.</p>
-                            </div>
-                            <div class="inv-signature">
-                                <div class="sign-line">Authorized Signature</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer no-print">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnPrintInvoice"><i class="bi bi-printer"></i>
-                        Print Invoice</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment Modal -->
-    <div class="modal fade" id="paymentModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Record Payment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="payInvoiceId">
-                    <div class="alert alert-light border mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Invoice:</span>
-                            <strong id="payInvNo">INV-000000</strong>
-                        </div>
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Customer:</span>
-                            <span id="payCustomer">-</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Due Amount:</span>
-                            <strong class="text-danger" id="payDue">৳ 0.00</strong>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label-sm">Payment Amount <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control-sm" id="payAmount" step="0.01" required>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <label class="form-label-sm">Method</label>
-                            <select class="form-select-sm" id="payMethod">
-                                <option value="Cash">Cash</option>
-                                <option value="Bank">Bank</option>
-                                <option value="bKash">bKash</option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label-sm">Date</label>
-                            <input type="date" class="form-control-sm" id="payDate">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" id="btnSubmitPayment">Record Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center p-4">
-                    <div class="mb-3 text-danger"><i class="bi bi-exclamation-triangle-fill"
-                            style="font-size: 48px;"></i></div>
-                    <h5 class="mb-2">Delete Invoice?</h5>
-                    <p class="text-muted small mb-4">Are you sure you want to delete <strong
-                            id="deleteInvNo">INV-000000</strong>? This action cannot be undone.</p>
-                    <div class="d-flex gap-2 justify-content-center">
-                        <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/invoice-data.js"></script>
-    <script src="js/invoice-list.js"></script>
-    <script src="js/create-invoice.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/invoice-data.js"></script>
+        <script src="js/create-invoice.js"></script>
 </body>
 
 </html>
