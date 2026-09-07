@@ -73,10 +73,8 @@ body {
     color: var(--text-muted);
     margin: 0;
     line-height: 1.5;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
+
 
 .btn-add {
     display: inline-flex;
@@ -93,12 +91,14 @@ body {
     transition: all 0.2s;
     white-space: nowrap;
     box-shadow: 0 1px 2px rgb(37 99 235 / 0.2);
+    text-decoration: none;
 }
 
 .btn-add:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgb(37 99 235 / 0.25);
+    text-decoration: none;
 }
 
 .btn-add:active {
@@ -107,6 +107,14 @@ body {
 
 .btn-add i {
     font-size: 16px;
+}
+
+
+.page-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
 }
 
 /* ========================================
@@ -1424,12 +1432,36 @@ textarea.form-control-modern {
 }
 
 @media (max-width: 767px) {
+
+
+    .main-content {
+        padding: 12px !important;
+    }
+
     .page-header {
-        padding: var(--space-lg);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 5px;
+    }
+
+    .page-header-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+    }
+
+    .page-header-actions .btn-export,
+    .page-header-actions .btn-add {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 8px;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
     .page-title {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .kpi-summary {
